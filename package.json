@@ -6,20 +6,34 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint \"src/**\""
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.89.0",
+    "embla-carousel-react": "^8.6.0",
+    "lodash.debounce": "^4.0.8",
+    "motion": "^12.23.15",
+    "next": "15.5.3",
+    "next-auth": "^4.24.11",
+    "nuqs": "^2.6.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.3"
+    "react-hook-form": "^7.62.0",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "jiti": "^2.5.1",
+    "prettier": "^3.6.2",
+    "sass": "^1.92.1",
+    "typescript": "^5"
   }
 }
