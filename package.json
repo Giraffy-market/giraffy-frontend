@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.89.0",
+    "axios": "^1.12.2",
     "embla-carousel-react": "^8.6.0",
     "lodash.debounce": "^4.0.8",
     "motion": "^12.23.15",
