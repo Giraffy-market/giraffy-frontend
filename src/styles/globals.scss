@@ -1,4 +1,4 @@
-@import './utils/index';
+@use './utils/index' as *;
 
 // Blocks
-@import './blocks/container';
+@use './blocks/container' as *;
