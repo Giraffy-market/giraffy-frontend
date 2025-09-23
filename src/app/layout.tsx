@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 
 import { nunito, openSans } from '@/layouts/root';
 
+import AuthProvider from '@/modules/auth/providers/AuthProvider';
+
 import { Footer } from '@/components/Footer/Footer';
 
 import '@/styles/globals.scss';
@@ -18,9 +20,11 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="uk">
       <body className={`${nunito.variable} ${openSans.variable}`}>
-        <ReactQueryProvider>
-          <main>{children}</main>
-        </ReactQueryProvider>
+        <AuthProvider>
+          <ReactQueryProvider>
+            <main>{children}</main>
+          </ReactQueryProvider>
+        </AuthProvider>
         <Footer />
       </body>
     </html>
