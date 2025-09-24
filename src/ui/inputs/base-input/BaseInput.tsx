@@ -1,5 +1,5 @@
 import {
-  type ChangeEvent,
+  type ChangeEventHandler,
   type ElementType,
   type FC,
   type InputHTMLAttributes,
@@ -11,35 +11,23 @@ import {
 import s from './styles/BaseInput.module.scss';
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
-  placeholder?: string;
-  type?: string;
   Icon?: ElementType;
   value?: string | number;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
 export const BaseInput: FC<Props> = memo(
-  ({ placeholder = '', type = 'text', Icon, value = '', onChange }) => {
-    const [eyeClose, setEyeClose] = useState(false);
-    const toggleEye = useCallback(() => setEyeClose((prev) => !prev), []);
-
+  ({ Icon, value = '', onChange, ...props }) => {
     return (
       <div className={s.input__wrapper}>
-        {Icon && (
-          <button
-            type="button"
-            className={`${s.input__icon_wrapper} ${eyeClose && s.not_active}`}
-            onClick={toggleEye}
-          >
-            <Icon className={s.input__icon} />
-          </button>
-        )}
+        {Icon && <Icon className={s.icon} />}
+
         <input
           className={`${s.input} ${Icon && s.with_icon}`}
-          type={eyeClose ? 'password' : type}
-          placeholder={placeholder}
+          // type={eyeClose ? 'password' : type}
           value={value}
           onChange={onChange}
+          {...props}
         />
       </div>
     );
@@ -47,3 +35,10 @@ export const BaseInput: FC<Props> = memo(
 );
 
 BaseInput.displayName = 'BaseInput';
+
+const PasswordInput: FC = () => {
+  const [eyeClose, setEyeClose] = useState(false);
+  const toggleEye = useCallback(() => setEyeClose((prev) => !prev), []);
+
+  return <BaseInput type={eyeClose ? 'text' : 'password'} />;
+};
