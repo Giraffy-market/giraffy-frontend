@@ -1,0 +1,15 @@
+@mixin fade-in($duration: 200ms, $easing: ease-out) {
+opacity: 0;
+animation: slideUp $duration $easing forwards;
+@keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+}
+
+@mixin scale-in($scale: 0.95, $duration: 220ms, $easing: ease-out) {
+  transform: scale($scale);
+  opacity: 0;
+  animation: scaleIn $duration $easing forwards;
+  @keyframes scaleIn {
+    to { transform: scale(1); opacity: 1; }
+  }
+}
+
