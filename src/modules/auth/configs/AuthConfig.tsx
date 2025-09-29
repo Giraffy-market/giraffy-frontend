@@ -1,5 +1,6 @@
 import { type AuthOptions, getServerSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
 import { API_ENDPOINTS_AUTH } from '@/modules/auth/constans/routes';
 import type { LoginResponse } from '@/modules/auth/type/types';
@@ -9,13 +10,17 @@ import { httpClient } from '@/shared/api/httpClient';
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: {
-          label: 'Електронна пошта',
-          type: 'email',
-          placeholder: 'example@mail.com',
+        username: {
+          label: 'username',
+          type: 'text',
+          placeholder: 'ім`я користувача',
         },
         password: {
           label: 'Пароль',
@@ -25,12 +30,12 @@ export const authOptions: AuthOptions = {
       },
       // @ts-expect-error next-auth err
       authorize: async (credentials, req) => {
-        if (!credentials?.email || !credentials?.password) return null;
-        const { email, password } = credentials;
+        if (!credentials?.username || !credentials?.password) return null;
+        const { username, password } = credentials;
         const axiosClient = await httpClient();
         const response = await axiosClient
           .post<LoginResponse>(API_ENDPOINTS_AUTH.AUTH.AUTHENTICATION_LOGIN, {
-            username: email,
+            username: username,
             password: password,
           })
           .then((res) => res)
