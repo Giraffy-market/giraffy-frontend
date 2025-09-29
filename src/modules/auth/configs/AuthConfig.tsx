@@ -7,6 +7,7 @@ import type { LoginResponse } from '@/modules/auth/type/types';
 import { httpClient } from '@/shared/api/httpClient';
 
 export const authOptions: AuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -22,6 +23,7 @@ export const authOptions: AuthOptions = {
           placeholder: 'Введіть пароль',
         },
       },
+      // @ts-expect-error next-auth err
       authorize: async (credentials, req) => {
         if (!credentials?.email || !credentials?.password) return null;
         const { email, password } = credentials;
@@ -32,7 +34,7 @@ export const authOptions: AuthOptions = {
             password: password,
           })
           .then((res) => res)
-          .catch((err) => err);
+          .catch((err) => console.log(err.response.data));
 
         if (!response?.data) return null;
 
