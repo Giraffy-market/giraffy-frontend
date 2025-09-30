@@ -2,23 +2,22 @@
 
 import { type FC, useState } from 'react';
 
-import { BaseInput } from '@/ui/inputs/base-input/BaseInput';
-import { ShowPasswordUnchecked } from '@/ui/inputs/base-input/assets';
+import { PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
 
 const Home: FC = () => {
   const [value, setValue] = useState<string | number>();
 
+  console.log(value);
+
   return (
     <div className="container">
       <Logo />
-      <BaseInput
-        Icon={ShowPasswordUnchecked}
+      <PhoneInput
         onChange={(e) => {
           setValue(e.target.value);
         }}
         value={value}
-        placeholder="Enter your password"
       />
       Welcome to the Home Page
     </div>
