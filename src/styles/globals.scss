@@ -1,3 +1,4 @@
-@import url("./utils/_normalize.scss");
-@import url("./utils/_variables.scss");
-@import url("./utils/_mixins.scss");
+@use './utils/index' as *;
+
+// Blocks
+@use './blocks/container' as *;
