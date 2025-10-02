@@ -34,10 +34,17 @@ export const authOptions: AuthOptions = {
         const { username, password } = credentials;
         const axiosClient = await httpClient();
         const response = await axiosClient
-          .post<LoginResponse>(API_ENDPOINTS_AUTH.AUTH.AUTHENTICATION_LOGIN, {
-            username: username,
-            password: password,
-          })
+          .post<LoginResponse>(
+            API_ENDPOINTS_AUTH.AUTH.AUTHENTICATION_LOGIN,
+            new URLSearchParams({
+              grant_type: 'password',
+              username,
+              password,
+            }),
+            {
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            },
+          )
           .then((res) => res)
           .catch((err) => console.log(err.response.data));
 
