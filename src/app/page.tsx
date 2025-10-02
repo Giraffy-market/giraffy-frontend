@@ -9,6 +9,7 @@ import { Slider } from '@/components/slider/Slider';
 
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
+import { Popup } from '@/ui/modal/popup';
 
 const Home: FC = () => {
   const [value, setValue] = useState({
@@ -16,6 +17,8 @@ const Home: FC = () => {
     password: '',
     phoneNumber: '',
   });
+
+  const [open, setOpen] = useState(false);
 
   console.log('base: ', value.base);
   console.log('password: ', value.password);
@@ -41,7 +44,15 @@ const Home: FC = () => {
           value={value.phoneNumber}
           onChange={(e) => setValue({ ...value, phoneNumber: e.target.value })}
         />
-        Welcome to the Home Page
+        <button
+          onClick={() => setOpen(true)}
+          style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
+        >
+          Open Pop up
+        </button>
+        <Popup isOpen={open} onClose={() => setOpen(false)} title="Title">
+          <p>Content modal </p>
+        </Popup>
       </div>
 
       <section>
