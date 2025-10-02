@@ -1,14 +1,26 @@
-import type { FC } from 'react';
+'use client';
 
-import { Logo } from '@/ui/logo/Logo';
+import { useState } from 'react';
 
-const Home: FC = () => {
+import { Popup } from '@/ui/modal/popup';
+
+export default function Page() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="container">
-      <Logo />
-      Welcome to the Home Page
-    </div>
-  );
-};
+    <main style={{ padding: 40 }}>
+      <h1>Test native dialog</h1>
 
-export default Home;
+      <button
+        onClick={() => setOpen(true)}
+        style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
+      >
+        Open Pop up
+      </button>
+
+      <Popup isOpen={open} onClose={() => setOpen(false)} title="Title">
+        <p>Content modal </p>
+      </Popup>
+    </main>
+  );
+}
