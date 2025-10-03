@@ -11,13 +11,13 @@ import Pets from '../../../components/categories/assets/pets.svg';
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const categoryIcons = [
-  BeautyCare,
-  Clothes,
+  HouseCare,
+  Pets,
+  Kids,
   Electronics,
   Hobbies,
-  HouseCare,
-  Kids,
+  Clothes,
+  BeautyCare,
   Kitchen,
-  Pets,
   CarsCare,
 ];
