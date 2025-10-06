@@ -1,13 +1,15 @@
+@use '../../../styles/utils/media' as *;
+@use '../../../styles/utils/variables' as *;
+
 .title {
   font-weight: 600;
   font-size: 20px;
-  line-height: 1.4;
+  line-height: 28px;
   text-align: center;
-  color: #09203f;
+  color: $blue;
   margin-bottom: 24px;
-}
-@media screen and (min-width: 1280px) {
-  .title {
+
+  @include onDesktop {
     font-weight: 500;
     font-size: 40px;
     margin-bottom: 32px;
