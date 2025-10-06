@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 
 import cn from 'classnames';
@@ -6,18 +8,18 @@ import css from './styles/styles.module.scss';
 
 type Props = {
   label: string;
-  isHome?: boolean;
   isUpdate?: boolean;
+  onClick?: () => void;
 };
 
-const Button: FC<Props> = ({ label, isHome, isUpdate }) => {
+const Button: FC<Props> = ({ label, isUpdate, onClick }) => {
   return (
     <button
       className={cn(css.button, {
-        [css['button--home']]: isHome,
         [css['button--update']]: isUpdate,
       })}
       type="button"
+      onClick={onClick}
     >
       <span>{label}</span>
     </button>

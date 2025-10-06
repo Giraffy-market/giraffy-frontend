@@ -36,7 +36,11 @@ const Error: FC<{ type: ErrorType }> = ({ type }) => {
           <p className={css.description}>{description}</p>
           <div className={css.buttonsWrapper}>
             {showUpdateButton && (
-              <Button label="Оновити сторінку" isUpdate={true} />
+              <Button
+                label="Оновити сторінку"
+                isUpdate={true}
+                onClick={() => window.location.reload()}
+              />
             )}
             <Link className={css.goHomeLink} href="/">
               Повернутися на головну
