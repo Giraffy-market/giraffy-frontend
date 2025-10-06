@@ -5,6 +5,7 @@ import { type FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import Error from '@/ui/error/Error';
+import { getErrorType } from '@/ui/error/utils/getErrorType';
 
 import './styles/list.scss';
 
@@ -19,12 +20,7 @@ const CategoriesList: FC = () => {
   });
 
   if (error || !data) {
-    let type = 'unknown';
-
-    if (error instanceof Error) {
-      if (error.message.includes('500')) type = 'server';
-    }
-
+    const type = getErrorType(error);
     return <Error type={type} />;
   }
 
