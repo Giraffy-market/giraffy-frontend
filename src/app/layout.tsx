@@ -18,7 +18,9 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="uk">
       <body className={`${nunito.variable} ${openSans.variable}`}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <main>{children}</main>
+        </ReactQueryProvider>
         <Footer />
       </body>
     </html>
