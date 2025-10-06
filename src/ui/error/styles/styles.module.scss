@@ -1,0 +1,42 @@
+@use '../../../styles/utils/variables' as *;
+@use '../../../styles/utils/typography' as *;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 410px 628px;
+  column-gap: 24px;
+  padding: 150px 109px 223px 109px;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  color: $blue;
+  text-align: center;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 56px;
+}
+
+.description {
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  max-width: 396px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 410px;
+  height: 379px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 35px;
+}
