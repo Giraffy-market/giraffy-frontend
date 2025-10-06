@@ -1,0 +1,29 @@
+@use '../../../styles//utils/variables' as *;
+.button {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 8px;
+  border-radius: 10px;
+  width: 100%;
+  height: 52px;
+  color: $blue;
+  transition: background-color 250ms linear;
+
+  &--update {
+    border: 0;
+    background-color: #ff7518;
+    &:hover {
+      background-color: #ff8d4b;
+    }
+  }
+
+  &--home {
+    border: 1px solid $blue;
+    background-color: $gray;
+    &:hover {
+      background-color: $white;
+    }
+  }
+}
