@@ -20,6 +20,12 @@ body {
   color: $blue;
 
   @include base-body;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 img,
