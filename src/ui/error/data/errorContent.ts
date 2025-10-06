@@ -26,10 +26,4 @@ export const errorContent: ErrorContent = {
     Icon: Giraffe,
     showUpdateButton: true,
   },
-  unknown: {
-    titleLines: ['Невідома помилка'],
-    description: 'Щось пішло не так, але ми вже працюємо над цим',
-    Icon: Giraffe,
-    showUpdateButton: true,
-  },
 };

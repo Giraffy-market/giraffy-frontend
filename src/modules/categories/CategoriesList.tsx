@@ -21,6 +21,7 @@ const CategoriesList: FC = () => {
 
   if (error || !data) {
     const type = getErrorType(error);
+    if (!type) return null;
     return <Error type={type} />;
   }
 
