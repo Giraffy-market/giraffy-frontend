@@ -5,12 +5,12 @@ import Link from 'next/link';
 import '../styles/list.scss';
 
 import { categoryIcons } from '../constants/constants';
-import { CategoryItemProps } from '../types';
+import { CategoryItem } from '../types/CategoryItem';
 
-export interface Props {
-  data: CategoryItemProps;
+export type Props = {
+  data: CategoryItem;
   index: number;
-}
+};
 
 const CategoriesItem: FC<Props> = ({ data, index }) => {
   const Icon = categoryIcons[index];
