@@ -1,7 +1,7 @@
 import { ErrorType } from '../shared/types/ErrorType';
 
 export const getErrorType = (error: unknown): ErrorType => {
-  if (!error) return 'unknown';
+  if (!error) return null;
 
   if (error instanceof Error) {
     const message = error.message.toLowerCase();
@@ -11,5 +11,5 @@ export const getErrorType = (error: unknown): ErrorType => {
     if (message.includes('network')) return 'network';
   }
 
-  return 'unknown';
+  return null;
 };

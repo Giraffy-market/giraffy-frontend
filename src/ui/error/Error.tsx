@@ -9,23 +9,23 @@ import { errorContent } from './data/errorContent';
 import { ErrorType } from './shared/types/ErrorType';
 
 const Error: FC<{ type: ErrorType }> = ({ type }) => {
-  console.log(type);
+  const safeType: Exclude<ErrorType, null> = (type ?? '500') as Exclude<
+    ErrorType,
+    null
+  >;
 
   const { titleLines, description, Icon, showUpdateButton } =
-    errorContent[type];
-
+    errorContent[safeType];
   return (
     <div className="container">
       <div className={css.wrapper}>
-        {Icon && (
-          <div className={css.imageWrapper}>
-            <Icon role="img" aria-label="giraffe" />
-          </div>
-        )}
+        <div className={css.imageWrapper}>
+          <Icon role="img" aria-label="giraffe" />
+        </div>
 
         <div className={css.infoWrapper}>
           <h2 className={css.title}>
-            {titleLines.map((line, i) => (
+            {titleLines.map((line: string, i: number) => (
               <span key={i}>
                 {line}
                 {i < titleLines.length - 1 && <br />}
