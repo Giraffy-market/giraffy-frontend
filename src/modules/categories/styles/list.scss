@@ -1,3 +1,7 @@
+@use '../../../styles/utils/media' as *;
+@use '../../../styles/utils/variables' as *;
+@use '../../../styles/utils/typography' as *;
+
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(116px, 1fr));
@@ -16,38 +20,30 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
+
+  @include onDesktop {
+    gap: 24px;
+  }
 }
 
 .image-wrapper {
   height: 50px;
   width: 50px;
   margin-bottom: 8px;
-}
 
-.subtitle {
-  font-size: 16px;
-  line-height: 1.75;
-  color: #09203f;
-  text-align: center;
-}
-
-@media screen and (min-width: 768px) {
-  .image-wrapper {
+  @include onTablet {
     height: 70px;
     width: 70px;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .list {
-    gap: 24px;
-  }
-  .image-wrapper {
+  @include onDesktop {
     height: 100px;
     width: 100px;
   }
-  .subtitle {
-    font-size: 18px;
-    line-height: 1.56;
-  }
+}
+
+.subtitle {
+  @include base-body;
+  color: $blue;
+  text-align: center;
 }
