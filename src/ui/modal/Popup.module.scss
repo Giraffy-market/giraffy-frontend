@@ -1,6 +1,4 @@
-@use '@/styles/utils/variables' as *;
-@use '@/styles/utils/media' as *;
-@use '@/styles/utils/z-indexes' as *;
+@use '@/styles/utils/index' as *;
 
 .dialog {
   border: none;
@@ -64,10 +62,9 @@
   border-radius: 24px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
   padding: 24px;
+  margin: 0 auto;
 
   width: 100%;
-  max-width: 367px;
-  margin: 0 auto;
 
   max-height: 90vh;
   overflow-y: auto;
@@ -140,15 +137,14 @@
 
   width: 24px;
   height: 24px;
+  display: grid;
+  place-items: center;
   padding: 0;
-
+  border: 0;
   background: transparent;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   line-height: 1;
+  color: inherit;
 
   &:focus {
     outline: none;
@@ -170,16 +166,9 @@
 
 .closeIcon {
   display: block;
-  width: 16px;
-  height: 16px;
-  @include onDesktop {
-    width: 18px;
-    height: 18px;
-  }
-  @include onLarge {
-    width: 21px;
-    height: 21px;
-  }
+  width: 70%;
+  height: 70%;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

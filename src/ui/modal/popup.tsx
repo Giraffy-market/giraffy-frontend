@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
-import { useEffect, useId, useRef } from 'react';
+import { useId, useRef } from 'react';
 
 import styles from './Popup.module.scss';
 import CloseIcon from './closeIcon.svg';
@@ -14,63 +14,43 @@ export type PopupProps = {
 };
 
 export const Popup: FC<PopupProps> = ({ isOpen, onClose, title, children }) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const ref = useRef<HTMLDialogElement>(null);
   const headingId = useId();
 
-  useEffect(() => {
-    const dlg = dialogRef.current;
-    if (!dlg) return;
+  const setRef = (node: HTMLDialogElement | null) => {
+    if (!node) return;
+    ref.current = node;
+    if (!node.open) node.showModal();
+  };
 
-    const canShowModal = typeof (dlg as any).showModal === 'function';
+  const handleClose = () => onClose();
 
-    try {
-      if (isOpen) {
-        if (!dlg.open) {
-          if (canShowModal) {
-            dlg.showModal();
-            dlg.removeAttribute('inert');
-          } else {
-            dlg.setAttribute('open', '');
-          }
-        }
-      } else {
-        if (dlg.open) dlg.close();
-        dlg.setAttribute('inert', '');
-      }
-    } catch (err) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error('[Popup] showModal/close error:', err);
-      }
-    }
-  }, [isOpen]);
+  const handleCancel: React.ReactEventHandler<HTMLDialogElement> = (e) => {
+    // Блокируем дефолтный "cancel", чтобы не закрывалось мимо нашей логики
+    e.preventDefault();
+    ref.current?.close();
+  };
 
-  useEffect(() => {
-    const dlg = dialogRef.current;
-    if (!dlg) return;
-    const onCancel = (e: Event) => {
-      e.preventDefault();
-      onClose();
-    };
-    dlg.addEventListener('cancel', onCancel);
-    return () => dlg.removeEventListener('cancel', onCancel);
-  }, [onClose]);
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (e.target === e.currentTarget) ref.current?.close();
+  };
 
-  const onClickBackdrop = (e: React.MouseEvent<HTMLDialogElement>) => {
-  if (e.currentTarget === e.target) onClose();
-};
+  if (!isOpen) return null;
 
   return (
     <dialog
-      ref={dialogRef}
+      ref={setRef}
       className={styles.dialog}
       aria-modal="true"
       aria-labelledby={headingId}
-      onClick={onClickBackdrop}
+      onClose={handleClose}
+      onCancel={handleCancel}
+      onClick={handleBackdropClick}
     >
       <div className={styles.panel} role="document">
         <button
           className={styles.closeButton}
-          onClick={onClose}
+          onClick={() => ref.current?.close()}
           aria-label="Close"
           type="button"
         >
@@ -80,6 +60,7 @@ export const Popup: FC<PopupProps> = ({ isOpen, onClose, title, children }) => {
         <h2 id={headingId} className={styles.title}>
           {title}
         </h2>
+
         <div className={styles.content}>{children}</div>
       </div>
     </dialog>
