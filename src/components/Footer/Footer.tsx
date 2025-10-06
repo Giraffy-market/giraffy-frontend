@@ -6,7 +6,7 @@ import { Logo } from '@/ui/logo/Logo';
 
 import s from './footer.module.scss';
 
-export default function Footer() {
+export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
