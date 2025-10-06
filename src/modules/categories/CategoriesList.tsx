@@ -19,9 +19,13 @@ const CategoriesList: FC = () => {
   });
 
   if (error || !data) {
-    const message =
-      error instanceof Error ? error.message : 'Something went wrong';
-    return <Error error={message} />;
+    let type = 'unknown';
+
+    if (error instanceof Error) {
+      if (error.message.includes('500')) type = 'server';
+    }
+
+    return <Error type={type} />;
   }
 
   return (
