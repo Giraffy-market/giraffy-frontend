@@ -2,7 +2,7 @@ import { type FC } from 'react';
 
 import Link from 'next/link';
 
-import css from './styles/styles.module.scss';
+import './styles/error.scss';
 
 import Button from '../button/Button';
 import { errorContent } from './data/errorContent';
@@ -18,13 +18,13 @@ const Error: FC<{ type: ErrorType }> = ({ type }) => {
     errorContent[safeType];
   return (
     <div className="container">
-      <div className={css.wrapper}>
-        <div className={css.imageWrapper}>
+      <div className="wrapper">
+        <div className="imageWrapper">
           <Icon role="img" aria-label="giraffe" />
         </div>
 
-        <div className={css.infoWrapper}>
-          <h2 className={css.title}>
+        <div className="infoWrapper">
+          <h2 className="title">
             {titleLines.map((line: string, i: number) => (
               <span key={i}>
                 {line}
@@ -33,8 +33,8 @@ const Error: FC<{ type: ErrorType }> = ({ type }) => {
             ))}
           </h2>
 
-          <p className={css.description}>{description}</p>
-          <div className={css.buttonsWrapper}>
+          <p className="description">{description}</p>
+          <div className="buttonsWrapper">
             {showUpdateButton && (
               <Button
                 label="Оновити сторінку"
@@ -42,7 +42,7 @@ const Error: FC<{ type: ErrorType }> = ({ type }) => {
                 onClick={() => window.location.reload()}
               />
             )}
-            <Link className={css.goHomeLink} href="/">
+            <Link className="goHomeLink" href="/">
               Повернутися на головну
             </Link>
           </div>

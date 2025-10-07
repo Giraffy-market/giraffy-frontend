@@ -1,5 +1,4 @@
-@use '../../../styles/utils/variables' as *;
-@use '../../../styles/utils/typography' as *;
+@use '@/styles/utils/index' as *;
 
 .wrapper {
   display: grid;
