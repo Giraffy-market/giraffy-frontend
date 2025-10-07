@@ -19,9 +19,9 @@ const CategoriesItem: FC<Props> = ({ data, index }) => {
     <li className="item">
       <Link className="link" href="/">
         <div className="image-wrapper">
-          <Icon role="img" aria-label={data?.name} />
+          <Icon role="img" aria-label={data.name} />
         </div>
-        <h3 className="subtitle">{data?.name}</h3>
+        <h3 className="subtitle">{data.name}</h3>
       </Link>
     </li>
   );
