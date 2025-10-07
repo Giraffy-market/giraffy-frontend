@@ -1,17 +1,12 @@
-@use '../../../styles/utils/media' as *;
-@use '../../../styles/utils/variables' as *;
+@use '@/styles/utils/index' as *;
 
 .title {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 28px;
+  @include h2;
   text-align: center;
   color: $blue;
   margin-bottom: 24px;
 
   @include onDesktop {
-    font-weight: 500;
-    font-size: 40px;
     margin-bottom: 32px;
   }
 }
