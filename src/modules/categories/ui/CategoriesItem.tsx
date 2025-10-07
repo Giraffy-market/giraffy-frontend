@@ -2,8 +2,6 @@ import { type FC } from 'react';
 
 import Link from 'next/link';
 
-import '../styles/list.scss';
-
 import { categoryIcons } from '../constants/constants';
 import { CategoryItem } from '../types/CategoryItem';
 

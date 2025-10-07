@@ -1,6 +1,4 @@
-@use '../../../styles/utils/media' as *;
-@use '../../../styles/utils/variables' as *;
-@use '../../../styles/utils/typography' as *;
+@use '@/styles/utils/index' as *;
 
 .list {
   display: grid;
