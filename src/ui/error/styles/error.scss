@@ -1,0 +1,69 @@
+@use '@/styles/utils/index' as *;
+
+.error-wrapper {
+  display: grid;
+  grid-template-columns: 410px 628px;
+  column-gap: 24px;
+  padding: 150px 109px 223px 109px;
+}
+
+.error-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  color: $blue;
+  text-align: center;
+}
+
+.error-title {
+  @include h2;
+}
+
+.error-description {
+  margin: 0 auto;
+  @include large-body;
+  max-width: 396px;
+}
+
+.error-image-wrapper {
+  position: relative;
+  width: 410px;
+  height: 379px;
+}
+
+.error-buttons-wrapper {
+  display: flex;
+  gap: 35px;
+}
+
+.error-link,
+.error-button {
+  cursor: pointer;
+  @include button-2;
+  padding: 8px;
+  border-radius: 10px;
+  width: 100%;
+  height: 52px;
+  color: $blue;
+  transition: background-color 250ms linear;
+}
+
+.error-button {
+  border: 0;
+  background-color: #ff7518;
+  &:hover {
+    background-color: #ff8d4b;
+  }
+}
+
+.error-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $blue;
+  text-decoration: none;
+  background-color: $gray;
+  &:hover {
+    background-color: $white;
+  }
+}
