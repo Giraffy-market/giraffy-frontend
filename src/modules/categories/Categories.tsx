@@ -5,16 +5,15 @@ import { type FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import Error from '@/ui/error/Error';
+import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 
 import GiraffeEating from '../../ui/error/assets/giraffe-eating.svg';
 
-import './styles/list.scss';
-
 import { fetchCategories } from './api/fetchCategories';
 import { CategoryItem } from './types/CategoryItem';
-import CategoriesItem from './ui/CategoriesItem';
+import CategoriesList from './ui/CategoriesList';
 
-const CategoriesList: FC = () => {
+const Categories: FC = () => {
   const { data, error, refetch } = useQuery<CategoryItem[]>({
     queryKey: ['categories'],
     queryFn: fetchCategories,
@@ -32,12 +31,11 @@ const CategoriesList: FC = () => {
   }
 
   return (
-    <ul className="list">
-      {data.map((category, i) => (
-        <CategoriesItem key={category.category_id} data={category} index={i} />
-      ))}
-    </ul>
+    <div className="container">
+      <SectionTitle title="Тебе зацікавлять" />
+      <CategoriesList data={data} />
+    </div>
   );
 };
 
-export default CategoriesList;
+export default Categories;

@@ -2,11 +2,10 @@
 
 import { type FC, useState } from 'react';
 
-import { CategoriesList } from '@/modules/categories';
+import Categories from '@/modules/categories/Categories';
 
 import { PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
-import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 
 const Home: FC = () => {
   const [value, setValue] = useState<string | number>();
@@ -27,10 +26,7 @@ const Home: FC = () => {
       </div>
 
       <section>
-        <div className="container">
-          <SectionTitle title="Тебе зацікавлять" />
-          <CategoriesList />
-        </div>
+        <Categories />
       </section>
     </>
   );
