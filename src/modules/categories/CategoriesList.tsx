@@ -26,8 +26,8 @@ const CategoriesList: FC = () => {
 
   return (
     <ul className="list">
-      {data?.map((category, i) => (
-        <CategoriesItem key={category?.category_id} data={category} index={i} />
+      {data.map((category, i) => (
+        <CategoriesItem key={category.category_id} data={category} index={i} />
       ))}
     </ul>
   );
