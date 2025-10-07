@@ -5,7 +5,8 @@ import { type FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import Error from '@/ui/error/Error';
-import { getErrorType } from '@/ui/error/utils/getErrorType';
+
+import GiraffeEating from '../../ui/error/assets/giraffe-eating.svg';
 
 import './styles/list.scss';
 
@@ -14,15 +15,20 @@ import { CategoryItem } from './types/CategoryItem';
 import CategoriesItem from './ui/CategoriesItem';
 
 const CategoriesList: FC = () => {
-  const { data, error } = useQuery<CategoryItem[]>({
+  const { data, error, refetch } = useQuery<CategoryItem[]>({
     queryKey: ['categories'],
     queryFn: fetchCategories,
   });
 
   if (error || !data) {
-    const type = getErrorType(error);
-    if (!type) return null;
-    return <Error type={type} />;
+    return (
+      <Error
+        Icon={GiraffeEating}
+        title={['Упс!', 'Щось пішло не так']}
+        description="Схоже, виникла неочікувана помилка. Ми вже знаємо про це й працюємо над виправленням"
+        refetch={refetch}
+      />
+    );
   }
 
   return (
