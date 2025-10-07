@@ -1,10 +1,11 @@
+'use client';
+
 import { type FC } from 'react';
 
 import Link from 'next/link';
 
 import './styles/error.scss';
 
-import Button from '../button/Button';
 import { ErrorProps } from './shared/types/ErrorProps';
 
 const Error: FC<ErrorProps> = ({
@@ -18,13 +19,13 @@ const Error: FC<ErrorProps> = ({
 
   return (
     <div className="container">
-      <div className="wrapper">
-        <div className="imageWrapper">
+      <div className="error-wrapper">
+        <div className="error-image-wrapper">
           <Icon role="img" aria-label="giraffe" />
         </div>
 
-        <div className="infoWrapper">
-          <h2 className="title">
+        <div className="error-info-wrapper">
+          <h2 className="error-title">
             {titleLines.map((line: string, i: number) => (
               <span key={i}>
                 {line}
@@ -33,16 +34,18 @@ const Error: FC<ErrorProps> = ({
             ))}
           </h2>
 
-          <p className="description">{description}</p>
-          <div className="buttonsWrapper">
+          <p className="error-description ">{description}</p>
+          <div className="error-buttons-wrapper">
             {showUpdateButton && refetch && (
-              <Button
-                label="Оновити сторінку"
-                isUpdate={true}
+              <button
+                className="error-button"
+                type="button"
                 onClick={() => void refetch()}
-              />
+              >
+                <span>Оновити сторінку</span>
+              </button>
             )}
-            <Link className="goHomeLink" href="/">
+            <Link className="error-link" href="/">
               Повернутися на головну
             </Link>
           </div>
