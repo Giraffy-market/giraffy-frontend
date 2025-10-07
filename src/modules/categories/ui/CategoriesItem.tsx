@@ -14,12 +14,12 @@ const CategoriesItem: FC<Props> = ({ data, index }) => {
   const Icon = categoryIcons[index];
 
   return (
-    <li className="item">
-      <Link className="link" href="/">
-        <div className="image-wrapper">
+    <li className="categories-item">
+      <Link className="categories-item-link" href="/">
+        <div className="categories-item-image-wrapper">
           <Icon role="img" aria-label={data.name} />
         </div>
-        <h3 className="subtitle">{data.name}</h3>
+        <h3 className="categories-item-subtitle">{data.name}</h3>
       </Link>
     </li>
   );
