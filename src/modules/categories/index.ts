@@ -1,3 +1,3 @@
-import { default as CategoriesList } from './ui/CategoriesList';
+import Categories from './Categories';
 
-export { CategoriesList };
+export { Categories };
