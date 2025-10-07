@@ -2,7 +2,7 @@
 
 import { type FC, useState } from 'react';
 
-import Categories from '@/modules/categories/Categories';
+import { Categories } from '@/modules/categories';
 
 import { PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
