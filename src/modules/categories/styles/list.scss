@@ -5,43 +5,43 @@
   grid-template-columns: repeat(auto-fit, minmax(116px, 1fr));
   column-gap: 20px;
   row-gap: 22px;
-}
 
-.categories-item {
-  list-style: none;
-  width: 100%;
-  max-width: 160px;
-}
+  .categories-item {
+    list-style: none;
+    width: 100%;
+    max-width: 160px;
 
-.categories-item-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
+    &-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
 
-  @include onDesktop {
-    gap: 24px;
+      @include onDesktop {
+        gap: 24px;
+      }
+    }
+
+    &-image-wrapper {
+      height: 50px;
+      width: 50px;
+      margin-bottom: 8px;
+
+      @include onTablet {
+        height: 70px;
+        width: 70px;
+      }
+
+      @include onDesktop {
+        height: 100px;
+        width: 100px;
+      }
+    }
+
+    &-subtitle {
+      @include base-body;
+      color: $blue;
+      text-align: center;
+    }
   }
-}
-
-.categories-item-image-wrapper {
-  height: 50px;
-  width: 50px;
-  margin-bottom: 8px;
-
-  @include onTablet {
-    height: 70px;
-    width: 70px;
-  }
-
-  @include onDesktop {
-    height: 100px;
-    width: 100px;
-  }
-}
-
-.categories-item-subtitle {
-  @include base-body;
-  color: $blue;
-  text-align: center;
 }
