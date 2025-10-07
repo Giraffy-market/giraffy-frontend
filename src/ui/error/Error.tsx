@@ -5,17 +5,17 @@ import Link from 'next/link';
 import './styles/error.scss';
 
 import Button from '../button/Button';
-import { errorContent } from './data/errorContent';
-import { ErrorType } from './shared/types/ErrorType';
+import { ErrorProps } from './shared/types/ErrorProps';
 
-const Error: FC<{ type: ErrorType }> = ({ type }) => {
-  const safeType: Exclude<ErrorType, null> = (type ?? '500') as Exclude<
-    ErrorType,
-    null
-  >;
+const Error: FC<ErrorProps> = ({
+  Icon,
+  title,
+  description,
+  refetch,
+  showUpdateButton = true,
+}) => {
+  const titleLines = Array.isArray(title) ? title : [title];
 
-  const { titleLines, description, Icon, showUpdateButton } =
-    errorContent[safeType];
   return (
     <div className="container">
       <div className="wrapper">
@@ -35,11 +35,11 @@ const Error: FC<{ type: ErrorType }> = ({ type }) => {
 
           <p className="description">{description}</p>
           <div className="buttonsWrapper">
-            {showUpdateButton && (
+            {showUpdateButton && refetch && (
               <Button
                 label="Оновити сторінку"
                 isUpdate={true}
-                onClick={() => window.location.reload()}
+                onClick={() => void refetch()}
               />
             )}
             <Link className="goHomeLink" href="/">
