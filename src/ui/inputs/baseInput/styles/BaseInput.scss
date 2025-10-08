@@ -1,0 +1,45 @@
+@use '@/styles/utils/_variables.scss' as *;
+
+.base-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  &__field {
+    width: 100%;
+    height: 100%;
+    border: 1px solid $light-gray;
+    border-radius: 15px;
+    padding: 12px;
+    outline: none;
+    transition: border 0.2s ease;
+
+    &--with-icon {
+      padding-left: 40px;
+    }
+
+    &:focus {
+      border-color: $orange;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: $light-gray;
+
+    &--left {
+      left: 10px;
+    }
+
+    &--right {
+      right: 10px;
+    }
+  }
+}
