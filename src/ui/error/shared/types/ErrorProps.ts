@@ -1,6 +1,9 @@
-import { ElementType } from 'react';
+import type { ElementType } from 'react';
 
-import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import type {
+  QueryObserverResult,
+  RefetchOptions,
+} from '@tanstack/react-query';
 
 type RefetchFn = (
   options?: RefetchOptions,
