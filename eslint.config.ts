@@ -24,7 +24,17 @@ const eslintConfig = [
 
     rules: {
       // General
-      indent: ['error', 2],
+      indent: 'off',
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          semi: true,
+          endOfLine: 'lf',
+          tabWidth: 2,
+          useTabs: false,
+        },
+      ],
       'linebreak-style': ['error', 'unix'],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],

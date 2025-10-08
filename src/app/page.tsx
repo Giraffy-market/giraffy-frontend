@@ -10,8 +10,6 @@ import { Logo } from '@/ui/logo/Logo';
 const Home: FC = () => {
   const [value, setValue] = useState<string | number>();
 
-  console.log(value);
-
   return (
     <>
       <div className="container">

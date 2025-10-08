@@ -1,0 +1,25 @@
+#!/bin/sh
+
+echo '🏗️👷 Styling, linting, testing and building your project before committing'
+
+npm run format ||
+(
+  echo '❌❌ Prettier Check Failed. Run npm run format-all, stage changes and try to commit again. ❌❌';
+  false;
+)
+
+npm run lint ||
+(
+  echo '❌❌ ESLint Check Failed. Make the required changes listed above, stage changes and try to commit again. ❌❌'
+  false;
+)
+
+echo '🔎🔎 Everything passed. Trying to build now. 🔎🔎'
+
+npm run build ||
+(
+  echo '❌👷 Next build failed. View the errors above to see why. 👷❌'
+  false;
+)
+
+echo '✅✅ Every check passed and build was completed successfully. Commiting now. ✅✅'

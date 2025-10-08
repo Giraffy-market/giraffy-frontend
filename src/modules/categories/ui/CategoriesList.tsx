@@ -2,7 +2,7 @@ import { type FC } from 'react';
 
 import '../styles/list.scss';
 
-import { CategoryItem } from '../types/CategoryItem';
+import type { CategoryItem } from '../types/CategoryItem';
 import CategoriesItem from './CategoriesItem';
 
 const CategoriesList: FC<{ data: CategoryItem[] }> = ({ data }) => {

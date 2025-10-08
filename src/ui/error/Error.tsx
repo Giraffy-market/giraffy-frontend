@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import './styles/error.scss';
 
-import { ErrorProps } from './shared/types/ErrorProps';
+import type { ErrorProps } from './shared/types/ErrorProps';
 
 const Error: FC<ErrorProps> = ({
   Icon,
