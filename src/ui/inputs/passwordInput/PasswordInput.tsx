@@ -1,33 +1,31 @@
-import { type FC, memo, useCallback, useState } from 'react';
+'use client';
+
+import { type FC, useState } from 'react';
+
+import cn from 'classnames';
 
 import { ShowPasswordUnchecked } from '@/ui/inputs/passwordInput/assets/index';
 
-import s from './styles/PasswordInput.module.scss';
+import './styles/PasswordInput.scss';
 
 import { BaseInput } from '../baseInput/BaseInput';
 import type { PasswordInputProps } from '../types';
 
-export const PasswordInput: FC<PasswordInputProps> = memo(({ ...props }) => {
+export const PasswordInput: FC<PasswordInputProps> = ({ ...props }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
 
-  const togglePasswordVisibility = useCallback(() => {
-    setIsPasswordVisible((prev) => !prev);
-  }, []);
-
   return (
-    <div className={s.password__wrapper}>
+    <div className="password__wrapper">
       <BaseInput {...props} type={isPasswordVisible ? 'password' : 'text'} />
 
       <button
         type="button"
-        className={`${s.password__toggle} ${!isPasswordVisible && s.active}`}
-        onClick={togglePasswordVisibility}
+        className={cn('password__toggle', { active: !isPasswordVisible })}
+        onClick={() => setIsPasswordVisible((prev) => !prev)}
         aria-label={isPasswordVisible ? 'Приховати пароль' : 'Показати пароль'}
       >
-        <ShowPasswordUnchecked className={s.password__icon} />
+        <ShowPasswordUnchecked className="password__icon" />
       </button>
     </div>
   );
-});
-
-PasswordInput.displayName = 'PasswordInput';
+};
