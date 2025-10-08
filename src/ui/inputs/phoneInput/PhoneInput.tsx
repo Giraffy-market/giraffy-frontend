@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from 'react';
 
-import IMask from 'imask';
+import IMask, { type InputMask } from 'imask';
 
 import type { PhoneInputProps } from '@/ui/inputs/types';
 
@@ -22,7 +22,7 @@ export const PhoneInput: FC<PhoneInputProps> = ({
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const maskRef = useRef<any>(null);
+  const maskRef = useRef<InputMask | null>(null);
 
   useEffect(() => {
     if (inputRef.current) {

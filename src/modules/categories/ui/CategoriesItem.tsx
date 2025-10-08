@@ -3,7 +3,7 @@ import { type FC } from 'react';
 import Link from 'next/link';
 
 import { categoryIcons } from '../constants/constants';
-import { CategoryItem } from '../types/CategoryItem';
+import type { CategoryItem } from '../types/CategoryItem';
 
 export type Props = {
   data: CategoryItem;
