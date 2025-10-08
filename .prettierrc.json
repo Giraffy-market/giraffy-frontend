@@ -22,6 +22,8 @@
     "^@/shared/(.*)$",
     "^@/assets/(.*)$",
     "^@/styles/(.*)$",
+    "^[./].*\\.(png|jpg|jpeg|gif|svg|webp|avif)$",
+    "^[./].*\\.(css|scss)$",
     "^[./]"
   ]
 }

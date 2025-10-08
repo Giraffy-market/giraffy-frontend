@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from 'react';
 
+import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';
 
 import { nunito, openSans } from '@/layouts/root';
@@ -15,7 +16,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="uk">
       <body className={`${nunito.variable} ${openSans.variable}`}>
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

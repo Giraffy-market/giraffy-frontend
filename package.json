@@ -13,6 +13,7 @@
     "axios": "^1.12.2",
     "classnames": "^2.5.1",
     "embla-carousel-react": "^8.6.0",
+    "imask": "^7.6.1",
     "lodash.debounce": "^4.0.8",
     "motion": "^12.23.15",
     "next": "15.5.3",
@@ -21,10 +22,12 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
+    "vanilla-text-mask": "^5.1.1",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
