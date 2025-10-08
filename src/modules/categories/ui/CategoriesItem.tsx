@@ -2,8 +2,9 @@ import { type FC } from 'react';
 
 import Link from 'next/link';
 
-import { categoryIcons } from '../constants/constants';
 import type { CategoryItem } from '../types/CategoryItem';
+
+import { categoryIcons } from '../constants/constants';
 
 export type Props = {
   data: CategoryItem;

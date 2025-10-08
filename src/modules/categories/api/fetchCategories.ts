@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { API_BASE_URL } from '../constants/constants';
 import type { CategoryItem } from '../types/CategoryItem';
+
+import { API_BASE_URL } from '../constants/constants';
 
 export const fetchCategories = async (): Promise<CategoryItem[]> => {
   const response = await axios.get(
