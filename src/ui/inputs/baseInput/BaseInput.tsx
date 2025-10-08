@@ -1,30 +1,38 @@
-import { type ForwardedRef, forwardRef, memo } from 'react';
+import { type ForwardedRef, forwardRef } from 'react';
 
-import s from './styles/BaseInput.module.scss';
+import cn from 'classnames';
+
+import './styles/BaseInput.scss';
 
 import type { BaseInputProps } from '../types';
 
-export const BaseInput = memo(
-  forwardRef<HTMLInputElement, BaseInputProps>(
-    (
-      { Icon, value = '', onChange, ...props },
-      ref: ForwardedRef<HTMLInputElement>,
-    ) => {
-      return (
-        <div className={s.input__wrapper}>
-          {Icon && <Icon className={s.input__icon} />}
+export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
+  (
+    { Icon, value = '', onChange, iconPosition = 'left', ...props },
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return (
+      <div className="base-input">
+        {iconPosition === 'left' && Icon && (
+          <Icon className={cn('base-input__icon', 'base-input__icon--left')} />
+        )}
 
-          <input
-            ref={ref}
-            className={`${s.input} ${Icon ? s.input_with_icon : ''}`}
-            value={value}
-            onChange={onChange}
-            {...props}
-          />
-        </div>
-      );
-    },
-  ),
+        <input
+          ref={ref}
+          className={cn('base-input__field', {
+            ['base-input__field--with-icon']: Icon,
+          })}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
+
+        {iconPosition === 'right' && Icon && (
+          <Icon className={cn('base-input__icon', 'base-input__icon--right')} />
+        )}
+      </div>
+    );
+  },
 );
 
 BaseInput.displayName = 'BaseInput';
