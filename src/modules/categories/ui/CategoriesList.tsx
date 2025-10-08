@@ -1,8 +1,9 @@
 import { type FC } from 'react';
 
+import type { CategoryItem } from '../types/CategoryItem';
+
 import '../styles/list.scss';
 
-import type { CategoryItem } from '../types/CategoryItem';
 import CategoriesItem from './CategoriesItem';
 
 const CategoriesList: FC<{ data: CategoryItem[] }> = ({ data }) => {

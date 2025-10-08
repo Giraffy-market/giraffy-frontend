@@ -4,14 +4,14 @@ import { type FC } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
+import CategoriesList from './ui/CategoriesList';
 import Error from '@/ui/error/Error';
+import GiraffeEating from '@/ui/error/assets/giraffe-eating.svg';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 
-import GiraffeEating from '../../ui/error/assets/giraffe-eating.svg';
-
 import { fetchCategories } from './api/fetchCategories';
+
 import type { CategoryItem } from './types/CategoryItem';
-import CategoriesList from './ui/CategoriesList';
 
 const Categories: FC = () => {
   const { data, error, refetch } = useQuery<CategoryItem[]>({

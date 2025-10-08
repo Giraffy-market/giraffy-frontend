@@ -4,9 +4,9 @@ import { type FC } from 'react';
 
 import Link from 'next/link';
 
-import './styles/error.scss';
-
 import type { ErrorProps } from './shared/types/ErrorProps';
+
+import './styles/error.scss';
 
 const Error: FC<ErrorProps> = ({
   Icon,
