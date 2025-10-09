@@ -6,7 +6,7 @@ import { nunito, openSans } from '@/layouts/root';
 
 import { Footer } from '@/components/Footer/Footer';
 
-import '../styles/globals.scss';
+import '@/styles/globals.scss';
 
 export const metadata: Metadata = {
   title: 'Gyraffy',
