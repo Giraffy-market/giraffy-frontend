@@ -15,7 +15,7 @@ export const PasswordInput: FC<PasswordInputProps> = ({ ...props }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
 
   return (
-    <div className="password__wrapper">
+    <label className="password__wrapper">
       <BaseInput {...props} type={isPasswordVisible ? 'password' : 'text'} />
 
       <button
@@ -26,6 +26,6 @@ export const PasswordInput: FC<PasswordInputProps> = ({ ...props }) => {
       >
         <ShowPasswordUnchecked className="password__icon" />
       </button>
-    </div>
+    </label>
   );
 };
