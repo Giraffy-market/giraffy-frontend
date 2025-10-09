@@ -12,7 +12,6 @@ const footerLinks = [
   { href: '/exchange-returns', label: 'Правила обміну/повернення' },
   { href: '/faq', label: 'FAQ' },
 ];
-
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
