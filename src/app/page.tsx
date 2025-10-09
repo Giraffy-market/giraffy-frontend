@@ -4,9 +4,9 @@ import { type FC, useState } from 'react';
 
 import { Categories } from '@/modules/categories';
 
-import Giraffe from '../components/profilePopup/assets/logout.svg';
+import logoOutIcon from '../components/profilePopup/assets/logout.svg';
 
-import { BaseInput, PasswordInput } from '@/ui/inputs';
+import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
 
 const Home: FC = () => {
@@ -27,14 +27,18 @@ const Home: FC = () => {
         <BaseInput
           value={value.base}
           onChange={(e) => setValue({ ...value, base: e.target.value })}
-          Icon={Giraffe}
+          Icon={logoOutIcon}
           iconPosition="right"
         />
         <PasswordInput
           value={value.password}
           onChange={(e) => setValue({ ...value, password: e.target.value })}
-          Icon={Giraffe}
+          Icon={logoOutIcon}
           iconPosition="left"
+        />
+        <PhoneInput
+          value={value.phoneNumber}
+          onChange={(e) => setValue({ ...value, phoneNumber: e.target.value })}
         />
         Welcome to the Home Page
       </div>
