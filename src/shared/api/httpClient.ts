@@ -9,7 +9,7 @@ export const httpClient = async (): Promise<AxiosInstance> => {
   const session = await getServerAuthSession();
 
   return axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     headers: {
       Authorization: `Bearer ${session?.accessToken || ''}`,
     },
