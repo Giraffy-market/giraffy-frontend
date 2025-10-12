@@ -1,4 +1,4 @@
-import { type AuthOptions, getServerSession } from 'next-auth';
+import { type AuthOptions, type Session, getServerSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -29,7 +29,7 @@ export const authOptions: AuthOptions = {
         },
       },
       // @ts-expect-error next-auth err
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
         if (!credentials?.username || !credentials?.password) return null;
         const { username, password } = credentials;
         const axiosClient = await httpClient();
@@ -65,4 +65,5 @@ export const authOptions: AuthOptions = {
   },
 };
 
-export const getServerAuthSession = () => getServerSession(authOptions);
+export const getServerAuthSession = (): Promise<Session | null> =>
+  getServerSession(authOptions);
