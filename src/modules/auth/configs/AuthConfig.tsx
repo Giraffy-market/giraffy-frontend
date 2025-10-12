@@ -55,10 +55,14 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    session: async ({ token, session }) => {
-      session.user = token.user;
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
+    jwt: async ({ user, token }) => {
+      if (user) return { ...token, ...user };
+
+      return token;
+    },
+    session: async ({ session, token }) => {
+      session.access_token = token.access_token;
+      // session.refreshToken = token.refreshToken;
 
       return session;
     },
