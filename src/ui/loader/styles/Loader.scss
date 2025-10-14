@@ -1,0 +1,19 @@
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__dot {
+    width: 150px;
+    height: 150px;
+    animation: spinner 1s linear infinite;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(1turn);
+  }
+}
