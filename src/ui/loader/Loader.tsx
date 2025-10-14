@@ -4,7 +4,7 @@ import IconLoader from './assets/loader.svg';
 
 import './styles/Loader.scss';
 
-const Loader: FC = () => {
+export const Loader: FC = () => {
   return (
     <div className="loader-overlay">
       <div className="loader-overlay__dot">
@@ -13,5 +13,3 @@ const Loader: FC = () => {
     </div>
   );
 };
-
-export default Loader;
