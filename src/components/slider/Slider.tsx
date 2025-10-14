@@ -2,6 +2,7 @@
 
 import { type FC } from 'react';
 
+import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 
 import SliderItem from './ui/SliderItem/SliderItem';
@@ -15,7 +16,12 @@ import './styles/Slider.scss';
 import { useDotButton } from './hooks/useDotButton';
 
 export const Slider: FC = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({
+      delay: 4000,
+      stopOnInteraction: false,
+    }),
+  ]);
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
 
