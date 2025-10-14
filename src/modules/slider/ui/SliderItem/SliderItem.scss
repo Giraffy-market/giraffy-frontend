@@ -4,7 +4,15 @@ $slider1-gradient: linear-gradient(135deg, $orange 0%, #5c147a 100%);
 $slider2-gradient: linear-gradient(135deg, $orange 0%, #870bb8 100%);
 $slider3-gradient: linear-gradient(135deg, $orange 0%, #b7128d 100%);
 $slider4-gradient: linear-gradient(135deg, $orange 0%, #7a143d 100%);
-$slider5-gradient: large-body(135deg, $orange 0%, #ac07a9 100%);
+$slider5-gradient: linear-gradient(135deg, $orange 0%, #ac07a9 100%);
+
+$slider-gradients: (
+  1: $slider1-gradient,
+  2: $slider2-gradient,
+  3: $slider3-gradient,
+  4: $slider4-gradient,
+  5: $slider5-gradient,
+);
 
 .slider {
   position: relative;
@@ -25,21 +33,10 @@ $slider5-gradient: large-body(135deg, $orange 0%, #ac07a9 100%);
     border-bottom-right-radius: 64px;
   }
 
-  &.slider1 {
-    background: $slider1-gradient;
-  }
-
-  &.slider2 {
-    background: $slider2-gradient;
-  }
-  &.slider3 {
-    background: $slider3-gradient;
-  }
-  &.slider4 {
-    background: $slider4-gradient;
-  }
-  &.slider5 {
-    background: $slider5-gradient;
+  @each $i, $gradient in $slider-gradients {
+    &.slider#{$i} {
+      background: $gradient;
+    }
   }
 
   &.slider2,
