@@ -1,5 +1,11 @@
 @use '@/styles/utils/index' as *;
 
+$slider1-gradient: linear-gradient(135deg, $orange 0%, #5c147a 100%);
+$slider2-gradient: linear-gradient(135deg, $orange 0%, #870bb8 100%);
+$slider3-gradient: linear-gradient(135deg, $orange 0%, #b7128d 100%);
+$slider4-gradient: linear-gradient(135deg, $orange 0%, #7a143d 100%);
+$slider5-gradient: large-body(135deg, $orange 0%, #ac07a9 100%);
+
 .slider {
   position: relative;
   user-select: none;
@@ -20,28 +26,26 @@
   }
 
   &.slider1 {
-    background: linear-gradient(135deg, $orange 0%, #5c147a 100%);
+    background: $slider1-gradient;
   }
+
   &.slider2 {
-    background: linear-gradient(135deg, $orange 0%, #870bb8 100%);
-    @include onDesktop {
-      border-bottom-left-radius: 64px;
-    }
+    background: $slider2-gradient;
   }
   &.slider3 {
-    background: linear-gradient(135deg, $orange 0%, #b7128d 100%);
-    @include onDesktop {
-      border-bottom-left-radius: 64px;
-    }
+    background: $slider3-gradient;
   }
   &.slider4 {
-    background: linear-gradient(135deg, $orange 0%, #7a143d 100%);
-    @include onDesktop {
-      border-bottom-left-radius: 64px;
-    }
+    background: $slider4-gradient;
   }
   &.slider5 {
-    background: linear-gradient(135deg, $orange 0%, #ac07a9 100%);
+    background: $slider5-gradient;
+  }
+
+  &.slider2,
+  &.slider3,
+  &.slider4,
+  &.slider5 {
     @include onDesktop {
       border-bottom-left-radius: 64px;
     }
