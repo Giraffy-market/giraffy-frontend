@@ -1,0 +1,43 @@
+import Giraffe1 from '../icons/giraffe1.svg';
+import Giraffe2 from '../icons/giraffe2.svg';
+import Giraffe3 from '../icons/giraffe3.svg';
+import Giraffe4 from '../icons/giraffe4.svg';
+import Giraffe5 from '../icons/giraffe5.svg';
+
+export const SLIDER_DATA = [
+  {
+    Icon: Giraffe1,
+    title: 'Є речі, якими давно не користуєшся?',
+    description:
+      'Те, що тобі вже не потрібно, може стати корисним для інших — подаруй речам друге життя',
+    buttonsLabel: 'Виставити на продаж',
+  },
+  {
+    Icon: Giraffe2,
+    title: 'Шукаєш потрібне без зайвих витрат ?',
+    description:
+      'Тут зібрано багато корисного, що готове стати в нагоді — шукай і обирай легко',
+    buttonsLabel: 'Переглянути оголошення',
+  },
+  {
+    Icon: Giraffe3,
+    title: 'Не знаєш як продати ? Giraffy AI',
+    description:
+      'Завантажиш фото — отримаєш опис, ціну та поради для швидкого продажу. Асистент уже в дорозі!',
+    buttonsLabel: 'Чекай оновлень',
+  },
+  {
+    Icon: Giraffe4,
+    title: 'Бонуси за речі — це вже близько',
+    description:
+      'Граємось по-дорослому: досягнення, баланси, сюрпризи за активність. Giraffy готує приємне.',
+    buttonsLabel: 'Хочу дізнатись більше',
+  },
+  {
+    Icon: Giraffe5,
+    title: 'У тебе — зайве, комусь — потрібне',
+    description:
+      'Подаруй те, що більше не використовуєш. Це більше, ніж просто жест.',
+    buttonsLabel: 'Подарувати через Giraffy',
+  },
+];
