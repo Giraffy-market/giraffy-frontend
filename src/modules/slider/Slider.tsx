@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC, useEffect } from 'react';
+import { type FC } from 'react';
 
 import useEmblaCarousel from 'embla-carousel-react';
 
@@ -12,16 +12,10 @@ import './styles/Slider.scss';
 
 import { useDotButton } from './hooks/useDotButton';
 
-const Slider: FC = () => {
+export const Slider: FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
-
-  useEffect(() => {
-    if (emblaApi) {
-      console.log('Embla initialized:', emblaApi);
-    }
-  }, [emblaApi]);
 
   return (
     <section className="embla">
@@ -45,5 +39,3 @@ const Slider: FC = () => {
     </section>
   );
 };
-
-export default Slider;
