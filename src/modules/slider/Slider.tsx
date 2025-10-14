@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 
 import SliderItem from './ui/SliderItem/SliderItem';
 
-import { SLIDER_DATA } from './assets/data/sliderData';
+import { SLIDER_DATA } from './constants/constants';
 
 import './styles/Slider.scss';
 
@@ -28,7 +28,7 @@ const Slider: FC = () => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {SLIDER_DATA.map((data, i) => (
-            <SliderItem key={i} data={data} index={i} />
+            <SliderItem key={data.id} data={data} index={i} />
           ))}
         </div>
       </div>
