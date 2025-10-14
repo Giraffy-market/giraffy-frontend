@@ -1,11 +1,12 @@
-import Giraffe1 from '../icons/giraffe1.svg';
-import Giraffe2 from '../icons/giraffe2.svg';
-import Giraffe3 from '../icons/giraffe3.svg';
-import Giraffe4 from '../icons/giraffe4.svg';
-import Giraffe5 from '../icons/giraffe5.svg';
+import Giraffe1 from '../assets/icons/giraffe1.svg';
+import Giraffe2 from '../assets/icons/giraffe2.svg';
+import Giraffe3 from '../assets/icons/giraffe3.svg';
+import Giraffe4 from '../assets/icons/giraffe4.svg';
+import Giraffe5 from '../assets/icons/giraffe5.svg';
 
 export const SLIDER_DATA = [
   {
+    id: 1,
     Icon: Giraffe1,
     title: 'Є речі, якими давно не користуєшся?',
     description:
@@ -13,6 +14,7 @@ export const SLIDER_DATA = [
     buttonsLabel: 'Виставити на продаж',
   },
   {
+    id: 2,
     Icon: Giraffe2,
     title: 'Шукаєш потрібне без зайвих витрат ?',
     description:
@@ -20,6 +22,7 @@ export const SLIDER_DATA = [
     buttonsLabel: 'Переглянути оголошення',
   },
   {
+    id: 3,
     Icon: Giraffe3,
     title: 'Не знаєш як продати ? Giraffy AI',
     description:
@@ -27,6 +30,7 @@ export const SLIDER_DATA = [
     buttonsLabel: 'Чекай оновлень',
   },
   {
+    id: 4,
     Icon: Giraffe4,
     title: 'Бонуси за речі — це вже близько',
     description:
@@ -34,6 +38,7 @@ export const SLIDER_DATA = [
     buttonsLabel: 'Хочу дізнатись більше',
   },
   {
+    id: 5,
     Icon: Giraffe5,
     title: 'У тебе — зайве, комусь — потрібне',
     description:
