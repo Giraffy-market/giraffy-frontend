@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 
 import SliderItem from './ui/SliderItem/SliderItem';
 
-import { SLIDER_DATA } from './constants/constants';
+import { SLIDER_DATA } from './constants/sliderData';
 
 import './styles/Slider.scss';
 
