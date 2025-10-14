@@ -3,9 +3,9 @@
 import { type FC, useState } from 'react';
 
 import { Categories } from '@/modules/categories';
-import { Slider } from '@/modules/slider';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
+import { Slider } from '@/components/slider';
 
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
