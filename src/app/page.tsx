@@ -3,6 +3,7 @@
 import { type FC, useState } from 'react';
 
 import { Categories } from '@/modules/categories';
+import { Slider } from '@/modules/slider';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
 
@@ -46,6 +47,8 @@ const Home: FC = () => {
       <section>
         <Categories />
       </section>
+
+      <Slider />
     </>
   );
 };

@@ -1,0 +1,58 @@
+@use '@/styles/utils/index' as *;
+
+.embla {
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 32px;
+
+  &__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+  &__container {
+    display: flex;
+    gap: 16px;
+    touch-action: pan-y;
+    will-change: transform;
+
+    @include onDesktop {
+      gap: 40px;
+    }
+  }
+
+  &__dots {
+    position: relative;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    @include onDesktop {
+      bottom: -32px;
+    }
+  }
+
+  &__dot {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: none;
+    background-color: #998096;
+    transition: background-color 0.3s ease;
+
+    &.is-selected {
+      background-color: $white;
+      @include onDesktop {
+        background-color: #75236b;
+      }
+    }
+
+    @include onDesktop {
+      width: 24px;
+      height: 24px;
+      background-color: #a3819f;
+    }
+  }
+}
