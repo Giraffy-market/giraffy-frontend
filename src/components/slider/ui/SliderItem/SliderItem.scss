@@ -25,26 +25,19 @@ $slider-gradients: (
   padding: 45px 16px;
   flex: 0 0 100%;
   border-bottom-right-radius: 40px;
+  margin-left: 16px;
   @include onDesktop {
     flex: 0 0 90%;
     flex-direction: row;
     gap: 240px;
     height: 548px;
-    border-bottom-right-radius: 64px;
+    border-radius: 0 0 64px 64px;
+    margin-left: 40px;
   }
 
   @each $i, $gradient in $slider-gradients {
     &.slider#{$i} {
       background: $gradient;
-    }
-  }
-
-  &.slider2,
-  &.slider3,
-  &.slider4,
-  &.slider5 {
-    @include onDesktop {
-      border-bottom-left-radius: 64px;
     }
   }
 
