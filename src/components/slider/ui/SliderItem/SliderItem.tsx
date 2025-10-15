@@ -4,13 +4,6 @@ import cn from 'classnames';
 
 import './SliderItem.scss';
 
-type SliderItemProps = {
-  Icon: ElementType;
-  title: string;
-  description: string;
-  buttonsLabel: string;
-};
-
 const SLIDER_CLASSNAMES = [
   'slider1',
   'slider2',
@@ -19,13 +12,20 @@ const SLIDER_CLASSNAMES = [
   'slider5',
 ];
 
-const SliderItem: FC<{ data: SliderItemProps; index: number }> = ({
-  data,
-  index,
-}) => {
+type SliderItemProps = {
+  data: {
+    Icon: ElementType;
+    title: string;
+    description: string;
+    buttonsLabel: string;
+  };
+  index: number;
+};
+
+export const SliderItem: FC<SliderItemProps> = ({ data, index }) => {
   const Icon = data.Icon;
   return (
-    <div className={cn('slider', SLIDER_CLASSNAMES[index])}>
+    <div className={cn('slider', SLIDER_CLASSNAMES[index - 1])}>
       <div className="slider-image__wrapper">
         <Icon className="slide-image" role="img" aria-label="giraffe" />
       </div>
@@ -43,5 +43,3 @@ const SliderItem: FC<{ data: SliderItemProps; index: number }> = ({
     </div>
   );
 };
-
-export default SliderItem;
