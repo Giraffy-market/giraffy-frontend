@@ -2,6 +2,8 @@ import type { ElementType, FC } from 'react';
 
 import cn from 'classnames';
 
+import { Button } from '@/ui/button/Button';
+
 import './SliderItem.scss';
 
 const SLIDER_CLASSNAMES = [
@@ -36,9 +38,9 @@ export const SliderItem: FC<SliderItemProps> = ({ data, index }) => {
           <p className="slider-description">{data.description}</p>
         </div>
 
-        <button className="slider-item__button" type="button">
-          {data.buttonsLabel}
-        </button>
+        <div className="slider-button__wrapper">
+          <Button type="button" text={data.buttonsLabel} variant="primary" />
+        </div>
       </div>
     </div>
   );
