@@ -1,29 +1,26 @@
 'use client';
 
-import { FC } from 'react';
+import { type FC } from 'react';
 
 import cn from 'classnames';
 
-import css from './styles/styles.module.scss';
+import type { BaseButtonProps } from './types/baseButtonProps';
 
-type Props = {
-  label: string;
-  isUpdate?: boolean;
-  onClick?: () => void;
-};
+import './styles/button.scss';
 
-const Button: FC<Props> = ({ label, isUpdate, onClick }) => {
+export const Button: FC<BaseButtonProps> = ({ text, variant, ...props }) => {
   return (
     <button
-      className={cn(css.button, {
-        [css['button--update']]: isUpdate,
+      className={cn('button', {
+        ['primary']: variant === 'primary',
+        ['outline']: variant === 'outline',
+        ['gradient']: variant === 'gradient',
+        ['ghost']: variant === 'ghost',
+        ['smallest']: variant === 'smallest',
       })}
-      type="button"
-      onClick={onClick}
+      {...props}
     >
-      <span>{label}</span>
+      {text}
     </button>
   );
 };
-
-export default Button;
