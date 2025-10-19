@@ -1,8 +1,6 @@
-import type { ButtonHTMLAttributes, MouseEventHandler } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
 export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string;
   variant: 'primary' | 'outline' | 'gradient' | 'ghost' | 'smallest';
-  type: 'button' | 'submit' | 'reset';
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
