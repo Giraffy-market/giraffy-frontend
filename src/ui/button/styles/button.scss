@@ -12,6 +12,10 @@ $disabled-gradient: linear-gradient(90deg, #ccc 0%, #797777 100%);
   border-radius: 10px;
   transition: all 250ms linear;
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &.primary {
     height: 52px;
     @include button-2;
@@ -52,22 +56,41 @@ $disabled-gradient: linear-gradient(90deg, #ccc 0%, #797777 100%);
     }
   }
   &.gradient {
+    position: relative;
     height: 60px;
     @include button;
     color: $white;
     background: $base-gradient;
-    transition: background-position 250ms linear;
-    &:hover {
+    overflow: hidden;
+    z-index: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
       background: $hover-gradient;
+      opacity: 0;
+      transition: opacity 250ms linear;
+      z-index: -1;
     }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
     &:active {
       background: $active-gradient;
     }
+
     &:disabled {
       color: #f8f5f5;
       background: $disabled-gradient;
+      &::before {
+        display: none;
+      }
     }
   }
+
   &.ghost {
     height: 60px;
     font-weight: 400;
