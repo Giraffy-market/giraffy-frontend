@@ -1,0 +1,14 @@
+@import '@/styles/utils/variables';
+@import '../../utils/header-typography';
+
+.items {
+  @include headerCategoryItems;
+}
+
+.item {
+  @include headerCategoryItem;
+}
+
+.mainCategories {
+  border-right: 1px solid #000;
+}

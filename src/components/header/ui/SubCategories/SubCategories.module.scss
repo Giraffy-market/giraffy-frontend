@@ -1,0 +1,10 @@
+@import '@/styles/utils/variables';
+@import '../../utils/header-typography';
+
+.items {
+  @include headerCategoryItems;
+}
+
+.item {
+  @include headerCategoryItem;
+}

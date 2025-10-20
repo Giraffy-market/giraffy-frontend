@@ -1,0 +1,18 @@
+@import '@/styles/utils/variables';
+@import '../../utils/header-typography';
+
+.wrapper {
+  background-color: $white;
+  border-radius: 10px;
+  max-width: 500px;
+
+  display: inline-block;
+}
+
+.wrapperLoading {
+  width: 300px;
+}
+
+.body {
+  display: flex;
+}

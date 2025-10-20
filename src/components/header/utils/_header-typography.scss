@@ -1,0 +1,10 @@
+@mixin headerCategoryItems {
+  display: grid;
+  gap: 16px;
+
+  padding: 24px;
+}
+
+@mixin headerCategoryItem {
+  cursor: pointer;
+}
