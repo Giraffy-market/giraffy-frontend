@@ -8,6 +8,8 @@ import type { ErrorProps } from './shared/types/ErrorProps';
 
 import './styles/error.scss';
 
+import { Button } from '../button/Button';
+
 const Error: FC<ErrorProps> = ({
   Icon,
   title,
@@ -38,13 +40,12 @@ const Error: FC<ErrorProps> = ({
             <p className="error-description ">{description}</p>
             <div className="error-buttons-wrapper">
               {showUpdateButton && refetch && (
-                <button
-                  className="error-button"
+                <Button
                   type="button"
+                  text="Оновити сторінку"
+                  variant="primary"
                   onClick={() => void refetch()}
-                >
-                  <span>Оновити сторінку</span>
-                </button>
+                />
               )}
               <Link className="error-link" href="/">
                 Повернутися на головну
