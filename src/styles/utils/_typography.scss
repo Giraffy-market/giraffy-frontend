@@ -109,6 +109,8 @@
 @mixin footer-text {
   font-family: var(--font-open-sans);
   font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
 
   @include onDesktop {
     font-size: 14px;
