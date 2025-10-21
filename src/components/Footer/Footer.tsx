@@ -1,32 +1,30 @@
-'use client';
-
 import Link from 'next/link';
 
 import { Logo } from '@/ui/logo/Logo';
 
-import s from './Footer.module.scss';
+import './Footer.scss';
 
-const footerLinks = [
-  { href: '/about', label: 'Про нас' },
-  { href: '/contacts', label: 'Контакти' },
-  { href: '/exchange-returns', label: 'Правила обміну/повернення' },
-  { href: '/faq', label: 'FAQ' },
+const FOOTER_LINKS = [
+  { id: 1, href: '/about', text: 'Про нас' },
+  { id: 2, href: '/contacts', text: 'Контакти' },
+  { id: 3, href: '/exchange-returns', text: 'Правила обміну/повернення' },
+  { id: 4, href: '/faq', text: 'FAQ' },
 ];
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={s.footer} role="contentinfo">
-      <div className={`container ${s['footer__inner']}`}>
-        <div className={s['footer__top']}>
+    <footer className="footer" role="contentinfo">
+      <div className="footer__inner">
+        <div className="footer__top">
           <Logo />
 
-          <nav className={s['footer__nav']} aria-label="Footer navigation">
-            <ul className={s['footer__menu']}>
-              {footerLinks.map((link) => (
-                <li key={link.href} className={s['footer__menu-item']}>
-                  <Link href={link.href} className={s['footer__menu-link']}>
-                    {link.label}
+          <nav className="footer__nav" aria-label="Footer navigation">
+            <ul className="footer__menu">
+              {FOOTER_LINKS.map(({ id, text, href }) => (
+                <li className="footer__menu-item" key={id}>
+                  <Link className="footer__menu-link" href={href}>
+                    {text}
                   </Link>
                 </li>
               ))}
@@ -34,19 +32,17 @@ export const Footer: React.FC = () => {
           </nav>
         </div>
 
-        <p className={s['footer__copy']}>&copy; {year} — Giraffy.</p>
+        <p className="footer__copy">&copy; {year} — Giraffy.</p>
 
-        <p className={s['footer__legal']}>
-          Усі права захищено.
-          <br className={s['footer__only-mobile']} />
-          <Link href="/privacy" className={s['footer__legal-link']}>
+        <p className="footer__legal">
+          Усі права захищено.&nbsp;
+          <br className="footer__legal-break" />
+          <Link className="footer__legal-link" href="/privacy">
             Політика конфіденційності
           </Link>
           &nbsp;та&nbsp;
-          <Link href="/tos" className={s['footer__legal-link']}>
-            Умови&nbsp;
-            <br className={s['footer__only-mobile']} />
-            надання послуг
+          <Link className="footer__legal-link" href="/tos">
+            Умови надання послуг
           </Link>
           .
         </p>
