@@ -7,9 +7,9 @@ import { Categories } from '@/modules/categories';
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
 import { Slider } from '@/components/slider/Slider';
 
+import { Popup } from '@/ui/Popup/Popup';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
-import { Popup } from '@/ui/modal/popup';
 
 const Home: FC = () => {
   const [value, setValue] = useState({
@@ -50,7 +50,7 @@ const Home: FC = () => {
         >
           Open Pop up
         </button>
-        <Popup isOpen={open} onClose={() => setOpen(false)} title="Title">
+        <Popup isOpen={open} onClose={() => setOpen(false)}>
           <p>Content modal </p>
         </Popup>
       </div>

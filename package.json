@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint \"src/**\"",
     "format": "prettier --check \"src/**/*.{ts,tsx,scss,json,md}\"",
+    "format:fix": "prettier --write \"src/**/*.{ts,tsx,scss,json,md}\"",
     "prepare": "husky"
   },
   "dependencies": {
