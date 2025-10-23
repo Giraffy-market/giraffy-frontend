@@ -7,6 +7,7 @@ import { Categories } from '@/modules/categories';
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
 import { Slider } from '@/components/slider/Slider';
 
+import { Popup } from '@/ui/Popup/Popup';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
 
@@ -16,6 +17,8 @@ const Home: FC = () => {
     password: '',
     phoneNumber: '',
   });
+
+  const [open, setOpen] = useState(false);
 
   console.log('base: ', value.base);
   console.log('password: ', value.password);
@@ -41,7 +44,15 @@ const Home: FC = () => {
           value={value.phoneNumber}
           onChange={(e) => setValue({ ...value, phoneNumber: e.target.value })}
         />
-        Welcome to the Home Page
+        <button
+          onClick={() => setOpen(true)}
+          style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
+        >
+          Open Pop up
+        </button>
+        <Popup isOpen={open} onClose={() => setOpen(false)}>
+          <p>Content modal </p>
+        </Popup>
       </div>
 
       <section>
