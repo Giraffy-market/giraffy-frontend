@@ -2,8 +2,9 @@ import { type FC, useState } from 'react';
 
 import cn from 'classnames';
 
-import { ParentCategories } from '../ParentCategories/ParentCategories';
-import { SubCategories } from '../SubCategories/SubCategories';
+import CategoriesLogo from '@/components/header/assets/categories.svg';
+import { HeaderCategoriesPopup } from '@/components/header/ui/HeaderCategoriesPopup/HeaderCategoriesPopup';
+
 import styles from './HeaderCategories.module.scss';
 
 interface Props {
@@ -11,20 +12,20 @@ interface Props {
 }
 
 export const HeaderCategories: FC<Props> = ({ className }) => {
-  const [activeParentCategoryId, setActiveParentCategoryId] = useState<
-    number | null
-  >(null);
+  const [activeCategoriesPopup, setActiveCategoriesPopup] =
+    useState<boolean>(false);
 
   return (
-    <div className={cn(className, styles.wrapper)}>
-      <div className={styles.body}>
-        <ParentCategories
-          activeParentCategoryId={activeParentCategoryId}
-          setActiveParentCategoryId={setActiveParentCategoryId}
-        />
+    <div className={cn(styles.wrapper, className)}>
+      <button
+        className={styles.button}
+        onClick={() => setActiveCategoriesPopup((prevState) => !prevState)}
+      >
+        <CategoriesLogo />
+        <p>Категорії</p>
+      </button>
 
-        <SubCategories activeParentCategoryId={activeParentCategoryId} />
-      </div>
+      {activeCategoriesPopup ? <HeaderCategoriesPopup /> : null}
     </div>
   );
 };
