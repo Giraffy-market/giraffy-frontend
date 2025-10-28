@@ -1,0 +1,62 @@
+/* Для особливих випадків. */
+.option {
+      display: block;
+      margin-bottom: 1em;
+      font-size: 20px;
+}
+
+/* Для оформлення label, щоб дати йому відступи від самого чекбокса. */
+.check {
+      padding-left: 1.2em;
+      padding-top: 20px;
+      cursor: pointer;
+      width: fit-content;
+}
+
+/* Для повного приховування стандартного чекбокса. */
+.check__input {
+      /* 1. Спосіб повністю приховати стандартний чекбокс, при цьому самі можливості взаємодії залишаються. */
+      // appearance: none;
+      // -webkit-appearance: none;
+      // -moz-appearance: none;
+      /* 2. Спосіб */
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      clip-path: rect(0 0 0 0);
+}
+
+/* Для оформлення кастомного чекбокса, стилізованого під ваш стиль та колір. */
+.check__box {
+      position: absolute;
+      margin-top: 0.2em;
+      margin-left: 1em;
+      width: 1em;
+      height: 1em;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='1.5' stroke='%23CACACA'/%3E%3C/svg%3E%0A");
+}
+
+/* Для оформлення різних станів кастомного зовнішнього вигляду чекбокса. */
+
+.check__input:hover + .check__box {
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='1.5' fill='white' stroke='%23F88C44'/%3E%3C/svg%3E%0A");
+}
+
+.check__input:checked + .check__box {
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='20' height='20' rx='2' fill='%23FF7518'/%3E%3Cpath d='M15.9194 4.96249C16.0047 4.87545 16.1065 4.8063 16.2189 4.7591C16.3312 4.71189 16.4519 4.68758 16.5737 4.68758C16.6956 4.68758 16.8163 4.71189 16.9286 4.7591C17.041 4.8063 17.1428 4.87545 17.2281 4.96249C17.5856 5.32374 17.5906 5.90749 17.2406 6.27499L9.84936 15.0125C9.76545 15.1046 9.66361 15.1787 9.55009 15.2301C9.43656 15.2816 9.31374 15.3093 9.18912 15.3117C9.06451 15.314 8.94073 15.2909 8.82535 15.2438C8.70998 15.1966 8.60543 15.1264 8.51812 15.0375L4.02061 10.48C3.84716 10.3031 3.75 10.0652 3.75 9.81749C3.75 9.56975 3.84716 9.33189 4.02061 9.15499C4.10592 9.06795 4.20774 8.9988 4.3201 8.9516C4.43246 8.90439 4.55311 8.88008 4.67499 8.88008C4.79687 8.88008 4.91752 8.90439 5.02988 8.9516C5.14224 8.9988 5.24406 9.06795 5.32936 9.15499L9.14436 13.0212L15.8944 4.98999C15.9021 4.98033 15.9105 4.97115 15.9194 4.96249Z' fill='white'/%3E%3C/svg%3E%0A");
+}
+
+.check__input:disabled + .check__box {
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='1.5' fill='%23E5E5E5' stroke='%23CACACA'/%3E%3C/svg%3E%0A");
+}
+
+.check__input:disabled:checked + .check__box {
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='1.5' fill='%23CACACA'/%3E%3Crect x='0.5' y='0.5' width='19' height='19' rx='1.5' stroke='%23A9A9A9'/%3E%3Cpath d='M15.9194 4.96251C16.0047 4.87547 16.1065 4.80632 16.2188 4.75911C16.3312 4.71191 16.4519 4.68759 16.5737 4.68759C16.6956 4.68759 16.8163 4.71191 16.9286 4.75911C17.041 4.80632 17.1428 4.87547 17.2281 4.96251C17.5856 5.32376 17.5906 5.90751 17.2406 6.27501L9.84936 15.0125C9.76545 15.1047 9.66361 15.1787 9.55009 15.2302C9.43656 15.2816 9.31374 15.3093 9.18912 15.3117C9.06451 15.314 8.94073 15.2909 8.82535 15.2438C8.70998 15.1966 8.60543 15.1264 8.51811 15.0375L4.02061 10.48C3.84716 10.3031 3.75 10.0653 3.75 9.81751C3.75 9.56977 3.84716 9.3319 4.02061 9.15501C4.10592 9.06797 4.20774 8.99882 4.3201 8.95161C4.43246 8.90441 4.55311 8.88009 4.67499 8.88009C4.79687 8.88009 4.91752 8.90441 5.02988 8.95161C5.14224 8.99882 5.24406 9.06797 5.32936 9.15501L9.14436 13.0213L15.8944 4.99001C15.9021 4.98035 15.9105 4.97117 15.9194 4.96251Z' fill='white'/%3E%3C/svg%3E%0A");
+}
+
+.check__input:focus + .check__box {
+      box-shadow:
+      0 0 0 0.2em #fc640c67;
+      border-radius: 0.1em;
+}
