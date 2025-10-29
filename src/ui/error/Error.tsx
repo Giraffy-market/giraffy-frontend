@@ -11,10 +11,11 @@ import './styles/error.scss';
 import { Button } from '../button/Button';
 
 const Error: FC<ErrorProps> = ({
+  errorCode,
   Icon,
   title,
   description,
-  refetch,
+  onRetry,
   showUpdateButton = true,
 }) => {
   const titleLines = Array.isArray(title) ? title : [title];
@@ -23,28 +24,34 @@ const Error: FC<ErrorProps> = ({
     <div className="container">
       <div className="error">
         <div className="error-wrapper">
-          <div className="error-image-wrapper">
-            <Icon role="img" aria-label="giraffe" />
-          </div>
+          {Icon && (
+            <div className="error-image-wrapper">
+              <Icon role="img" aria-label="giraffe" />
+            </div>
+          )}
 
           <div className="error-info-wrapper">
-            <h2 className="error-title">
-              {titleLines.map((line: string, i: number) => (
-                <span key={i}>
-                  {line}
-                  {i < titleLines.length - 1 && <br />}
-                </span>
-              ))}
-            </h2>
+            {errorCode && <span className="error-error-code">{errorCode}</span>}
+
+            {titleLines.length > 0 && (
+              <h2 className="error-title">
+                {titleLines.map((line: string, i: number) => (
+                  <span key={i}>
+                    {line}
+                    {i < titleLines.length - 1 && <br />}
+                  </span>
+                ))}
+              </h2>
+            )}
 
             <p className="error-description ">{description}</p>
             <div className="error-buttons-wrapper">
-              {showUpdateButton && refetch && (
+              {showUpdateButton && onRetry && (
                 <Button
                   type="button"
                   text="Оновити сторінку"
                   variant="primary"
-                  onClick={() => void refetch()}
+                  onClick={() => void onRetry()}
                 />
               )}
               <Link className="error-link" href="/">

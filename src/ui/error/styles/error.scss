@@ -22,6 +22,15 @@
     text-align: center;
   }
 
+  &-error-code {
+    font-weight: 500;
+    font-size: 180px;
+    line-height: 64px;
+    text-align: center;
+    color: $blue;
+    margin-bottom: 75px;
+  }
+
   &-title {
     @include h2;
   }

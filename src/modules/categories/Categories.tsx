@@ -28,7 +28,7 @@ const Categories: FC = () => {
         Icon={GiraffeEating}
         title={['Упс!', 'Щось пішло не так']}
         description="Схоже, виникла неочікувана помилка. Ми вже знаємо про це й працюємо над виправленням"
-        refetch={refetch}
+        onRetry={refetch}
       />
     );
   }
