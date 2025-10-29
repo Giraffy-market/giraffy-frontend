@@ -2,6 +2,7 @@
 
 import { type FC } from 'react';
 
+import cn from 'classnames';
 import Link from 'next/link';
 
 import type { ErrorProps } from './shared/types/ErrorProps';
@@ -23,7 +24,12 @@ const Error: FC<ErrorProps> = ({
   return (
     <div className="container">
       <div className="error">
-        <div className="error-wrapper">
+        <div
+          className={cn('error-wrapper', {
+            ['error-wrapper--base']: !errorCode,
+            ['error-wrapper--code']: errorCode,
+          })}
+        >
           {Icon && (
             <div className="error-image-wrapper">
               <Icon role="img" aria-label="giraffe" />
@@ -31,7 +37,9 @@ const Error: FC<ErrorProps> = ({
           )}
 
           <div className="error-info-wrapper">
-            {errorCode && <span className="error-error-code">{errorCode}</span>}
+            {errorCode && (
+              <span className="error-error--code">{errorCode}</span>
+            )}
 
             {titleLines.length > 0 && (
               <h2 className="error-title">
@@ -44,8 +52,19 @@ const Error: FC<ErrorProps> = ({
               </h2>
             )}
 
-            <p className="error-description ">{description}</p>
-            <div className="error-buttons-wrapper">
+            <p
+              className={cn('error-description', {
+                ['error-description--base']: !errorCode,
+                ['error-description--code']: errorCode,
+              })}
+            >
+              {description}
+            </p>
+            <div
+              className={cn('error-buttons-wrapper', {
+                ['error-buttons-wrapper--code']: errorCode,
+              })}
+            >
               {showUpdateButton && onRetry && (
                 <Button
                   type="button"
