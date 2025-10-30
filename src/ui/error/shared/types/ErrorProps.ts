@@ -8,11 +8,13 @@ import type {
 type RefetchFn = (
   options?: RefetchOptions,
 ) => Promise<QueryObserverResult<unknown, unknown>>;
+type RetryFn = RefetchFn | (() => void);
 
 export type ErrorProps = {
-  Icon: ElementType;
+  errorCode?: number;
+  Icon?: ElementType;
   title: string | string[];
   description: string;
-  refetch?: RefetchFn;
+  onRetry?: RetryFn;
   showUpdateButton?: boolean;
 };

@@ -2,6 +2,7 @@
 
 import { type FC } from 'react';
 
+import cn from 'classnames';
 import Link from 'next/link';
 
 import type { ErrorProps } from './shared/types/ErrorProps';
@@ -11,10 +12,11 @@ import './styles/error.scss';
 import { Button } from '../button/Button';
 
 const Error: FC<ErrorProps> = ({
+  errorCode,
   Icon,
   title,
   description,
-  refetch,
+  onRetry,
   showUpdateButton = true,
 }) => {
   const titleLines = Array.isArray(title) ? title : [title];
@@ -22,29 +24,53 @@ const Error: FC<ErrorProps> = ({
   return (
     <div className="container">
       <div className="error">
-        <div className="error-wrapper">
-          <div className="error-image-wrapper">
-            <Icon role="img" aria-label="giraffe" />
-          </div>
+        <div
+          className={cn('error-wrapper', {
+            ['error-wrapper--base']: !errorCode,
+            ['error-wrapper--code']: errorCode,
+          })}
+        >
+          {Icon && (
+            <div className="error-image-wrapper">
+              <Icon role="img" aria-label="giraffe" />
+            </div>
+          )}
 
           <div className="error-info-wrapper">
-            <h2 className="error-title">
-              {titleLines.map((line: string, i: number) => (
-                <span key={i}>
-                  {line}
-                  {i < titleLines.length - 1 && <br />}
-                </span>
-              ))}
-            </h2>
+            {errorCode && (
+              <span className="error-error--code">{errorCode}</span>
+            )}
 
-            <p className="error-description ">{description}</p>
-            <div className="error-buttons-wrapper">
-              {showUpdateButton && refetch && (
+            {titleLines.length > 0 && (
+              <h2 className="error-title">
+                {titleLines.map((line: string, i: number) => (
+                  <span key={i}>
+                    {line}
+                    {i < titleLines.length - 1 && <br />}
+                  </span>
+                ))}
+              </h2>
+            )}
+
+            <p
+              className={cn('error-description', {
+                ['error-description--base']: !errorCode,
+                ['error-description--code']: errorCode,
+              })}
+            >
+              {description}
+            </p>
+            <div
+              className={cn('error-buttons-wrapper', {
+                ['error-buttons-wrapper--code']: errorCode,
+              })}
+            >
+              {showUpdateButton && onRetry && (
                 <Button
                   type="button"
                   text="Оновити сторінку"
                   variant="primary"
-                  onClick={() => void refetch()}
+                  onClick={() => void onRetry()}
                 />
               )}
               <Link className="error-link" href="/">
