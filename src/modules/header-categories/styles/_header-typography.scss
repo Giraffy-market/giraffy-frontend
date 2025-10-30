@@ -1,4 +1,4 @@
-@import '@/styles/utils/typography';
+@use '@/styles/utils/typography' as *;
 
 @mixin headerCategoryItems {
   display: grid;
@@ -11,8 +11,4 @@
   @include large-body;
 
   cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }

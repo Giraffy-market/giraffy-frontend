@@ -1,5 +1,5 @@
-@import '@/styles/utils/variables';
-@import '../../utils/header-typography';
+@use '@/styles/utils/variables' as *;
+@use '../../styles/header-typography' as *;
 
 .wrapper {
   background-color: $white;

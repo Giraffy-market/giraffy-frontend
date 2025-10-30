@@ -1,15 +1,17 @@
 import { type FC, useState } from 'react';
 
 import cn from 'classnames';
+import { AnimatePresence } from 'framer-motion';
 
 import CategoriesLogo from '@/components/header/assets/categories.svg';
-import { HeaderCategoriesPopup } from '@/components/header/ui/HeaderCategoriesPopup/HeaderCategoriesPopup';
+
+import { HeaderCategoriesPopup } from './ui/HeaderCategoriesPopup/HeaderCategoriesPopup';
 
 import styles from './HeaderCategories.module.scss';
 
-interface Props {
+type Props = {
   className?: string;
-}
+};
 
 export const HeaderCategories: FC<Props> = ({ className }) => {
   const [activeCategoriesPopup, setActiveCategoriesPopup] =
@@ -25,7 +27,9 @@ export const HeaderCategories: FC<Props> = ({ className }) => {
         <p>Категорії</p>
       </button>
 
-      {activeCategoriesPopup ? <HeaderCategoriesPopup /> : null}
+      <AnimatePresence>
+        {activeCategoriesPopup && <HeaderCategoriesPopup />}
+      </AnimatePresence>
     </div>
   );
 };

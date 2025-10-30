@@ -1,43 +1,40 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
 
-import { fetchCategories } from '@/modules/categories/api/fetchCategories';
-import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
+import { Loader } from '@/ui/loader/Loader';
+import { LoadingError } from '@/ui/loadingError/LoadingError';
 
-import { HeaderCategoriesError } from '../HeaderCategoriesError/HeaderCategoriesError';
-import { HeaderCategoriesIsLoading } from '../HeaderCategoriesIsLoading/HeaderCategoriesIsLoading';
+import { useFetchParentCategories } from '../../api/useFetchParentCategories';
 import styles from './ParentCategories.module.scss';
 
-interface Props {
+type Props = {
   activeParentCategoryId: number | null;
   setActiveParentCategoryId: Dispatch<SetStateAction<number | null>>;
 
   className?: string;
-}
+};
 
 export const ParentCategories: FC<Props> = ({
   activeParentCategoryId,
   setActiveParentCategoryId,
   className,
 }) => {
-  const { data, error, isLoading } = useQuery<CategoryItem[]>({
-    queryKey: ['header-categories'],
-    queryFn: fetchCategories,
-  });
+  const { data, error, isLoading, refetch } = useFetchParentCategories();
 
-  if (error || !data) {
-    return <HeaderCategoriesError message={error?.message} />;
+  if (error && error.message) {
+    return <LoadingError message={error.message} refetch={refetch} />;
   }
 
   if (isLoading) {
-    return <HeaderCategoriesIsLoading />;
+    return <Loader />;
   }
 
-  console.log('isLoading ->', isLoading);
+  if (!data) {
+    return <LoadingError message="Data not found" refetch={refetch} />;
+  }
 
-  return data ? (
+  return (
     <ul
       className={cn(
         styles.items,
@@ -55,5 +52,5 @@ export const ParentCategories: FC<Props> = ({
         </li>
       ))}
     </ul>
-  ) : null;
+  );
 };
