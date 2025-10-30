@@ -1,18 +1,18 @@
-import type { FC, InputHTMLAttributes, ReactNode } from 'react';
+"use client";
+
+import { InputHTMLAttributes, type FC } from 'react';
 
 import styles from './CheckBox.module.scss';
-
-// Для отримання необхідних властивостей в input, для прокидання пропсів, з різними станами чекбокса + відображення назви самого чекбокса, обгорнутим в label.
-interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
-  children: ReactNode;
+interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement & HTMLLabelElement> {
+  labelText: string;
 }
 
-export const CheckBox: FC<CheckBoxProps> = ({ children, ...props }) => {
+export const CheckBox: FC<CheckBoxProps> = ({ labelText, ...props }) => {
   return (
-    <label className={`${styles.check} ${styles.option}`}>
-      {children}
+    <label className={`${styles.check} ${styles.option}`} {...props}>
+      {labelText}
       <input className={styles.check__input} type="checkbox" {...props} />
-      <span className={styles.check__box}></span>
+      <span className={styles.check__box} />
     </label>
   );
 };

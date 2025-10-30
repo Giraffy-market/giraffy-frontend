@@ -7,6 +7,7 @@ import { Categories } from '@/modules/categories';
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
 import { Slider } from '@/components/slider/Slider';
 
+import { CheckBox } from '@/ui/CheckBox/CheckBox';
 import { Popup } from '@/ui/Popup/Popup';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
@@ -60,6 +61,10 @@ const Home: FC = () => {
       </section>
 
       <Slider />
+
+      <div>
+        <CheckBox labelText="CheckBox" />
+      </div>
     </>
   );
 };
