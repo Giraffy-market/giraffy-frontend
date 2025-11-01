@@ -1,50 +1,42 @@
-.option {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 20px;
-}
-
 .check {
-      cursor: pointer;
-}
+  cursor: pointer;
 
-.check__input {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      clip-path: rect(0 0 0 0);
-}
+  &__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    clip-path: rect(0 0 0 0);
+  }
+  
+  &__box {
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../modules/assets/off.svg);
+  }
 
-.check__box {
-      position: absolute;
-      margin-top: 2px;
-      margin-left: 10px;
-      width: 20px;
-      height: 20px;
-      background-image: url(../../../public/assets/off.svg);
-}
+  &__input:hover + &__box {
+    background-image: url(../../modules/assets/hover.svg);
+  }
 
-.check__input:hover + .check__box {
-      background-image: url(../../../public/assets/hover.svg);
-}
+  &__input:checked + &__box {
+    background-image: url(../../modules/assets/checked.svg);
+  }
 
-.check__input:checked + .check__box {
-      background-image: url(../../../public/assets/checked.svg);
-}
-.check__input:disabled,
-.check__input:disabled + .check__box {
-      background-image: url(../../../public/assets/disabled.svg);
-      cursor: not-allowed;
-}
+  &__input:disabled + &__box {
+    background-image: url(../../modules/assets/disabled.svg);
+  }
 
-.check__input:disabled:checked + .check__box {
-      background-image: url(../../../public/assets/disabled-checked.svg);
-      cursor: not-allowed;
-}
+  &__input:disabled:checked + &__box {
+    background-image: url(../../modules/assets/disabled-checked.svg);
+  }
 
-.check__input:focus + .check__box {
-      box-shadow:
-      0 0 0 0.2em #fc640c67;
-      border-radius: 2px;
+  &__input:focus + &__box {
+    box-shadow:
+    0 0 0 0.2em #fc640c67;
+    border-radius: 2px;
+  }
 }
