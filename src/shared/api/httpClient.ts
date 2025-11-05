@@ -11,7 +11,7 @@ export const httpClient = async (): Promise<AxiosInstance> => {
   return axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     headers: {
-      Authorization: `Bearer ${session?.accessToken || ''}`,
+      Authorization: `Bearer ${session?.access_token || ''}`,
     },
   });
 };

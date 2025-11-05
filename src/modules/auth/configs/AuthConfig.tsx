@@ -2,9 +2,9 @@ import { type AuthOptions, type Session, getServerSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { API_ENDPOINTS_AUTH } from '@/modules/auth/constans/routes';
 import type { LoginResponse } from '@/modules/auth/type/types';
 
+import { routes } from '@/shared/api/constans/routes';
 import { httpClient } from '@/shared/api/httpClient';
 
 export const authOptions: AuthOptions = {
@@ -35,7 +35,7 @@ export const authOptions: AuthOptions = {
         const axiosClient = await httpClient();
         const response = await axiosClient
           .post<LoginResponse>(
-            API_ENDPOINTS_AUTH.AUTH.AUTHENTICATION_LOGIN,
+            routes.auth.login,
             new URLSearchParams({
               grant_type: 'password',
               username,
