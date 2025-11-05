@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import type { LoginResponse } from '@/modules/auth/type/types';
 
-import { routes } from '@/shared/api/constans/routes';
+import { routes } from '@/shared/api/constants/routes';
 import { httpClient } from '@/shared/api/httpClient';
 
 export const authOptions: AuthOptions = {
@@ -17,40 +17,43 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: {
-          label: 'username',
-          type: 'text',
-          placeholder: 'ім`я користувача',
+        email: {
+          label: 'Електронна пошта',
+          type: 'email',
+          placeholder: 'example@mail.com',
+          required: true,
         },
         password: {
           label: 'Пароль',
           type: 'password',
           placeholder: 'Введіть пароль',
+          required: true,
         },
       },
       // @ts-expect-error next-auth err
       authorize: async (credentials) => {
-        if (!credentials?.username || !credentials?.password) return null;
-        const { username, password } = credentials;
-        const axiosClient = await httpClient();
-        const response = await axiosClient
-          .post<LoginResponse>(
+        if (!credentials?.email || !credentials?.password) return null;
+
+        try {
+          const axiosClient = await httpClient();
+
+          const { data } = await axiosClient.post<LoginResponse>(
             routes.auth.login,
-            new URLSearchParams({
-              grant_type: 'password',
-              username,
-              password,
-            }),
             {
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              email: credentials?.email,
+              password: credentials?.password,
             },
-          )
-          .then((res) => res)
-          .catch((err) => console.log(err.response.data));
+          );
 
-        if (!response?.data) return null;
+          if (data?.access_token) {
+            return data;
+          }
 
-        return response.data;
+          return null;
+        } catch (error) {
+          console.log('Login error:', error);
+          return null;
+        }
       },
     }),
   ],
