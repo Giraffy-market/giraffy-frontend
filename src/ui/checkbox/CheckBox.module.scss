@@ -4,39 +4,35 @@
     width: 0;
     height: 0;
     overflow: hidden;
-    clip-path: rect(0 0 0 0);
   }
 
   &__box {
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     position: absolute;
 
     width: 20px;
     height: 20px;
-    background-image: url(./assets/off.svg);
+    background-image: url(/assets/checkbox/unchecked.svg);
   }
 
   &__input:hover + &__box {
-    background-image: url(./assets/hover.svg);
+    background-image: url(/assets/checkbox/hover.svg);
   }
 
   &__input:checked + &__box {
-    background-image: url(./assets/checked.svg);
+    background-image: url(/assets/checkbox/checked.svg);
   }
 
   &__input:disabled + &__box {
-    background-image: url(./assets/disabled.svg);
+    background-image: url(/assets/checkbox/disabled.svg);
   }
 
   &__input:disabled:checked + &__box {
-    background-image: url(./assets/disabled-checked.svg);
+    background-image: url(/assets/checkbox/disabled-checked.svg);
   }
 
   &__input:focus + &__box {
-    box-shadow:
-    0 0 0 0.2em #fc640c67;
+    box-shadow: 0 0 0 0.2em #fc640c67;
     border-radius: 2px;
   }
 }
