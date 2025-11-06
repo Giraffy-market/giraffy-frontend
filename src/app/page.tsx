@@ -1,8 +1,8 @@
 'use client';
 
-import { type FC, useState } from 'react';
+import { type FC, Suspense, useState } from 'react';
 
-import { LoginForm } from '@/modules/LoginForm/LoginForm';
+import { LoginForm } from '@/modules/LoginForm';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
@@ -11,6 +11,7 @@ import { Slider } from '@/components/slider/Slider';
 import { Popup } from '@/ui/Popup/Popup';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
+import { Loader } from '@/ui/loader/Loader';
 import { Logo } from '@/ui/logo/Logo';
 
 const Home: FC = () => {
@@ -68,7 +69,9 @@ const Home: FC = () => {
           isOpen={isLoginModalOpen}
           onClose={() => setIsLoginModalOpen(false)}
         >
-          <LoginForm />
+          <Suspense fallback={<Loader />}>
+            <LoginForm />
+          </Suspense>
         </Popup>
       </div>
 
