@@ -15,6 +15,7 @@ import { Slider } from '@/components/slider/Slider';
 import { Popup } from '@/ui/Popup/Popup';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
+import { Loader } from '@/ui/loader/Loader';
 import { Logo } from '@/ui/logo/Logo';
 
 const Home: FC = () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import { type FC } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { type SubmitHandler } from 'react-hook-form';
 
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
@@ -10,21 +10,14 @@ import { Button } from '@/ui/button/Button';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput } from '@/ui/inputs';
 
-import './LoginForm.scss';
+import type { LoginFormValues } from './types/types';
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-};
+import './styles/LoginForm.scss';
+
+import { useLoginForm } from './model/useLoginForm';
 
 export const LoginForm: FC = () => {
-  const { register, handleSubmit } = useForm<LoginFormValues>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
+  const { register, handleSubmit } = useLoginForm();
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
     email,
     password,
