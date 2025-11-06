@@ -6,9 +6,9 @@ import type {
 
 export type BaseInputProps = InputHTMLAttributes<HTMLInputElement> & {
   Icon?: ElementType;
-  value: string | number;
+  value?: string | number;
   iconPosition?: 'left' | 'right';
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
 export type PasswordInputProps = Omit<BaseInputProps, 'type'> & {

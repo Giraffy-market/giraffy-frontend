@@ -8,7 +8,7 @@ import type { BaseInputProps } from '../types';
 
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   (
-    { Icon, value = '', onChange, iconPosition = 'left', ...props },
+    { Icon, value, onChange, iconPosition = 'left', ...props },
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
@@ -22,7 +22,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
           className={cn('base-input__field', {
             ['base-input__field--with-icon']: Icon,
           })}
-          value={value}
+          {...(value !== undefined ? { value } : {})}
           onChange={onChange}
           {...props}
         />

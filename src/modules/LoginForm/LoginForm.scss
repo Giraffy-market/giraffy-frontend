@@ -1,0 +1,57 @@
+@use '@/styles/utils/index' as *;
+
+.login {
+  &-wrapper {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  &-title {
+    @include h1;
+    color: #09203f;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &-inputs {
+    &--wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+    &--forget {
+      @include base-body;
+      color: #233246;
+    }
+  }
+
+  &-label {
+    @include base-body;
+    color: #09203f;
+  }
+
+  &-or {
+    @include small-body;
+    text-align: center;
+    color: #000;
+  }
+
+  &-register {
+    @include base-body;
+    color: #09203f;
+    margin: 0 auto;
+    &--link {
+      color: #09203f;
+    }
+  }
+}

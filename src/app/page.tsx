@@ -2,6 +2,7 @@
 
 import { type FC, useState } from 'react';
 
+import { LoginForm } from '@/modules/LoginForm/LoginForm';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
@@ -20,6 +21,7 @@ const Home: FC = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   console.log('base: ', value.base);
   console.log('password: ', value.password);
@@ -53,6 +55,20 @@ const Home: FC = () => {
         </button>
         <Popup isOpen={open} onClose={() => setOpen(false)}>
           <p>Content modal </p>
+        </Popup>
+
+        <button
+          onClick={() => setIsLoginModalOpen(true)}
+          style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
+        >
+          Open Login Modal
+        </button>
+
+        <Popup
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        >
+          <LoginForm />
         </Popup>
       </div>
 
