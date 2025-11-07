@@ -1,5 +1,4 @@
 @use '@/styles/utils/variables' as *;
-@use '../../styles/header-typography' as *;
 
 .wrapper {
   background-color: $white;
@@ -7,17 +6,14 @@
   max-width: 500px;
 
   display: inline-block;
-
   position: absolute;
   top: 50px;
   left: 0;
   z-index: 50;
-}
-
-.wrapperLoading {
-  width: 300px;
+  overflow: hidden;
 }
 
 .body {
   display: flex;
+  align-items: flex-start;
 }

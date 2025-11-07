@@ -8,7 +8,7 @@ export const fetchSubCategories = async (
   parentCategoryId: number,
 ): Promise<CategoryItem[]> => {
   const response = await axios.get(
-    `${API_BASE_URL}/categories/public/categories/${parentCategoryId}/subcategories`,
+    `${API_BASE_URL}/categories/${parentCategoryId}`,
   );
 
   return response.data;
