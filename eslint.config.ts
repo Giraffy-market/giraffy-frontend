@@ -40,7 +40,6 @@ const eslintConfig = [
       semi: ['error', 'always'],
 
       // TypeScript recommended
-      '@typescript-eslint/explicit-function-return-type': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_' },
