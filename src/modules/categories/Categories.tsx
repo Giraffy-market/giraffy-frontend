@@ -2,23 +2,16 @@
 
 import { type FC } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
-
 import CategoriesList from './ui/CategoriesList';
 import Error from '@/ui/error/Error';
 import GiraffeEating from '@/ui/error/assets/giraffe-eating.svg';
 import { Loader } from '@/ui/loader/Loader';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 
-import { fetchCategories } from './api/fetchCategories';
-
-import type { CategoryItem } from './types/CategoryItem';
+import { useFetchCategories } from './api/fetchCategories';
 
 const Categories: FC = () => {
-  const { data, error, isLoading, refetch } = useQuery<CategoryItem[]>({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
-  });
+  const { isLoading, error, data, refetch } = useFetchCategories();
 
   if (isLoading) return <Loader />;
 

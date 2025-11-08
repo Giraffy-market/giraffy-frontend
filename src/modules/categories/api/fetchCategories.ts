@@ -1,13 +1,19 @@
-import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
-import type { CategoryItem } from '../types/CategoryItem';
+import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
 
-import { API_BASE_URL } from '../constants/constants';
+import { STALE_TIME, endpoints } from '@/shared/api/constants/endpoints';
+import type { HttpErrorType } from '@/shared/api/errors/http-error';
+import { customFetch } from '@/shared/api/fetch';
 
-export const fetchCategories = async (): Promise<CategoryItem[]> => {
-  const response = await axios.get(
-    `${API_BASE_URL}/categories/public/categories`,
-  );
+export const categoriesKeys = {
+  all: 'categories',
+};
 
-  return response.data;
+export const useFetchCategories = () => {
+  return useQuery<CategoryItem[], HttpErrorType>({
+    queryKey: [categoriesKeys.all],
+    queryFn: () => customFetch(endpoints.categories.base),
+    staleTime: STALE_TIME,
+  });
 };
