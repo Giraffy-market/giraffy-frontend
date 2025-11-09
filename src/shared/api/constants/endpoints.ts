@@ -5,4 +5,7 @@ export const endpoints = {
   categories: {
     base: '/categories',
   },
+  products: {
+    base: '/products',
+  },
 };
