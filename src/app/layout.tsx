@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';
@@ -20,6 +21,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <body className={`${nunito.variable} ${openSans.variable}`}>
         <ReactQueryProvider>
           <main>{children}</main>
+          <ToastContainer />
         </ReactQueryProvider>
         <Footer />
       </body>
