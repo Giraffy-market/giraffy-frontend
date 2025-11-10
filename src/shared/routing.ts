@@ -1,5 +1,7 @@
 export const routing = {
-  home: {
-    base: '/',
+  home: { base: '/' },
+  categories: {
+    base: '/categories',
+    byName: (name: string) => `/categories/${encodeURIComponent(name)}`,
   },
 };

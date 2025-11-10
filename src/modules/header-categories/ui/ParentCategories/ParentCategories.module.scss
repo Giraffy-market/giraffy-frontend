@@ -3,12 +3,9 @@
 
 .items {
   @include headerCategoryItems;
+  border-right: 1px solid $black;
 }
 
 .item {
   @include headerCategoryItem;
-}
-
-.mainCategories {
-  border-right: 1px solid $black;
 }
