@@ -1,10 +1,10 @@
 'use client';
 
 import { type FC } from 'react';
-import { type SubmitHandler } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import { signIn } from 'next-auth/react';
-import Link from 'next/link';
+import { useQueryState } from 'nuqs';
 
 import { Button } from '@/ui/button/Button';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
@@ -14,10 +14,12 @@ import type { LoginFormValues } from './types/types';
 
 import './styles/LoginForm.scss';
 
-import { useLoginForm } from './model/useLoginForm';
+import { switchModal } from './utils/switchModal';
 
 export const LoginForm: FC = () => {
-  const { register, handleSubmit } = useLoginForm();
+  const { control, handleSubmit } = useForm<LoginFormValues>();
+  const [modal, setModal] = useQueryState('modal');
+
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
     email,
     password,
@@ -40,18 +42,32 @@ export const LoginForm: FC = () => {
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="login-inputs--wrapper">
           <div className="login-input--wrapper">
-            <label className="login-label" htmlFor="email">
-              Електронна пошта
-            </label>
-            <BaseInput
-              placeholder="Email"
-              {...register('email', { required: 'Email is required' })}
+            <Controller
+              render={({ field }) => (
+                <BaseInput
+                  {...field}
+                  type="email"
+                  placeholder="example@mail.com"
+                  labelText="Електронна пошта"
+                  id="email"
+                />
+              )}
+              name="email"
+              control={control}
             />
           </div>
           <div className="login-input--wrapper">
-            <PasswordInput
-              placeholder="Password"
-              {...register('password', { required: 'Password is required' })}
+            <Controller
+              render={({ field }) => (
+                <PasswordInput
+                  {...field}
+                  placeholder="Введіть пароль"
+                  labelText="Пароль "
+                  id="password"
+                />
+              )}
+              name="password"
+              control={control}
             />
           </div>
         </div>
@@ -66,9 +82,13 @@ export const LoginForm: FC = () => {
         <span className="login-or">Або</span>
         <p className="login-register">
           Вперше тут?&nbsp;
-          <Link className="login-register--link" href="/">
+          <button
+            className="login-register--link"
+            type="button"
+            onClick={() => switchModal({ setModal, to: 'modal-register' })}
+          >
             Зареєструватися
-          </Link>
+          </button>
         </p>
       </form>
     </div>

@@ -5,7 +5,8 @@ import GoogleProvider from 'next-auth/providers/google';
 import type { LoginResponse } from '@/modules/auth/type/types';
 
 import { routes } from '@/shared/api/constants/routes';
-import { httpClient } from '@/shared/api/httpClient';
+
+import { customFetch } from '../../../shared/api/fetch';
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -35,13 +36,15 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
 
         try {
-          const axiosClient = await httpClient();
-
-          const { data } = await axiosClient.post<LoginResponse>(
+          const data = await customFetch<LoginResponse>(
             routes.auth.login,
+            undefined,
             {
-              email: credentials?.email,
-              password: credentials?.password,
+              method: 'POST',
+              body: JSON.stringify({
+                email: credentials.email,
+                password: credentials.password,
+              }),
             },
           );
 
@@ -69,6 +72,10 @@ export const authOptions: AuthOptions = {
 
       return session;
     },
+  },
+
+  pages: {
+    signIn: 'modal-login',
   },
 };
 

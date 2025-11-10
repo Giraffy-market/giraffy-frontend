@@ -8,29 +8,46 @@ import type { BaseInputProps } from '../types';
 
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   (
-    { Icon, value, onChange, iconPosition = 'left', ...props },
+    {
+      Icon,
+      value = '',
+      id,
+      labelText,
+      onChange,
+      iconPosition = 'left',
+      ...props
+    },
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <div className="base-input">
-        {iconPosition === 'left' && Icon && (
-          <Icon className={cn('base-input__icon', 'base-input__icon--left')} />
-        )}
+      <label htmlFor={id}>
+        {labelText && <span className="base-input__label">{labelText}</span>}
 
-        <input
-          ref={ref}
-          className={cn('base-input__field', {
-            ['base-input__field--with-icon']: Icon,
-          })}
-          {...(value !== undefined ? { value } : {})}
-          onChange={onChange}
-          {...props}
-        />
+        <div className="base-input">
+          {iconPosition === 'left' && Icon && (
+            <Icon
+              className={cn('base-input__icon', 'base-input__icon--left')}
+            />
+          )}
 
-        {iconPosition === 'right' && Icon && (
-          <Icon className={cn('base-input__icon', 'base-input__icon--right')} />
-        )}
-      </div>
+          <input
+            ref={ref}
+            className={cn('base-input__field', {
+              ['base-input__field--with-icon']: Icon,
+            })}
+            value={value}
+            id={id}
+            onChange={onChange}
+            {...props}
+          />
+
+          {iconPosition === 'right' && Icon && (
+            <Icon
+              className={cn('base-input__icon', 'base-input__icon--right')}
+            />
+          )}
+        </div>
+      </label>
     );
   },
 );

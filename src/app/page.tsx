@@ -1,6 +1,8 @@
 'use client';
 
-import { type FC, Suspense, useState } from 'react';
+import { type FC, useState } from 'react';
+
+import { useQueryState } from 'nuqs';
 
 import { LoginForm } from '@/modules/LoginForm';
 import { Categories } from '@/modules/categories';
@@ -11,7 +13,6 @@ import { Slider } from '@/components/slider/Slider';
 import { Popup } from '@/ui/Popup/Popup';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
-import { Loader } from '@/ui/loader/Loader';
 import { Logo } from '@/ui/logo/Logo';
 
 const Home: FC = () => {
@@ -22,7 +23,7 @@ const Home: FC = () => {
   });
 
   const [open, setOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [modal, setModal] = useQueryState('modal');
 
   console.log('base: ', value.base);
   console.log('password: ', value.password);
@@ -59,19 +60,21 @@ const Home: FC = () => {
         </Popup>
 
         <button
-          onClick={() => setIsLoginModalOpen(true)}
+          onClick={() => setModal('modal-login')}
           style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
         >
           Open Login Modal
         </button>
 
+        <Popup isOpen={modal === 'modal-login'} onClose={() => setModal(null)}>
+          <LoginForm />
+        </Popup>
+
         <Popup
-          isOpen={isLoginModalOpen}
-          onClose={() => setIsLoginModalOpen(false)}
+          isOpen={modal === 'modal-register'}
+          onClose={() => setModal(null)}
         >
-          <Suspense fallback={<Loader />}>
-            <LoginForm />
-          </Suspense>
+          Register
         </Popup>
       </div>
 

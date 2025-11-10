@@ -1,13 +1,16 @@
-import type { FC, PropsWithChildren } from 'react';
+import { type FC, type PropsWithChildren, Suspense } from 'react';
 
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';
+import { NuqsAdapter } from 'nuqs/adapters/next';
 
 import { nunito, openSans } from '@/layouts/root';
 
 import AuthProvider from '@/modules/auth/providers/AuthProvider';
 
 import { Footer } from '@/components/Footer/Footer';
+
+import { Loader } from '@/ui/loader/Loader';
 
 import '@/styles/globals.scss';
 
@@ -22,7 +25,11 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <body className={`${nunito.variable} ${openSans.variable}`}>
         <AuthProvider>
           <ReactQueryProvider>
-            <main>{children}</main>
+            <Suspense fallback={<Loader />}>
+              <NuqsAdapter>
+                <main>{children}</main>
+              </NuqsAdapter>
+            </Suspense>
           </ReactQueryProvider>
         </AuthProvider>
         <Footer />
