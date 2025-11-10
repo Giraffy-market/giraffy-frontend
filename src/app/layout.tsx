@@ -1,5 +1,8 @@
 import { type FC, type PropsWithChildren, Suspense } from 'react';
+<<<<<<< HEAD
 import { ToastContainer } from 'react-toastify';
+=======
+>>>>>>> 6fe278b (refactor(feature/OW2-301-auth): change login open/close logic from statu to nuqs, add nuqsAdapter, add label to baseInput and fix passwordInput button)
 
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';

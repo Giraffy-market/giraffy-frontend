@@ -1,6 +1,11 @@
 'use client';
 
 import { type FC, useState } from 'react';
+<<<<<<< HEAD
+=======
+
+import { useQueryState } from 'nuqs';
+>>>>>>> 6fe278b (refactor(feature/OW2-301-auth): change login open/close logic from statu to nuqs, add nuqsAdapter, add label to baseInput and fix passwordInput button)
 
 import { useQueryState } from 'nuqs';
 
@@ -15,7 +20,6 @@ import { Slider } from '@/components/slider/Slider';
 import { Popup } from '@/ui/Popup/Popup';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
-import { Loader } from '@/ui/loader/Loader';
 import { Logo } from '@/ui/logo/Logo';
 
 const Home: FC = () => {
