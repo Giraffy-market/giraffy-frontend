@@ -1,4 +1,5 @@
 import { type FC, type PropsWithChildren, Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';
@@ -28,6 +29,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
             <Suspense fallback={<Loader />}>
               <NuqsAdapter>
                 <main>{children}</main>
+                <ToastContainer position="top-right" autoClose={3000} />
               </NuqsAdapter>
             </Suspense>
           </ReactQueryProvider>

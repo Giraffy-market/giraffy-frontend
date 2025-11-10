@@ -5,6 +5,7 @@ import { type FC, useState } from 'react';
 import { useQueryState } from 'nuqs';
 
 import { LoginForm } from '@/modules/LoginForm';
+import { closeModal } from '@/modules/LoginForm/utils/closeModal';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
@@ -23,6 +24,7 @@ const Home: FC = () => {
   });
 
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useQueryState('email');
   const [modal, setModal] = useQueryState('modal');
 
   console.log('base: ', value.base);
@@ -66,13 +68,16 @@ const Home: FC = () => {
           Open Login Modal
         </button>
 
-        <Popup isOpen={modal === 'modal-login'} onClose={() => setModal(null)}>
+        <Popup
+          isOpen={modal === 'modal-login'}
+          onClose={() => closeModal({ setModal, setEmail })}
+        >
           <LoginForm />
         </Popup>
 
         <Popup
           isOpen={modal === 'modal-register'}
-          onClose={() => setModal(null)}
+          onClose={() => closeModal({ setModal, setEmail })}
         >
           Register
         </Popup>

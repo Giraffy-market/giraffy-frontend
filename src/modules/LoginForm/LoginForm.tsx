@@ -1,7 +1,8 @@
 'use client';
 
-import { type FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
@@ -17,21 +18,32 @@ import './styles/LoginForm.scss';
 import { switchModal } from './utils/switchModal';
 
 export const LoginForm: FC = () => {
-  const { control, handleSubmit } = useForm<LoginFormValues>();
+  const { control, handleSubmit, reset } = useForm<LoginFormValues>();
   const [modal, setModal] = useQueryState('modal');
+  const [email, setEmail] = useQueryState('email');
 
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
     email,
     password,
   }) => {
     try {
-      await signIn('credentials', {
+      const result = await signIn('credentials', {
         redirect: false,
         email,
         password,
       });
+
+      if (result?.error) {
+        toast.error(result.error);
+        return;
+      }
+
+      if (result?.ok) {
+        reset();
+        setModal(null);
+      }
     } catch (error) {
-      console.log(error);
+      toast.error((error as Error).message);
     }
   };
 
@@ -43,6 +55,9 @@ export const LoginForm: FC = () => {
         <div className="login-inputs--wrapper">
           <div className="login-input--wrapper">
             <Controller
+              name="email"
+              control={control}
+              defaultValue=""
               render={({ field }) => (
                 <BaseInput
                   {...field}
@@ -50,14 +65,18 @@ export const LoginForm: FC = () => {
                   placeholder="example@mail.com"
                   labelText="Електронна пошта"
                   id="email"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    setEmail(e.target.value);
+                  }}
                 />
               )}
-              name="email"
-              control={control}
             />
           </div>
           <div className="login-input--wrapper">
             <Controller
+              name="password"
+              control={control}
               render={({ field }) => (
                 <PasswordInput
                   {...field}
@@ -66,18 +85,28 @@ export const LoginForm: FC = () => {
                   id="password"
                 />
               )}
-              name="password"
-              control={control}
             />
           </div>
         </div>
         <div className="login-actions">
-          <CheckBox labelText="Запам’ятати мене" />
+          <Controller
+            name="rememberMe"
+            control={control}
+            render={({ field }) => (
+              <CheckBox
+                {...field}
+                labelText="Запам’ятати мене"
+                labelProps={{
+                  className: 'login-actions--checkbox',
+                }}
+              />
+            )}
+          />
 
           <span className="login-actions--forget">Забули пароль?</span>
         </div>
 
-        <Button text="Увійти" variant="gradient" />
+        <Button text="Увійти" variant="gradient" type="submit" />
 
         <span className="login-or">Або</span>
         <p className="login-register">
@@ -85,7 +114,9 @@ export const LoginForm: FC = () => {
           <button
             className="login-register--link"
             type="button"
-            onClick={() => switchModal({ setModal, to: 'modal-register' })}
+            onClick={() =>
+              switchModal({ setModal, setEmail, to: 'modal-register' })
+            }
           >
             Зареєструватися
           </button>

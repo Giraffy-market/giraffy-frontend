@@ -5,6 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import type { LoginResponse } from '@/modules/auth/type/types';
 
 import { routes } from '@/shared/api/constants/routes';
+import { HttpError } from '@/shared/api/errors/http-error';
 
 import { customFetch } from '../../../shared/api/fetch';
 
@@ -33,7 +34,9 @@ export const authOptions: AuthOptions = {
       },
       // @ts-expect-error next-auth err
       authorize: async (credentials) => {
-        if (!credentials?.email || !credentials?.password) return null;
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error('Email та пароль не можуть бути порожніми');
+        }
 
         try {
           const data = await customFetch<LoginResponse>(
@@ -51,11 +54,10 @@ export const authOptions: AuthOptions = {
           if (data?.access_token) {
             return data;
           }
-
-          return null;
         } catch (error) {
-          console.log('Login error:', error);
-          return null;
+          if (error instanceof HttpError) {
+            throw new Error(error.message);
+          }
         }
       },
     }),
@@ -68,7 +70,6 @@ export const authOptions: AuthOptions = {
     },
     session: async ({ session, token }) => {
       session.access_token = token.access_token;
-      // session.refreshToken = token.refreshToken;
 
       return session;
     },
