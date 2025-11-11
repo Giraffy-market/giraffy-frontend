@@ -8,7 +8,7 @@ type AuthFormModalProps = {
   children: ReactNode;
 };
 
-const AuthFormModal: FC<AuthFormModalProps> = ({
+export const AuthFormModal: FC<AuthFormModalProps> = ({
   isOpen,
   onClose,
   children,
@@ -19,5 +19,3 @@ const AuthFormModal: FC<AuthFormModalProps> = ({
     </Popup>
   );
 };
-
-export default AuthFormModal;

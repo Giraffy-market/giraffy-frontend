@@ -11,7 +11,7 @@ import { useQueryState } from 'nuqs';
 
 import { LoginForm } from '@/modules/auth/components/LoginForm';
 import { closeModal } from '@/modules/auth/components/LoginForm/shared/utils/closeModal';
-import AuthFormModal from '@/modules/auth/ui/AuthFormModal/AuthFormModal';
+import { AuthFormModal } from '@/modules/auth/ui/AuthFormModal/AuthFormModal';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
@@ -22,6 +22,10 @@ import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
 
+const MODAL_LOGIN = 'modal-login';
+const MODAL_REGISTER = 'modal-register';
+const MODAL_QUERY_STATE = 'modal';
+
 const Home: FC = () => {
   const [value, setValue] = useState({
     base: '',
@@ -30,8 +34,7 @@ const Home: FC = () => {
   });
 
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useQueryState('email');
-  const [modal, setModal] = useQueryState('modal');
+  const [modal, setModal] = useQueryState(MODAL_QUERY_STATE);
 
   console.log('base: ', value.base);
   console.log('password: ', value.password);
@@ -68,22 +71,22 @@ const Home: FC = () => {
         </Popup>
 
         <button
-          onClick={() => setModal('modal-login')}
+          onClick={() => setModal(MODAL_LOGIN)}
           style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
         >
           Open Login Modal
         </button>
 
         <AuthFormModal
-          isOpen={modal === 'modal-login'}
-          onClose={() => closeModal({ setModal, setEmail })}
+          isOpen={modal === MODAL_LOGIN}
+          onClose={() => closeModal({ setModal })}
         >
           <LoginForm />
         </AuthFormModal>
 
         <AuthFormModal
-          isOpen={modal === 'modal-register'}
-          onClose={() => closeModal({ setModal, setEmail })}
+          isOpen={modal === MODAL_REGISTER}
+          onClose={() => closeModal({ setModal })}
         >
           Register
         </AuthFormModal>

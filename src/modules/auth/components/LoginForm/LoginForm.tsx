@@ -17,12 +17,13 @@ import { switchModal } from './shared/utils/switchModal';
 
 import './styles/LoginForm.scss';
 
-import AuthForm from '../AuthForm/AuthForm';
+import { AuthForm } from '../AuthForm/AuthForm';
+
+const MODAL_QUERY_STATE = 'modal';
 
 export const LoginForm: FC = () => {
   const { control, handleSubmit, reset } = useForm<LoginFormValues>();
-  const [modal, setModal] = useQueryState('modal');
-  const [email, setEmail] = useQueryState('email');
+  const [modal, setModal] = useQueryState(MODAL_QUERY_STATE);
 
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
     rememberMe,
@@ -35,8 +36,6 @@ export const LoginForm: FC = () => {
         email,
         password,
       });
-
-      console.log(rememberMe);
 
       if (result?.error) {
         toast.error(result.error);
@@ -68,10 +67,6 @@ export const LoginForm: FC = () => {
                   placeholder="example@mail.com"
                   labelText="Електронна пошта"
                   id="email"
-                  onChange={(e) => {
-                    field.onChange(e);
-                    setEmail(e.target.value);
-                  }}
                 />
               )}
             />
@@ -117,9 +112,7 @@ export const LoginForm: FC = () => {
           <button
             className="login-register--link"
             type="button"
-            onClick={() =>
-              switchModal({ setModal, setEmail, to: 'modal-register' })
-            }
+            onClick={() => switchModal({ setModal, to: 'modal-register' })}
           >
             Зареєструватися
           </button>

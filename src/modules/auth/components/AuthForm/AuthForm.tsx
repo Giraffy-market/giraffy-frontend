@@ -7,7 +7,7 @@ type AuthFormProps = {
   title: string;
 };
 
-const AuthForm: FC<AuthFormProps> = ({ children, title }) => {
+export const AuthForm: FC<AuthFormProps> = ({ children, title }) => {
   return (
     <div className="auth-wrapper">
       <h2 className="auth-title">{title}</h2>
@@ -15,5 +15,3 @@ const AuthForm: FC<AuthFormProps> = ({ children, title }) => {
     </div>
   );
 };
-
-export default AuthForm;

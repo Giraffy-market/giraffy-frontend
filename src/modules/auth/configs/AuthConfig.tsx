@@ -39,17 +39,13 @@ export const authOptions: AuthOptions = {
         }
 
         try {
-          const data = await customFetch<LoginResponse>(
-            routes.auth.login,
-            undefined,
-            {
-              method: 'POST',
-              body: JSON.stringify({
-                email: credentials.email,
-                password: credentials.password,
-              }),
-            },
-          );
+          const data = await customFetch<LoginResponse>(routes.auth.login, '', {
+            method: 'POST',
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
 
           if (data?.access_token) {
             return data;
