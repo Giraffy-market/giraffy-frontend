@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC, useEffect } from 'react';
+import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -13,9 +13,11 @@ import { BaseInput, PasswordInput } from '@/ui/inputs';
 
 import type { LoginFormValues } from './types/types';
 
+import { switchModal } from './shared/utils/switchModal';
+
 import './styles/LoginForm.scss';
 
-import { switchModal } from './utils/switchModal';
+import AuthForm from '../AuthForm/AuthForm';
 
 export const LoginForm: FC = () => {
   const { control, handleSubmit, reset } = useForm<LoginFormValues>();
@@ -23,6 +25,7 @@ export const LoginForm: FC = () => {
   const [email, setEmail] = useQueryState('email');
 
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
+    rememberMe,
     email,
     password,
   }) => {
@@ -32,6 +35,8 @@ export const LoginForm: FC = () => {
         email,
         password,
       });
+
+      console.log(rememberMe);
 
       if (result?.error) {
         toast.error(result.error);
@@ -48,9 +53,7 @@ export const LoginForm: FC = () => {
   };
 
   return (
-    <div className="login-wrapper">
-      <h2 className="login-title">Вхiд</h2>
-
+    <AuthForm title="Вхiд">
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="login-inputs--wrapper">
           <div className="login-input--wrapper">
@@ -122,6 +125,6 @@ export const LoginForm: FC = () => {
           </button>
         </p>
       </form>
-    </div>
+    </AuthForm>
   );
 };

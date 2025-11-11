@@ -4,8 +4,9 @@ import { type FC, useState } from 'react';
 
 import { useQueryState } from 'nuqs';
 
-import { LoginForm } from '@/modules/LoginForm';
-import { closeModal } from '@/modules/LoginForm/utils/closeModal';
+import { LoginForm } from '@/modules/auth/components/LoginForm';
+import { closeModal } from '@/modules/auth/components/LoginForm/shared/utils/closeModal';
+import AuthFormModal from '@/modules/auth/ui/AuthFormModal/AuthFormModal';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
@@ -68,19 +69,19 @@ const Home: FC = () => {
           Open Login Modal
         </button>
 
-        <Popup
+        <AuthFormModal
           isOpen={modal === 'modal-login'}
           onClose={() => closeModal({ setModal, setEmail })}
         >
           <LoginForm />
-        </Popup>
+        </AuthFormModal>
 
-        <Popup
+        <AuthFormModal
           isOpen={modal === 'modal-register'}
           onClose={() => closeModal({ setModal, setEmail })}
         >
           Register
-        </Popup>
+        </AuthFormModal>
       </div>
 
       <section>

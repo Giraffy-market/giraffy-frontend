@@ -7,7 +7,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next';
 
 import { nunito, openSans } from '@/layouts/root';
 
-import AuthProvider from '@/modules/auth/providers/AuthProvider';
+import { AuthProvider } from '@/modules/auth/providers/AuthProvider';
 
 import { Footer } from '@/components/Footer/Footer';
 

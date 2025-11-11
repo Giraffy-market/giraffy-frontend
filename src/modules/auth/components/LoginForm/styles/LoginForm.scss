@@ -1,17 +1,6 @@
 @use '@/styles/utils/index' as *;
 
 .login {
-  &-wrapper {
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  &-title {
-    @include h1;
-    color: $blue;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-
   &-form {
     display: flex;
     flex-direction: column;
