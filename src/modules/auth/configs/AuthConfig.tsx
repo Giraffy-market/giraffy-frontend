@@ -4,6 +4,8 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import type { LoginResponse } from '@/modules/auth/type/types';
 
+import { ToastMessage } from '@/ui/toastMessage/toastMessages';
+
 import { routes } from '@/shared/api/constants/routes';
 import { HttpError } from '@/shared/api/errors/http-error';
 
@@ -52,7 +54,7 @@ export const authOptions: AuthOptions = {
           }
         } catch (error) {
           if (error instanceof HttpError) {
-            throw new Error(error.message);
+            <ToastMessage message={error.detail} type="error" />;
           }
         }
       },

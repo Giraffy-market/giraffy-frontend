@@ -32,7 +32,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
             <Suspense fallback={<Loader />}>
               <NuqsAdapter>
                 <main>{children}</main>
-                <ToastContainer position="top-right" autoClose={3000} />
+                <ToastContainer />
               </NuqsAdapter>
             </Suspense>
           </ReactQueryProvider>
