@@ -2,9 +2,8 @@
 
 @mixin headerCategoryItems {
   display: grid;
-  gap: 16px;
 
-  padding: 24px;
+  padding-block: 16px;
 }
 
 @mixin headerCategoryItem {

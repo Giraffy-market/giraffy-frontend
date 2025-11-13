@@ -8,4 +8,9 @@
 
 .item {
   @include headerCategoryItem;
+  padding: 8px 24px;
+
+  &.active {
+    background: #e7e7e7;
+  }
 }

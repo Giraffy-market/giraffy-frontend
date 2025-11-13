@@ -2,6 +2,7 @@ export const routing = {
   home: { base: '/' },
   categories: {
     base: '/categories',
-    byName: (name: string) => `/categories/${encodeURIComponent(name)}`,
+    byId: (id: string | number) => `/categories/${id}`,
+    byName: (name: string) => `/categories/${name}`,
   },
 };

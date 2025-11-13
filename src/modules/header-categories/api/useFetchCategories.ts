@@ -7,7 +7,7 @@ import { STALE_TIME } from '@/shared/api/constants/endpoints';
 import type { HttpErrorType } from '@/shared/api/errors/http-error';
 
 export const categoriesKeys = {
-  all: ['categories'] as const,
+  all: ['categories'],
 };
 
 export const useFetchCategories = () =>

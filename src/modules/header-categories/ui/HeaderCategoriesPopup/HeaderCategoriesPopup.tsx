@@ -5,6 +5,7 @@ import { type FC, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { motion } from 'framer-motion';
 
+import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
 import { ParentCategories } from '@/modules/header-categories/ui/ParentCategories/ParentCategories';
 import { SubCategories } from '@/modules/header-categories/ui/SubCategories/SubCategories';
 
@@ -20,10 +21,6 @@ type Props = {
 };
 
 export const HeaderCategoriesPopup: FC<Props> = ({ className }) => {
-  const [activeParentCategoryId, setActiveParentCategoryId] = useState<
-    number | null
-  >(null);
-
   const {
     data: categories,
     isLoading,
@@ -32,52 +29,20 @@ export const HeaderCategoriesPopup: FC<Props> = ({ className }) => {
     refetch,
   } = useFetchCategories();
 
+  const [activeParentCategory, setActiveParentCategory] =
+    useState<CategoryItem | null>(null);
+
   useEffect(() => {
-    if (
-      categories &&
-      categories.length > 0 &&
-      activeParentCategoryId === null
-    ) {
-      setActiveParentCategoryId(categories[0].category_id);
+    if (categories && categories.length > 0 && !activeParentCategory) {
+      setActiveParentCategory(categories[0]);
     }
-  }, [categories, activeParentCategoryId]);
+  }, [categories, activeParentCategory]);
 
-  if (isLoading) {
-    return (
-      <motion.div
-        {...POPUP_ANIMATION_CONFIG}
-        className={cn(styles.wrapper, className)}
-      >
-        <div className={styles.loaderWrap}>
-          <Loader />
-        </div>
-      </motion.div>
-    );
-  }
+  if (isLoading) return <Loader />;
 
-  if (isError) {
-    const errorMessage =
-      (error as { message?: string })?.message ||
-      'Не вдалося завантажити категорії';
-    return (
-      <motion.div
-        {...POPUP_ANIMATION_CONFIG}
-        className={cn(styles.wrapper, className)}
-      >
-        <LoadingError refetch={refetch} message={errorMessage} />
-      </motion.div>
-    );
-  }
-
-  if (!categories?.length) {
-    return (
-      <motion.div
-        {...POPUP_ANIMATION_CONFIG}
-        className={cn(styles.wrapper, className)}
-      >
-        <LoadingError refetch={refetch} message="Категорії не знайдено" />
-      </motion.div>
-    );
+  if (isError || !categories) {
+    const errorMessage = error?.detail || 'Помилка завантаження категорій';
+    return <LoadingError refetch={refetch} message={errorMessage} />;
   }
 
   return (
@@ -88,14 +53,13 @@ export const HeaderCategoriesPopup: FC<Props> = ({ className }) => {
       <div className={styles.body}>
         <ParentCategories
           categories={categories}
-          activeParentCategoryId={activeParentCategoryId}
-          setActiveParentCategoryId={setActiveParentCategoryId}
+          activeParentCategory={activeParentCategory}
+          setActiveParentCategory={setActiveParentCategory}
         />
 
-        {activeParentCategoryId !== null && (
+        {activeParentCategory && (
           <SubCategories
-            categories={categories}
-            activeParentCategoryId={activeParentCategoryId}
+            childrenCategories={activeParentCategory.children ?? []}
           />
         )}
       </div>

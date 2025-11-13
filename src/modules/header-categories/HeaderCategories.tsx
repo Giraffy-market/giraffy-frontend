@@ -11,7 +11,7 @@ import CategoriesLogo from '@/components/header/assets/categories.svg';
 import { HeaderCategoriesPopup } from '../header-categories/ui/HeaderCategoriesPopup/HeaderCategoriesPopup';
 import styles from './HeaderCategories.module.scss';
 
-export const HeaderCategories: FC<{ className?: string }> = ({ className }) => {
+export const HeaderCategories: FC = () => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +32,7 @@ export const HeaderCategories: FC<{ className?: string }> = ({ className }) => {
   }, []);
 
   return (
-    <div ref={wrapperRef} className={cn(styles.wrapper, className)}>
+    <div ref={wrapperRef} className={cn(styles.wrapper)}>
       <button className={styles.button} onClick={() => setOpen((s) => !s)}>
         <CategoriesLogo />
         <p>Категорії</p>

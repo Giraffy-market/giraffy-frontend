@@ -12,30 +12,20 @@ import { routing } from '@/shared/routing';
 import styles from './SubCategories.module.scss';
 
 type Props = {
-  categories: CategoryItem[];
-  activeParentCategoryId: number;
+  childrenCategories: CategoryItem[];
   className?: string;
 };
 
-export const SubCategories: FC<Props> = ({
-  categories,
-  activeParentCategoryId,
-  className,
-}) => {
-  const parentCategory = categories.find(
-    (cat) => cat.category_id === activeParentCategoryId,
-  );
-  const children = parentCategory?.children || [];
-
-  if (!children.length) {
+export const SubCategories: FC<Props> = ({ childrenCategories, className }) => {
+  if (!childrenCategories.length) {
     return <p className={styles.empty}>Немає підкатегорій</p>;
   }
 
   return (
     <ul className={cn(styles.items, className)}>
-      {children.map((child) => (
+      {childrenCategories.map((child) => (
         <li key={child.category_id} className={styles.item}>
-          <Link href={`${routing.home.base}categories/${child.category_id}`}>
+          <Link href={routing.categories.byId(child.category_id)}>
             {child.name}
           </Link>
         </li>
