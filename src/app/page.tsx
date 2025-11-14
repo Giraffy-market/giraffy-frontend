@@ -31,10 +31,6 @@ const Home: FC = () => {
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useQueryState(MODAL_QUERY_STATE);
 
-  console.log('base: ', value.base);
-  console.log('password: ', value.password);
-  console.log('phoneNumber: ', value.phoneNumber);
-
   return (
     <>
       <div className="container">

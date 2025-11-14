@@ -4,12 +4,18 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import type { LoginResponse } from '@/modules/auth/type/types';
 
-import { ToastMessage } from '@/ui/toastMessage/toastMessages';
-
 import { routes } from '@/shared/api/constants/routes';
 import { HttpError } from '@/shared/api/errors/http-error';
 
 import { customFetch } from '../../../shared/api/fetch';
+
+export const handleApiError = (error: unknown) => {
+  if (error instanceof HttpError && error.detail) {
+    return error.detail;
+  }
+
+  return 'Невідома помилка';
+};
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -36,16 +42,12 @@ export const authOptions: AuthOptions = {
       },
       // @ts-expect-error next-auth err
       authorize: async (credentials) => {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error('Email та пароль не можуть бути порожніми');
-        }
-
         try {
           const data = await customFetch<LoginResponse>(routes.auth.login, '', {
             method: 'POST',
             body: JSON.stringify({
-              email: credentials.email,
-              password: credentials.password,
+              email: credentials!.email,
+              password: credentials!.password,
             }),
           });
 
@@ -53,9 +55,9 @@ export const authOptions: AuthOptions = {
             return data;
           }
         } catch (error) {
-          if (error instanceof HttpError) {
-            <ToastMessage message={error.detail} type="error" />;
-          }
+          const message = handleApiError(error);
+
+          throw new HttpError(401, { detail: message });
         }
       },
     }),

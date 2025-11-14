@@ -2,6 +2,7 @@
 
 import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
@@ -9,7 +10,6 @@ import { useQueryState } from 'nuqs';
 import { Button } from '@/ui/button/Button';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput } from '@/ui/inputs';
-import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
 import type { LoginFormValues } from './types/types';
 
@@ -29,26 +29,19 @@ export const LoginForm: FC = () => {
     email,
     password,
   }) => {
-    try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
-      });
+    const result = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
 
-      if (result?.error) {
-        return <ToastMessage message={result.error} type="error" />;
-      }
-
-      if (result?.ok) {
-        reset();
-        setModal(null);
-      }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Виникла помилка';
-      <ToastMessage message={errorMessage} type="error" />;
+    if (result && !result?.ok && result.error) {
+      toast.error(result.error);
+      return;
     }
+
+    reset();
+    setModal(null);
   };
 
   return (
