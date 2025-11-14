@@ -23,7 +23,7 @@ const MODAL_QUERY_STATE = 'modal';
 
 export const LoginForm: FC = () => {
   const { control, handleSubmit, reset } = useForm<LoginFormValues>();
-  const [modal, setModal] = useQueryState(MODAL_QUERY_STATE);
+  const [, setModal] = useQueryState(MODAL_QUERY_STATE);
 
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
     email,

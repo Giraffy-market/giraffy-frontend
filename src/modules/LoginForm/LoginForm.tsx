@@ -18,7 +18,7 @@ import { switchModal } from './utils/switchModal';
 
 export const LoginForm: FC = () => {
   const { control, handleSubmit } = useForm<LoginFormValues>();
-  const [modal, setModal] = useQueryState('modal');
+  const [, setModal] = useQueryState('modal');
 
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
     email,
