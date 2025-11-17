@@ -5,9 +5,9 @@ import { type FC } from 'react';
 import cn from 'classnames';
 import Link from 'next/link';
 
-import type { ErrorProps } from './shared/types/ErrorProps';
+import type { ErrorProps } from './shared/types/LoadingErrorPageProps';
 
-import './styles/error.scss';
+import './styles/loadingErrorPage.scss';
 
 import { Button } from '../button/Button';
 

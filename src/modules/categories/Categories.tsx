@@ -3,12 +3,12 @@
 import { type FC } from 'react';
 
 import CategoriesList from './ui/CategoriesList';
-import Error from '@/ui/error/Error';
-import GiraffeEating from '@/ui/error/assets/giraffe-eating.svg';
 import { Loader } from '@/ui/loader/Loader';
+import LoadingErrorPage from '@/ui/loadingErrorPage/LoadingErrorPage';
+import GiraffeEating from '@/ui/loadingErrorPage/assets/giraffe-eating.svg';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 
-import { useFetchCategories } from './api/fetchCategories';
+import { useFetchCategories } from '../header-categories/api/useFetchCategories';
 
 const Categories: FC = () => {
   const { isLoading, error, data, refetch } = useFetchCategories();
@@ -17,7 +17,7 @@ const Categories: FC = () => {
 
   if (error || !data) {
     return (
-      <Error
+      <LoadingErrorPage
         Icon={GiraffeEating}
         title={['Упс!', 'Щось пішло не так']}
         description="Схоже, виникла неочікувана помилка. Ми вже знаємо про це й працюємо над виправленням"

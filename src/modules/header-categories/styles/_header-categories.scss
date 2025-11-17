@@ -1,0 +1,11 @@
+@use './header-typography' as *;
+
+@mixin headerCategoryItems {
+  display: grid;
+  padding-block: 16px;
+}
+
+@mixin headerCategoryItem {
+  cursor: pointer;
+  @include headerCategoryItemTypography;
+}
