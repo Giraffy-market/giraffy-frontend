@@ -1,5 +1,5 @@
 @use '@/styles/utils/variables' as *;
-@use '../../styles/header-typography' as *;
+@use '../../styles/header-categories' as *;
 
 .items {
   @include headerCategoryItems;
@@ -11,6 +11,6 @@
   padding: 8px 24px;
 
   &.active {
-    background: #e7e7e7;
+    background: $light-gray;
   }
 }

@@ -13,16 +13,19 @@ import styles from './SubCategories.module.scss';
 
 type Props = {
   childrenCategories: CategoryItem[];
-  className?: string;
+  subCategoriesListClassName?: string;
 };
 
-export const SubCategories: FC<Props> = ({ childrenCategories, className }) => {
+export const SubCategories: FC<Props> = ({
+  childrenCategories,
+  subCategoriesListClassName,
+}) => {
   if (!childrenCategories.length) {
     return <p className={styles.empty}>Немає підкатегорій</p>;
   }
 
   return (
-    <ul className={cn(styles.items, className)}>
+    <ul className={cn(styles.items, subCategoriesListClassName)}>
       {childrenCategories.map((child) => (
         <li key={child.category_id} className={styles.item}>
           <Link href={routing.categories.byId(child.category_id)}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC, useEffect, useState } from 'react';
+import { type FC, useState } from 'react';
 
 import cn from 'classnames';
 import { motion } from 'framer-motion';
@@ -30,13 +30,9 @@ export const HeaderCategoriesPopup: FC<Props> = ({ className }) => {
   } = useFetchCategories();
 
   const [activeParentCategory, setActiveParentCategory] =
-    useState<CategoryItem | null>(null);
-
-  useEffect(() => {
-    if (categories && categories.length > 0 && !activeParentCategory) {
-      setActiveParentCategory(categories[0]);
-    }
-  }, [categories, activeParentCategory]);
+    useState<CategoryItem | null>(
+      categories && categories.length > 0 ? categories[0] : null,
+    );
 
   if (isLoading) return <Loader />;
 
