@@ -8,7 +8,8 @@ import { AnimatePresence } from 'framer-motion';
 
 import CategoriesLogo from '@/components/header/assets/categories.svg';
 
-import { HeaderCategoriesPopup } from '../header-categories/ui/HeaderCategoriesPopup/HeaderCategoriesPopup';
+import { HeaderCategoriesPopup } from './ui/HeaderCategoriesPopup/HeaderCategoriesPopup';
+
 import styles from './HeaderCategories.module.scss';
 
 export const HeaderCategories: FC = () => {

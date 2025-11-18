@@ -1,0 +1,166 @@
+@use '@/styles/utils/variables' as *;
+
+.container {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.trigger {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.triggerIcon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.popupWrap {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 424px;
+  background: $white;
+  border-radius: 12px;
+  padding: 32px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+}
+
+.userRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.userIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #b5b2b2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 48px;
+    height: 48px;
+    fill: #fff;
+  }
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 150%;
+}
+
+.userEmail {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: 328px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: $orange;
+  color: $black;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 133%;
+  &:hover {
+    color: $white;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.navItem {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  &:hover {
+    background: $gray;
+  }
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  svg {
+    width: 23px;
+    height: 23px;
+  }
+  &:hover {
+    background: $gray;
+  }
+}
+.supportLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoutBtn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
