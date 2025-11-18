@@ -13,7 +13,7 @@ export const LoadingError: FC<LoadingErrorProps> = ({
 }) => {
   useEffect(() => {
     refetch();
-  }, []);
+  });
 
   return (
     <div className={cn(className, styles.wrapper)}>
