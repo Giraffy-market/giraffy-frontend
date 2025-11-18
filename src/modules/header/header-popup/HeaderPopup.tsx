@@ -8,10 +8,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 
 import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants/constants';
+import { panelVariants } from './constants/variants';
 
 import styles from './styles/HeaderPopup.module.scss';
-
-import { panelVariants } from './variants';
 
 type Props = {
   popupClassName?: string;
@@ -46,9 +45,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
         onClick={() => setOpen((s) => !s)}
         aria-expanded={open}
       >
-        <div className={styles.triggerIcon}>
-          <TRIGER.Icon />
-        </div>
+        <TRIGER.Icon />
       </button>
 
       <AnimatePresence>
