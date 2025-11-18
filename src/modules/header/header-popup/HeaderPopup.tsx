@@ -5,30 +5,16 @@ import { useRef, useState } from 'react';
 
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import Link from 'next/link';
 
-import styles from './HeaderPopup.module.scss';
-import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants';
+import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants/constants';
+
+import styles from './styles/HeaderPopup.module.scss';
+
+import { panelVariants } from './variants';
 
 type Props = {
   popupClassName?: string;
-};
-
-export const panelVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: 20 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { type: 'spring', stiffness: 120, damping: 20 },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.95,
-    y: 20,
-    transition: { type: 'spring', stiffness: 120, damping: 20 },
-  },
 };
 
 export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
@@ -119,7 +105,16 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
                 <span>{SUPPORT.label}</span>
               </Link>
 
-              <button className={cn(styles.itemRow, styles.logoutBtn)}>
+              {/* TODO: додати логіку logout, прибрати disabled та style={...} */}
+              <button
+                className={cn(styles.itemRow, styles.logoutBtn)}
+                disabled
+                style={{
+                  opacity: 0.5,
+                  cursor: 'not-allowed',
+                  pointerEvents: 'none',
+                }}
+              >
                 <LOGOUT.Icon />
                 <span>{LOGOUT.label}</span>
               </button>
@@ -130,5 +125,3 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
     </div>
   );
 };
-
-export default HeaderPopup;

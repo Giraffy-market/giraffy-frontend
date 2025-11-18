@@ -1,1 +1,1 @@
-export { HeaderPopup as default } from './HeaderPopup';
+export { HeaderPopup } from './HeaderPopup';
