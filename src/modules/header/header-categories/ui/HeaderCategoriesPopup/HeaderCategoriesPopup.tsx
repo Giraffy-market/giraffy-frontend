@@ -6,8 +6,8 @@ import cn from 'classnames';
 import { motion } from 'framer-motion';
 
 import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
-import { ParentCategories } from '@/modules/header-categories/ui/ParentCategories/ParentCategories';
-import { SubCategories } from '@/modules/header-categories/ui/SubCategories/SubCategories';
+import { ParentCategories } from '@/modules/header/header-categories/ui/ParentCategories/ParentCategories';
+import { SubCategories } from '@/modules/header/header-categories/ui/SubCategories/SubCategories';
 
 import { Loader } from '@/ui/loader/Loader';
 import { LoadingError } from '@/ui/loadingError/LoadingError';

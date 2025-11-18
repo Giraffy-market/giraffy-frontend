@@ -1,4 +1,6 @@
-import type { FC } from 'react';
+'use client';
+
+import { type FC } from 'react';
 
 import { useFetchProducts } from '@/modules/products/api/useFetchProducts';
 import { ProductsList } from '@/modules/products/components/products-list';
