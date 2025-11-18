@@ -53,73 +53,59 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
 
       <AnimatePresence>
         {open && (
-          <>
-            <motion.div
-              className={styles.backdrop}
-              onClick={handleClose}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-
-            <motion.div
-              className={styles.popupWrap}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={panelVariants}
-            >
-              <div className={styles.userRow}>
-                <div className={styles.userIcon}>
-                  <USER.Icon />
-                </div>
-
-                <div className={styles.userInfo}>
-                  <h1 className={styles.userName}>{USER.name}</h1>
-                  <p className={styles.userEmail}>{USER.email}</p>
-                </div>
+          <motion.div
+            className={styles.popupWrap}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={panelVariants}
+          >
+            <div className={styles.userRow}>
+              <div className={styles.userIcon}>
+                <USER.Icon />
               </div>
 
-              <Link href={ADD.href} className={styles.addButton}>
-                {ADD.label}
-              </Link>
+              <div className={styles.userInfo}>
+                <h1 className={styles.userName}>{USER.name}</h1>
+                <p className={styles.userEmail}>{USER.email}</p>
+              </div>
+            </div>
 
-              <nav className={styles.nav}>
-                {NAV.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={item.href}
-                    className={styles.navItem}
-                  >
-                    <item.Icon />
-                    <span>{item.label}</span>
-                  </Link>
-                ))}
-              </nav>
+            <Link href={ADD.href} className={styles.addButton}>
+              {ADD.label}
+            </Link>
 
-              <Link
-                href={SUPPORT.href}
-                className={cn(styles.itemRow, styles.supportLink)}
-              >
-                <SUPPORT.Icon />
-                <span>{SUPPORT.label}</span>
-              </Link>
+            <nav className={styles.nav}>
+              {NAV.map((item) => (
+                <Link key={item.id} href={item.href} className={styles.navItem}>
+                  <item.Icon />
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </nav>
 
-              {/* TODO: додати логіку logout, прибрати disabled та style={...} */}
-              <button
-                className={cn(styles.itemRow, styles.logoutBtn)}
-                disabled
-                style={{
-                  opacity: 0.5,
-                  cursor: 'not-allowed',
-                  pointerEvents: 'none',
-                }}
-              >
-                <LOGOUT.Icon />
-                <span>{LOGOUT.label}</span>
-              </button>
-            </motion.div>
-          </>
+            <Link
+              href={SUPPORT.href}
+              className={cn(styles.itemRow, styles.supportLink)}
+            >
+              <SUPPORT.Icon />
+              <span>{SUPPORT.label}</span>
+            </Link>
+
+            {/* TODO: додати логіку logout, прибрати disabled та style={...} */}
+            <button
+              className={cn(styles.itemRow, styles.logoutBtn)}
+              disabled
+              style={{
+                opacity: 0.5,
+                cursor: 'not-allowed',
+                pointerEvents: 'none',
+              }}
+            >
+              <LOGOUT.Icon />
+              <span>{LOGOUT.label}</span>
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
