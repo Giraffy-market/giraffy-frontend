@@ -13,7 +13,8 @@ export const LoadingError: FC<LoadingErrorProps> = ({
 }) => {
   useEffect(() => {
     refetch();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Не нужны другие зависимости
+  }, []);
 
   return (
     <div className={cn(className, styles.wrapper)}>
