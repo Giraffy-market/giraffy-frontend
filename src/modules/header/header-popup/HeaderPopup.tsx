@@ -7,7 +7,14 @@ import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants/constants';
+import {
+  ADD,
+  LOGOUT,
+  NAV,
+  SUPPORT,
+  TRIGGER,
+  USER,
+} from './constants/constants';
 import { panelVariants } from './constants/variants';
 
 import styles from './styles/HeaderPopup.module.scss';
@@ -45,7 +52,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
         onClick={() => setOpen((s) => !s)}
         aria-expanded={open}
       >
-        <TRIGER.Icon />
+        <TRIGGER.Icon />
       </button>
 
       <AnimatePresence>

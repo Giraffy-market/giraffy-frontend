@@ -38,22 +38,6 @@
   margin-bottom: 24px;
 }
 
-.userIcon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #b5b2b2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    width: 48px;
-    height: 48px;
-    fill: #fff;
-  }
-}
-
 .userInfo {
   display: flex;
   flex-direction: column;
@@ -85,8 +69,14 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 133%;
+  transition: background 0.3s ease;
+
   &:hover {
-    color: $white;
+    background: $orange-hover;
+  }
+
+  &:active {
+    background: $orange-active;
   }
 }
 
@@ -106,6 +96,7 @@
   border-radius: 8px;
   text-decoration: none;
   color: inherit;
+  transition: background 0.3s ease;
 
   svg {
     width: 22px;
@@ -123,6 +114,8 @@
   gap: 14px;
   border-radius: 8px;
   padding: 8px 16px;
+  transition: background 0.3s ease;
+
   svg {
     width: 23px;
     height: 23px;

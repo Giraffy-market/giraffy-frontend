@@ -14,7 +14,7 @@ export type NavItem = {
   Icon: React.ElementType;
 };
 
-export const TRIGER = {
+export const TRIGGER = {
   Icon: ProfileIcon,
 };
 
