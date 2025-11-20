@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 
-import { getServerAuthSession } from '@/modules/auth/configs/AuthConfig';
+import { getServerAuthSession } from '@/modules/auth';
 
 import { TestClient } from './TestClient';
 

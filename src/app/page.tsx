@@ -4,10 +4,7 @@ import { type FC, useState } from 'react';
 
 import { useQueryState } from 'nuqs';
 
-import {
-  LOGIN_FORM_MODAL_KEY,
-  MODAL_QUERY_STATE,
-} from '@/modules/auth/constants/modal-constants';
+import { LOGIN_FORM_MODAL_KEY, MODAL_QUERY_STATE } from '@/modules/auth';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
