@@ -15,7 +15,10 @@ import type { LoginFormValues } from './types/types';
 
 import './styles/LoginForm.scss';
 
-import { MODAL_QUERY_STATE, REGISTER_FORM_MODAL_KEY } from '../../constants';
+import {
+  MODAL_QUERY_STATE,
+  REGISTER_FORM_MODAL_KEY,
+} from '../../constants/modal-constants';
 
 export const LoginForm: FC = () => {
   const { control, handleSubmit, reset } = useForm<LoginFormValues>();

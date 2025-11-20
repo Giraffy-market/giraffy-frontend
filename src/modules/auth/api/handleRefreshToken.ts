@@ -5,7 +5,7 @@ import type { LoginResponse } from '@/modules/auth/type/types';
 import { routes } from '@/shared/api/constants/routes';
 import { customFetch } from '@/shared/api/fetch';
 
-export const refreshToken = async (token: JWT): Promise<JWT> => {
+export const handleRefreshToken = async (token: JWT): Promise<JWT> => {
   const refreshed = await customFetch<LoginResponse>(routes.auth.refresh, '', {
     method: 'POST',
     body: JSON.stringify({

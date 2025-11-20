@@ -2,16 +2,17 @@
 
 import { useQueryState } from 'nuqs';
 
-import { LoginForm } from '../components/LoginForm';
+import { LoginForm } from '../components/LoginForm/LoginForm';
 
 import { Popup } from '@/ui/Popup/Popup';
 
+import { LOGIN_TITLE_KEY } from '../constants/form-constants';
 import {
   LOGIN_FORM_MODAL_KEY,
-  LOGIN_TITLE_KEY,
   MODAL_QUERY_STATE,
   REGISTER_FORM_MODAL_KEY,
-} from '../constants';
+} from '../constants/modal-constants';
+
 import './AuthFormLayout.scss';
 
 export const AuthFormLayout = () => {

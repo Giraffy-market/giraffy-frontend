@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import type { LoginResponse } from '@/modules/auth/type/types';
 
-import { refreshToken } from '../api/refreshToken';
+import { handleRefreshToken } from '../api/handleRefreshToken';
 
 import { routes } from '@/shared/api/constants/routes';
 import { HttpError } from '@/shared/api/errors/http-error';
@@ -49,6 +49,12 @@ export const authOptions: AuthOptions = {
           if (data?.access_token) {
             return data;
           }
+
+          if (Date.now() > data.expired_in * 1000) {
+            return await handleRefreshToken(data);
+          }
+
+          return data;
         } catch (error) {
           const message = handleApiError(error);
 
@@ -59,18 +65,9 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     jwt: async ({ user, token }) => {
-      if (user) {
-        const u = user as unknown as LoginResponse;
-        return {
-          ...token,
-          ...u,
-          expired_in: Math.floor(Date.now() / 1000) + u.expired_in,
-        };
-      }
+      if (user) return { ...token, ...user };
 
-      if (new Date().getTime() < token.expired_in * 1000) return token;
-
-      return await refreshToken(token);
+      return token;
     },
 
     session: async ({ session, token }) => {
@@ -78,7 +75,7 @@ export const authOptions: AuthOptions = {
         session.user.id = token.user_id;
         session.access_token = token.access_token;
         session.refresh_token = token.refresh_token;
-        session.expires = new Date(token.expired_in * 1000).toISOString();
+        session.expires = token.expired_in;
       }
 
       return session;
