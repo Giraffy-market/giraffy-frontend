@@ -28,6 +28,16 @@ main {
   flex: 1 0 auto;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
 img,
 picture,
 svg,
@@ -36,11 +46,13 @@ video {
   max-width: 100%;
 }
 
+input,
+textarea,
+select,
 button {
-  cursor: pointer;
-  font: inherit;
-
-  color: inherit;
-  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
   border: none;
+  outline: none;
 }

@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { Categories } from '@/modules/categories';
+import { HeaderPopup } from '@/modules/header/header-popup/HeaderPopup';
 import { Products } from '@/modules/products';
 
 import { Slider } from '@/components/slider/Slider';
@@ -14,6 +15,7 @@ const HomePage = () => (
   <div className="home-page">
     <header className="header container">
       <Logo />
+      <HeaderPopup />
     </header>
 
     <div className="home-page__content">
