@@ -1,0 +1,73 @@
+@use '@/styles/utils/index' as *;
+
+.login {
+  &-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-inputs {
+    &--wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+      @include onDesktop {
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    @include onDesktop {
+      margin-bottom: 28px;
+    }
+    &--forget {
+      @include base-body;
+      color: #233246;
+      text-decoration: underline;
+    }
+    &--checkbox {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 8px;
+      @include onDesktop {
+        gap: 16px;
+      }
+    }
+  }
+
+  &-label {
+    @include base-body;
+    color: $blue;
+  }
+
+  &-or {
+    @include small-body;
+    text-align: center;
+    color: $black;
+    margin-top: 16px;
+  }
+
+  &-register {
+    @include base-body;
+    color: $blue;
+    margin: 0 auto;
+    margin-top: 12px;
+    @include onDesktop {
+      margin-top: 16px;
+    }
+    &--link {
+      color: $blue;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+}

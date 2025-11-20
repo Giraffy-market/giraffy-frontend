@@ -1,12 +1,17 @@
-import type { FC, PropsWithChildren } from 'react';
+import { type FC, type PropsWithChildren, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';
+import { NuqsAdapter } from 'nuqs/adapters/next';
 
 import { nunito, openSans } from '@/layouts/root';
 
+import { AuthFormLayout, AuthProvider } from '@/modules/auth';
+
 import { Footer } from '@/components/Footer/Footer';
+
+import { Loader } from '@/ui/loader/Loader';
 
 import '@/styles/globals.scss';
 
@@ -19,10 +24,17 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="uk">
       <body className={`${nunito.variable} ${openSans.variable}`}>
-        <ReactQueryProvider>
-          <main>{children}</main>
-          <ToastContainer />
-        </ReactQueryProvider>
+        <AuthProvider>
+          <ReactQueryProvider>
+            <Suspense fallback={<Loader />}>
+              <NuqsAdapter>
+                <main>{children}</main>
+                <ToastContainer />
+                <AuthFormLayout />
+              </NuqsAdapter>
+            </Suspense>
+          </ReactQueryProvider>
+        </AuthProvider>
         <Footer />
       </body>
     </html>

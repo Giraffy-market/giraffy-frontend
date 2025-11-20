@@ -1,0 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NextAuth from 'next-auth';
+import type { JWT } from 'next-auth';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string;
+    };
+    access_token: string;
+    refresh_token: string;
+    expires: number;
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    user_id: string;
+    access_token: string;
+    refresh_token: string;
+    token_type: string;
+    expired_in: number;
+  }
+}

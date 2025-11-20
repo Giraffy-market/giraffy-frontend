@@ -1,4 +1,4 @@
-@use '@/styles//utils//index' as *;
+@use '@/styles/utils/index' as *;
 
 .base-input {
   position: relative;
@@ -30,6 +30,11 @@
       letter-spacing: 0.05em;
       color: $dark-gray;
     }
+  }
+
+  &__label {
+    @include base-body;
+    color: $blue;
   }
 
   &__icon {

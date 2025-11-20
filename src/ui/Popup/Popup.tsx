@@ -25,27 +25,33 @@ export const Popup: FC<PopupProps> = ({ isOpen, onClose, children }) => {
     if (dialog && e.target === dialog) onClose();
   };
 
-  return (
-    <dialog
-      ref={dialogRef}
-      className="dialog"
-      onClose={onClose}
-      onClick={handleBackdrop}
-    >
-      <button
-        className="dialog__closeButton"
-        onClick={onClose}
-        aria-label="Close"
-        type="button"
-      >
-        <CloseIcon
-          className="dialog__closeIcon"
-          role="img"
-          aria-label="Close icon"
-        />
-      </button>
+  if (!isOpen) return null;
 
-      {children}
-    </dialog>
+  return (
+    <>
+      <div className="dialog__backdrop"></div>
+
+      <dialog
+        ref={dialogRef}
+        className="dialog"
+        onClose={onClose}
+        onClick={handleBackdrop}
+      >
+        <button
+          className="dialog__closeButton"
+          onClick={onClose}
+          aria-label="Close"
+          type="button"
+        >
+          <CloseIcon
+            className="dialog__closeIcon"
+            role="img"
+            aria-label="Close icon"
+          />
+        </button>
+
+        {children}
+      </dialog>
+    </>
   );
 };

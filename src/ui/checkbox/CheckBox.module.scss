@@ -7,9 +7,8 @@
   }
 
   &__box {
+    cursor: pointer;
     appearance: none;
-    position: absolute;
-
     width: 20px;
     height: 20px;
     background-image: url(/assets/checkbox/unchecked.svg);
