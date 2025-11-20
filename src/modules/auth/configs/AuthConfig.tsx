@@ -4,18 +4,13 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import type { LoginResponse } from '@/modules/auth/type/types';
 
+import { refreshToken } from '../api/refreshToken';
+
 import { routes } from '@/shared/api/constants/routes';
 import { HttpError } from '@/shared/api/errors/http-error';
+import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
 import { customFetch } from '../../../shared/api/fetch';
-
-export const handleApiError = (error: unknown) => {
-  if (error instanceof HttpError && error.detail) {
-    return error.detail;
-  }
-
-  return 'Невідома помилка';
-};
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -64,12 +59,26 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     jwt: async ({ user, token }) => {
-      if (user) return { ...token, ...user };
+      if (user) {
+        const u = user as unknown as LoginResponse;
+        return {
+          ...token,
+          ...u,
+          expired_in: Math.floor(Date.now() / 1000) + u.expired_in,
+        };
+      }
 
-      return token;
+      if (new Date().getTime() < token.expired_in * 1000) return token;
+
+      return await refreshToken(token);
     },
+
     session: async ({ session, token }) => {
-      session.access_token = token.access_token;
+      if (token) {
+        session.user.id = token.user_id;
+        session.access_token = token.access_token;
+        session.refresh_token = token.refresh_token;
+      }
 
       return session;
     },

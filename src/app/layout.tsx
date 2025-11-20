@@ -7,6 +7,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next';
 
 import { nunito, openSans } from '@/layouts/root';
 
+import { AuthFormLayout } from '@/modules/auth';
 import { AuthProvider } from '@/modules/auth/providers/AuthProvider';
 
 import { Footer } from '@/components/Footer/Footer';
@@ -30,6 +31,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
               <NuqsAdapter>
                 <main>{children}</main>
                 <ToastContainer />
+                <AuthFormLayout />
               </NuqsAdapter>
             </Suspense>
           </ReactQueryProvider>

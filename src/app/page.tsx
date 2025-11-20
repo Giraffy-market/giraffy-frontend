@@ -4,6 +4,10 @@ import { type FC, useState } from 'react';
 
 import { useQueryState } from 'nuqs';
 
+import {
+  LOGIN_FORM_MODAL_KEY,
+  MODAL_QUERY_STATE,
+} from '@/modules/auth/constants';
 import { Categories } from '@/modules/categories';
 
 import logoOutIcon from '../components/profilePopup/assets/logout.svg';
@@ -13,10 +17,6 @@ import { Popup } from '@/ui/Popup/Popup';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
 import { Logo } from '@/ui/logo/Logo';
-
-const MODAL_LOGIN = 'modal-login';
-const MODAL_REGISTER = 'modal-register';
-const MODAL_QUERY_STATE = 'modal';
 
 const Home: FC = () => {
   const [value, setValue] = useState({
@@ -59,7 +59,7 @@ const Home: FC = () => {
         </Popup>
 
         <button
-          onClick={() => setModal(MODAL_LOGIN)}
+          onClick={() => setModal(LOGIN_FORM_MODAL_KEY)}
           style={{ padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}
         >
           Open Login Modal

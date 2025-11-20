@@ -13,13 +13,9 @@ import { BaseInput, PasswordInput } from '@/ui/inputs';
 
 import type { LoginFormValues } from './types/types';
 
-import { switchModal } from './shared/utils/switchModal';
-
 import './styles/LoginForm.scss';
 
-import { AuthForm } from '../AuthForm/AuthForm';
-
-const MODAL_QUERY_STATE = 'modal';
+import { MODAL_QUERY_STATE, REGISTER_FORM_MODAL_KEY } from '../../constants';
 
 export const LoginForm: FC = () => {
   const { control, handleSubmit, reset } = useForm<LoginFormValues>();
@@ -45,72 +41,70 @@ export const LoginForm: FC = () => {
   };
 
   return (
-    <AuthForm title="Вхiд">
-      <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="login-inputs--wrapper">
-          <div className="login-input--wrapper">
-            <Controller
-              name="email"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <BaseInput
-                  {...field}
-                  type="email"
-                  placeholder="example@mail.com"
-                  labelText="Електронна пошта"
-                  id="email"
-                />
-              )}
-            />
-          </div>
-          <div className="login-input--wrapper">
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <PasswordInput
-                  {...field}
-                  placeholder="Введіть пароль"
-                  labelText="Пароль "
-                  id="password"
-                />
-              )}
-            />
-          </div>
-        </div>
-        <div className="login-actions">
+    <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="login-inputs--wrapper">
+        <div className="login-input--wrapper">
           <Controller
-            name="rememberMe"
+            name="email"
             control={control}
+            defaultValue=""
             render={({ field }) => (
-              <CheckBox
+              <BaseInput
                 {...field}
-                labelText="Запам’ятати мене"
-                labelProps={{
-                  className: 'login-actions--checkbox',
-                }}
+                type="email"
+                placeholder="example@mail.com"
+                labelText="Електронна пошта"
+                id="email"
               />
             )}
           />
-
-          <span className="login-actions--forget">Забули пароль?</span>
         </div>
+        <div className="login-input--wrapper">
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <PasswordInput
+                {...field}
+                placeholder="Введіть пароль"
+                labelText="Пароль "
+                id="password"
+              />
+            )}
+          />
+        </div>
+      </div>
+      <div className="login-actions">
+        <Controller
+          name="rememberMe"
+          control={control}
+          render={({ field }) => (
+            <CheckBox
+              {...field}
+              labelText="Запам’ятати мене"
+              labelProps={{
+                className: 'login-actions--checkbox',
+              }}
+            />
+          )}
+        />
 
-        <Button text="Увійти" variant="gradient" type="submit" />
+        <span className="login-actions--forget">Забули пароль?</span>
+      </div>
 
-        <span className="login-or">Або</span>
-        <p className="login-register">
-          Вперше тут?&nbsp;
-          <button
-            className="login-register--link"
-            type="button"
-            onClick={() => switchModal({ setModal, to: 'modal-register' })}
-          >
-            Зареєструватися
-          </button>
-        </p>
-      </form>
-    </AuthForm>
+      <Button text="Увійти" variant="gradient" type="submit" />
+
+      <span className="login-or">Або</span>
+      <p className="login-register">
+        Вперше тут?&nbsp;
+        <button
+          className="login-register--link"
+          type="button"
+          onClick={() => setModal(REGISTER_FORM_MODAL_KEY)}
+        >
+          Зареєструватися
+        </button>
+      </p>
+    </form>
   );
 };
