@@ -78,6 +78,7 @@ export const authOptions: AuthOptions = {
         session.user.id = token.user_id;
         session.access_token = token.access_token;
         session.refresh_token = token.refresh_token;
+        session.expires = new Date(token.expired_in * 1000).toISOString();
       }
 
       return session;
