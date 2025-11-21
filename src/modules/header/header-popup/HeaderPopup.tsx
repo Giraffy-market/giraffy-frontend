@@ -1,13 +1,20 @@
 'use client';
 
 import type { FC } from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants/constants';
+import {
+  ADD,
+  LOGOUT,
+  NAV,
+  SUPPORT,
+  TRIGGER,
+  USER,
+} from './constants/constants';
 import { panelVariants } from './constants/variants';
 
 import styles from './styles/HeaderPopup.module.scss';
@@ -20,16 +27,27 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const handleClose = () => setOpen(false);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') handleClose();
-  };
-
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-      handleClose();
-    }
+    if (e.key === 'Escape') setOpen(false);
   };
 
   return (
@@ -38,14 +56,13 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
       className={cn(styles.container, popupClassName)}
       tabIndex={-1}
       onKeyDown={handleKeyDown}
-      onPointerDown={handlePointerDown}
     >
       <button
         className={styles.trigger}
         onClick={() => setOpen((s) => !s)}
         aria-expanded={open}
       >
-        <TRIGER.Icon />
+        <TRIGGER.Icon />
       </button>
 
       <AnimatePresence>

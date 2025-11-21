@@ -10,19 +10,11 @@ import type { BaseInputProps } from '../types';
 
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   (
-    {
-      Icon,
-      value = '',
-      id,
-      labelText,
-      onChange,
-      iconPosition = 'left',
-      ...props
-    },
+    { Icon, id, labelText, iconPosition = 'left', className, ...props },
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <label htmlFor={id}>
+      <label htmlFor={id} className={className}>
         {labelText && <span className="base-input__label">{labelText}</span>}
 
         <div className="base-input">
@@ -34,12 +26,10 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 
           <input
             ref={ref}
+            id={id}
             className={cn('base-input__field', {
               ['base-input__field--with-icon']: Icon,
             })}
-            value={value}
-            id={id}
-            onChange={onChange}
             {...props}
           />
 
