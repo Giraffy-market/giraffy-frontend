@@ -1,4 +1,4 @@
-@use '@/styles/utils/variables' as *;
+@use '@/styles/utils/index' as *;
 
 .container {
   position: relative;
@@ -142,4 +142,16 @@
   border: none;
   cursor: pointer;
   text-align: left;
+}
+
+.unAuthorizedWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.text {
+  @include small-body;
+  text-align: center;
+  color: $blue;
 }
