@@ -17,18 +17,11 @@ import { Loader } from '@/ui/loader/Loader';
 
 import { useFetchUser } from './api/useFetchUser';
 
-import {
-  ADD,
-  LOGOUT,
-  NAV,
-  ROUTING,
-  SUPPORT,
-  TRIGER,
-  USER,
-} from './constants/constants';
+import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants/constants';
 import { panelVariants } from './constants/variants';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
+import { routing } from '@/shared/routing';
 
 import styles from './styles/HeaderPopup.module.scss';
 
@@ -133,7 +126,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
 
                 <button
                   className={cn(styles.itemRow, styles.logoutBtn)}
-                  onClick={() => signOut({ callbackUrl: ROUTING })}
+                  onClick={() => signOut({ callbackUrl: routing.home.base })}
                 >
                   <LOGOUT.Icon />
                   <span>{LOGOUT.label}</span>
