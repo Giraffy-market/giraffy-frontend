@@ -17,8 +17,18 @@ import { Loader } from '@/ui/loader/Loader';
 
 import { useFetchUser } from './api/useFetchUser';
 
-import { ADD, LOGOUT, NAV, SUPPORT, TRIGER, USER } from './constants/constants';
+import {
+  ADD,
+  LOGOUT,
+  NAV,
+  ROUTING,
+  SUPPORT,
+  TRIGER,
+  USER,
+} from './constants/constants';
 import { panelVariants } from './constants/variants';
+
+import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
 import styles from './styles/HeaderPopup.module.scss';
 
@@ -36,8 +46,9 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
 
   if (isLoading) return <Loader />;
 
-  if (error) {
-    toast.error(error.detail);
+  if (error || !data) {
+    const errorMessage = handleApiError(error);
+    toast.error(errorMessage);
     return;
   }
 
@@ -82,15 +93,15 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
               <>
                 <div className={styles.userRow}>
                   <div className={styles.userIcon}>
-                    {data?.avatar_url ? data?.avatar_url : <USER.Icon />}
+                    {data.avatar_url || <USER.Icon />}
                   </div>
 
                   <div className={styles.userInfo}>
                     <h1 className={styles.userName}>
-                      {data?.username || USER.name}
+                      {data.username || USER.name}
                     </h1>
                     <p className={styles.userEmail}>
-                      {data?.email || USER.email}
+                      {data.email || USER.email}
                     </p>
                   </div>
                 </div>
@@ -122,7 +133,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
 
                 <button
                   className={cn(styles.itemRow, styles.logoutBtn)}
-                  onClick={() => signOut({ callbackUrl: '/' })}
+                  onClick={() => signOut({ callbackUrl: ROUTING })}
                 >
                   <LOGOUT.Icon />
                   <span>{LOGOUT.label}</span>

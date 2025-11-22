@@ -54,3 +54,7 @@ export const SUPPORT = {
   Icon: HelpIcon,
 };
 export const LOGOUT = { id: 'logout', label: 'Вийти', Icon: LogoutIcon };
+
+export const ROUTING = '/';
+
+export const USER_QUERY_KEY = 'get-user-me';
