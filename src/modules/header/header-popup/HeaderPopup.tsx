@@ -2,7 +2,6 @@
 
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
-import { toast } from 'react-toastify';
 
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,6 +13,7 @@ import { LOGIN_FORM_MODAL_KEY, MODAL_QUERY_STATE } from '@/modules/auth';
 
 import { Button } from '@/ui/button/Button';
 import { Loader } from '@/ui/loader/Loader';
+import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
 import { useFetchUser } from './api/useFetchUser';
 
@@ -39,10 +39,10 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
 
   if (isLoading) return <Loader />;
 
-  if (error || !data) {
+  if (error && !data) {
     const errorMessage = handleApiError(error);
-    toast.error(errorMessage);
-    return;
+
+    return <ToastMessage type="error" message={errorMessage} />;
   }
 
   const handleClose = () => setOpen(false);
@@ -82,7 +82,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
             exit="exit"
             variants={panelVariants}
           >
-            {isLoggedIn ? (
+            {isLoggedIn && data ? (
               <>
                 <div className={styles.userRow}>
                   <div className={styles.userIcon}>
