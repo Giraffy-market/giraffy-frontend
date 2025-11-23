@@ -32,8 +32,10 @@ type Props = {
 export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { data, isLoading, error } = useFetchUser();
+
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
+  const { data, isLoading, error } = useFetchUser();
+
   const { status } = useSession();
   const isLoggedIn = status === 'authenticated';
 
@@ -42,7 +44,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
   if (error && !data) {
     const errorMessage = handleApiError(error);
 
-    return <ToastMessage type="error" message={errorMessage} />;
+    <ToastMessage type="error" message={errorMessage} />;
   }
 
   const handleClose = () => setOpen(false);
