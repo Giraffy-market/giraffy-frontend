@@ -1,6 +1,6 @@
 @use '@/styles/utils/index' as *;
 
-.login {
+.register {
   &-form {
     display: flex;
     flex-direction: column;
@@ -26,11 +26,6 @@
     @include onDesktop {
       margin-bottom: 28px;
     }
-    &--forget {
-      @include base-body;
-      color: #233246;
-      text-decoration: underline;
-    }
     &--checkbox {
       display: flex;
       flex-direction: row-reverse;
@@ -49,7 +44,7 @@
     color: $blue;
   }
 
-  &-register {
+  &-login {
     @include base-body;
     color: $blue;
     margin: 0 auto;

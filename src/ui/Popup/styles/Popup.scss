@@ -3,9 +3,7 @@
 .dialog {
   position: fixed;
   width: 100%;
-  height: 100%;
   max-width: 367px;
-  max-height: 500px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.95);
@@ -20,6 +18,10 @@
     transform 0.25s linear,
     display 0.25s allow-discrete,
     overlay 0.25s allow-discrete;
+  @include onDesktop {
+    max-width: 848px;
+    padding: 48px 164px 52px 164px;
+  }
 
   &[open] {
     opacity: 1;
@@ -51,12 +53,6 @@
 
   &::backdrop {
     background-color: transparent;
-  }
-
-  @include onDesktop {
-    max-width: 848px;
-    max-height: 672px;
-    padding: 48px;
   }
 
   &__closeButton {
