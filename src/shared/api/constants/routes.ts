@@ -8,4 +8,7 @@ export const routes = {
     confirm: '/auth/confirm',
     verify_code: '/auth/verify_code',
   },
+  users: {
+    me: '/users/me',
+  },
 };
