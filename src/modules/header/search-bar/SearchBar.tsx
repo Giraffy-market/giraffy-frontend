@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import SearchIcon from '@/components/header/assets/search.svg';
 
@@ -9,7 +9,7 @@ import { BaseInput } from '@/ui/inputs/baseInput/BaseInput';
 import styles from './styles/SearchBar.module.scss';
 
 export const SearchBar = () => {
-  const { register, handleSubmit, resetField } = useForm({
+  const { control, handleSubmit, resetField } = useForm({
     defaultValues: { query: '' },
   });
 
@@ -21,7 +21,13 @@ export const SearchBar = () => {
   return (
     <form className={styles.searchBar} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.inputWrapper}>
-        <BaseInput id="search" Icon={SearchIcon} {...register('query')} />
+        <Controller
+          name="query"
+          control={control}
+          render={({ field }) => (
+            <BaseInput id="search" Icon={SearchIcon} {...field} />
+          )}
+        />
       </div>
 
       <button type="submit" className={styles.searchBtn}>
