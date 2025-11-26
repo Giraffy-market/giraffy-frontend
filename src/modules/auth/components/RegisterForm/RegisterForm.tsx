@@ -21,7 +21,14 @@ import {
 } from '../../constants/modal-constants';
 
 export const RegisterForm: FC = () => {
-  const { control, handleSubmit, reset } = useForm<RegisterFormValues>();
+  const { control, handleSubmit, reset } = useForm<RegisterFormValues>({
+    defaultValues: {
+      email: '',
+      phone_number: '',
+      password: '',
+      passwordConfirm: '',
+    },
+  });
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async ({
@@ -59,7 +66,6 @@ export const RegisterForm: FC = () => {
           <Controller
             name="email"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <BaseInput
                 {...field}
@@ -75,12 +81,13 @@ export const RegisterForm: FC = () => {
           <Controller
             name="phone_number"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <PhoneInput
                 {...field}
                 labelText="Номер телефону"
                 id="phone_number"
+                mask="+{380} (00) 000 00 00"
+                onAccept={(value) => field.onChange(value)}
               />
             )}
           />
