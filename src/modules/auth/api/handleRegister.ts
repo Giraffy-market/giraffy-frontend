@@ -1,5 +1,6 @@
 import { routes } from '@/shared/api/constants/routes';
 import { customFetch } from '@/shared/api/fetch';
+import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
 import type { RegisterResponse } from '../type/types';
 
@@ -22,6 +23,7 @@ export const handleRegister = async (data: HandleRegisterProps) => {
 
     return response;
   } catch (error) {
-    throw error;
+    const errorMsg = handleApiError(error);
+    throw errorMsg;
   }
 };

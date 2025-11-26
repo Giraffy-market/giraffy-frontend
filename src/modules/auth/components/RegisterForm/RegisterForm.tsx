@@ -36,11 +36,9 @@ export const RegisterForm: FC = () => {
         return;
       }
 
-      const rawValue = phone_number.replace(/(?!\+)\D/g, '');
-
       const result = await handleRegister({
         email,
-        phone_number: rawValue,
+        phone_number,
         password,
       });
 

@@ -18,6 +18,10 @@
     transform 0.25s linear,
     display 0.25s allow-discrete,
     overlay 0.25s allow-discrete;
+  @include onTablet {
+    max-width: 525px;
+    padding: 32px 50px;
+  }
   @include onDesktop {
     max-width: 848px;
     padding: 48px 164px 52px 164px;
