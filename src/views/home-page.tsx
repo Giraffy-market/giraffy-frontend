@@ -12,7 +12,7 @@ import './home-page.scss';
 
 const HomePage = () => (
   <div className="home-page">
-    <Header />
+    {/* <Header /> */}
 
     <div className="home-page__content">
       <Slider />

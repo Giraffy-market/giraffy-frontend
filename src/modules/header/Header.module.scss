@@ -1,4 +1,8 @@
 .header {
+  box-shadow: 0 1px 4px 0 rgba(194, 164, 164, 0.52);
+}
+
+.headerWrap {
   display: flex;
   align-items: center;
   justify-content: space-between;

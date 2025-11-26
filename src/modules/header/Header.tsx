@@ -11,17 +11,19 @@ import { HeaderAction } from './header-action/HeaderAction';
 export const Header = () => {
   return (
     <header className={styles.header}>
-      <div className={styles.left}>
-        <Logo />
-        <HeaderCategories />
-      </div>
+      <div className={styles.headerWrap}>
+        <div className={styles.left}>
+          <Logo />
+          <HeaderCategories />
+        </div>
 
-      <div className={styles.center}>
-        <SearchBar />
-      </div>
+        <div className={styles.center}>
+          <SearchBar />
+        </div>
 
-      <div className={styles.right}>
-        <HeaderAction />
+        <div className={styles.right}>
+          <HeaderAction />
+        </div>
       </div>
     </header>
   );
