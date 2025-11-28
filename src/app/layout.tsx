@@ -8,7 +8,9 @@ import { NuqsAdapter } from 'nuqs/adapters/next';
 import { nunito, openSans } from '@/layouts/root';
 
 import { AuthFormLayout, AuthProvider } from '@/modules/auth';
+import { Header } from '@/modules/header/Header';
 
+import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 import { Footer } from '@/components/Footer/Footer';
 
 import { Loader } from '@/ui/loader/Loader';
@@ -28,6 +30,8 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
           <ReactQueryProvider>
             <Suspense fallback={<Loader />}>
               <NuqsAdapter>
+                <Header />
+                <Breadcrumbs />
                 <main>{children}</main>
                 <ToastContainer />
                 <AuthFormLayout />
