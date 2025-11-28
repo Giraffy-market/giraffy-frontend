@@ -5,20 +5,20 @@ import { usePathname } from 'next/navigation';
 
 import Arrow from '@/components/slider/assets/icons/arrow.svg';
 
+import { routing } from '@/shared/routing';
+
 import styles from './Breadcrumbs.module.scss';
+import { getDictionaryKey } from './breadcrumbsData';
 
 export const Breadcrumbs = () => {
   const pathname = usePathname();
 
-  if (pathname === '/') return null;
+  if (pathname === routing.home.base) return null;
 
   const segments = pathname.split('/').filter(Boolean);
 
-  const generateName = (segment: string) =>
-    segment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
-
   const paths = segments.map((seg, i) => ({
-    name: generateName(seg),
+    name: getDictionaryKey(seg),
     href: '/' + segments.slice(0, i + 1).join('/'),
   }));
 
@@ -26,7 +26,7 @@ export const Breadcrumbs = () => {
     <nav className={styles.breadcrumbs}>
       <Arrow className={styles.startArrow} />
       <span className={styles.linkWithSeparator}>
-        <Link href="/" className={styles.link}>
+        <Link href={routing.home.base} className={styles.link}>
           Головна сторінка
         </Link>
         {paths.length > 0 && <span className={styles.separator}>/</span>}
