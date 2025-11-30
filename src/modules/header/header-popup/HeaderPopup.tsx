@@ -9,7 +9,11 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 
-import { LOGIN_FORM_MODAL_KEY, MODAL_QUERY_STATE } from '@/modules/auth';
+import {
+  LOGIN_FORM_MODAL_KEY,
+  MODAL_QUERY_STATE,
+  REGISTER_FORM_MODAL_KEY,
+} from '@/modules/auth';
 
 import { Button } from '@/ui/button/Button';
 import { Loader } from '@/ui/loader/Loader';
@@ -163,6 +167,14 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
                   text="Увійти"
                   onClick={() => {
                     setModal(LOGIN_FORM_MODAL_KEY);
+                    handleClose();
+                  }}
+                />
+                <Button
+                  variant="outline"
+                  text="Реєстрація"
+                  onClick={() => {
+                    setModal(REGISTER_FORM_MODAL_KEY);
                     handleClose();
                   }}
                 />

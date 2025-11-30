@@ -97,7 +97,6 @@ export const LoginForm: FC = () => {
 
       <Button text="Увійти" variant="gradient" type="submit" />
 
-      <span className="login-or">Або</span>
       <p className="login-register">
         Вперше тут?&nbsp;
         <button

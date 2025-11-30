@@ -3,10 +3,14 @@
 import { useQueryState } from 'nuqs';
 
 import { LoginForm } from '../components/LoginForm/LoginForm';
+import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 
 import { Popup } from '@/ui/Popup/Popup';
 
-import { LOGIN_TITLE_KEY } from '../constants/form-constants';
+import {
+  LOGIN_TITLE_KEY,
+  REGISTER_TITLE_KEY,
+} from '../constants/form-constants';
 import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
@@ -23,7 +27,7 @@ export const AuthFormLayout = () => {
       case LOGIN_FORM_MODAL_KEY:
         return <LoginForm />;
       case REGISTER_FORM_MODAL_KEY:
-        return <div>test</div>;
+        return <RegisterForm />;
       default:
         return null;
     }
@@ -33,6 +37,8 @@ export const AuthFormLayout = () => {
     switch (modal) {
       case LOGIN_FORM_MODAL_KEY:
         return LOGIN_TITLE_KEY;
+      case REGISTER_FORM_MODAL_KEY:
+        return REGISTER_TITLE_KEY;
       default:
         return null;
     }

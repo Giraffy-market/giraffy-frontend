@@ -7,8 +7,7 @@ import './Footer.scss';
 const FOOTER_LINKS = [
   { id: 1, href: '/about', text: 'Про нас' },
   { id: 2, href: '/contacts', text: 'Контакти' },
-  { id: 3, href: '/exchange-returns', text: 'Правила обміну/повернення' },
-  { id: 4, href: '/faq', text: 'FAQ' },
+  { id: 3, href: '/faq', text: 'FAQ' },
 ];
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();

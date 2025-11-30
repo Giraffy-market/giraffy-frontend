@@ -1,6 +1,4 @@
-import { type FC } from 'react';
-
-import { useMask } from '@react-input/mask';
+import { IMaskMixin } from 'react-imask';
 
 import type { PhoneInputProps } from '@/ui/inputs/types';
 
@@ -8,30 +6,17 @@ import styles from './styles/PhoneInput.module.scss';
 
 import { BaseInput } from '../baseInput/BaseInput';
 
-const PHONE_MASK = '+380 (__) ___ __ __';
-
-export const PhoneInput: FC<PhoneInputProps> = ({
-  value = '',
-  onChange,
-  ...props
-}) => {
-  const options = {
-    mask: PHONE_MASK,
-    replacement: { _: /\d/ },
-  };
-
-  const inputRef = useMask(options);
-
-  return (
+export const PhoneInput = IMaskMixin<HTMLInputElement, PhoneInputProps>(
+  ({ inputRef, ...props }) => (
     <div className={styles.phone__wrapper}>
       <BaseInput
-        value={value}
-        onChange={onChange}
-        placeholder={PHONE_MASK}
-        type="tel"
-        ref={inputRef}
         {...props}
+        ref={inputRef}
+        type="tel"
+        placeholder="+380 (__) ___ __ __"
       />
     </div>
-  );
-};
+  ),
+);
+
+PhoneInput.displayName = 'PhoneInput';
