@@ -10,3 +10,14 @@
     gap: 24px;
   }
 }
+
+.catalog-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 16px;
+
+  @include onTablet {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 28px;
+  }
+}

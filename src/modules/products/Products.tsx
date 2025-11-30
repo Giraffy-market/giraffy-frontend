@@ -9,7 +9,15 @@ import { Loader } from '@/ui/loader/Loader';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
-export const Products: FC = () => {
+type ProductsProps = {
+  showTitle?: boolean;
+  variant?: string;
+};
+
+export const Products: FC<ProductsProps> = ({
+  showTitle = true,
+  variant = 'home',
+}) => {
   const { data, isLoading, error } = useFetchProducts();
 
   if (isLoading) return <Loader />;
@@ -18,8 +26,8 @@ export const Products: FC = () => {
 
   return (
     <div className="container">
-      <SectionTitle title="Для тебе" />
-      <ProductsList products={data.items} />
+      {showTitle && <SectionTitle title="Для тебе" />}
+      <ProductsList products={data.items} variant={variant} />
     </div>
   );
 };

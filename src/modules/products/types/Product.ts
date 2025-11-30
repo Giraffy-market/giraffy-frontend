@@ -8,6 +8,9 @@ export type Product = {
   category_id: number;
   location: string;
   status: 'for_moderation';
+  is_new: boolean;
+  published_date: string;
+  comments_count: number;
 };
 
 export type ProductsListResponse = PaginatedResponse<Product>;

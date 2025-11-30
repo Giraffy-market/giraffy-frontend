@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import cn from 'classnames';
 import Image from 'next/image';
 
 import type { Product } from '@/modules/products/types/Product';
@@ -11,10 +12,11 @@ import './product-card.scss';
 
 type Props = {
   product: Product;
+  variant?: string;
 };
 
-export const ProductCard: FC<Props> = ({ product }) => {
-  const { title, price, location } = product;
+export const ProductCard: FC<Props> = ({ product, variant }) => {
+  const { title, price, location, comments_count } = product;
 
   return (
     <div className="product-card">
@@ -41,9 +43,18 @@ export const ProductCard: FC<Props> = ({ product }) => {
           </p>
         </div>
 
-        <div className="product-card__additional-reviews">
-          <ReviewIcon />
-        </div>
+        {comments_count === 0 && (
+          <div
+            className={cn({
+              ['product-card__additional-reviews']: variant === 'home',
+              ['product-card__additional-reviews-catalog']:
+                variant === 'catalog',
+            })}
+          >
+            <ReviewIcon />
+            <span>{comments_count}</span>
+          </div>
+        )}
       </div>
     </div>
   );
