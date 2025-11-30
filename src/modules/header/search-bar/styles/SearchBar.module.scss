@@ -1,0 +1,32 @@
+@use '@/styles/utils/variables' as *;
+
+.searchBar {
+  display: flex;
+  align-items: center;
+
+  .inputWrapper {
+    width: 600px;
+    height: 44px;
+    position: relative;
+  }
+
+  .searchBtn {
+    background: $orange;
+    border: none;
+    border-radius: 10px;
+    padding: 0px 12px;
+    width: 81px;
+    height: 44px;
+    margin-left: -81px;
+    z-index: 10;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: $orange-hover;
+    }
+  }
+}

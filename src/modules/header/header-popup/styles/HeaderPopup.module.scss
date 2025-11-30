@@ -16,12 +16,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
 }
 
 .popupWrap {
   position: absolute;
   top: 50px;
-  left: 0;
+  right: 0;
   width: 424px;
   background: $white;
   border-radius: 12px;
@@ -36,22 +44,6 @@
   gap: 16px;
   align-items: center;
   margin-bottom: 24px;
-}
-
-.userIcon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #b5b2b2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    width: 48px;
-    height: 48px;
-    fill: #fff;
-  }
 }
 
 .userInfo {
@@ -85,8 +77,10 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 133%;
+  transition: background 0.3s ease;
+
   &:hover {
-    color: $white;
+    background: $orange-hover;
   }
 }
 

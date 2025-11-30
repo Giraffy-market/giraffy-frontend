@@ -9,6 +9,7 @@
 .item {
   @include headerCategoryItem;
   padding: 8px 24px;
+  white-space: nowrap;
 
   &.active {
     background: $light-gray;
