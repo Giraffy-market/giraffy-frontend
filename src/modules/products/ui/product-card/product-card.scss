@@ -1,4 +1,4 @@
-@use '@/styles/utils/index' as *;
+@use '@/styles/utils/_index' as *;
 
 .product-card {
   position: relative;
@@ -32,6 +32,10 @@
     @include onDesktop {
       height: 200px;
     }
+  }
+
+  &__info-title {
+    @include base-body;
   }
 
   &__info,

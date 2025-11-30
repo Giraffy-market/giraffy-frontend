@@ -3,6 +3,7 @@
 @mixin headerCategoryItems {
   display: grid;
   padding-block: 16px;
+  padding-left: 0;
 }
 
 @mixin headerCategoryItem {
