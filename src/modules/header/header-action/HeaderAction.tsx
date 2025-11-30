@@ -1,3 +1,5 @@
+'use client';
+
 import FavoritesIcon from '@/components/header/assets/favourites.svg';
 import NotificationIcon from '@/components/header/assets/notification.svg';
 

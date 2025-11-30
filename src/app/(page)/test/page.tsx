@@ -1,14 +1,25 @@
+'use client';
+
 import { type FC } from 'react';
 
-import { getServerAuthSession } from '@/modules/auth';
+import { signOut, useSession } from 'next-auth/react';
 
-import { TestClient } from './TestClient';
+import { Button } from '@/ui/button/Button';
 
-const Test: FC = async () => {
-  const session = await getServerAuthSession();
+const Test: FC = () => {
+  const session = useSession();
   console.log(session);
 
-  return <TestClient session={session} />;
+  return (
+    <>
+      <div>Welcome to the Test Page {session?.data?.access_token}</div>
+      <Button
+        text="Sign out"
+        variant="primary"
+        onClick={() => signOut({ callbackUrl: '/' })}
+      />
+    </>
+  );
 };
 
 export default Test;

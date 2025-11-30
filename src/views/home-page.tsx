@@ -1,11 +1,9 @@
-import { Suspense } from 'react';
+'use client';
 
 import { Categories } from '@/modules/categories';
 import { Products } from '@/modules/products';
 
 import { Slider } from '@/components/slider/Slider';
-
-import { Loader } from '@/ui/loader/Loader';
 
 import './home-page.scss';
 
@@ -19,9 +17,7 @@ const HomePage = () => (
       </section>
 
       <section>
-        <Suspense fallback={<Loader />}>
-          <Products />
-        </Suspense>
+        <Products />
       </section>
     </div>
   </div>
