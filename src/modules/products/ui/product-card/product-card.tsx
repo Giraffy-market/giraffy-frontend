@@ -43,7 +43,7 @@ export const ProductCard: FC<Props> = ({ product, variant }) => {
           </p>
         </div>
 
-        {comments_count === 0 && (
+        {comments_count > 0 && (
           <div
             className={cn({
               ['product-card__additional-reviews']: variant === 'home',
