@@ -15,7 +15,7 @@ export const Breadcrumbs = () => {
 
   if (pathname === routing.home.base) return null;
 
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean).slice(0, -1);
 
   const paths = segments.map((seg, i) => ({
     name: getDictionaryKey(seg),
