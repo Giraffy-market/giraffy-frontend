@@ -2,24 +2,17 @@ import type { ComponentProps } from 'react';
 
 import { Slot } from '@radix-ui/react-slot';
 
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 type ButtonProps = ComponentProps<'button'> & {
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'outline'
-    | 'ghost'
-    | 'destructive'
-    | 'link';
-  size?: 'sm' | 'md' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg';
+  variant?: 'outline' | 'ghost';
+  size?: 'md' | 'icon';
   asChild?: boolean;
 };
 
 function Button({
   className,
-  variant = 'primary',
-  size = 'md',
+  variant = 'outline',
   asChild = false,
   ...props
 }: ButtonProps) {
@@ -27,7 +20,6 @@ function Button({
 
   return (
     <Comp
-      data-size={size}
       data-variant={variant}
       className={`${styles.button} ${className ?? ''}`.trim()}
       {...props}

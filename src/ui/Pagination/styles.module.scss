@@ -1,6 +1,6 @@
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   width: 100%;
   margin-inline: auto;
 
@@ -8,31 +8,21 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--spacing);
+    gap: 8px;
 
     .pagination-previous,
     .pagination-next {
-      gap: var(--spacing);
       padding-inline: calc(var(--spacing) * 2);
 
       & > span {
         display: none;
       }
     }
-
-    .pagination-ellipsis {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: calc(var(--spacing) * 9);
-      height: calc(var(--spacing) * 9);
-
-      & > svg {
-        width: calc(var(--spacing) * 4);
-        height: calc(var(--spacing) * 4);
-      }
-    }
   }
+}
+
+.left-arrow {
+  rotate: -180deg;
 }
 
 @media (width >= 640px) {

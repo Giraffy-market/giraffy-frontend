@@ -1,14 +1,10 @@
 import type { ComponentProps } from 'react';
 
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from 'lucide-react';
-
 import Button from '@/ui/button';
 
-import styles from './styles.module.css';
+import Arrow from './assets/arrow-right.svg';
+
+import styles from './styles.module.scss';
 
 function Pagination({ className, ...props }: ComponentProps<'nav'>) {
   return (
@@ -41,13 +37,9 @@ type PaginationLinkProps = {
 } & Pick<ComponentProps<typeof Button>, 'size'> &
   ComponentProps<'a'>;
 
-function PaginationLink({
-  isActive,
-  size = 'icon',
-  ...props
-}: PaginationLinkProps) {
+function PaginationLink({ isActive, ...props }: PaginationLinkProps) {
   return (
-    <Button asChild variant={isActive ? 'outline' : 'ghost'} size={size}>
+    <Button asChild variant={isActive ? 'outline' : 'ghost'}>
       <a
         aria-current={isActive ? 'page' : undefined}
         data-slot="pagination-link"
@@ -69,8 +61,7 @@ function PaginationPrevious({
       className={`${styles['pagination-previous']} ${className ?? ''}`.trim()}
       {...props}
     >
-      <ChevronLeftIcon />
-      <span>Previous</span>
+      <Arrow className={styles['left-arrow']} role="img" aria-label="arrow" />
     </PaginationLink>
   );
 }
@@ -86,23 +77,8 @@ function PaginationNext({
       className={`${styles['pagination-next']} ${className ?? ''}`.trim()}
       {...props}
     >
-      <span>Next</span>
-      <ChevronRightIcon />
+      <Arrow role="img" aria-label="arrow" />
     </PaginationLink>
-  );
-}
-
-function PaginationEllipsis({ className, ...props }: ComponentProps<'span'>) {
-  return (
-    <span
-      aria-hidden
-      data-slot="pagination-ellipsis"
-      className={`${styles['pagination-ellipsis']} ${className ?? ''}`.trim()}
-      {...props}
-    >
-      <MoreHorizontalIcon />
-      <span className="sr-only">More pages</span>
-    </span>
   );
 }
 
@@ -113,5 +89,4 @@ export {
   PaginationItem,
   PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
 };
