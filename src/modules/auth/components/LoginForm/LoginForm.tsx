@@ -21,7 +21,13 @@ import {
 } from '../../constants/modal-constants';
 
 export const LoginForm: FC = () => {
-  const { control, handleSubmit, reset } = useForm<LoginFormValues>();
+  const { control, handleSubmit, reset } = useForm<LoginFormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+  });
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
 
   const onSubmit: SubmitHandler<LoginFormValues> = async ({
