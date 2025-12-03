@@ -1,0 +1,92 @@
+.accordion-item {
+  color: var(--color-neutral-800);
+  border-block-end: 1px solid var(--color-border);
+
+  & > [data-slot='accordion-header'] {
+    display: flex;
+  }
+}
+
+.accordion-trigger {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-block: calc(var(--spacing) * 4);
+  transition: all var(--default-transition-duration)
+    var(--default-transition-timing-function);
+  border: none;
+  border-radius: var(--radius-md);
+  outline: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-sm--line-height);
+  text-align: start;
+  gap: calc(var(--spacing) * 4);
+
+  /* Icon */
+  & > svg {
+    flex-shrink: 0;
+    width: calc(var(--spacing) * 4);
+    height: calc(var(--spacing) * 4);
+    color: var(--color-muted-foreground);
+    pointer-events: none;
+    rotate: 0deg;
+    translate: 0 calc(var(--spacing) * 0.5);
+  }
+
+  /* State */
+  &[data-state='open'] > svg {
+    rotate: 180deg;
+    transition: rotate var(--default-transition-duration)
+      var(--default-transition-timing-function);
+  }
+
+  /* Hover */
+  &:hover {
+    text-decoration: underline;
+  }
+
+  /* Focus */
+  &:focus-visible {
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--color-ring) 50%, transparent);
+  }
+
+  /* Disabled */
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.accordion-content {
+  overflow: hidden;
+  animation-duration: 0.2s;
+  animation-timing-function: var(--ease-out);
+  color: inherit;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  animation-fill-mode: forwards;
+
+  & > div {
+    padding-block-end: calc(var(--spacing) * 4);
+  }
+
+  /* State */
+  &[data-state='open'] {
+    animation-name: var(--animate-accordion-down);
+  }
+
+  &[data-state='closed'] {
+    animation-name: var(--animate-accordion-up) !important;
+  }
+}
+
+:global(.dark) {
+  .accordion-item {
+    color: var(--color-neutral-300);
+  }
+}
