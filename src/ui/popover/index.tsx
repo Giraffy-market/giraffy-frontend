@@ -1,6 +1,8 @@
-import styles from "./styles.module.css";
-import type { ComponentProps } from "react";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
+import type { ComponentProps } from 'react';
+
+import * as PopoverPrimitive from '@radix-ui/react-popover';
+
+import styles from './styles.module.scss';
 
 function Popover({ ...props }: ComponentProps<typeof PopoverPrimitive.Root>) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />;
@@ -14,7 +16,7 @@ function PopoverTrigger({
 
 function PopoverContent({
   className,
-  align = "center",
+  align = 'center',
   sideOffset = 4,
   ...props
 }: ComponentProps<typeof PopoverPrimitive.Content>) {
@@ -24,7 +26,7 @@ function PopoverContent({
         data-slot="popover-content"
         align={align}
         sideOffset={sideOffset}
-        className={`${styles["popover-content"]} ${className ?? ""}`.trim()}
+        className={`${styles['popover-content']} ${className ?? ''}`.trim()}
         {...props}
       />
     </PopoverPrimitive.Portal>

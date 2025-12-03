@@ -1,0 +1,35 @@
+@use '@/styles/utils/index' as *;
+
+.popover {
+  width: 343px;
+  padding: 16px 16px 28px 16px;
+  background-color: $white;
+  @include onDesktop {
+    width: 275px;
+  }
+
+  &_btn__wrapper {
+    margin-bottom: 24px;
+    @include onDesktop {
+      display: none;
+    }
+  }
+
+  &_headers {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    @include onDesktop {
+      display: none;
+    }
+  }
+
+  &_title {
+    @include h3;
+    color: $blue;
+  }
+
+  &_close__button {
+    cursor: pointer;
+  }
+}

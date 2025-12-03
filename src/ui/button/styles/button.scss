@@ -16,7 +16,8 @@ $disabled-gradient: linear-gradient(90deg, #ccc 0%, #797777 100%);
     cursor: not-allowed;
   }
 
-  &.primary {
+  &.primary,
+  &.primary_with_icon {
     height: 52px;
     @include button-2;
     color: $blue;
@@ -31,6 +32,12 @@ $disabled-gradient: linear-gradient(90deg, #ccc 0%, #797777 100%);
       color: $dark-gray;
       background-color: #ccc;
     }
+  }
+  &.primary_with_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
   }
   &.outline {
     height: 52px;
