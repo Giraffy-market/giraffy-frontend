@@ -16,10 +16,18 @@ import css from './styles/popover.module.scss';
 
 type ProductFilters = {
   search: string;
+  price_from: string;
+  price_to: string;
 };
 
 export const Filters = () => {
-  const { handleSubmit, control, reset } = useForm<ProductFilters>();
+  const { handleSubmit, control, reset } = useForm<ProductFilters>({
+    defaultValues: {
+      search: '',
+      price_from: '',
+      price_to: '',
+    },
+  });
 
   const onSubmit: SubmitHandler<ProductFilters> = async (values) => {
     try {
