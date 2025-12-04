@@ -11,7 +11,7 @@ import './product-list.scss';
 
 type Props = {
   products: Product[];
-  variant?: string;
+  variant: 'home' | 'catalog';
 };
 
 export const ProductsList: FC<Props> = ({ products, variant }) => (

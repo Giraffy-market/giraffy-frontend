@@ -2,6 +2,8 @@
 
 import { type FC } from 'react';
 
+import { useQueryState } from 'nuqs';
+
 import {
   Pagination,
   PaginationContent,
@@ -13,29 +15,29 @@ import {
 
 type CustomPaginationType = {
   size: number;
-  page: number;
-  setPage: (params: { page: number }) => void;
 };
 
-export const CustomPagination: FC<CustomPaginationType> = ({
-  size,
-  page,
-  setPage,
-}) => {
-  const start = Math.max(1, page - 1);
+export const CustomPagination: FC<CustomPaginationType> = ({ size }) => {
+  const [page, setPage] = useQueryState('page');
+
+  if (size <= 1) return null;
+
+  const currentPage = page ? parseInt(page, 10) : 1;
+
+  const start = Math.max(1, currentPage - 1);
   const end = Math.min(size, start + 1);
   const pagesToShow = end - start === 1 ? [start, end] : [start];
 
   return (
     <Pagination>
       <PaginationContent>
-        {page > 1 && (
+        {currentPage > 1 && (
           <PaginationItem>
             <PaginationPrevious
               onClick={() => {
-                setPage({ page: page - 1 });
+                setPage(String(currentPage - 1));
               }}
-              aria-disabled={page === 1}
+              aria-disabled={currentPage === 1}
             />
           </PaginationItem>
         )}
@@ -43,21 +45,21 @@ export const CustomPagination: FC<CustomPaginationType> = ({
         {pagesToShow.map((p) => (
           <PaginationItem key={p}>
             <PaginationLink
-              isActive={page === p}
-              onClick={() => setPage({ page: p })}
+              isActive={currentPage === p}
+              onClick={() => setPage(String(p))}
             >
               {p}
             </PaginationLink>
           </PaginationItem>
         ))}
 
-        {page !== size && (
+        {currentPage !== size && (
           <PaginationItem>
             <PaginationNext
               onClick={() => {
-                setPage({ page: page + 1 });
+                setPage(String(currentPage + 1));
               }}
-              aria-disabled={page === size}
+              aria-disabled={currentPage === size}
             />
           </PaginationItem>
         )}

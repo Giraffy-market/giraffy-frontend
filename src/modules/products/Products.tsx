@@ -2,8 +2,6 @@
 
 import { type FC } from 'react';
 
-import { parseAsInteger, useQueryStates } from 'nuqs';
-
 import { useFetchProducts } from '@/modules/products/api/useFetchProducts';
 import { ProductsList } from '@/modules/products/components/products-list';
 
@@ -14,17 +12,11 @@ import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
 type ProductsProps = {
   showTitle?: boolean;
-  variant?: string;
+  variant: 'home' | 'catalog';
 };
 
-export const Products: FC<ProductsProps> = ({
-  showTitle = true,
-  variant = 'home',
-}) => {
+export const Products: FC<ProductsProps> = ({ showTitle = true, variant }) => {
   const { data, isLoading, error } = useFetchProducts();
-  const [searchParams, setSearchParams] = useQueryStates({
-    page: parseAsInteger.withDefault(1),
-  });
 
   if (isLoading) return <Loader />;
   if (error || !data)
@@ -34,11 +26,7 @@ export const Products: FC<ProductsProps> = ({
     <div className="container">
       {showTitle && <SectionTitle title="Для тебе" />}
       <ProductsList products={data.items} variant={variant} />
-      <CustomPagination
-        size={data.size}
-        page={searchParams.page}
-        setPage={setSearchParams}
-      />
+      <CustomPagination size={data.size} />
     </div>
   );
 };

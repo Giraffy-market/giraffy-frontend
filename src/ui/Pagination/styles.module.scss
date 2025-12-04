@@ -2,9 +2,12 @@
 
 .pagination {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   width: 100%;
   margin-inline: auto;
+  @include onDesktop {
+    justify-content: end;
+  }
 
   &-content {
     display: flex;
