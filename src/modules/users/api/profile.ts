@@ -3,11 +3,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
+import type { User } from '../types/user';
+
 import { routes } from '@/shared/api/constants/routes';
 import type { HttpError } from '@/shared/api/errors/http-error';
 import { customFetch } from '@/shared/api/fetch';
-
-import type { User } from '../../../users/types/user';
 
 const userKey = {
   me: 'get-user-me',

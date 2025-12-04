@@ -1,0 +1,160 @@
+@use '@/styles/utils/variables' as *;
+
+.profilWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1064px;
+  margin-inline: auto;
+
+  .userData {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d9d9d9;
+    width: 100%;
+
+    .avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+
+      .avatarImage {
+        border-radius: 50%;
+      }
+
+      .defaultAvatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: $light-gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .bio {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 133%;
+
+      .username {
+        display: flex;
+        gap: 4px;
+      }
+
+      > p:last-of-type {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 160%;
+      }
+    }
+  }
+
+  .descriptionsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d9d9d9;
+
+    .titleWrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 133%;
+      }
+      .editButton {
+        cursor: pointer;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 160%;
+      }
+    }
+
+    .top {
+      p:not(:last-of-type) {
+        margin-bottom: 8px;
+      }
+    }
+    .bottom {
+      p:not(:last-of-type) {
+        margin-bottom: 4px;
+      }
+
+      p:last-of-type {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 744px) {
+    flex-direction: row;
+    gap: 72px;
+
+    .userData {
+      flex-direction: column;
+      border: none;
+      align-items: center;
+      width: 302px;
+      text-align: center;
+      gap: 24px;
+
+      .bio {
+        gap: 24px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 150%;
+
+        .username {
+          flex-direction: column;
+        }
+
+        > p:nth-of-type(2) {
+          font-weight: 600;
+        }
+
+        > p:last-of-type {
+          font-size: 18px;
+          line-height: 156%;
+        }
+      }
+    }
+
+    .descriptionsWrapper {
+      width: 690px;
+      border: none;
+      font-size: 20px;
+      gap: 24px;
+
+      .titleWrapper {
+        .title {
+          font-size: 24px;
+          line-height: 150%;
+        }
+
+        .editButton {
+          font-size: 16px;
+        }
+      }
+
+      .top {
+        p:not(:last-of-type) {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
