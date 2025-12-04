@@ -1,6 +1,5 @@
 .accordion-item {
   color: var(--color-neutral-800);
-  border-block-end: 1px solid var(--color-border);
 
   & > [data-slot='accordion-header'] {
     display: flex;
@@ -8,9 +7,10 @@
 }
 
 .accordion-trigger {
+  cursor: pointer;
   display: flex;
   flex: 1;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   padding-block: calc(var(--spacing) * 4);
   transition: all var(--default-transition-duration)
@@ -27,7 +27,7 @@
   gap: calc(var(--spacing) * 4);
 
   /* Icon */
-  & > svg {
+  &.arrow_down {
     flex-shrink: 0;
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
@@ -38,15 +38,10 @@
   }
 
   /* State */
-  &[data-state='open'] > svg {
+  &[data-state='open'] .arrow_down {
     rotate: 180deg;
     transition: rotate var(--default-transition-duration)
       var(--default-transition-timing-function);
-  }
-
-  /* Hover */
-  &:hover {
-    text-decoration: underline;
   }
 
   /* Focus */

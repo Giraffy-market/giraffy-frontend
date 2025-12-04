@@ -8,20 +8,10 @@
     width: 275px;
   }
 
-  &_btn__wrapper {
-    margin-bottom: 24px;
-    @include onDesktop {
-      display: none;
-    }
-  }
-
   &_headers {
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
-    @include onDesktop {
-      display: none;
-    }
   }
 
   &_title {

@@ -1,0 +1,11 @@
+@use '@/styles/utils/index' as *;
+
+.page_wrapper {
+  display: grid;
+  gap: 24px;
+
+  @include onDesktop {
+    grid-template-columns: 275px 1fr;
+    gap: 38px;
+  }
+}

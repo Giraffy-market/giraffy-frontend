@@ -1,3 +1,3 @@
-import { Filters } from './Filters';
+import { FiltersLayout } from './FiltersLayout';
 
-export { Filters };
+export { FiltersLayout };

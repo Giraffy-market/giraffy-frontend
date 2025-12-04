@@ -1,9 +1,10 @@
 import type { ComponentProps } from 'react';
 
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from 'lucide-react';
 
-import styles from './styles.module.css';
+import ArrowIcon from './assets/arrow.svg';
+
+import styles from './styles.module.scss';
 
 function Accordion({
   ...props
@@ -37,7 +38,9 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <ChevronDownIcon />
+        <div className={styles.arrow_down}>
+          <ArrowIcon role="img" />
+        </div>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

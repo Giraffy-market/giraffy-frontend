@@ -1,11 +1,15 @@
-import { Filters } from '@/modules/filters';
+import { FiltersLayout } from '@/modules/filters';
 import { Products } from '@/modules/products';
+
+import css from './page.module.scss';
 
 const page = () => {
   return (
-    <div>
-      <Filters />
-      <Products showTitle={false} variant="catalog" />
+    <div className="container">
+      <div className={css.page_wrapper}>
+        <FiltersLayout />
+        <Products showTitle={false} variant="catalog" />
+      </div>
     </div>
   );
 };

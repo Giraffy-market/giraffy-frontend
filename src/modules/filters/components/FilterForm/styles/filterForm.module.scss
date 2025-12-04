@@ -1,0 +1,28 @@
+@use '@/styles/utils/index' as *;
+
+.popover {
+  width: 343px;
+  padding: 16px 16px 28px 16px;
+  background-color: $white;
+  @include onDesktop {
+    width: 275px;
+  }
+
+  &_price__content {
+    display: flex;
+    gap: 19px;
+  }
+
+  &_location__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &_checkbox {
+    display: flex;
+    align-self: start;
+    flex-direction: row-reverse;
+    gap: 4px;
+  }
+}
