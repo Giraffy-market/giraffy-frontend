@@ -4,6 +4,8 @@ import Image from 'next/image';
 
 import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
 import PencilIcon from '@/components/prifile/assets/pencil.svg';
+import StarEmpty from '@/components/prifile/assets/star-empty.svg';
+import StarFilled from '@/components/prifile/assets/star-filled.svg';
 
 import { Loader } from '@/ui/loader/Loader';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
@@ -99,18 +101,13 @@ export default function UserProfilePage() {
                   </div>
 
                   <div className={styles.stars}>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <span
-                        key={index}
-                        className={
-                          index < review.rating
-                            ? styles.starFilled
-                            : styles.starEmpty
-                        }
-                      >
-                        ★
-                      </span>
-                    ))}
+                    {Array.from({ length: 5 }).map((_, index) =>
+                      index < review.rating ? (
+                        <StarFilled key={index} className={styles.starIcon} />
+                      ) : (
+                        <StarEmpty key={index} className={styles.starIcon} />
+                      ),
+                    )}
                   </div>
 
                   <p className={styles.reviewText}>{review.text}</p>

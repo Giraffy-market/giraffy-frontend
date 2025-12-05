@@ -124,6 +124,13 @@
           }
 
           .stars {
+            display: flex;
+            gap: 4px;
+
+            .starIcon {
+              width: 24px;
+              height: 24px;
+            }
           }
 
           .reviewText {
