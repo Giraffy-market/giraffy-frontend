@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 
-import ProfileIcon from '@/components/header/assets/profile.svg';
+import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
+import PencilIcon from '@/components/prifile/assets/pencil.svg';
 
 import { Loader } from '@/ui/loader/Loader';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
@@ -30,19 +31,13 @@ export default function UserProfilePage() {
       <div className={styles.profilWrapper}>
         <div className={styles.userData}>
           <div className={styles.avatar}>
-            {user.avatar_url ? (
-              <Image
-                src={user.avatar_url}
-                alt="Аватар користувача"
-                width={100}
-                height={100}
-                className={styles.avatarImage}
-              />
-            ) : (
-              <div className={styles.defaultAvatar}>
-                <ProfileIcon className={styles.icon} />
-              </div>
-            )}
+            <Image
+              src={user.avatar_url || defaultAvatar}
+              alt="Аватар користувача"
+              width={100}
+              height={100}
+              className={styles.avatarImage}
+            />
           </div>
 
           <div className={styles.bio}>
@@ -50,12 +45,12 @@ export default function UserProfilePage() {
               <p>{user.first_name ?? 'Іван'}</p>
               <p>{user.last_name ?? 'Коваленко'}</p>
             </div>
-            <p>Львів, Україна</p>
+            <p>{user.location ?? 'Львів, Україна'}</p>
             <p>
               На Giraffy з{' '}
               {user.datetime_create
                 ? formatDateToUk(user.datetime_create)
-                : '-'}
+                : '--'}
             </p>
           </div>
         </div>
@@ -65,23 +60,20 @@ export default function UserProfilePage() {
             <h3 className={styles.title}>Дані профілю</h3>
             <button className={styles.editButton} disabled>
               Редагувати
+              <PencilIcon className={styles.pencilIcon} />
             </button>
           </div>
 
           <div className={styles.top}>
-            <p className={styles.descriptions}>
-              Продаю техніку та аксесуари. Люблю порядок у речах і чесні угоди.
-              Відповідаю швидко.
-            </p>
-            <p>{user.email}</p>
-            <p>{user.phone_number}</p>
+            <p>{user.email ?? 'Немає email'}</p>
+            <p>{user.phone_number ?? 'Немає телефону'}</p>
           </div>
 
           <div className={styles.bottom}>
-            <p>Активних оголошень: 5</p>
-            <p>Завершених угод: 12</p>
+            <p>Активних оголошень: {user.announcements?.length ?? 0}</p>
+            <p>Завершених угод: {user.completed_deals ?? 0}</p>
             <p>Середня оцінка: 4.8 </p>
-            <p>Дата реєстрації: {user?.datetime_create}</p>
+            <p>Дата реєстрації: {user.datetime_create ?? '--'}</p>
           </div>
         </div>
       </div>

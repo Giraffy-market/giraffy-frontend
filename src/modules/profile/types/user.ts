@@ -8,6 +8,12 @@ type OauthAccount = {
   account_email: string;
 };
 
+export type Announcement = {
+  id: string;
+  title: string;
+  is_active: boolean;
+};
+
 export type User = {
   id: string;
   email: string;
@@ -21,4 +27,7 @@ export type User = {
   last_name: string | null;
   datetime_create: string;
   oauth_accounts: OauthAccount[];
+  completed_deals: number;
+  announcements: Announcement[];
+  location: string | null;
 };
