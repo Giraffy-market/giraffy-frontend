@@ -2,12 +2,12 @@
 
 import Image from 'next/image';
 
-import { useFetchUser } from '@/modules/users/api/profile';
-
 import ProfileIcon from '@/components/header/assets/profile.svg';
 
 import { Loader } from '@/ui/loader/Loader';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
+
+import { useFetchUser } from './api/profile';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
@@ -17,13 +17,12 @@ import { formatDateToUk } from './formatDateToUk';
 export default function UserProfilePage() {
   const { data: user, isLoading, error } = useFetchUser();
 
-  console.log('data: ', user);
-
   if (isLoading) return <Loader />;
-  if (error && !user) {
+
+  if (error || !user) {
     const errorMessage = handleApiError(error);
 
-    <ToastMessage type="error" message={errorMessage} />;
+    return <ToastMessage type="error" message={errorMessage} />;
   }
 
   return (
@@ -31,7 +30,7 @@ export default function UserProfilePage() {
       <div className={styles.profilWrapper}>
         <div className={styles.userData}>
           <div className={styles.avatar}>
-            {user?.avatar_url ? (
+            {user.avatar_url ? (
               <Image
                 src={user.avatar_url}
                 alt="Аватар користувача"
@@ -48,13 +47,13 @@ export default function UserProfilePage() {
 
           <div className={styles.bio}>
             <div className={styles.username}>
-              <p>{user?.first_name ?? 'Іван'}</p>
-              <p>{user?.last_name ?? 'Коваленко'}</p>
+              <p>{user.first_name ?? 'Іван'}</p>
+              <p>{user.last_name ?? 'Коваленко'}</p>
             </div>
             <p>Львів, Україна</p>
             <p>
               На Giraffy з{' '}
-              {user?.datetime_create
+              {user.datetime_create
                 ? formatDateToUk(user.datetime_create)
                 : '-'}
             </p>
@@ -74,8 +73,8 @@ export default function UserProfilePage() {
               Продаю техніку та аксесуари. Люблю порядок у речах і чесні угоди.
               Відповідаю швидко.
             </p>
-            <p>{user?.email}</p>
-            <p>{user?.phone_number}</p>
+            <p>{user.email}</p>
+            <p>{user.phone_number}</p>
           </div>
 
           <div className={styles.bottom}>

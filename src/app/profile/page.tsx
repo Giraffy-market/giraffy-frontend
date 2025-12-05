@@ -1,8 +1,6 @@
-'use client';
-
 import { type FC } from 'react';
 
-import Profile from '@/views/profile';
+import Profile from '@/views/profile/profile';
 
 const UserProfilePage: FC = () => <Profile />;
 
