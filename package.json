@@ -20,7 +20,7 @@
     "embla-carousel-react": "^8.6.0",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.555.0",
-    "motion": "^12.23.15",
+    "motion": "^12.23.25",
     "next": "15.5.3",
     "next-auth": "^4.24.11",
     "nuqs": "^2.6.0",
