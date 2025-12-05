@@ -1,10 +1,8 @@
 @use '@/styles/utils/index' as *;
 
-.profilWrapper {
+.profileWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 20px;
   max-width: 1064px;
   margin-inline: auto;
@@ -41,48 +39,105 @@
       }
     }
   }
-
-  .descriptionsWrapper {
+  .profileDetails {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #d9d9d9;
-
-    .titleWrapper {
+    gap: 20px;
+    .descriptionsWrapper {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #d9d9d9;
 
-      .title {
+      .titleWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 133%;
+        }
+        .editButton {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 160%;
+        }
+      }
+
+      .top {
+        p:not(:last-of-type) {
+          margin-bottom: 8px;
+        }
+      }
+      .bottom {
+        p:not(:last-of-type) {
+          margin-bottom: 4px;
+        }
+
+        p:last-of-type {
+          margin-top: 8px;
+        }
+      }
+    }
+
+    .reviewsWrapper {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #d9d9d9;
+      padding-bottom: 12px;
+      gap: 16px;
+
+      .reviewsTitle {
         font-weight: 600;
         font-size: 18px;
         line-height: 133%;
       }
-      .editButton {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        cursor: pointer;
+
+      .reviewsList {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-left: 12px;
+
+        .reviewCard {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          .reviewHeader {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .reviewAvatar {
+            }
+
+            .reviewName {
+            }
+          }
+
+          .stars {
+          }
+
+          .reviewText {
+            font-size: 15px;
+          }
+        }
+      }
+      .allReviewsBtn {
         font-weight: 400;
         font-size: 15px;
         line-height: 160%;
-      }
-    }
-
-    .top {
-      p:not(:last-of-type) {
-        margin-bottom: 8px;
-      }
-    }
-    .bottom {
-      p:not(:last-of-type) {
-        margin-bottom: 4px;
-      }
-
-      p:last-of-type {
-        margin-top: 8px;
+        text-align: end;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
@@ -129,26 +184,71 @@
       }
     }
 
-    .descriptionsWrapper {
-      width: 690px;
-      border: none;
-      font-size: 20px;
-      gap: 24px;
+    .profileDetails {
+      gap: 40px;
+      .descriptionsWrapper {
+        width: 690px;
+        border: none;
+        font-size: 20px;
+        gap: 24px;
 
-      .titleWrapper {
-        .title {
+        .titleWrapper {
+          .title {
+            font-size: 24px;
+            line-height: 150%;
+          }
+
+          .editButton {
+            font-size: 16px;
+          }
+        }
+
+        .top {
+          p:not(:last-of-type) {
+            margin-bottom: 12px;
+          }
+        }
+      }
+      .reviewsWrapper {
+        border: none;
+        gap: 24px;
+
+        .reviewsTitle {
           font-size: 24px;
           line-height: 150%;
         }
+        .reviewsList {
+          flex-direction: row;
+          gap: 24px;
+          padding: 0;
 
-        .editButton {
-          font-size: 16px;
+          .reviewCard {
+            width: 333px;
+
+            .reviewHeader {
+              gap: 16px;
+              .reviewAvatar {
+              }
+
+              .reviewName {
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 133%;
+              }
+            }
+
+            .stars {
+            }
+
+            .reviewText {
+              font-size: 16px;
+              line-height: 150%;
+            }
+          }
         }
-      }
-
-      .top {
-        p:not(:last-of-type) {
-          margin-bottom: 12px;
+        .allReviewsBtn {
+          font-size: 16px;
+          line-height: 150%;
         }
       }
     }

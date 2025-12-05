@@ -1,0 +1,24 @@
+import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
+
+import type { Review } from './types/review';
+
+export const reviewsData: Review[] = [
+  {
+    id: 1,
+    user: {
+      name: 'Марія І.',
+      avatar: defaultAvatar,
+    },
+    rating: 4,
+    text: 'Все пройшло чудово! Дуже приємний продавець, швидко відповідає.',
+  },
+  {
+    id: 2,
+    user: {
+      name: 'Олександр П.',
+      avatar: defaultAvatar,
+    },
+    rating: 5,
+    text: 'Замовлення отримав у той же день. Рекомендую!',
+  },
+];
