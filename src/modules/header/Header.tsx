@@ -7,14 +7,22 @@ import { Logo } from '@/ui/logo/Logo';
 
 import styles from './Header.module.scss';
 import { HeaderAction } from './header-action/HeaderAction';
+import { HeaderBurger } from './header-burger/HeaderBurger';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerWrap}>
         <div className={styles.left}>
-          <Logo />
-          <HeaderCategories />
+          <div className={styles.burger}>
+            <HeaderBurger />
+          </div>
+          <div className={styles.logo}>
+            <Logo />
+          </div>
+          <div className={styles.categories}>
+            <HeaderCategories />
+          </div>
         </div>
 
         <div className={styles.center}>

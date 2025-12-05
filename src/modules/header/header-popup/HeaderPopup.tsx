@@ -28,8 +28,8 @@ import {
   SUPPORT,
   TRIGGER,
   USER,
-} from './constants/constants';
-import { panelVariants } from './constants/variants';
+} from '../constants/constants';
+import { panelVariants } from '../constants/variants';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 import { routing } from '@/shared/routing';

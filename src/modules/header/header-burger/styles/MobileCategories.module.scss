@@ -1,0 +1,44 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 2000;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  padding: 15px 10px 15px 10px;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  padding: 20px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+}
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 18px;
+}

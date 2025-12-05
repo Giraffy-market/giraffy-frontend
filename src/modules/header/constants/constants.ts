@@ -1,3 +1,5 @@
+import FavouritesIcon from '@/components/header/assets/favourites.svg';
+import NotificationsIcon from '@/components/header/assets/notification.svg';
 import ProfileIcon from '@/components/header/assets/profile.svg';
 import BasketIcon from '@/components/profilePopup/assets/basket.svg';
 import ChatsIcon from '@/components/profilePopup/assets/chats.svg';
@@ -54,3 +56,17 @@ export const SUPPORT = {
   Icon: HelpIcon,
 };
 export const LOGOUT = { id: 'logout', label: 'Вийти', Icon: LogoutIcon };
+
+export const NOTIFICATIONS = {
+  id: 'notifications',
+  label: 'Сповіщення',
+  href: '/notifications',
+  Icon: NotificationsIcon,
+};
+
+export const FAVOURITES = {
+  id: 'favourites',
+  label: 'Обрані',
+  href: '/favourites',
+  Icon: FavouritesIcon,
+};
