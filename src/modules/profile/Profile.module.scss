@@ -147,6 +147,17 @@
         cursor: pointer;
       }
     }
+
+    .logoutBtn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      text-align: start;
+    }
   }
 
   @include onTablet {
@@ -257,6 +268,10 @@
           font-size: 16px;
           line-height: 150%;
         }
+      }
+
+      .logoutBtn {
+        font-size: 18px;
       }
     }
   }

@@ -1,8 +1,10 @@
 'use client';
 
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 
 import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
+import LogoutIcon from '@/components/prifile/assets/logout.svg';
 import PencilIcon from '@/components/prifile/assets/pencil.svg';
 import StarEmpty from '@/components/prifile/assets/star-empty.svg';
 import StarFilled from '@/components/prifile/assets/star-filled.svg';
@@ -13,6 +15,7 @@ import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 import { useFetchUser } from './api/profile';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
+import { routing } from '@/shared/routing';
 
 import styles from './Profile.module.scss';
 import { formatDateToUk } from './formatDateToUk';
@@ -64,7 +67,7 @@ export default function UserProfilePage() {
               <h3 className={styles.title}>Дані профілю</h3>
               <button className={styles.editButton} disabled>
                 Редагувати
-                <PencilIcon className={styles.pencileIcon} />
+                <PencilIcon />
               </button>
             </div>
 
@@ -115,10 +118,18 @@ export default function UserProfilePage() {
               ))}
             </div>
 
-            <button className={styles.allReviewsBtn}>
+            <button className={styles.allReviewsBtn} disabled>
               Дивитися всі відгуки &gt;
             </button>
           </div>
+
+          <button
+            className={styles.logoutBtn}
+            onClick={() => signOut({ callbackUrl: routing.home.base })}
+          >
+            <LogoutIcon />
+            Вийти
+          </button>
         </div>
       </div>
     </div>
