@@ -25,9 +25,9 @@ type ProductFilters = {
   search: string;
   price_from: string;
   price_to: string;
-  location: string;
-  state: string;
-  category: string;
+  location: string[];
+  state: string[];
+  category: string[];
 };
 
 const LOCATIONS = [
@@ -46,19 +46,22 @@ const STATES = [
 ];
 
 export const FilterForm = () => {
-  const { data, isLoading, error } = useFetchCategories();
+  // const { data, isLoading, error } = useFetchCategories();
 
   const { handleSubmit, control, reset } = useForm<ProductFilters>({
     defaultValues: {
       search: '',
       price_from: '',
       price_to: '',
+      location: [],
+      state: [],
+      category: [],
     },
   });
 
-  if (isLoading) return <Loader />;
-  if (error || !data)
-    return <ToastMessage message={error?.detail} type="error" />;
+  // if (isLoading) return <Loader />;
+  // if (error || !data)
+  //   return <ToastMessage message={error?.detail} type="error" />;
 
   const onSubmit: SubmitHandler<ProductFilters> = async (values) => {
     try {
@@ -114,10 +117,24 @@ export const FilterForm = () => {
                   control={control}
                   render={({ field }) => (
                     <CheckBox
-                      {...field}
                       labelText={label}
                       labelProps={{
                         className: css.popover_checkbox,
+                      }}
+                      inputProps={{
+                        checked: field.value?.includes(label),
+                        onChange: (e) => {
+                          const checked = e.target.checked;
+
+                          console.log(checked);
+                          if (checked) {
+                            field.onChange([...field.value, label]);
+                          } else {
+                            field.onChange(
+                              field.value.filter((v) => v !== label),
+                            );
+                          }
+                        },
                       }}
                     />
                   )}
@@ -140,10 +157,24 @@ export const FilterForm = () => {
                   control={control}
                   render={({ field }) => (
                     <CheckBox
-                      {...field}
                       labelText={label}
                       labelProps={{
                         className: css.popover_checkbox,
+                      }}
+                      inputProps={{
+                        checked: field.value?.includes(label),
+                        onChange: (e) => {
+                          const checked = e.target.checked;
+
+                          console.log(checked);
+                          if (checked) {
+                            field.onChange([...field.value, label]);
+                          } else {
+                            field.onChange(
+                              field.value.filter((v) => v !== label),
+                            );
+                          }
+                        },
                       }}
                     />
                   )}
@@ -154,7 +185,7 @@ export const FilterForm = () => {
         </AccordionItem>
       </Accordion>
 
-      <Accordion type="single" collapsible defaultValue="category">
+      {/* <Accordion type="single" collapsible defaultValue="category">
         <AccordionItem value="category">
           <AccordionTrigger>Категорії</AccordionTrigger>
           <AccordionContent>
@@ -178,7 +209,7 @@ export const FilterForm = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
+      </Accordion> */}
 
       <Button
         variant="outline"
