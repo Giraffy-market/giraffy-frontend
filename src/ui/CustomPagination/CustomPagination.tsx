@@ -14,18 +14,18 @@ import {
 } from '../Pagination';
 
 type CustomPaginationType = {
-  size: number;
+  pages: number;
 };
 
-export const CustomPagination: FC<CustomPaginationType> = ({ size }) => {
+export const CustomPagination: FC<CustomPaginationType> = ({ pages }) => {
   const [page, setPage] = useQueryState('page');
 
-  if (size <= 1) return null;
+  if (pages <= 1) return null;
 
   const currentPage = page ? parseInt(page, 10) : 1;
 
   const start = Math.max(1, currentPage - 1);
-  const end = Math.min(size, start + 1);
+  const end = Math.min(pages, start + 1);
   const pagesToShow = end - start === 1 ? [start, end] : [start];
 
   return (
@@ -53,13 +53,13 @@ export const CustomPagination: FC<CustomPaginationType> = ({ size }) => {
           </PaginationItem>
         ))}
 
-        {currentPage !== size && (
+        {currentPage !== pages && (
           <PaginationItem>
             <PaginationNext
               onClick={() => {
                 setPage(String(currentPage + 1));
               }}
-              aria-disabled={currentPage === size}
+              aria-disabled={currentPage === pages}
             />
           </PaginationItem>
         )}

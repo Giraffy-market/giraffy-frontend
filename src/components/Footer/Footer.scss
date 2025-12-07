@@ -1,6 +1,7 @@
 @use '@/styles/utils/index' as *;
 
 .footer {
+  margin-top: 40px;
   flex-shrink: 0;
   border-top: 1px solid rgba($blue, 0.12);
   background-color: #f6eee7;

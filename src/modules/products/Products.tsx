@@ -26,7 +26,7 @@ export const Products: FC<ProductsProps> = ({ showTitle = true, variant }) => {
     <div className="container">
       {showTitle && <SectionTitle title="Для тебе" />}
       <ProductsList products={data.items} variant={variant} />
-      <CustomPagination size={data.size} />
+      <CustomPagination pages={data.pages} />
     </div>
   );
 };
