@@ -1,4 +1,4 @@
-import css from './styles/desktopPopover.module.scss';
+import css from './styles/DesktopPopover.module.scss';
 
 import { FilterForm } from '../FilterForm/FilterForm';
 

@@ -2,7 +2,10 @@
 
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
-import { useFetchCategories } from '@/modules/header/header-categories/api/useFetchCategories';
+import { useQueryClient } from '@tanstack/react-query';
+
+import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
+import { categoriesKeys } from '@/modules/header/header-categories/api/useFetchCategories';
 
 import {
   Accordion,
@@ -14,8 +17,6 @@ import { Button } from '@/ui/button/Button';
 import { CheckBox } from '@/ui/checkbox/CheckBox';
 import { BaseInput } from '@/ui/inputs';
 import { NumberInput } from '@/ui/inputs/numberInput/NumberInput';
-import { Loader } from '@/ui/loader/Loader';
-import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
 import css from './styles/filterForm.module.scss';
 
@@ -46,7 +47,8 @@ const STATES = [
 ];
 
 export const FilterForm = () => {
-  const { data, isLoading, error } = useFetchCategories();
+  const queryClient = useQueryClient();
+  const d = queryClient.getQueryData<CategoryItem[]>(categoriesKeys.all);
 
   const { handleSubmit, control, reset } = useForm<ProductFilters>({
     defaultValues: {
@@ -56,9 +58,7 @@ export const FilterForm = () => {
     },
   });
 
-  if (isLoading) return <Loader />;
-  if (error || !data)
-    return <ToastMessage message={error?.detail} type="error" />;
+  if (!d) return null;
 
   const onSubmit: SubmitHandler<ProductFilters> = async (values) => {
     try {
@@ -159,7 +159,7 @@ export const FilterForm = () => {
           <AccordionTrigger>Категорії</AccordionTrigger>
           <AccordionContent>
             <div className={css.popover_location__content}>
-              {data.map(({ category_id, name }) => (
+              {d.map(({ category_id, name }) => (
                 <Controller
                   key={category_id}
                   name="category"
@@ -180,11 +180,7 @@ export const FilterForm = () => {
         </AccordionItem>
       </Accordion>
 
-      <Button
-        variant="outline"
-        text="Скинути фільтер"
-        onClick={() => reset()}
-      />
+      <Button variant="outline" text="Скинути фільтр" onClick={() => reset()} />
     </form>
   );
 };

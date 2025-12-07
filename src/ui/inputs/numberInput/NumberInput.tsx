@@ -4,5 +4,5 @@ import { BaseInput } from '../baseInput/BaseInput';
 import type { NumberInputProps } from '../types';
 
 export const NumberInput: FC<NumberInputProps> = ({ ...props }) => {
-  return <BaseInput {...props} type="number" />;
+  return <BaseInput {...props} type="number" min={0} />;
 };
