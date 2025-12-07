@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import { useQueryClient } from '@tanstack/react-query';
+import { parseAsArrayOf, parseAsString, useQueryStates } from 'nuqs';
 
 import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
 import { categoriesKeys } from '@/modules/header/header-categories/api/useFetchCategories';
@@ -50,30 +52,32 @@ export const FilterForm = () => {
   const queryClient = useQueryClient();
   const d = queryClient.getQueryData<CategoryItem[]>(categoriesKeys.all);
 
-  const { handleSubmit, control, reset } = useForm<ProductFilters>({
-    defaultValues: {
-      search: '',
-      price_from: '',
-      price_to: '',
-      location: [],
-      state: [],
-      category: [],
-    },
+  const [searchParams, setSearchParams] = useQueryStates({
+    search: parseAsString.withDefault(''),
+    price_from: parseAsString.withDefault(''),
+    price_to: parseAsString.withDefault(''),
+    location: parseAsArrayOf(parseAsString).withDefault([]),
+    state: parseAsArrayOf(parseAsString).withDefault([]),
+    category: parseAsArrayOf(parseAsString).withDefault([]),
   });
+
+  const { watch, control, reset } = useForm<ProductFilters>({
+    defaultValues: searchParams,
+  });
+
+  useEffect(() => {
+    const subscription = watch((values) => {
+      setSearchParams(values as ProductFilters);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [watch, setSearchParams]);
 
   // Error handled by parent component
   if (!d) return null;
 
-  const onSubmit: SubmitHandler<ProductFilters> = async (values) => {
-    try {
-      console.log(values);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
       <Controller
         name="search"
         control={control}
@@ -127,7 +131,6 @@ export const FilterForm = () => {
                         onChange: (e) => {
                           const checked = e.target.checked;
 
-                          console.log(checked);
                           if (checked) {
                             field.onChange([...field.value, label]);
                           } else {
@@ -167,7 +170,6 @@ export const FilterForm = () => {
                         onChange: (e) => {
                           const checked = e.target.checked;
 
-                          console.log(checked);
                           if (checked) {
                             field.onChange([...field.value, label]);
                           } else {
@@ -198,10 +200,23 @@ export const FilterForm = () => {
                   control={control}
                   render={({ field }) => (
                     <CheckBox
-                      {...field}
                       labelText={name}
                       labelProps={{
                         className: css.popover_checkbox,
+                      }}
+                      inputProps={{
+                        checked: field.value?.includes(name),
+                        onChange: (e) => {
+                          const checked = e.target.checked;
+
+                          if (checked) {
+                            field.onChange([...field.value, name]);
+                          } else {
+                            field.onChange(
+                              field.value.filter((v) => v !== name),
+                            );
+                          }
+                        },
                       }}
                     />
                   )}
@@ -213,6 +228,6 @@ export const FilterForm = () => {
       </Accordion>
 
       <Button variant="outline" text="Скинути фільтр" onClick={() => reset()} />
-    </form>
+    </>
   );
 };
