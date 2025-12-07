@@ -17,7 +17,9 @@ const ProductsPage = () => {
   if (isLoading) return <Loader />;
   if (error || !data) {
     const errorMsg = handleApiError(error);
-    return <Error title={errorMsg} description="" />;
+    return (
+      <Error title={['Упс!', 'Щось пішло не так']} description={errorMsg} />
+    );
   }
 
   return (
