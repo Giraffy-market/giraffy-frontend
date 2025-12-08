@@ -8,7 +8,7 @@ import LoadingErrorPage from '@/ui/loadingErrorPage/LoadingErrorPage';
 import GiraffeEating from '@/ui/loadingErrorPage/assets/giraffe-eating.svg';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 
-import { useFetchCategories } from '../header/header-categories/api/useFetchCategories';
+import { useFetchCategories } from '../header/api/useFetchCategories';
 
 const Categories: FC = () => {
   const { isLoading, error, data, refetch } = useFetchCategories();

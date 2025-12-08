@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
-import type { User } from '../types/user';
+import type { User } from '../components/header-popup/types/user';
 
 import { routes } from '@/shared/api/constants/routes';
 import type { HttpError } from '@/shared/api/errors/http-error';

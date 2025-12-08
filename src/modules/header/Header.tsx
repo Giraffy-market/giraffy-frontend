@@ -1,12 +1,12 @@
 'use client';
 
-import { HeaderCategories } from '@/modules/header/header-categories';
-import { SearchBar } from '@/modules/header/search-bar/SearchBar';
+import { HeaderAction } from './components/header-action';
+import { HeaderCategories } from './components/header-categories';
+import { SearchBar } from './components/search-bar';
 
 import { Logo } from '@/ui/logo/Logo';
 
 import styles from './Header.module.scss';
-import { HeaderAction } from './header-action/HeaderAction';
 
 export const Header = () => {
   return (

@@ -6,14 +6,14 @@ import cn from 'classnames';
 import { motion } from 'framer-motion';
 
 import type { CategoryItem } from '@/modules/categories/types/CategoryItem';
-import { ParentCategories } from '@/modules/header/header-categories/ui/ParentCategories/ParentCategories';
-import { SubCategories } from '@/modules/header/header-categories/ui/SubCategories/SubCategories';
+import { useFetchCategories } from '@/modules/header/api/useFetchCategories';
 
 import { Loader } from '@/ui/loader/Loader';
 import { LoadingError } from '@/ui/loadingError/LoadingError';
 
-import { useFetchCategories } from '../../api/useFetchCategories';
 import { POPUP_ANIMATION_CONFIG } from '../../constants/constants';
+import { ParentCategories } from '../ParentCategories/ParentCategories';
+import { SubCategories } from '../SubCategories/SubCategories';
 import styles from './HeaderCategoriesPopup.module.scss';
 
 type Props = {
