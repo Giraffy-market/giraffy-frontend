@@ -1,4 +1,8 @@
+import Link from 'next/link';
+
 import DropdownCategoriesIcon from '@/components/header/assets/Expand_right_light.svg';
+
+import { NAVCATEGORIES } from '../constants/constants';
 
 import styles from './styles/MobileCategories.module.scss';
 
@@ -18,15 +22,14 @@ export const MobileCategories = ({
         <p>Категорії</p>
       </div>
 
-      <div className={styles.content}>
-        <ul className={styles.categoryList}>
-          <li>Electronics</li>
-          <li>Books</li>
-          <li>Home</li>
-          <li>Fashion</li>
-          <li>Toys</li>
-        </ul>
-      </div>
+      <nav className={styles.nav}>
+        {NAVCATEGORIES.map((item) => (
+          <Link key={item.id} href={item.href} className={styles.navItem}>
+            <item.Icon />
+            <span>{item.label}</span>
+          </Link>
+        ))}
+      </nav>
     </div>
   ) : null;
 };

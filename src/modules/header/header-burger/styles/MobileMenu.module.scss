@@ -7,17 +7,21 @@
   background: $gray;
   z-index: 1000;
 
-  opacity: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
   pointer-events: none;
   transform: translateY(-20px);
   transition: 0.3s ease;
+  gap: 20px;
+  padding: 20px 10px 20px 10px;
 }
 
-.overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
+// .overlay.open {
+//   opacity: 1;
+//   pointer-events: auto;
+//   transform: translateY(0);
+// }
 
 .guestRow {
   display: flex;
@@ -41,7 +45,7 @@
   margin-bottom: 16px;
 }
 
-.loginButton {
+.actionButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,6 +63,23 @@
     color: $white;
   }
 }
+
+.userRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16;
+  padding: 0px 10px 0px 20px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8;
+  width: 100%;
+}
+
 .closeButton {
   position: absolute;
   top: 16px;
@@ -95,19 +116,39 @@
   }
 }
 
+.userDropdownSection {
+  display: flex;
+  flex-direction: row;
+  border: none;
+  background: none;
+}
+
+.userEmail {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownButton {
+  margin-left: auto;
+  flex-shrink: 0;
+  transform: rotate(270deg);
+}
+
+.dropdownButtonOpen {
+  transform: rotate(90deg);
+}
+
+.userDropdownContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .list {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px;
-}
-
-.categoriesList {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  margin-top: 30px;
 }
 
 .categoriesButton {
@@ -128,6 +169,8 @@
 }
 
 .rightGroup {
+  display: flex;
+  align-items: center;
   margin-left: auto;
   flex-shrink: 0;
 }

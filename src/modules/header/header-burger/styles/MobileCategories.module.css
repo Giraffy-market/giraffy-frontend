@@ -42,3 +42,17 @@
   gap: 16px;
   font-size: 18px;
 }
+
+.nav {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
