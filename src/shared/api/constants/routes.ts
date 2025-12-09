@@ -10,5 +10,6 @@ export const routes = {
   },
   users: {
     me: '/users/me',
+    profile: '/user/profile',
   },
 };

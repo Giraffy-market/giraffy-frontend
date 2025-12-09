@@ -10,7 +10,7 @@ import type { HttpError } from '@/shared/api/errors/http-error';
 import { customFetch } from '@/shared/api/fetch';
 
 const userKey = {
-  me: 'get-user-me',
+  profile: 'get-user-profile',
 };
 
 export const useFetchUser = () => {
@@ -18,9 +18,9 @@ export const useFetchUser = () => {
   const isLoggedIn = status === 'authenticated';
 
   return useQuery<User, HttpError>({
-    queryKey: [userKey.me],
+    queryKey: [userKey.profile],
     queryFn: () =>
-      customFetch<User>(routes.users.me, '', {
+      customFetch<User>(routes.users.profile, '', {
         headers: { Authorization: `Bearer ${data?.access_token}` },
       }),
     enabled: isLoggedIn,

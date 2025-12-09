@@ -1,0 +1,104 @@
+@use '@/styles/utils/index' as *;
+
+.reviewsWrapper {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 12px;
+  gap: 16px;
+
+  .reviewsTitle {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 133%;
+  }
+
+  .reviewsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 12px;
+
+    .reviewCard {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      .reviewHeader {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .reviewAvatar {
+        }
+
+        .reviewName {
+        }
+      }
+
+      .stars {
+        display: flex;
+        gap: 4px;
+
+        .starIcon {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .reviewText {
+        font-size: 15px;
+      }
+    }
+  }
+  .allReviewsBtn {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 160%;
+    text-align: end;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  @include onTablet {
+    border: none;
+    gap: 24px;
+
+    .reviewsTitle {
+      font-size: 24px;
+      line-height: 150%;
+    }
+    .reviewsList {
+      flex-direction: row;
+      gap: 24px;
+      padding: 0;
+
+      .reviewCard {
+        width: 333px;
+
+        .reviewHeader {
+          gap: 16px;
+          .reviewAvatar {
+          }
+
+          .reviewName {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 133%;
+          }
+        }
+
+        .stars {
+        }
+
+        .reviewText {
+          font-size: 16px;
+          line-height: 150%;
+        }
+      }
+    }
+    .allReviewsBtn {
+      font-size: 16px;
+      line-height: 150%;
+    }
+  }
+}
