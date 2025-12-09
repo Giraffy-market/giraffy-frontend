@@ -1,23 +1,37 @@
 import Image from 'next/image';
 
-import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
+import Add from '@/components/prifile/assets/add.svg';
+import DefaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
 import StarEmpty from '@/components/prifile/assets/star-empty.svg';
 import StarFilled from '@/components/prifile/assets/star-filled.svg';
+
+import type { ReviewsListProps } from '../types/user';
 
 import { reviewsData } from '../reviewsData';
 import styles from './ReviewsList.module.scss';
 
-export default function ReviewsList() {
+export default function ReviewsList({
+  userId,
+  isOwnProfile,
+}: ReviewsListProps) {
   return (
     <div className={styles.reviewsWrapper}>
-      <h3 className={styles.reviewsTitle}>Відгуки ({reviewsData.length})</h3>
+      <div className={styles.reviewsTitleWrapper}>
+        <h3 className={styles.reviewsTitle}>Відгуки ({reviewsData.length})</h3>
+        {!isOwnProfile && (
+          <button className={styles.addReviewBtn} disabled>
+            Додати відгук
+            <Add />
+          </button>
+        )}
+      </div>
 
       <div className={styles.reviewsList}>
         {reviewsData.map((review) => (
           <div key={review.id} className={styles.reviewCard}>
             <div className={styles.reviewHeader}>
               <Image
-                src={review.user.avatar || defaultAvatar}
+                src={review.user.avatar || DefaultAvatar}
                 alt={review.user.name}
                 width={40}
                 height={40}

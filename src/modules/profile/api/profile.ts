@@ -11,18 +11,25 @@ import { customFetch } from '@/shared/api/fetch';
 
 const userKey = {
   profile: 'get-user-profile',
+  byId: 'get-user-by-id',
 };
 
-export const useFetchUser = () => {
-  const { data, status } = useSession();
+export const useFetchUser = (id?: string) => {
+  const { data: session, status } = useSession();
   const isLoggedIn = status === 'authenticated';
 
   return useQuery<User, HttpError>({
-    queryKey: [userKey.profile],
-    queryFn: () =>
-      customFetch<User>(routes.users.profile, '', {
-        headers: { Authorization: `Bearer ${data?.access_token}` },
-      }),
-    enabled: isLoggedIn,
+    queryKey: id ? [userKey.byId, id] : [userKey.profile],
+    queryFn: () => {
+      if (id) {
+        return customFetch<User>(routes.users.byId.replace('{id}', id), '', {
+          headers: { Authorization: `Bearer ${session?.access_token}` },
+        });
+      }
+      return customFetch<User>(routes.users.profile, '', {
+        headers: { Authorization: `Bearer ${session?.access_token}` },
+      });
+    },
+    enabled: !id || isLoggedIn,
   });
 };

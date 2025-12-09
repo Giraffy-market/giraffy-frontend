@@ -11,5 +11,6 @@ export const routes = {
   users: {
     me: '/users/me',
     profile: '/user/profile',
+    byId: '/users/{id}',
   },
 };

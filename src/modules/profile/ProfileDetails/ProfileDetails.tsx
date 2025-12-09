@@ -1,29 +1,38 @@
+import cn from 'classnames';
+
+import ComplaintIcon from '@/components/prifile/assets/complaint.svg';
 import LogoutIcon from '@/components/prifile/assets/logout.svg';
 import PencilIcon from '@/components/prifile/assets/pencil.svg';
 
-import type { User } from '../types/user';
+import type { ProfileDetailsProps, User } from '../types/user';
 
 import ReviewsList from '../ReviewsList/ReviewsList';
 import styles from './ProfileDetails.module.scss';
 
-type ProfileDetailsProps = {
-  user: User;
-  onLogout: () => void;
-};
-
 export default function ProfileDetails({
   user,
   onLogout,
+  isOwnProfile,
 }: ProfileDetailsProps) {
   return (
     <div className={styles.profileDetails}>
       <div className={styles.descriptionsWrapper}>
         <div className={styles.titleWrapper}>
           <h3 className={styles.title}>Дані профілю</h3>
-          <button className={styles.editButton} disabled>
-            Редагувати
-            <PencilIcon />
-          </button>
+          {isOwnProfile ? (
+            <button
+              className={cn(styles.detailActionBtn, styles.editButton)}
+              disabled
+            >
+              Редагувати
+              <PencilIcon />
+            </button>
+          ) : (
+            <button className={cn(styles.detailActionBtn, styles.reportButton)}>
+              Поскаржитися
+              <ComplaintIcon />
+            </button>
+          )}
         </div>
 
         <div className={styles.top}>
@@ -39,12 +48,14 @@ export default function ProfileDetails({
         </div>
       </div>
 
-      <ReviewsList />
+      <ReviewsList userId={user.id} isOwnProfile={isOwnProfile} />
 
-      <button className={styles.logoutBtn} onClick={onLogout}>
-        <LogoutIcon />
-        Вийти
-      </button>
+      {isOwnProfile && (
+        <button className={styles.logoutBtn} onClick={onLogout}>
+          <LogoutIcon />
+          Вийти
+        </button>
+      )}
     </div>
   );
 }

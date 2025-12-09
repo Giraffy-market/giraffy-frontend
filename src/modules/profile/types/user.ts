@@ -1,3 +1,5 @@
+import type { StaticImageData } from 'next/image';
+
 type OauthAccount = {
   id: number;
   oauth_name: string;
@@ -30,4 +32,31 @@ export type User = {
   completed_deals: number;
   announcements: Announcement[];
   location: string | null;
+  rating: number | null;
+};
+
+export type Review = {
+  id: number;
+  user: {
+    name: string;
+    avatar: string | StaticImageData;
+  };
+  rating: number;
+  text: string;
+};
+
+export type UserDataProps = {
+  user: User;
+  isOwnProfile: boolean;
+};
+
+export type ProfileDetailsProps = {
+  user: User;
+  onLogout: () => void;
+  isOwnProfile: boolean;
+};
+
+export type ReviewsListProps = {
+  userId: string;
+  isOwnProfile: boolean;
 };

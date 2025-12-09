@@ -7,10 +7,26 @@
   padding-bottom: 12px;
   gap: 16px;
 
-  .reviewsTitle {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 133%;
+  .reviewsTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .reviewsTitle {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 133%;
+    }
+
+    .addReviewBtn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 160%;
+      cursor: pointer;
+    }
   }
 
   .reviewsList {
