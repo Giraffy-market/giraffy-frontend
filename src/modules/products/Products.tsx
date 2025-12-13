@@ -5,6 +5,7 @@ import { type FC } from 'react';
 import { useFetchProducts } from '@/modules/products/api/useFetchProducts';
 import { ProductsList } from '@/modules/products/components/products-list';
 
+import { ProductsNotExist } from './ui/products-not-exist/products-not-exist';
 import { CustomPagination } from '@/ui/CustomPagination/CustomPagination';
 import { Loader } from '@/ui/loader/Loader';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
@@ -21,6 +22,10 @@ export const Products: FC<ProductsProps> = ({ showTitle = true, variant }) => {
   if (isLoading) return <Loader />;
   if (error || !data)
     return <ToastMessage message={error?.detail} type="error" />;
+
+  if (!isLoading && data.items.length > 0) {
+    return <ProductsNotExist />;
+  }
 
   return (
     <div className="container">

@@ -1,0 +1,10 @@
+@use '@/styles/utils/typography' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &_text {
+    @include base-body;
+  }
+}
