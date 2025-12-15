@@ -5,21 +5,33 @@ import { type FC } from 'react';
 import { useFetchProducts } from '@/modules/products/api/useFetchProducts';
 import { ProductsList } from '@/modules/products/components/products-list';
 
+import { ProductsNotExist } from './ui/products-not-exist/products-not-exist';
+import { CustomPagination } from '@/ui/CustomPagination/CustomPagination';
 import { Loader } from '@/ui/loader/Loader';
 import SectionTitle from '@/ui/sectionTitle/SectionTitle';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
-export const Products: FC = () => {
+type ProductsProps = {
+  showTitle?: boolean;
+  variant: 'home' | 'catalog';
+};
+
+export const Products: FC<ProductsProps> = ({ showTitle = true, variant }) => {
   const { data, isLoading, error } = useFetchProducts();
 
   if (isLoading) return <Loader />;
   if (error || !data)
     return <ToastMessage message={error?.detail} type="error" />;
 
+  if (!isLoading && data.items.length === 0) {
+    return <ProductsNotExist />;
+  }
+
   return (
     <div className="container">
-      <SectionTitle title="Для тебе" />
-      <ProductsList products={data.items} />
+      {showTitle && <SectionTitle title="Для тебе" />}
+      <ProductsList products={data.items} variant={variant} />
+      <CustomPagination pages={data.pages} />
     </div>
   );
 };

@@ -1,0 +1,15 @@
+@use '@/styles/utils/media' as *;
+
+.mobile_popover {
+  display: inline-block;
+  @include onDesktop {
+    display: none;
+  }
+}
+
+.desktop_popover {
+  display: none;
+  @include onDesktop {
+    display: inline-block;
+  }
+}

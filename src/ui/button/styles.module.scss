@@ -1,0 +1,25 @@
+@use '@/styles/utils/index' as *;
+
+.button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  height: 36px;
+  width: 36px;
+
+  @include base-body;
+  color: #09203f;
+
+  /* Variant */
+  &[data-variant='outline'] {
+    border-color: #ff7518;
+    background-color: #ff7518;
+  }
+
+  &[data-variant='ghost'] {
+    background-color: transparent;
+  }
+}

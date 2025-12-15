@@ -5,4 +5,7 @@ export const routing = {
     byId: (id: string | number) => `/categories/${id}`,
     byName: (name: string) => `/categories/${name}`,
   },
+  products: {
+    base: '/products',
+  },
 };

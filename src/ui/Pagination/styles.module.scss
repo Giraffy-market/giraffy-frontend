@@ -1,0 +1,35 @@
+@use '@/styles/utils/index' as *;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-inline: auto;
+  @include onDesktop {
+    justify-content: end;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &-previous,
+  &-next {
+    padding-inline: calc(var(--spacing) * 2);
+
+    > span {
+      display: none;
+
+      @include onTablet {
+        display: block;
+      }
+    }
+  }
+}
+
+.left-arrow {
+  rotate: -180deg;
+}

@@ -17,7 +17,7 @@ const HomePage = () => (
       </section>
 
       <section>
-        <Products />
+        <Products variant="home" />
       </section>
     </div>
   </div>

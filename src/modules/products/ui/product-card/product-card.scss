@@ -60,4 +60,21 @@
     @include small-body;
     color: $dark-gray;
   }
+
+  &__additional-reviews {
+    display: flex;
+    align-items: center;
+    @include small-body;
+    color: $dark-gray;
+  }
+
+  &__additional-reviews-catalog {
+    display: none;
+    @include onDesktop {
+      display: flex;
+      align-items: center;
+      @include small-body;
+      color: $dark-gray;
+    }
+  }
 }

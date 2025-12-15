@@ -16,3 +16,5 @@ export type PhoneInputProps = IMaskMixinProps<HTMLInputElement> & {
   labelText?: string;
   id?: string;
 };
+
+export type NumberInputProps = InputHTMLAttributes<HTMLInputElement>;
