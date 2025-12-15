@@ -29,13 +29,13 @@
       touch-action: none;
 
       /* Orientation */
-      &[data-orientation="vertical"] {
+      &[data-orientation='vertical'] {
         width: calc(var(--spacing) * 2.5);
         height: 100%;
         border-inline-start: 1px solid transparent;
       }
 
-      &[data-orientation="horizontal"] {
+      &[data-orientation='horizontal'] {
         flex-direction: column;
         height: calc(var(--spacing) * 2.5);
         border-block-start: 1px solid transparent;

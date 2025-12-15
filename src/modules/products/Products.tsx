@@ -23,7 +23,7 @@ export const Products: FC<ProductsProps> = ({ showTitle = true, variant }) => {
   if (error || !data)
     return <ToastMessage message={error?.detail} type="error" />;
 
-  if (!isLoading && data.items.length > 0) {
+  if (!isLoading && data.items.length === 0) {
     return <ProductsNotExist />;
   }
 

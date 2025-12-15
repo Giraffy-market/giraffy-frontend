@@ -5,6 +5,6 @@
   align-items: center;
   justify-content: center;
   &_text {
-    @include base-body;
+    @include h3;
   }
 }
