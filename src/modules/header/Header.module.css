@@ -1,0 +1,33 @@
+@use '@/styles/utils/index' as *;
+.header {
+  box-shadow: 0 1px 4px 0 rgba(194, 164, 164, 0.52);
+}
+
+.headerWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 108px;
+  width: 1280px;
+  margin-inline: auto;
+  gap: 20px;
+}
+
+.headerWrap .left {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-shrink: 0;
+}
+
+.headerWrap .enter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.headerWrap .right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
