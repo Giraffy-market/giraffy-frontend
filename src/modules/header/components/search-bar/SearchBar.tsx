@@ -35,10 +35,10 @@ export const SearchBar = () => {
         Знайти
       </button>
 
-      <button type="submit" className={styles.searchBtnMobile}>
-        <Dialog>
-          <SearchIcon />
-        </Dialog>
+      <button className={styles.searchBtnMobile}>
+        {/* <Dialog> */}
+        <SearchIcon />
+        {/* </Dialog> */}
       </button>
     </form>
   );

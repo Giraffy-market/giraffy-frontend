@@ -9,9 +9,8 @@ import {
   DrawerTrigger,
 } from '@/ui/drawer';
 
-// import { MobileMenu } from './MobileMenu';
-
 import './HeaderBurger.scss';
+import { MobileMenu } from './MobileMenu';
 
 export const HeaderBurger = () => {
   return (
@@ -23,7 +22,7 @@ export const HeaderBurger = () => {
         <DrawerHeader>
           <DrawerTitle></DrawerTitle>
           <DrawerDescription></DrawerDescription>
-          {/* <MobileMenu /> */}
+          <MobileMenu />
         </DrawerHeader>
       </DrawerContent>
     </Drawer>
