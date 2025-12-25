@@ -1,15 +1,23 @@
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
 
 import { Button } from '@/ui/button/Button';
 
-import type { UserDataProps } from '../types/user';
+import type { User } from '@/shared/types';
 
 import { formatDateToUk } from '../formatDateToUk';
 import styles from './UserData.module.scss';
 
-export default function UserData({ user, isOwnProfile }: UserDataProps) {
+interface UserDataProps {
+  user: User;
+}
+
+export default function UserData({ user }: UserDataProps) {
+  const { data: session } = useSession();
+  const isOwnProfile = session?.user?.id === user.id;
+
   return (
     <div className={styles.userData}>
       <div className={styles.userDataWrapper}>

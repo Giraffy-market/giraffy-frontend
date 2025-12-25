@@ -1,24 +1,22 @@
 'use client';
 
-import { signOut, useSession } from 'next-auth/react';
-
 import { Loader } from '@/ui/loader/Loader';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
 import { useFetchUser } from './api/profile';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
-import { routing } from '@/shared/routing';
 
 import styles from './Profile.module.scss';
 import ProfileDetails from './ProfileDetails/ProfileDetails';
 import UserData from './UserData/UserData';
 
-export default function UserProfilePage() {
-  const { data: session } = useSession();
-  const { data: user, isLoading, error } = useFetchUser();
+interface Props {
+  params?: { id: string };
+}
 
-  console.log('User data: ', user);
+export default function UserProfilePage({ params }: Props) {
+  const { data: user, isLoading, error } = useFetchUser(params?.id);
 
   if (isLoading) return <Loader />;
 
@@ -27,21 +25,11 @@ export default function UserProfilePage() {
     return <ToastMessage type="error" message={errorMessage} />;
   }
 
-  const isOwnProfile = session?.user?.id === user.id;
-
-  console.log('Session User ID:', session?.user?.id);
-  console.log('Profile User ID:', user.id);
-  console.log('Is Own Profile:', isOwnProfile);
-
   return (
     <div className="container">
       <div className={styles.profileWrapper}>
-        <UserData user={user} isOwnProfile={isOwnProfile} />
-        <ProfileDetails
-          user={user}
-          isOwnProfile={isOwnProfile}
-          onLogout={() => signOut({ callbackUrl: routing.home.base })}
-        />
+        <UserData user={user} />
+        <ProfileDetails user={user} />
       </div>
     </div>
   );

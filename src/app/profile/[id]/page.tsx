@@ -1,7 +1,9 @@
-import React from 'react';
+import Profile from '@/views/profile/profile';
 
-const UserProfileIdPage = () => {
-  return <div>UserProfileIdPage</div>;
-};
+interface Props {
+  params: { id: string };
+}
 
-export default UserProfileIdPage;
+export default function UserProfileIdPage({ params }: Props) {
+  return <Profile params={params} />;
+}

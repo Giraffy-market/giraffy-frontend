@@ -6,7 +6,7 @@ import type { LoginResponse } from '@/modules/auth/type/types';
 
 import { handleRefreshToken } from '../api/handleRefreshToken';
 
-import { routes } from '@/shared/api/constants/routes';
+import { endpoints } from '@/shared/api/constants/endpoints';
 import { HttpError } from '@/shared/api/errors/http-error';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
@@ -38,13 +38,17 @@ export const authOptions: AuthOptions = {
       // @ts-expect-error next-auth err
       authorize: async (credentials) => {
         try {
-          const data = await customFetch<LoginResponse>(routes.auth.login, '', {
-            method: 'POST',
-            body: JSON.stringify({
-              email: credentials!.email,
-              password: credentials!.password,
-            }),
-          });
+          const data = await customFetch<LoginResponse>(
+            endpoints.auth.login,
+            '',
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                email: credentials!.email,
+                password: credentials!.password,
+              }),
+            },
+          );
 
           if (data?.access_token) {
             return data;

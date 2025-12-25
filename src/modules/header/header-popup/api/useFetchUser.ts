@@ -3,11 +3,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
-import type { User } from '@/modules/profile/types/user';
-
-import { routes } from '@/shared/api/constants/routes';
+import { endpoints } from '@/shared/api/constants/endpoints';
 import type { HttpError } from '@/shared/api/errors/http-error';
 import { customFetch } from '@/shared/api/fetch';
+import type { User } from '@/shared/types';
 
 const userKey = {
   me: 'get-user-me',
@@ -20,7 +19,7 @@ export const useFetchUser = () => {
   return useQuery<User, HttpError>({
     queryKey: [userKey.me],
     queryFn: () =>
-      customFetch<User>(routes.users.me, '', {
+      customFetch<User>(endpoints.users.me, '', {
         headers: { Authorization: `Bearer ${data?.access_token}` },
       }),
     enabled: isLoggedIn,

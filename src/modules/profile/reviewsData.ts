@@ -1,6 +1,6 @@
 import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
 
-import type { Review } from './types/review';
+import type { Review } from '@/shared/types';
 
 export const reviewsData: Review[] = [
   {

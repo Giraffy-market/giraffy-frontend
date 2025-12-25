@@ -5,7 +5,7 @@ import DefaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
 import StarEmpty from '@/components/prifile/assets/star-empty.svg';
 import StarFilled from '@/components/prifile/assets/star-filled.svg';
 
-import type { ReviewsListProps } from '../types/user';
+import type { ReviewsListProps } from '@/shared/types';
 
 import { reviewsData } from '../reviewsData';
 import styles from './ReviewsList.module.scss';

@@ -1,35 +1,31 @@
-'use client';
-
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
-import type { User } from '../types/user';
-
-import { routes } from '@/shared/api/constants/routes';
+import { endpoints } from '@/shared/api/constants/endpoints';
 import type { HttpError } from '@/shared/api/errors/http-error';
 import { customFetch } from '@/shared/api/fetch';
+import type { User } from '@/shared/types';
 
 const userKey = {
-  profile: 'get-user-profile',
   byId: 'get-user-by-id',
 };
 
 export const useFetchUser = (id?: string) => {
   const { data: session, status } = useSession();
   const isLoggedIn = status === 'authenticated';
+  const userIdForQuery = id || session?.user?.id;
 
   return useQuery<User, HttpError>({
-    queryKey: id ? [userKey.byId, id] : [userKey.profile],
+    queryKey: [userKey.byId, userIdForQuery],
     queryFn: () => {
-      if (id) {
-        return customFetch<User>(routes.users.byId.replace('{id}', id), '', {
-          headers: { Authorization: `Bearer ${session?.access_token}` },
-        });
-      }
-      return customFetch<User>(routes.users.profile, '', {
-        headers: { Authorization: `Bearer ${session?.access_token}` },
+      const url = id ? endpoints.users.BY_ID(id) : endpoints.users.me;
+
+      return customFetch<User>(url, '', {
+        headers: {
+          Authorization: `Bearer ${session?.access_token}`,
+        },
       });
     },
-    enabled: !id || isLoggedIn,
+    enabled: !!id || (isLoggedIn && !!userIdForQuery),
   });
 };
