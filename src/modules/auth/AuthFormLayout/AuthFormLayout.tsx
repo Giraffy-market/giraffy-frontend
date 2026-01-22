@@ -4,8 +4,7 @@ import { useQueryState } from 'nuqs';
 
 import { LoginForm } from '../components/LoginForm/LoginForm';
 import { RegisterForm } from '../components/RegisterForm/RegisterForm';
-
-import { Popup } from '@/ui/Popup/Popup';
+import { Popup } from '@/components/ui/Popup/Popup';
 
 import {
   LOGIN_TITLE_KEY,

@@ -1,18 +1,18 @@
 import { type FC, type PropsWithChildren } from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import { RootProvider } from '@/views/root-provider';
 import type { Metadata } from 'next';
 
-import { nunito, openSans } from '@/layouts/root';
-
 import { AuthFormLayout } from '@/modules/auth';
-import { Header } from '@/modules/header/Header';
 
-import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
-import { Footer } from '@/components/Footer/Footer';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 
-import '@/styles/globals.scss';
+import { nunito, openSans } from '@/shared/lib/fonts';
+import '@/shared/styles/globals.scss';
+
+import { RootProvider } from '../providers/root-provider';
 
 export const metadata: Metadata = {
   title: 'Gyraffy',

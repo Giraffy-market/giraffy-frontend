@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 
 import { useQueryState } from 'nuqs';
 
-import { Button } from '@/ui/button/Button';
-import { CheckBox } from '@/ui/checkbox/CheckBox';
-import { BaseInput, PasswordInput, PhoneInput } from '@/ui/inputs';
+import { Button } from '@/components/ui/button/Button';
+import { CheckBox } from '@/components/ui/checkbox/CheckBox';
+import { BaseInput, PasswordInput, PhoneInput } from '@/components/ui/inputs';
 
 import type { RegisterFormValues } from './types/types';
 

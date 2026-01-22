@@ -7,9 +7,9 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
 
-import { Button } from '@/ui/button/Button';
-import { CheckBox } from '@/ui/checkbox/CheckBox';
-import { BaseInput, PasswordInput } from '@/ui/inputs';
+import { Button } from '@/components/ui/button/Button';
+import { CheckBox } from '@/components/ui/checkbox/CheckBox';
+import { BaseInput, PasswordInput } from '@/components/ui/inputs';
 
 import type { LoginFormValues } from './types/types';
 

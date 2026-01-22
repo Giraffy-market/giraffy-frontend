@@ -4,7 +4,7 @@ import { type FC } from 'react';
 
 import { signOut, useSession } from 'next-auth/react';
 
-import { Button } from '@/ui/button/Button';
+import { Button } from '@/components/ui/button/Button';
 
 const Test: FC = () => {
   const session = useSession();
