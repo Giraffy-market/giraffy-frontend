@@ -1,3 +1,5 @@
+@use '@/styles/utils/index' as *;
+
 .header {
   box-shadow: 0 1px 4px 0 rgba(194, 164, 164, 0.52);
 }
@@ -7,7 +9,7 @@
   align-items: center;
   justify-content: space-between;
   height: 108px;
-  width: 1280px;
+  width: 100vw;
   margin-inline: auto;
   gap: 20px;
 
@@ -16,17 +18,64 @@
     align-items: center;
     gap: 48px;
     flex-shrink: 0;
+    .categories {
+      display: none;
+    }
+
+    .logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .burgerMenu {
+      background-color: $gray;
+    }
   }
 
-  .enter {
-    flex: 1;
+  .center {
     display: flex;
-    justify-content: center;
+    justify-self: end;
   }
 
   .right {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
+    display: none;
+  }
+}
+
+@include onTablet {
+  .headerWrap {
+    width: 1280px;
+
+    .left {
+      .categories {
+        display: block;
+      }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        position: static;
+        transform: none;
+      }
+
+      .burgerMenu {
+        display: none;
+      }
+    }
+
+    .center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .right {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
   }
 }

@@ -1,20 +1,28 @@
 'use client';
 
-import { HeaderCategories } from '@/modules/header/header-categories';
-import { SearchBar } from '@/modules/header/search-bar/SearchBar';
+import { HeaderAction } from './components/header-action';
+import { HeaderBurger } from './components/header-burger/HeaderBurger';
+import { HeaderCategories } from './components/header-categories';
+import { SearchBar } from './components/search-bar';
 
 import { Logo } from '@/ui/logo/Logo';
 
 import styles from './Header.module.scss';
-import { HeaderAction } from './header-action/HeaderAction';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerWrap}>
         <div className={styles.left}>
-          <Logo />
-          <HeaderCategories />
+          <div className={styles.burgerMenu}>
+            <HeaderBurger />
+          </div>
+          <div className={styles.logo}>
+            <Logo />
+          </div>
+          <div className={styles.categories}>
+            <HeaderCategories />
+          </div>
         </div>
 
         <div className={styles.center}>

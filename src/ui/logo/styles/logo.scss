@@ -5,9 +5,36 @@
   align-items: center;
   gap: 8px;
 
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 500;
 
   color: $blue;
   text-decoration: none;
+  &__text {
+    @include onTablet {
+      font-size: 28px;
+    }
+  }
+
+  &__icon {
+    &--small {
+      display: block;
+    }
+
+    &--large {
+      display: none;
+    }
+  }
+
+  @include onTablet {
+    &__icon {
+      &--small {
+        display: none;
+      }
+
+      &--large {
+        display: block;
+      }
+    }
+  }
 }

@@ -1,0 +1,15 @@
+@use '@/styles/utils/index' as *;
+
+.unAuthorizedWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 12px;
+  padding: 10px;
+
+  background-color: $white;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

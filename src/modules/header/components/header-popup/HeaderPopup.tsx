@@ -19,8 +19,6 @@ import { Button } from '@/ui/button/Button';
 import { Loader } from '@/ui/loader/Loader';
 import { ToastMessage } from '@/ui/toastMessage/toastMessages';
 
-import { useFetchUser } from './api/useFetchUser';
-
 import {
   ADD,
   LOGOUT,
@@ -28,13 +26,15 @@ import {
   SUPPORT,
   TRIGGER,
   USER,
-} from './constants/constants';
-import { panelVariants } from './constants/variants';
+} from '../constants/constants';
+import { panelVariants } from '../constants/variants';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 import { routing } from '@/shared/routing';
 
 import styles from './styles/HeaderPopup.module.scss';
+
+import { useFetchUser } from '../../api/useFetchUser';
 
 type Props = {
   popupClassName?: string;
