@@ -1,0 +1,59 @@
+'use client';
+
+import { type ForwardedRef, TextareaHTMLAttributes, forwardRef } from 'react';
+
+import cn from 'classnames';
+
+import './styles/TextInput.scss';
+
+// Створюємо тип спеціально для Textarea
+interface TextInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  labelText?: string;
+  Icon?: React.ElementType;
+  iconPosition?: 'left' | 'right';
+}
+
+export const TextInput = forwardRef<HTMLTextAreaElement, TextInputProps>(
+  (
+    {
+      Icon,
+      id,
+      labelText,
+      onChange,
+      iconPosition = 'left',
+      className,
+      ...props
+    },
+    ref: ForwardedRef<HTMLTextAreaElement>,
+  ) => {
+    return (
+      <label htmlFor={id} className="base-input__label-wrapper">
+        {labelText && <span className="base-input__label">{labelText}</span>}
+
+        <div className={cn('base-input', 'base-input--textarea')}>
+          {iconPosition === 'left' && Icon && (
+            <Icon className="base-input__icon base-input__icon--left" />
+          )}
+
+          <textarea
+            ref={ref}
+            id={id}
+            onChange={onChange}
+            className={cn(
+              'base-input__field',
+              'base-input__field--textarea',
+              className,
+            )}
+            {...props}
+          />
+
+          {iconPosition === 'right' && Icon && (
+            <Icon className="base-input__icon base-input__icon--right" />
+          )}
+        </div>
+      </label>
+    );
+  },
+);
+
+TextInput.displayName = 'TextInput';

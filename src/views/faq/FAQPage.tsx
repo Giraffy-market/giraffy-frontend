@@ -1,5 +1,7 @@
 'use client';
 
+import { CreateTicketForm } from '@/modules/support-tickets';
+
 import SectionTitle from '@/components/ui/sectionTitle/SectionTitle';
 
 import { FAQItem } from './ui/FAQItem';
@@ -21,6 +23,7 @@ const FAQPage = () => (
         </ul>
       </section>
     </div>
+    <CreateTicketForm />
   </div>
 );
 
