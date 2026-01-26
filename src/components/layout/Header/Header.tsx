@@ -1,6 +1,7 @@
 'use client';
 
 import { HeaderAction } from './components/HeaderAction/HeaderAction';
+import { HeaderBurger } from './components/HeaderBurger/HeaderBurger';
 import { HeaderCategories } from './components/HeaderCategories';
 import { SearchBar } from './components/SearchBar';
 import { Logo } from '@/components/ui/logo/Logo';
@@ -12,8 +13,15 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerWrap}>
         <div className={styles.left}>
-          <Logo />
-          <HeaderCategories />
+          <div className={styles.burger}>
+            <HeaderBurger />
+          </div>
+          <div className={styles.logo}>
+            <Logo />
+          </div>
+          <div className={styles.categories}>
+            <HeaderCategories />
+          </div>
         </div>
 
         <div className={styles.center}>

@@ -3,13 +3,12 @@
 .base-input {
   position: relative;
   display: flex;
-  // align-items: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   @include base-body;
   color: $blue;
-
-  &__field {
+  s &__field {
     width: 100%;
     height: 100%;
     border: 1px solid $light-gray;

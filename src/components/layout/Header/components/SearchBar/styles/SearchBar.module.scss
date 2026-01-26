@@ -1,3 +1,5 @@
+@use '@/shared/styles/utils/index' as *;
+
 @use '@/shared/styles/utils/variables' as *;
 
 .searchBar {
@@ -5,28 +7,53 @@
   align-items: center;
 
   .inputWrapper {
-    width: 600px;
-    height: 44px;
-    position: relative;
+    display: none;
+
+    @include onTablet {
+      display: block;
+      width: 600px;
+      height: 44px;
+      position: relative;
+    }
   }
 
   .searchBtn {
-    background: $orange;
-    border: none;
-    border-radius: 10px;
-    padding: 0px 12px;
-    width: 81px;
-    height: 44px;
-    margin-left: -81px;
-    z-index: 10;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    display: none;
 
-    &:hover {
-      background: $orange-hover;
+    @include onTablet {
+      display: block;
+      background: $orange;
+      border: none;
+      border-radius: 10px;
+      padding: 0px 12px;
+      width: 81px;
+      height: 44px;
+      margin-left: -81px;
+      z-index: 10;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: $orange-hover;
+      }
+    }
+  }
+
+  .searchBtnMobile {
+    display: block;
+    background: none;
+    border: none;
+    width: 44px;
+    height: 44px;
+    margin-right: 8px;
+    margin-top: 4px;
+    cursor: pointer;
+
+    @include onTablet {
+      display: none;
     }
   }
 }

@@ -3,6 +3,7 @@
 import { Controller, useForm } from 'react-hook-form';
 
 import SearchIcon from '@/components/layout/Header/assets/search.svg';
+import { Dialog } from '@/components/ui/dialog';
 import { BaseInput } from '@/components/ui/inputs/baseInput/BaseInput';
 
 import styles from './styles/SearchBar.module.scss';
@@ -31,6 +32,12 @@ export const SearchBar = () => {
 
       <button type="submit" className={styles.searchBtn}>
         Знайти
+      </button>
+
+      <button type="submit" className={styles.searchBtnMobile}>
+        <Dialog>
+          <SearchIcon />
+        </Dialog>
       </button>
     </form>
   );

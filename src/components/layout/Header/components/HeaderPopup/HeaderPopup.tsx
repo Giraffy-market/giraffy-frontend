@@ -14,12 +14,6 @@ import {
   MODAL_QUERY_STATE,
   REGISTER_FORM_MODAL_KEY,
 } from '@/modules/auth';
-import { useFetchUser } from '@/modules/user/api/useFetchUser';
-
-import { Button } from '@/components/ui/button/Button';
-import { Loader } from '@/components/ui/loader/Loader';
-import { ToastMessage } from '@/components/ui/toastMessage/toastMessages';
-
 import {
   ADD,
   LOGOUT,
@@ -27,13 +21,19 @@ import {
   SUPPORT,
   TRIGGER,
   USER,
-} from './constants/constants';
-import { panelVariants } from './constants/variants';
+} from '@/modules/categories/constants/constants';
+import { useFetchUser } from '@/modules/user/api/useFetchUser';
+
+import { Button } from '@/components/ui/button/Button';
+import { Loader } from '@/components/ui/loader/Loader';
+import { ToastMessage } from '@/components/ui/toastMessage/toastMessages';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 import { routing } from '@/shared/routing';
 
 import styles from './styles/HeaderPopup.module.scss';
+
+import { panelVariants } from '../../constants/variants';
 
 type Props = {
   popupClassName?: string;

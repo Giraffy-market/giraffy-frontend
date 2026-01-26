@@ -1,3 +1,85 @@
+@use '@/shared/styles/utils/index' as *;
+
+.header {
+  box-shadow: 0 1px 4px 0 rgba(194, 164, 164, 0.52);
+}
+
+.headerWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 98px;
+  width: 375px;
+  margin-inline: auto;
+
+  @include onTablet {
+    width: 1280px;
+    height: 108px;
+    gap: 20px;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    flex-shrink: 0;
+  }
+
+  .burger {
+    display: block;
+    background: none;
+    border: none;
+    height: 24px;
+    width: 37px;
+    margin-left: 14px;
+    margin-top: 4px;
+    @include onTablet {
+      display: none;
+    }
+  }
+
+  .categories {
+    display: none;
+
+    @include onTablet {
+      display: block;
+    }
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 24px;
+    @include onTablet {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      position: static;
+      transform: none;
+    }
+  }
+
+  .center {
+    display: flex;
+    @include onTablet {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .right {
+    display: none;
+    @include onTablet {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
 .header {
   box-shadow: 0 1px 4px 0 rgba(194, 164, 164, 0.52);
 }
@@ -10,23 +92,23 @@
   width: 1280px;
   margin-inline: auto;
   gap: 20px;
+}
 
-  .left {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    flex-shrink: 0;
-  }
+.headerWrap .left {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-shrink: 0;
+}
 
-  .enter {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
+.headerWrap .enter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
 
-  .right {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-  }
+.headerWrap .right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }

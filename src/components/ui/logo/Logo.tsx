@@ -2,14 +2,27 @@ import { type FC } from 'react';
 
 import Link from 'next/link';
 
-import LogoIcon from './assets/logo.svg';
+import LargeLogo from './assets/largeLogo.svg';
+import SmallLogo from './assets/smallLogo.svg';
 
 import './styles/logo.scss';
 
-export const Logo: FC = () => (
-  <Link href="/" className="logo">
-    <LogoIcon role="img" aria-label="Girrafy logo" />
+type Props = {
+  size?: 'small' | 'large';
+};
 
-    <span className="logo__text">Girrafy</span>
-  </Link>
-);
+export const Logo: FC<Props> = () => {
+  return (
+    <Link href="/" className="logo">
+      <div className="logo__icon--small">
+        <SmallLogo role="img" aria-label="Girrafy logo" aria-hidden="true" />
+      </div>
+
+      <div className="logo__icon--large">
+        <LargeLogo role="img" aria-label="Girrafy logo" />
+      </div>
+
+      <span className="logo__text">Girrafy</span>
+    </Link>
+  );
+};
