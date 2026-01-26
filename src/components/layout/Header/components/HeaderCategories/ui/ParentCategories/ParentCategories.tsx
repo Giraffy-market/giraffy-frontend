@@ -23,18 +23,19 @@ export const ParentCategories: FC<Props> = ({
 }) => {
   return (
     <ul className={cn(styles.items, className)}>
-      {categories.map((cat) => (
-        <li
-          key={cat.category_id}
-          className={cn(styles.item, {
-            [styles.active]:
-              activeParentCategory?.category_id === cat.category_id,
-          })}
-          onClick={() => setActiveParentCategory(cat)}
-        >
-          {cat.name}
-        </li>
-      ))}
+      {categories.map((cat) => {
+        const isActive = activeParentCategory?.category_id === cat.category_id;
+
+        return (
+          <li
+            key={cat.category_id}
+            className={cn(styles.item, isActive ? styles.active : '')}
+            onClick={() => setActiveParentCategory(cat)}
+          >
+            {cat.name}
+          </li>
+        );
+      })}
     </ul>
   );
 };
