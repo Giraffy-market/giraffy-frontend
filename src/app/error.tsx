@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 
-import Error from '@/ui/loadingErrorPage/LoadingErrorPage';
+import Error from '@/components/ui/loadingErrorPage/LoadingErrorPage';
 
 type ErrorProps = { reset: () => void };
 const error: FC<ErrorProps> = ({ reset }) => {

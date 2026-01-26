@@ -1,0 +1,44 @@
+'use client';
+
+import { Controller, useForm } from 'react-hook-form';
+
+import SearchIcon from '@/components/layout/Header/assets/search.svg';
+import { Dialog } from '@/components/ui/dialog';
+import { BaseInput } from '@/components/ui/inputs/baseInput/BaseInput';
+
+import styles from './styles/SearchBar.module.scss';
+
+export const SearchBar = () => {
+  const { control, handleSubmit, resetField } = useForm({
+    defaultValues: { query: '' },
+  });
+
+  const onSubmit = ({ query }: { query: string }) => {
+    console.log('Шукаємо:', query);
+    resetField('query');
+  };
+
+  return (
+    <form className={styles.searchBar} onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.inputWrapper}>
+        <Controller
+          name="query"
+          control={control}
+          render={({ field }) => (
+            <BaseInput id="search" Icon={SearchIcon} {...field} />
+          )}
+        />
+      </div>
+
+      <button type="submit" className={styles.searchBtn}>
+        Знайти
+      </button>
+
+      <button type="submit" className={styles.searchBtnMobile}>
+        <Dialog>
+          <SearchIcon />
+        </Dialog>
+      </button>
+    </form>
+  );
+};
