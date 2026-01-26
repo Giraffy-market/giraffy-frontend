@@ -14,7 +14,7 @@ import './styles/TextInput.scss';
 // Створюємо тип спеціально для Textarea
 interface TextInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   labelText?: string;
-Icon?: ElementType;
+  Icon?: ElementType;
   iconPosition?: 'left' | 'right';
 }
 
