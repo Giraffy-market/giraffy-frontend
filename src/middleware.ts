@@ -26,5 +26,6 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ['/test'],
+  // matcher: ['/test'],
+  matcher: [],
 };

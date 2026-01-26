@@ -6,8 +6,8 @@ import './styles/Footer.scss';
 
 const FOOTER_LINKS = [
   { id: 1, href: '/about', text: 'Про нас' },
-  { id: 2, href: '/contacts', text: 'Контакти' },
-  { id: 3, href: '/faq', text: 'FAQ' },
+  { id: 2, href: '/faq', text: 'FAQ' },
+  { id: 3, href: '/support', text: 'Підтримка' },
 ];
 export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             Політика конфіденційності
           </Link>
           &nbsp;та&nbsp;
-          <Link className="footer__legal-link" href="/tos">
+          <Link className="footer__legal-link" href="/legal-terms">
             Умови надання послуг
           </Link>
           .
