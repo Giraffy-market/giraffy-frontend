@@ -29,9 +29,14 @@ export const HeaderCategoriesPopup: FC<Props> = ({ className }) => {
     refetch,
   } = useFetchCategories();
 
+  // const [activeParentCategory, setActiveParentCategory] =
+  //   useState<CategoryItem | null>(
+  //     categories && categories.length > 0 ? categories[0] : null,
+  //   );
+
   const [activeParentCategory, setActiveParentCategory] =
     useState<CategoryItem | null>(
-      categories && categories.length > 0 ? categories[0] : null,
+      (categories && categories.length > 0 ? categories[0] : null) ?? null,
     );
 
   if (isLoading) return <Loader />;
