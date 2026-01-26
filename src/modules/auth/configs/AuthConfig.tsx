@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     CredentialsProvider({
       name: 'Credentials',
@@ -86,9 +86,9 @@ export const authOptions: AuthOptions = {
     },
   },
 
-  pages: {
-    signIn: 'modal-login',
-  },
+  // pages: {
+  //   signIn: 'modal-login',
+  // },
 };
 
 export const getServerAuthSession = (): Promise<Session | null> =>

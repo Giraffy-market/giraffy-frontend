@@ -25,4 +25,8 @@ export const endpoints = {
     base: '/products',
     ...makeEndpoints('/products'),
   },
+
+  support_tickets: {
+    base: '/support/tickets',
+  },
 };

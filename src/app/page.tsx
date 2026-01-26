@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 
-import HomePage from '@/views/home/home-page';
+import HomePage from '@/views/home/HomePage';
+import Test from '@/views/test/Test';
 
 const Home: FC = () => <HomePage />;
 

@@ -1,7 +1,7 @@
 'use client';
 
-import { Loader } from '@/ui/loader/Loader';
-import { ToastMessage } from '@/ui/toastMessage/toastMessages';
+import { Loader } from '@/components/ui/loader/Loader';
+import { ToastMessage } from '@/components/ui/toastMessage/toastMessages';
 
 import { useFetchUser } from './api/profile';
 
