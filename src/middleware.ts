@@ -5,13 +5,21 @@ export default withAuth(
   function middleware(req) {
     const url = req.nextUrl.clone();
     const token = req.nextauth.token;
+    const isMainPage = url.pathname === '/';
+    const hasLoginModal = url.searchParams.get('modal') === 'modal-login';
 
     // Если нет токена, редирект на главную с открытием модалки логина
-    if (!token) {
-      // Ключи тут как magic strings, потому что тут нельзя использовать из других модулей
+    // if (!token) {
+    //   // Ключи тут как magic strings, потому что тут нельзя использовать из других модулей
+    //   url.pathname = '/';
+    //   url.searchParams.set('modal', 'modal-login');
+
+    //   return NextResponse.redirect(url);
+    // }
+
+    if (!token && !isMainPage) {
       url.pathname = '/';
       url.searchParams.set('modal', 'modal-login');
-
       return NextResponse.redirect(url);
     }
 
@@ -27,5 +35,5 @@ export default withAuth(
 
 export const config = {
   // matcher: ['/test'],
-  matcher: [],
+  matcher: ['/profile/:path*', '/settings/:path*'],
 };
