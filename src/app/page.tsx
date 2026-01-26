@@ -1,5 +1,3 @@
-'use client';
-
 import { type FC } from 'react';
 
 import HomePage from '@/views/home/HomePage';

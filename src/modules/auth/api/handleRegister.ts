@@ -1,4 +1,4 @@
-import { routes } from '@/shared/api/constants/routes';
+import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
@@ -13,7 +13,7 @@ type HandleRegisterProps = {
 export const handleRegister = async (data: HandleRegisterProps) => {
   try {
     const response = await customFetch<RegisterResponse>(
-      routes.auth.register,
+      endpoints.auth.register,
       '',
       {
         method: 'POST',

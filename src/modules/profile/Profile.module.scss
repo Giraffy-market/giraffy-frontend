@@ -1,0 +1,14 @@
+@use '@/shared/styles/utils/index' as *;
+
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1064px;
+  margin-inline: auto;
+
+  @include onTablet {
+    flex-direction: row;
+    gap: 72px;
+  }
+}

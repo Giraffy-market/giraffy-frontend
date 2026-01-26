@@ -1,0 +1,90 @@
+@use '@/shared/styles/utils/index' as *;
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d9d9d9;
+  width: 100%;
+
+  .userDataWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    .avatar {
+      width: 100px;
+      height: 100px;
+    }
+
+    .bio {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 133%;
+
+      .username {
+        display: flex;
+        gap: 4px;
+      }
+
+      > p:last-of-type {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 160%;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  @include onTablet {
+    border: none;
+    align-items: center;
+    width: 302px;
+    text-align: center;
+    gap: 24px;
+
+    .userDataWrapper {
+      flex-direction: column;
+      .avatar {
+        width: 150px;
+        height: 150px;
+        .avatarImage {
+          width: 150px;
+          height: 150px;
+        }
+      }
+
+      .bio {
+        gap: 24px;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 150%;
+
+        .username {
+          flex-direction: column;
+        }
+
+        > p:nth-of-type(2) {
+          font-weight: 600;
+        }
+
+        > p:last-of-type {
+          font-size: 18px;
+          line-height: 156%;
+        }
+      }
+    }
+  }
+}

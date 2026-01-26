@@ -1,0 +1,93 @@
+@use '@/shared/styles/utils/index' as *;
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .descriptionsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d9d9d9;
+
+    .titleWrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 133%;
+      }
+      .detailActionBtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 160%;
+      }
+    }
+
+    .top {
+      p:not(:last-of-type) {
+        margin-bottom: 8px;
+      }
+    }
+    .bottom {
+      p:not(:last-of-type) {
+        margin-bottom: 4px;
+      }
+
+      p:last-of-type {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: start;
+  }
+
+  @include onTablet {
+    gap: 40px;
+    .descriptionsWrapper {
+      width: 690px;
+      border: none;
+      font-size: 20px;
+      gap: 24px;
+
+      .titleWrapper {
+        .title {
+          font-size: 24px;
+          line-height: 150%;
+        }
+
+        .detailActionBtn {
+          font-size: 16px;
+        }
+      }
+
+      .top {
+        p:not(:last-of-type) {
+          margin-bottom: 12px;
+        }
+      }
+    }
+
+    .logoutBtn {
+      font-size: 18px;
+    }
+  }
+}

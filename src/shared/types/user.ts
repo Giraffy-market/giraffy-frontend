@@ -1,3 +1,5 @@
+import type { Announcement } from './announcement';
+
 type OauthAccount = {
   id: number;
   oauth_name: string;
@@ -21,4 +23,8 @@ export type User = {
   last_name: string | null;
   datetime_create: string;
   oauth_accounts: OauthAccount[];
+  completed_deals: number;
+  announcements: Announcement[];
+  location: string | null;
+  rating: number | null;
 };
