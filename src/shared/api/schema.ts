@@ -1604,75 +1604,7 @@ export interface operations {
       };
     };
   };
-  get_product_by_id_products__product_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        product_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ProductRead'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  get_products_get: {
-    parameters: {
-      query?: {
-        search?: string | null;
-        category_id?: number | null;
-        category?: string | null;
-        location?: string | null;
-        price_from?: number | null;
-        price_to?: number | null;
-        page?: number;
-        size?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': unknown;
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
+
   faq_get_faq_get: {
     parameters: {
       query?: never;
@@ -3141,69 +3073,7 @@ export interface operations {
       };
     };
   };
-  delete_product_products__product_id__delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        product_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  get_products_get: {
-    parameters: {
-      query?: {
-        search?: string | null;
-        status?: components['schemas']['ProductStatus'] | null;
-        page?: number;
-        size?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['Page_ProductRead_'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
+
   delete_category_categories__category_id__delete: {
     parameters: {
       query?: never;
