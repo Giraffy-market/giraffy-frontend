@@ -1,12 +1,12 @@
 import cn from 'classnames';
 import { signOut, useSession } from 'next-auth/react';
 
-import ComplaintIcon from '@/components/prifile/assets/complaint.svg';
-import LogoutIcon from '@/components/prifile/assets/logout.svg';
-import PencilIcon from '@/components/prifile/assets/pencil.svg';
-
 import { routing } from '@/shared/routing';
 import type { User } from '@/shared/types';
+
+import ComplaintIcon from '../assets/complaint.svg';
+import LogoutIcon from '../assets/logout.svg';
+import PencilIcon from '../assets/pencil.svg';
 
 import ReviewsList from '../ReviewsList/ReviewsList';
 import styles from './ProfileDetails.module.scss';
