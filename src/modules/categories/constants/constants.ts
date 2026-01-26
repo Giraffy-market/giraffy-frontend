@@ -1,12 +1,12 @@
-import BeautyCare from '@/components/common/categories/assets/beauty-care.svg';
-import CarsCare from '@/components/common/categories/assets/cars-care.svg';
-import Clothes from '@/components/common/categories/assets/clothes.svg';
-import Electronics from '@/components/common/categories/assets/electronics.svg';
-import Hobbies from '@/components/common/categories/assets/hobbies.svg';
-import HouseCare from '@/components/common/categories/assets/house-care.svg';
-import Kids from '@/components/common/categories/assets/kids.svg';
-import Kitchen from '@/components/common/categories/assets/kitchen.svg';
-import Pets from '@/components/common/categories/assets/pets.svg';
+import BeautyCare from '../assets/beauty-care.svg';
+import CarsCare from '../assets/cars-care.svg';
+import Clothes from '../assets/clothes.svg';
+import Electronics from '../assets/electronics.svg';
+import Hobbies from '../assets/hobbies.svg';
+import HouseCare from '../assets/house-care.svg';
+import Kids from '../assets/kids.svg';
+import Kitchen from '../assets/kitchen.svg';
+import Pets from '../assets/pets.svg';
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
