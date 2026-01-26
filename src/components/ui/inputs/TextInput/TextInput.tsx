@@ -1,6 +1,11 @@
 'use client';
 
-import { type ForwardedRef, TextareaHTMLAttributes, forwardRef } from 'react';
+import {
+  type ElementType,
+  type ForwardedRef,
+  type TextareaHTMLAttributes,
+  forwardRef,
+} from 'react';
 
 import cn from 'classnames';
 
@@ -9,7 +14,7 @@ import './styles/TextInput.scss';
 // Створюємо тип спеціально для Textarea
 interface TextInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   labelText?: string;
-  Icon?: React.ElementType;
+Icon?: ElementType;
   iconPosition?: 'left' | 'right';
 }
 

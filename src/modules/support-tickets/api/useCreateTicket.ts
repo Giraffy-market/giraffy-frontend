@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { CreateTicketFormValues } from '../types/types';
+import { type CreateTicketFormValues } from '../types/types';
 
 import { API, endpoints } from '@/shared/api/constants/endpoints';
 
