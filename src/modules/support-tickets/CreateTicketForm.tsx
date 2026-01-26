@@ -6,7 +6,7 @@ import { TextInput } from '@/components/ui/inputs/TextInput/TextInput';
 
 import { useCreateTicket } from './api/useCreateTicket';
 
-import { CreateTicketFormValues } from './types/types';
+import { type CreateTicketFormValues } from './types/types';
 
 import './styles/CreateTicketForm.scss';
 

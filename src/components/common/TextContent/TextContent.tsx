@@ -1,10 +1,12 @@
 'use client';
 
+import type { FC, ReactNode, SVGProps } from 'react';
+
 import './TextContent.scss';
 
 interface AboutContentProps {
-  children: React.ReactNode;
-  image: React.FC<React.SVGProps<SVGSVGElement>>;
+  children: ReactNode;
+  image: FC<SVGProps<SVGSVGElement>>;
   isReversed?: boolean;
   mobileReverse?: boolean;
 }
