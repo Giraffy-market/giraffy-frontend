@@ -1,9 +1,9 @@
 'use client';
 
+import { CreateTicketForm } from '@/modules/support-tickets';
+
 import TextContent from '@/components/common/TextContent/TextContent';
 import SectionTitle from '@/components/ui/sectionTitle/SectionTitle';
-
-// import AboutContent from './ui/AboutContent/AboutContent';
 
 import Giraffy from './assets/giraffe-support-1.svg';
 
@@ -20,6 +20,7 @@ const SupportPage = () => (
         </TextContent>
       ))}
     </div>
+    <CreateTicketForm />
   </div>
 );
 
