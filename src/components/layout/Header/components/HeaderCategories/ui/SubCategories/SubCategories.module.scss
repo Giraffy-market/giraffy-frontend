@@ -1,0 +1,31 @@
+@use '@/shared/styles/utils/variables' as *;
+@use '../../styles/header-categories' as *;
+
+.items {
+  @include headerCategoryItems;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.item {
+  @include headerCategoryItem;
+  padding: 8px 24px;
+  white-space: nowrap;
+}
+
+.loaderItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 120px;
+}
+
+.emptyItem {
+  color: $gray;
+  font-size: 14px;
+  padding: 10px 0;
+}

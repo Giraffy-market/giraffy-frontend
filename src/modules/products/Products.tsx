@@ -5,9 +5,9 @@ import { type FC } from 'react';
 import { useFetchProducts } from '@/modules/products/api/useFetchProducts';
 import { ProductsList } from '@/modules/products/components/products-list';
 
-import { Loader } from '@/ui/loader/Loader';
-import SectionTitle from '@/ui/sectionTitle/SectionTitle';
-import { ToastMessage } from '@/ui/toastMessage/toastMessages';
+import { Loader } from '@/components/ui/loader/Loader';
+import SectionTitle from '@/components/ui/sectionTitle/SectionTitle';
+import { ToastMessage } from '@/components/ui/toastMessage/toastMessages';
 
 export const Products: FC = () => {
   const { data, isLoading, error } = useFetchProducts();

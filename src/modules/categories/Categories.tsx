@@ -2,13 +2,14 @@
 
 import { type FC } from 'react';
 
-import CategoriesList from './ui/CategoriesList';
-import { Loader } from '@/ui/loader/Loader';
-import LoadingErrorPage from '@/ui/loadingErrorPage/LoadingErrorPage';
-import GiraffeEating from '@/ui/loadingErrorPage/assets/giraffe-eating.svg';
-import SectionTitle from '@/ui/sectionTitle/SectionTitle';
+import { useFetchCategories } from '@/modules/categories/api/useFetchCategories';
 
-import { useFetchCategories } from '../header/header-categories/api/useFetchCategories';
+import { Loader } from '@/components/ui/loader/Loader';
+import LoadingErrorPage from '@/components/ui/loadingErrorPage/LoadingErrorPage';
+import GiraffeEating from '@/components/ui/loadingErrorPage/assets/giraffe-eating.svg';
+import SectionTitle from '@/components/ui/sectionTitle/SectionTitle';
+
+import CategoriesList from './ui/CategoriesList';
 
 const Categories: FC = () => {
   const { isLoading, error, data, refetch } = useFetchCategories();
