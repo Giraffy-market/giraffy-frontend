@@ -1,0 +1,8 @@
+@use '@/shared/styles/utils/index' as *;
+
+.title {
+  @include h1;
+  color: $blue;
+  margin-bottom: 24px;
+  text-align: center;
+}

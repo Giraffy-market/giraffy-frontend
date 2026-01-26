@@ -1,7 +1,10 @@
-import type { FC } from 'react';
+'use client';
 
-const Home: FC = () => {
-  return <div>Welcome to the Home Page</div>;
-};
+import { type FC } from 'react';
+
+import HomePage from '@/views/home/HomePage';
+import Test from '@/views/test/Test';
+
+const Home: FC = () => <HomePage />;
 
 export default Home;

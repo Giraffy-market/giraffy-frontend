@@ -24,13 +24,22 @@ const eslintConfig = [
 
     rules: {
       // General
-      indent: ['error', 2],
+      indent: 'off',
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          semi: true,
+          endOfLine: 'lf',
+          tabWidth: 2,
+          useTabs: false,
+        },
+      ],
       'linebreak-style': ['error', 'unix'],
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
 
       // TypeScript recommended
-      '@typescript-eslint/explicit-function-return-type': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_' },

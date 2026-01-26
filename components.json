@@ -1,0 +1,6 @@
+{
+  "componentsPath": "./src/ui",
+  "typescript": true,
+  "cssModules": true,
+  "iconLibrary": "lucide-react"
+}

@@ -1,0 +1,63 @@
+@use '@/shared/styles/utils/index' as *;
+
+.product-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 16px;
+
+  background-color: $white;
+  border-radius: 16px;
+
+  &__favorite-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    background: none;
+    border: none;
+  }
+
+  &__favorite-button-icon {
+    background-color: $white;
+    border-radius: 50%;
+  }
+
+  &__image {
+    height: 145px;
+
+    @include onDesktop {
+      height: 200px;
+    }
+  }
+
+  &__info-title {
+    @include base-body;
+  }
+
+  &__info,
+  &__additional-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__info-price {
+    @include button;
+    color: $orange;
+  }
+
+  &__additional {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__additional-info {
+    @include small-body;
+    color: $dark-gray;
+  }
+}

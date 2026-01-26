@@ -1,0 +1,37 @@
+.check {
+  &__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &__box {
+    cursor: pointer;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-image: url(/assets/checkbox/unchecked.svg);
+  }
+
+  &__input:hover + &__box {
+    background-image: url(/assets/checkbox/hover.svg);
+  }
+
+  &__input:checked + &__box {
+    background-image: url(/assets/checkbox/checked.svg);
+  }
+
+  &__input:disabled + &__box {
+    background-image: url(/assets/checkbox/disabled.svg);
+  }
+
+  &__input:disabled:checked + &__box {
+    background-image: url(/assets/checkbox/disabled-checked.svg);
+  }
+
+  &__input:focus + &__box {
+    box-shadow: 0 0 0 0.2em #fc640c67;
+    border-radius: 2px;
+  }
+}

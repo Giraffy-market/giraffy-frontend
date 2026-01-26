@@ -1,0 +1,33 @@
+.action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+
+  .notifications,
+  .favorites {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    background: none;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+
+    svg {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    &:hover svg {
+      transform: scale(1.1);
+    }
+  }
+}
