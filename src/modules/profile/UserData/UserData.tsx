@@ -1,11 +1,11 @@
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
-import defaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
-
-import { Button } from '@/ui/button/Button';
+import { Button } from '@/components/ui/button/Button';
 
 import type { User } from '@/shared/types';
+
+import defaultAvatar from '../assets/defaultAvatar.png';
 
 import { formatDateToUk } from '../formatDateToUk';
 import styles from './UserData.module.scss';

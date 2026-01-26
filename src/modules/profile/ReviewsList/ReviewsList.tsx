@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-import Add from '@/components/prifile/assets/add.svg';
-import DefaultAvatar from '@/components/prifile/assets/defaultAvatar.png';
-import StarEmpty from '@/components/prifile/assets/star-empty.svg';
-import StarFilled from '@/components/prifile/assets/star-filled.svg';
-
 import type { ReviewsListProps } from '@/shared/types';
+
+import Add from '../assets/add.svg';
+import DefaultAvatar from '../assets/defaultAvatar.png';
+import StarEmpty from '../assets/star-empty.svg';
+import StarFilled from '../assets/star-filled.svg';
 
 import { reviewsData } from '../reviewsData';
 import styles from './ReviewsList.module.scss';
