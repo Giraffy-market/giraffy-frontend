@@ -8,4 +8,8 @@ export const endpoints = {
   products: {
     base: '/products',
   },
+
+  support_tickets: {
+    base: '/support/tickets',
+  },
 };
