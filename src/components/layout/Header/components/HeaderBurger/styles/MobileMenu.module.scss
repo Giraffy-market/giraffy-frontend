@@ -2,19 +2,22 @@
 
 .overlay {
   position: fixed;
-  inset: 0;
+  width: 100vw;
+  height: 100vh;
 
+  inset: 0;
   background: $gray;
   z-index: 1000;
 
-  width: 100vw;
-  height: 100vh;
-  opacity: 1;
-  pointer-events: none;
-  transform: translateY(-20px);
-  transition: 0.3s ease;
   gap: 20px;
   padding: 20px 10px 20px 10px;
+  pointer-events: auto;
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 // .overlay.open {
@@ -25,7 +28,7 @@
 
 .guestRow {
   display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 10px 20px;
   margin-top: -12px;
   padding: 10px;
@@ -38,6 +41,8 @@
   padding: 10px;
   border-radius: 12px;
   margin-bottom: 35px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .loginMessage {
@@ -49,8 +54,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   height: 52px;
-  width: 328px;
+  min-width: 240px;
   margin: 0 auto;
   border-radius: 8px;
   background: $orange;
