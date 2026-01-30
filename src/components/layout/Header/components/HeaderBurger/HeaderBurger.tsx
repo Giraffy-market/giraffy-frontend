@@ -15,7 +15,7 @@ import { MobileMenu } from './MobileMenu';
 
 export const HeaderBurger = () => {
   return (
-    <Drawer direction="left" dismissible={false}>
+    <Drawer direction="left" dismissible>
       <DrawerTrigger>
         <BurgerIcon />
       </DrawerTrigger>

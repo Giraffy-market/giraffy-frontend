@@ -22,6 +22,8 @@ export const MobileMenu = () => {
 
   const [isUserListOpen, setIsUserListOpen] = useState(false);
 
+  const [isLangOpen, setIsLangOpen] = useState(false);
+
   // useEffect(() => {
   //   if (isOpen) {
   //     document.body.style.overflow = 'hidden';
@@ -70,16 +72,48 @@ export const MobileMenu = () => {
               {/* whatever you want to show below */}
               <button className={styles.actionButton}>Додати оголошення</button>
               <nav className={styles.nav}>
-                {NAVMOBILE.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={item.href}
-                    className={styles.navItem}
-                  >
-                    <item.Icon />
-                    <span>{item.label}</span>
-                  </Link>
-                ))}
+                {NAVMOBILE.map((item) => {
+                  if (item.id === 'languages') {
+                    return (
+                      <div key={item.id} className={styles.langWrapper}>
+                        <button
+                          className={styles.navItem}
+                          type="button"
+                          onClick={() => setIsLangOpen(!isLangOpen)}
+                        >
+                          <item.Icon />
+                          <span>{item.label}</span>
+                          <DropdownCategoriesIcon
+                            className={`${styles.dropdownButton} ${
+                              isLangOpen ? styles.dropdownButtonOpen : ''
+                            }`}
+                          />
+                        </button>
+                        {isLangOpen && (
+                          <div className={styles.langList}>
+                            <button className={styles.langOption}>
+                              Українська
+                            </button>
+                            <button className={styles.langOption}>
+                              English
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className={styles.navItem}
+                    >
+                      <item.Icon />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
               </nav>
             </div>
           )}
