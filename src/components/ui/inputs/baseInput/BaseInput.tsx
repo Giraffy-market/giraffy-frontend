@@ -10,7 +10,16 @@ import type { BaseInputProps } from '../types';
 
 export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
   (
-    { Icon, id, labelText, onChange, iconPosition = 'left', ...props },
+    {
+      Icon,
+      id,
+      labelText,
+      onChange,
+      iconPosition = 'left',
+      error,
+      isInvalid,
+      ...props
+    },
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
@@ -28,6 +37,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
             ref={ref}
             className={cn('base-input__field', {
               ['base-input__field--with-icon']: Icon,
+              ['base-input__field--invalid']: isInvalid,
             })}
             id={id}
             onChange={onChange}
@@ -38,6 +48,11 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
             <Icon
               className={cn('base-input__icon', 'base-input__icon--right')}
             />
+          )}
+        </div>
+        <div className="base-input__error-box">
+          {isInvalid && error && (
+            <span className="base-input__error-message">{error}</span>
           )}
         </div>
       </label>
