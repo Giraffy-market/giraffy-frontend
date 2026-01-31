@@ -184,3 +184,8 @@ export const FAVOURITES = {
   href: '/favourites',
   Icon: FavouritesIcon,
 };
+
+export const LANGUAGES = [
+  { id: 'ua', label: 'Українська', code: 'uk' },
+  { id: 'en', label: 'English', code: 'en' },
+];
