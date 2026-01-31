@@ -146,7 +146,8 @@ export const RegisterForm: FC = () => {
           <Controller
             name="email"
             control={control}
-            rules={{ required: "Поле обов'язкове для заповнення" }}
+            // prettier-ignore
+            rules={{ required: 'Поле обов\'язкове для заповнення' }}
             render={({ field, fieldState: { error } }) => {
               console.log('Email Error State:', error);
               return (
@@ -167,7 +168,8 @@ export const RegisterForm: FC = () => {
           <Controller
             name="phone_number"
             control={control}
-            rules={{ required: "Поле обов'язкове для заповнення" }}
+            // prettier-ignore
+            rules={{ required: 'Поле обов\'язкове для заповнення' }}
             render={({ field, fieldState: { error } }) => (
               <PhoneInput
                 {...field}
@@ -185,7 +187,8 @@ export const RegisterForm: FC = () => {
           <Controller
             name="password"
             control={control}
-            rules={{ required: "Поле обов'язкове для заповнення" }}
+            // prettier-ignore
+            rules={{ required: 'Поле обов\'язкове для заповнення' }}
             render={({ field, fieldState: { error } }) => (
               <PasswordInput
                 {...field}
@@ -202,7 +205,8 @@ export const RegisterForm: FC = () => {
           <Controller
             name="passwordConfirm"
             control={control}
-            rules={{ required: "Поле обов'язкове для заповнення" }}
+            // prettier-ignore
+            rules={{ required: 'Поле обов\'язкове для заповнення' }}
             render={({ field, fieldState: { error } }) => (
               <PasswordInput
                 {...field}
