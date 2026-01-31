@@ -149,7 +149,6 @@ export const RegisterForm: FC = () => {
             // prettier-ignore
             rules={{ required: 'Поле обов\'язкове для заповнення' }}
             render={({ field, fieldState: { error } }) => {
-              console.log('Email Error State:', error);
               return (
                 <BaseInput
                   {...field}
