@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 // prettier-ignore
 export const data = [
   {
