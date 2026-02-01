@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
+import { Interface } from 'readline';
 
 import {
   FAVOURITES,
+  LANGUAGES,
   NAVMOBILE,
   NOTIFICATIONS,
   USER,
@@ -91,12 +93,18 @@ export const MobileMenu = () => {
                         </button>
                         {isLangOpen && (
                           <div className={styles.langList}>
-                            <button className={styles.langOption}>
-                              Українська
-                            </button>
-                            <button className={styles.langOption}>
-                              English
-                            </button>
+                            {LANGUAGES.map((lang) => (
+                              <button
+                                key={lang.id}
+                                className={styles.langOption}
+                                //Тут буде перемикання мови у подальшому
+                                onClick={() =>
+                                  console.log(`Обрано мову: ${lang.label}`)
+                                }
+                              >
+                                {lang.label}
+                              </button>
+                            ))}
                           </div>
                         )}
                       </div>
