@@ -5,6 +5,12 @@
 .searchBar {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  min-width: 0;
 
   .inputWrapper {
     display: none;
@@ -34,7 +40,7 @@
       font-size: 16px;
       line-height: 150%;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: 0.3s ease;
 
       &:hover {
         background: $orange-hover;
@@ -43,13 +49,15 @@
   }
 
   .searchBtnMobile {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
+    flex-shrink: 0;
     border: none;
     width: 44px;
     height: 44px;
-    margin-right: 8px;
-    margin-top: 4px;
+    margin-left: auto;
     cursor: pointer;
 
     @include onTablet {

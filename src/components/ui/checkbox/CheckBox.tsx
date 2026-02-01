@@ -1,11 +1,17 @@
 'use client';
 
-import type { FC, InputHTMLAttributes, LabelHTMLAttributes } from 'react';
+import type {
+  ElementType,
+  FC,
+  InputHTMLAttributes,
+  LabelHTMLAttributes,
+  ReactNode,
+} from 'react';
 
 import styles from './CheckBox.module.scss';
 
 interface CheckBoxProps {
-  labelText: string;
+  labelText: ReactNode;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }

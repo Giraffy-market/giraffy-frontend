@@ -117,3 +117,15 @@
     line-height: 20px;
   }
 }
+
+@mixin error-message {
+  font-family: var(--font-open-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  @include onDesktop {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

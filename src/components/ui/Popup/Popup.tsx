@@ -21,8 +21,18 @@ export const Popup: FC<PopupProps> = ({ isOpen, onClose, children }) => {
   }, [isOpen]);
 
   const handleBackdrop = (e: React.MouseEvent<HTMLDialogElement>): void => {
-    const dialog = dialogRef.current;
-    if (dialog && e.target === dialog) onClose();
+    // const dialog = dialogRef.current;
+    // if (dialog && e.target === dialog) onClose();
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (
+      e.clientX < rect.left ||
+      e.clientX > rect.right ||
+      e.clientY < rect.top ||
+      e.clientY > rect.bottom
+    ) {
+      onClose();
+    }
   };
 
   if (!isOpen) return null;

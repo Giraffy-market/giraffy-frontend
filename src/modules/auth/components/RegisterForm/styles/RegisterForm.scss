@@ -19,14 +19,29 @@
     }
   }
 
-  &-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 24px;
-    @include onDesktop {
-      margin-bottom: 28px;
+  &-checkboxes {
+    &--wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+      @include onDesktop {
+        margin-bottom: 28px;
+      }
     }
-    &--checkbox {
+  }
+
+  &-checkbox {
+    &--wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        text-decoration: underline;
+        transition: opacity 0.2s;
+      }
+    }
+    &--item {
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
