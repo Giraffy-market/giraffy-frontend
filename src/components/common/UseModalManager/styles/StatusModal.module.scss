@@ -1,0 +1,41 @@
+@import '../../../../shared/styles/utils/index';
+@import '../../../../shared/styles/utils/modalmixins';
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1000;
+}
+
+.modal {
+  @include status-modal-layout;
+  border: none;
+  outline: none;
+
+  .title {
+    @include status-modal-title;
+  }
+
+  .description {
+    @include status-modal-description;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+      gap: 12px;
+    }
+  }
+
+  .timer {
+    @include status-modal-timer;
+  }
+}

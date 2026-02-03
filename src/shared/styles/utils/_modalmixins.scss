@@ -1,0 +1,85 @@
+@use 'variables';
+@use 'typography';
+
+@mixin status-modal-layout {
+  // ДЕСКТОП
+  width: 620px;
+  height: 365px;
+  border-radius: 24px;
+  background-color: $white !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  // МОБІЛКА
+  @media (max-width: 768px) {
+    width: 350px;
+    height: 320px;
+    padding: 24px 20px 32px 20px;
+  }
+}
+
+@mixin status-modal-title {
+  // ДЕСКТОП
+  font-family: var(--font-nunito);
+  text-wrap: nowrap;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 56px;
+  letter-spacing: 0;
+  color: $blue;
+  margin: 0 auto;
+  padding-bottom: 16px;
+  // МОБІЛКА
+  @media (max-width: 768px) {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 28px;
+    margin: 0 auto;
+    padding-bottom: 12px;
+  }
+}
+
+@mixin status-modal-description {
+  // ДЕСКТОП
+  font-family: var(--font-open-sans);
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  color: $dark-gray;
+  margin: 0 auto;
+  padding-bottom: 24px;
+
+  // МОБІЛКА
+  @media (max-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+}
+
+@mixin status-modal-timer {
+  // ДЕСКТОП
+  font-family: var(--font-open-sans);
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $light-gray;
+
+  // МОБІЛКА
+  @media (max-width: 768px) {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
