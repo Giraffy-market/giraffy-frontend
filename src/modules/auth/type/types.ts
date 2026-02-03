@@ -30,3 +30,7 @@ export type RegisterResponse = {
   datetime_create: string;
   oauth_accounts: OauthAccount[];
 };
+
+export type VerifyResponse = {
+  message: string;
+};
