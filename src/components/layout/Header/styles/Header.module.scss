@@ -11,7 +11,7 @@
   height: 98px;
   width: 100%;
   max-width: 100vw;
-  overflow: hidden;
+  // overflow: hidden;
 
   padding-inline: 16px;
   margin-inline: auto;
@@ -80,7 +80,7 @@
   .right {
     display: none !important;
     width: 0;
-    overflow: hidden;
+    // overflow: hidden;
     @include onTablet {
       display: flex !important;
       width: auto;
