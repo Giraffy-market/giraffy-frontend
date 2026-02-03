@@ -7,11 +7,11 @@
   inset: 0;
 
   /* State */
-  &[data-state="open"] {
+  &[data-state='open'] {
     animation-name: var(--animate-in);
   }
 
-  &[data-state="closed"] {
+  &[data-state='closed'] {
     animation-name: var(--animate-out);
   }
 }
@@ -37,11 +37,11 @@
   gap: calc(var(--spacing) * 4);
 
   /* State */
-  &[data-state="open"] {
+  &[data-state='open'] {
     animation-name: var(--animate-fade-zoom-in);
   }
 
-  &[data-state="closed"] {
+  &[data-state='closed'] {
     animation-name: var(--animate-fade-zoom-out);
   }
 
@@ -57,7 +57,7 @@
     inset-block-start: calc(var(--spacing) * 4);
 
     /* State */
-    &[data-state="open"] {
+    &[data-state='open'] {
       background-color: var(--color-accent);
       color: var(--color-muted-foreground);
     }
