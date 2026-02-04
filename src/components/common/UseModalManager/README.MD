@@ -1,17 +1,15 @@
 # 🦒 UseModalManager
 
-Система управління статусними модальними вікнами (**welcome, error, sendmessage, successreview, complaint**) з вбудованим таймером та адаптивною версткою.
+Управління статусами модальними вікнами (**welcome, error, sendmessage, successreview, complaint**).
 
-## 📂 Структура модуля
+## Структура модуля
 
 - `StatusModal.tsx` — UI компонент (на базі Radix UI Dialog).
 - `hooks/useModalManager.ts` — логіка керування станом (open/close).
 - `modals/constants.ts` — тексти та конфігурації для кожного типу вікна.
 - `styles/StatusModal.module.scss` — адаптивні стилі та кастомні міксини.
 
----
-
-## 🚀 Інструкція з використання
+## Інструкція з використання
 
 ### 1. Додавання або редагування контенту
 
@@ -31,9 +29,7 @@ export const MODAL_CONTENTS = {
   },
 };
 
-import { StatusModal } from '@/components/common/UseModalManager/StatusModal';
-import { useModalManager } from '@/components/common/UseModalManager/hooks/useModalManager';
-import { MODAL_CONTENTS } from '@/components/common/UseModalManager/modals/constants';
+import { StatusModal, useModalManager, MODAL_CONTENTS } from '@/components/common/UseModalManager';
 
 export const YourComponent = () => {
   const { activeModal, openModal, closeModal } = useModalManager();
