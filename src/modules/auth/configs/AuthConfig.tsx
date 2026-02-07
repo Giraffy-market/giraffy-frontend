@@ -7,7 +7,6 @@ import type { LoginResponse } from '@/modules/auth/type/types';
 import { handleRefreshToken } from '../api/handleRefreshToken';
 
 import { endpoints } from '@/shared/api/constants/endpoints';
-import { HttpError } from '@/shared/api/errors/http-error';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
 import { customFetch } from '../../../shared/api/fetch';
@@ -54,33 +53,53 @@ export const authOptions: AuthOptions = {
             return data;
           }
 
-          if (Date.now() > data.expired_in * 1000) {
-            return await handleRefreshToken(data);
-          }
-
           return data;
         } catch (error) {
           const message = handleApiError(error);
 
-          throw new HttpError(401, { detail: message });
+          const errorMessage = Array.isArray(message)
+            ? message.join(', ')
+            : message;
+
+          throw new Error(errorMessage);
         }
       },
     }),
   ],
+
   callbacks: {
     jwt: async ({ user, token }) => {
-      if (user) return { ...token, ...user };
+      if (user) {
+        return {
+          ...token,
+          access_token: user.access_token,
+          refresh_token: user.refresh_token,
+          user_id: user.user_id,
+          expired_in: user.expired_in,
+          expiresAt: Math.floor(Date.now() / 1000) + user.expired_in,
+        };
+      }
 
-      return token;
+      if (Math.floor(Date.now() / 1000) < token.expiresAt) {
+        return token;
+      }
+
+      try {
+        console.log('Token expired, refreshing...');
+        const refreshedToken = await handleRefreshToken(token);
+        return refreshedToken;
+      } catch (error) {
+        console.error('Refresh error', error);
+
+        return { ...token, error: 'RefreshAccessTokenError' };
+      }
     },
 
     session: async ({ session, token }) => {
-      if (token) {
-        session.user.id = token.user_id;
-        session.access_token = token.access_token;
-        session.refresh_token = token.refresh_token;
-        session.expires = token.expired_in;
-      }
+      session.access_token = token.access_token;
+      session.refresh_token = token.refresh_token;
+      session.user.id = token.user_id;
+      session.error = token.error;
 
       return session;
     },

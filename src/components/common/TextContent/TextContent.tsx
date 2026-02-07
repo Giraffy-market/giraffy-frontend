@@ -31,6 +31,8 @@ const TextContent = ({
       <Image
         viewBox="0 0 500 500"
         style={{ width: '100%', height: 'auto', maxWidth: '100%' }}
+        aria-hidden="true"
+        aria-label="Опис зображення"
       />
     </div>
   );

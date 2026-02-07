@@ -2,11 +2,11 @@
 
 import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
-import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useQueryState } from 'nuqs';
 
+import type { ModalType } from '@/components/common/UseModalManager/hooks/useModalManager';
 import { Button } from '@/components/ui/button/Button';
 import { CheckBox } from '@/components/ui/checkbox/CheckBox';
 import { BaseInput, PasswordInput } from '@/components/ui/inputs';
@@ -19,9 +19,15 @@ import {
   MODAL_QUERY_STATE,
   REGISTER_FORM_MODAL_KEY,
 } from '../../constants/modal-constants';
+import { useLogin } from '../../hooks/useLogin';
 
-export const LoginForm: FC = () => {
-  const { control, handleSubmit, reset } = useForm<LoginFormValues>({
+interface LoginFormProps {
+  onShowStatus?: (type: ModalType) => void;
+}
+
+export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
+  const router = useRouter();
+  const { control, handleSubmit, reset, setError } = useForm<LoginFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -29,24 +35,18 @@ export const LoginForm: FC = () => {
     },
   });
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
+  const { mutate, isPending } = useLogin(setError);
 
-  const onSubmit: SubmitHandler<LoginFormValues> = async ({
-    email,
-    password,
-  }) => {
-    const result = await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
+  const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
+    mutate(data, {
+      onSuccess: async () => {
+        reset();
+
+        router.refresh();
+        await setModal(null);
+        onShowStatus?.('welcome');
+      },
     });
-
-    if (result && !result?.ok && result.error) {
-      toast.error(result.error);
-      return;
-    }
-
-    reset();
-    setModal(null);
   };
 
   return (
@@ -57,13 +57,17 @@ export const LoginForm: FC = () => {
             name="email"
             control={control}
             defaultValue=""
-            render={({ field }) => (
+            // prettier-ignore
+            rules={{ required: 'Поле обов\'язкове для заповнення' }}
+            render={({ field, fieldState: { error } }) => (
               <BaseInput
                 {...field}
                 type="email"
                 placeholder="example@mail.com"
                 labelText="Електронна пошта"
                 id="email"
+                error={error?.message}
+                isInvalid={!!error}
               />
             )}
           />
@@ -72,12 +76,16 @@ export const LoginForm: FC = () => {
           <Controller
             name="password"
             control={control}
-            render={({ field }) => (
+            // prettier-ignore
+            rules={{ required: 'Поле обов\'язкове для заповнення' }}
+            render={({ field, fieldState: { error } }) => (
               <PasswordInput
                 {...field}
                 placeholder="Введіть пароль"
                 labelText="Пароль "
                 id="password"
+                error={error?.message}
+                isInvalid={!!error}
               />
             )}
           />
@@ -101,7 +109,12 @@ export const LoginForm: FC = () => {
         <span className="login-actions--forget">Забули пароль?</span>
       </div>
 
-      <Button text="Увійти" variant="gradient" type="submit" />
+      <Button
+        text={isPending ? 'Вхід...' : 'Увійти'}
+        variant="gradient"
+        type="submit"
+        disabled={isPending}
+      />
 
       <p className="login-register">
         Вперше тут?&nbsp;
