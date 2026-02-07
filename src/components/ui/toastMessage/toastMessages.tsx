@@ -4,7 +4,7 @@ import { type FC, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 
 type Props = {
-  message?: string;
+  message?: string | string[];
   type?: 'info' | 'success' | 'error' | 'warning';
 };
 
@@ -13,20 +13,25 @@ export const ToastMessage: FC<Props> = ({ message, type = 'info' }) => {
 
   useEffect(() => {
     if (!message || shown.current) return;
+
+    const displayMessage = Array.isArray(message)
+      ? message.join('\n')
+      : message;
+
     shown.current = true; // Флаг, чтобы не показывать тост повторно
 
     switch (type) {
       case 'success':
-        toast.success(message);
+        toast.success(displayMessage);
         break;
       case 'error':
-        toast.error(message);
+        toast.error(displayMessage);
         break;
       case 'warning':
-        toast.warning(message);
+        toast.warning(displayMessage);
         break;
       default:
-        toast(message);
+        toast(displayMessage);
     }
   }, [message, type]);
 
