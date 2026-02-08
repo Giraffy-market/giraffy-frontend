@@ -24,7 +24,7 @@ import { useVerify } from '../../hooks/useVerify';
 export const VerifyCode: FC = () => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const [email, setEmail] = useQueryState('email');
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(60);
   const [canResend, setCanResend] = useState(false);
   const { control, handleSubmit, reset, watch, setError } =
     useForm<VerifyFormValues>({
