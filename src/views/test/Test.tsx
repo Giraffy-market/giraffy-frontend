@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { Categories } from '@/modules/categories';
-import { Products } from '@/modules/products';
+// import { Categories } from '@/modules/categories';
+// import { Products } from '@/modules/products';
 
-import { Slider } from '@/components/common/Slider';
+// import { Slider } from '@/components/common/Slider';
 
 import { client } from '@/shared/api/client';
 
@@ -33,7 +33,7 @@ const Test = () => {
 export default Test;
 
 const TestCategories = () => {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     staleTime: 2000,
     refetchOnMount: false,
     refetchOnWindowFocus: false,

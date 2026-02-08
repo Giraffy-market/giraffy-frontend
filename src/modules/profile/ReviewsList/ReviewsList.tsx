@@ -11,7 +11,7 @@ import { reviewsData } from '../reviewsData';
 import styles from './ReviewsList.module.scss';
 
 export default function ReviewsList({
-  userId,
+  // userId,
   isOwnProfile,
 }: ReviewsListProps) {
   return (

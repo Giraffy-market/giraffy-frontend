@@ -8,6 +8,20 @@
   height: 100%;
   @include base-body;
   color: $blue;
+  &__error {
+    &-box {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      color: $error;
+      white-space: pre-line;
+    }
+
+    &-message {
+      @include error-message;
+      text-align: right;
+    }
+  }
   s &__field {
     width: 100%;
     height: 100%;

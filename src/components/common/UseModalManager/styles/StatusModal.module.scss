@@ -1,5 +1,5 @@
-@import '../../../../shared/styles/utils/index';
-@import '../../../../shared/styles/utils/modalmixins';
+@use '@/shared/styles/utils/index' as *;
+@use '@/shared/styles/utils/modalmixins' as *;
 
 .overlay {
   position: fixed;

@@ -20,6 +20,7 @@
     &-message {
       @include error-message;
       text-align: right;
+      white-space: pre-line;
     }
   }
 

@@ -1,19 +1,27 @@
 export type HttpErrorType = {
-  detail: string;
+  detail?: string;
+  error?: {
+    type: string;
+    message: string | string[];
+  };
 };
 
 export class HttpError extends Error {
   status: number;
   data?: HttpErrorType;
-  detail?: string;
 
   constructor(status: number, data?: HttpErrorType) {
-    super(data?.detail || 'HTTP Error');
+    const message =
+      data?.detail ||
+      (Array.isArray(data?.error?.message)
+        ? data.error.message.join(', ')
+        : data?.error?.message) ||
+      'HTTP Error';
+    super(message);
 
     this.name = 'HttpError';
     this.status = status;
     this.data = data;
-    this.detail = data?.detail;
 
     Object.setPrototypeOf(this, HttpError.prototype);
   }

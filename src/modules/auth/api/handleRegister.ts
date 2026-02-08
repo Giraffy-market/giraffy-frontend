@@ -1,6 +1,7 @@
 import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
-import { handleApiError } from '@/shared/api/helpers/handleApiError';
+
+// import { mockRequest } from '@/shared/mock/mockRequest';
 
 import type { RegisterResponse } from '../type/types';
 
@@ -22,8 +23,10 @@ export const handleRegister = async (data: HandleRegisterProps) => {
     );
 
     return response;
-  } catch (error) {
-    const errorMsg = handleApiError(error);
-    throw errorMsg;
+  } catch (error: unknown) {
+    throw error;
   }
+
+  //FAKE TEST
+  // return await mockRequest(data);
 };
