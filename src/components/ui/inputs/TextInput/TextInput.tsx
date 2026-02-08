@@ -11,11 +11,12 @@ import cn from 'classnames';
 
 import './styles/TextInput.scss';
 
-// Створюємо тип спеціально для Textarea
 interface TextInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   labelText?: string;
   Icon?: ElementType;
   iconPosition?: 'left' | 'right';
+  error?: string;
+  isInvalid?: boolean;
 }
 
 export const TextInput = forwardRef<HTMLTextAreaElement, TextInputProps>(
@@ -27,6 +28,8 @@ export const TextInput = forwardRef<HTMLTextAreaElement, TextInputProps>(
       onChange,
       iconPosition = 'left',
       className,
+      error,
+      isInvalid,
       ...props
     },
     ref: ForwardedRef<HTMLTextAreaElement>,
@@ -54,6 +57,11 @@ export const TextInput = forwardRef<HTMLTextAreaElement, TextInputProps>(
 
           {iconPosition === 'right' && Icon && (
             <Icon className="base-input__icon base-input__icon--right" />
+          )}
+        </div>
+        <div className="base-input__error-box">
+          {isInvalid && error && (
+            <span className="base-input__error-message">{error}</span>
           )}
         </div>
       </label>

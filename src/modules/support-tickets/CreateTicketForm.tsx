@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button/Button';
 import { BaseInput } from '@/components/ui/inputs';
 import { TextInput } from '@/components/ui/inputs/TextInput/TextInput';
 
-import { useCreateTicket } from './api/useCreateTicket';
-
 import { type CreateTicketFormValues } from './types/types';
 
 import './styles/CreateTicketForm.scss';
+
+import { useCreateTicket } from './hooks/useCreateTicket';
 
 const CreateTicketForm = () => {
   const { control, handleSubmit, reset } = useForm<CreateTicketFormValues>({
@@ -20,8 +20,7 @@ const CreateTicketForm = () => {
     },
   });
 
-  const { mutate, isPending, isError, error } = useCreateTicket(() => {
-    alert('Повідомлення успішно відправлено!');
+  const { mutate, isPending } = useCreateTicket(() => {
     reset();
   });
 
@@ -42,13 +41,17 @@ const CreateTicketForm = () => {
               name="user_name"
               control={control}
               defaultValue=""
-              render={({ field }) => (
+              // prettier-ignore
+              rules={{ required: 'Поле обов\'язкове для заповнення' }}
+              render={({ field, fieldState: { error } }) => (
                 <BaseInput
                   {...field}
                   type="name"
                   placeholder="Введіть ім’я"
                   labelText="Ім'я"
                   id="user_name"
+                  error={error?.message}
+                  isInvalid={!!error}
                 />
               )}
             />
@@ -58,13 +61,17 @@ const CreateTicketForm = () => {
               name="user_email"
               control={control}
               defaultValue=""
-              render={({ field }) => (
+              // prettier-ignore
+              rules={{ required: 'Поле обов\'язкове для заповнення' }}
+              render={({ field, fieldState: { error } }) => (
                 <BaseInput
                   {...field}
                   type="email"
                   placeholder="example@mail.com"
                   labelText="Електронна пошта"
                   id="user_email"
+                  error={error?.message}
+                  isInvalid={!!error}
                 />
               )}
             />
@@ -90,13 +97,17 @@ const CreateTicketForm = () => {
               name="description"
               control={control}
               defaultValue=""
-              render={({ field }) => (
+              // prettier-ignore
+              rules={{ required: 'Поле обов\'язкове для заповнення' }}
+              render={({ field, fieldState: { error } }) => (
                 <TextInput
                   {...field}
                   placeholder="Опишить ваше питання або проблему..."
                   labelText="Опис"
                   id="description"
                   style={{ minHeight: '108px' }}
+                  error={error?.message}
+                  isInvalid={!!error}
                 />
               )}
             />
