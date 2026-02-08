@@ -6,7 +6,7 @@ export default withAuth(
     const url = req.nextUrl.clone();
     const token = req.nextauth.token;
     const isMainPage = url.pathname === '/';
-    const hasLoginModal = url.searchParams.get('modal') === 'modal-login';
+    // const hasLoginModal = url.searchParams.get('modal') === 'modal-login';
 
     // Если нет токена, редирект на главную с открытием модалки логина
     // if (!token) {

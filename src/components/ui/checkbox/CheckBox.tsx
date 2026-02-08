@@ -1,7 +1,6 @@
 'use client';
 
 import type {
-  ElementType,
   FC,
   InputHTMLAttributes,
   LabelHTMLAttributes,

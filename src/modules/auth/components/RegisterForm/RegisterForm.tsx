@@ -2,9 +2,7 @@
 
 import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
-import { useRouter } from 'next/navigation';
 import { useQueryState } from 'nuqs';
 
 import { Button } from '@/components/ui/button/Button';
@@ -15,19 +13,14 @@ import type { RegisterFormValues } from './types/types';
 
 import './styles/RegisterForm.scss';
 
-import { handleRegister } from '../../api/handleRegister';
 import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
+  VERIFY_FORM_MODAL_KEY,
 } from '../../constants/modal-constants';
-
-interface ApiError {
-  detail?: string | Array<{ msg: string; loc: Array<string | number> }>;
-  message?: string;
-}
+import { useRegister } from '../../hooks/useRegister';
 
 export const RegisterForm: FC = () => {
-  const router = useRouter();
   const { control, handleSubmit, reset, setError } =
     useForm<RegisterFormValues>({
       defaultValues: {
@@ -37,106 +30,30 @@ export const RegisterForm: FC = () => {
         passwordConfirm: '',
       },
     });
+  const { mutate, isPending } = useRegister(setError);
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
+  const [, setEmail] = useQueryState('email');
 
-  const onSubmit: SubmitHandler<RegisterFormValues> = async ({
-    email,
-    phone_number,
-    password,
-    passwordConfirm,
-  }) => {
-    try {
-      if (password !== passwordConfirm) {
-        setError('passwordConfirm', {
-          type: 'manual',
-          message: 'Паролі не співпадають',
-        });
-
-        return;
-      }
-
-      const result = await handleRegister({
-        email,
-        phone_number,
-        password,
-      });
-
-      console.log(result);
-
-      toast.success('Реєстрація успішна!');
-
-      reset();
-      setModal(null);
-      router.push('/');
-    } catch (error) {
-      const serverError = error as ApiError;
-      const detail = serverError?.detail || serverError?.message || error;
-
-      if (detail) {
-        let isHandled = false;
-
-        if (Array.isArray(detail)) {
-          const passwordMessages = detail
-            .filter((err) => {
-              const m = typeof err === 'string' ? err : err.msg;
-              return m.toLowerCase().includes('пароль');
-            })
-            .map((err) => (typeof err === 'string' ? err : err.msg));
-
-          if (passwordMessages.length > 0) {
-            setError('password', {
-              type: 'server',
-              message: passwordMessages.join('\n'),
-            });
-            isHandled = true;
-          }
-
-          detail.forEach((err) => {
-            const msg = typeof err === 'string' ? err : err.msg;
-            const lowerMsg = msg.toLowerCase();
-
-            if (lowerMsg.includes('mail')) {
-              setError('email', { type: 'server', message: msg });
-              isHandled = true;
-            } else if (
-              lowerMsg.includes('phone') ||
-              lowerMsg.includes('номер')
-            ) {
-              setError('phone_number', { type: 'server', message: msg });
-              isHandled = true;
-            }
-          });
-        } else if (typeof detail === 'string') {
-          const cleanMessage = detail.trim();
-          const lowerDetail = cleanMessage.toLowerCase();
-
-          if (lowerDetail.includes('mail')) {
-            setError('email', { type: 'server', message: cleanMessage });
-            isHandled = true;
-          }
-          if (lowerDetail.includes('phone') || lowerDetail.includes('номер')) {
-            setError('phone_number', { type: 'server', message: cleanMessage });
-            isHandled = true;
-          }
-          if (lowerDetail.includes('пароль')) {
-            setError('password', { type: 'server', message: cleanMessage });
-            isHandled = true;
-          }
-
-          if (!isHandled) {
-            toast.error(cleanMessage);
-          }
-        }
-
-        if (!isHandled) {
-          toast.error(
-            typeof detail === 'string'
-              ? detail
-              : 'Сталася помилка при реєстрації',
-          );
-        }
-      }
+  const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
+    if (data.password !== data.passwordConfirm) {
+      setError('passwordConfirm', { message: 'Паролі не співпадають' });
+      return;
     }
+
+    mutate(
+      {
+        email: data.email,
+        password: data.password,
+        phone_number: data.phone_number,
+      },
+      {
+        onSuccess: async () => {
+          await setEmail(data.email);
+          setModal(VERIFY_FORM_MODAL_KEY);
+          reset();
+        },
+      },
+    );
   };
 
   return (
@@ -267,7 +184,12 @@ export const RegisterForm: FC = () => {
         </div>
       </div>
 
-      <Button text="Зареєструватися" variant="gradient" type="submit" />
+      <Button
+        text={isPending ? 'Реєстрація...' : 'Зареєструватися'}
+        variant="gradient"
+        type="submit"
+        disabled={isPending}
+      />
 
       <p className="register-login">
         Вже є аккаунт?&nbsp;

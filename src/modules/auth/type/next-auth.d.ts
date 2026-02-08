@@ -10,6 +10,15 @@ declare module 'next-auth' {
     access_token: string;
     refresh_token: string;
     expires: number;
+    error?: string;
+  }
+
+  interface User {
+    user_id: string;
+    access_token: string;
+    refresh_token: string;
+    expired_in: number;
+    email: string;
   }
 }
 
@@ -20,5 +29,8 @@ declare module 'next-auth/jwt' {
     refresh_token: string;
     token_type: string;
     expired_in: number;
+    expiresAt: number; // Нам это нужно для логики рефреша
+    token_type?: string; // Ставим ?, если бэк не всегда его шлет
+    error?: string;
   }
 }

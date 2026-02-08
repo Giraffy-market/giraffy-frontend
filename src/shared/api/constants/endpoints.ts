@@ -6,12 +6,13 @@ export const STALE_TIME = 300_000;
 export const endpoints = {
   auth: {
     register: '/auth/register',
+    verify_code: '/auth/verify_code',
+    resend_verification_code: '/auth/resend-verification-code',
     login: '/auth/user_login',
     logout: '/auth/user_logout',
     refresh: '/auth/refresh',
     request: '/auth/request',
     confirm: '/auth/confirm',
-    verify_code: '/auth/verify_code',
   },
   users: {
     me: '/users/me',

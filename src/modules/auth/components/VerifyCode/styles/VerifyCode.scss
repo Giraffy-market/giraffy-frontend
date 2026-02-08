@@ -1,0 +1,96 @@
+@use '@/shared/styles/utils/index' as *;
+
+.verify {
+  color: $blue;
+  &-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-text {
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  &-bottom {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  &-desc {
+    text-align: center;
+  }
+
+  &-inputs {
+    &--wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+      @include onDesktop {
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+    }
+  }
+
+  &-checkboxes {
+    &--wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+      @include onDesktop {
+        margin-bottom: 28px;
+      }
+    }
+  }
+
+  &-checkbox {
+    &--wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        text-decoration: underline;
+        transition: opacity 0.2s;
+      }
+    }
+    &--item {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 8px;
+      @include small-body;
+      color: #233246;
+      @include onDesktop {
+        gap: 16px;
+      }
+    }
+  }
+
+  &-label {
+    @include base-body;
+    color: $blue;
+  }
+
+  &-login {
+    @include base-body;
+    color: $blue;
+    margin: 0 auto;
+    margin-top: 12px;
+    @include onDesktop {
+      margin-top: 16px;
+    }
+    &--link {
+      color: $blue;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+}

@@ -2,6 +2,8 @@ import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
+// import { mockRequest } from '@/shared/mock/mockRequest';
+
 import type { VerifyResponse } from '../type/types';
 
 type HandleVerifyProps = {
@@ -25,4 +27,7 @@ export const handleVerify = async (data: HandleVerifyProps) => {
     const errorMsg = handleApiError(error);
     throw errorMsg;
   }
+
+  //FAKE TEST
+  // return await mockRequest(data);
 };
