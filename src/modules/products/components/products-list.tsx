@@ -13,7 +13,7 @@ type Props = {
 
 export const ProductsList: FC<Props> = ({ products }) => (
   <div className="products-list">
-    {products.map((product) => (
+    {products?.map((product) => (
       <Fragment key={product.product_id}>
         <ProductCard product={product} />
       </Fragment>

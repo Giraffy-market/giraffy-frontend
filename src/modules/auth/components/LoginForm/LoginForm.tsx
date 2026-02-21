@@ -16,6 +16,7 @@ import type { LoginFormValues } from './types/types';
 import './styles/LoginForm.scss';
 
 import {
+  FORGOT_PASSWORD_MODAL_KEY,
   MODAL_QUERY_STATE,
   REGISTER_FORM_MODAL_KEY,
 } from '../../constants/modal-constants';
@@ -106,7 +107,12 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
           )}
         />
 
-        <span className="login-actions--forget">Забули пароль?</span>
+        <button
+          className="login-actions--forget"
+          onClick={() => setModal(FORGOT_PASSWORD_MODAL_KEY)}
+        >
+          Забули пароль?
+        </button>
       </div>
 
       <Button

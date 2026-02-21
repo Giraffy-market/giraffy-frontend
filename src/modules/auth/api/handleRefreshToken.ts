@@ -15,15 +15,12 @@ export const handleRefreshToken = async (token: JWT): Promise<JWT> => {
     },
   );
 
-  // Мы НЕ возвращаем refreshed напрямую.
-  // Мы создаем объект, который соответствует интерфейсу JWT.
   return {
-    ...token, // сохраняем старые данные (user_id и т.д.)
+    ...token,
     access_token: refreshed.access_token,
     refresh_token: refreshed.refresh_token ?? token.refresh_token,
     token_type: refreshed.token_type,
     expired_in: refreshed.expired_in,
-    // ВОТ ТУТ мы создаем недостающее поле expiresAt
     expiresAt: Math.floor(Date.now() / 1000) + refreshed.expired_in,
   };
 };

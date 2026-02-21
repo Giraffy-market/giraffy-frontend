@@ -3,15 +3,17 @@ import { toast } from 'react-toastify';
 
 import { useMutation } from '@tanstack/react-query';
 
-import type { RegisterFormValues } from '../components/RegisterForm/types/types';
+import { ResetPasswordFormValues } from '../components/ResetPasswordForm/types/types';
 
-import { handleRegister } from '../api/handleRegister';
+import { handleResetPassword } from '../api/handleResetPassword';
 
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
-export const useRegister = (setError: UseFormSetError<RegisterFormValues>) => {
+export const useResetPassword = (
+  setError: UseFormSetError<ResetPasswordFormValues>,
+) => {
   return useMutation({
-    mutationFn: handleRegister,
+    mutationFn: handleResetPassword,
 
     onError: (error: unknown) => {
       const rawMessages = handleApiError(error);
@@ -44,34 +46,6 @@ export const useRegister = (setError: UseFormSetError<RegisterFormValues>) => {
             : displayMessage;
 
           setError('password', { type: 'server', message: passwordSpecific });
-          isHandled = true;
-        }
-
-        if (lowerMessage.includes('mail')) {
-          const emailSpecific = Array.isArray(rawMessages)
-            ? rawMessages.find((m) => m.toLowerCase().includes('mail'))
-            : displayMessage;
-
-          setError('email', {
-            type: 'server',
-            message: emailSpecific || displayMessage,
-          });
-          isHandled = true;
-        }
-
-        if (lowerMessage.includes('phone') || lowerMessage.includes('номер')) {
-          const phoneSpecific = Array.isArray(rawMessages)
-            ? rawMessages.find(
-                (m) =>
-                  m.toLowerCase().includes('phone') ||
-                  m.toLowerCase().includes('номер'),
-              )
-            : displayMessage;
-
-          setError('phone_number', {
-            type: 'server',
-            message: phoneSpecific || displayMessage,
-          });
           isHandled = true;
         }
       }

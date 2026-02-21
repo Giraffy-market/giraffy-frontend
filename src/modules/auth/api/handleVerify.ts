@@ -1,8 +1,7 @@
 import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
-
-// import { mockRequest } from '@/shared/mock/mockRequest';
+import { mockRequest } from '@/shared/mock/mockRequest';
 
 import type { VerifyResponse } from '../type/types';
 
@@ -11,7 +10,9 @@ type HandleVerifyProps = {
   kod: string;
 };
 
-export const handleVerify = async (data: HandleVerifyProps) => {
+export const handleVerify = async (
+  data: HandleVerifyProps,
+): Promise<VerifyResponse> => {
   try {
     const response = await customFetch<VerifyResponse>(
       endpoints.auth.verify_code,
@@ -29,5 +30,11 @@ export const handleVerify = async (data: HandleVerifyProps) => {
   }
 
   //FAKE TEST
-  // return await mockRequest(data);
+  // return await mockRequest<VerifyResponse['data']>({
+  //   email: data.email,
+  //   access_token: 'fake_access_token_123',
+  //   refresh_token: 'fake_refresh_token_456',
+  //   user_id: 'user_789',
+  //   token: 'reset_password_token_abc',
+  // });
 };

@@ -2,18 +2,17 @@ import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
 import { mockRequest } from '@/shared/mock/mockRequest';
 
-import type { RegisterResponse } from '../type/types';
+import type { ResetPasswordResponse } from '../type/types';
 
-type HandleRegisterProps = {
-  email: string;
+type HandleResetPasswordProps = {
+  token: string;
   password: string;
-  phone_number: string;
 };
 
-export const handleRegister = async (data: HandleRegisterProps) => {
+export const handleResetPassword = async (data: HandleResetPasswordProps) => {
   try {
-    const response = await customFetch<RegisterResponse>(
-      endpoints.auth.register,
+    const response = await customFetch<ResetPasswordResponse>(
+      endpoints.auth.confirm,
       '',
       {
         method: 'POST',

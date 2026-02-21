@@ -16,7 +16,9 @@ import './styles/RegisterForm.scss';
 import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
+  VERIFY_ACTION_KEY,
   VERIFY_FORM_MODAL_KEY,
+  VerifyAction,
 } from '../../constants/modal-constants';
 import { useRegister } from '../../hooks/useRegister';
 
@@ -33,6 +35,7 @@ export const RegisterForm: FC = () => {
   const { mutate, isPending } = useRegister(setError);
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const [, setEmail] = useQueryState('email');
+  const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     if (data.password !== data.passwordConfirm) {
@@ -49,6 +52,7 @@ export const RegisterForm: FC = () => {
       {
         onSuccess: async () => {
           await setEmail(data.email);
+          await setVerifyAction(VerifyAction.REGISTER);
           setModal(VERIFY_FORM_MODAL_KEY);
           reset();
         },

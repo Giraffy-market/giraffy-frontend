@@ -4,9 +4,10 @@ import { type FC, useEffect, useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
 
-// import { useModalManager } from '@/components/common/UseModalManager';
+import { ModalType } from '@/components/common/UseModalManager/hooks/useModalManager';
 import { Button } from '@/components/ui/button/Button';
 import { OtpInput } from '@/components/ui/inputs';
 
@@ -17,12 +18,19 @@ import './styles/VerifyCode.scss';
 import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
+  RESET_PASSWORD_MODAL_KEY,
 } from '../../constants/modal-constants';
 import { useResendCode } from '../../hooks/useResendCode';
 import { useVerify } from '../../hooks/useVerify';
 
-export const VerifyCode: FC = () => {
+interface VerifyCodeProps {
+  action?: 'register' | 'forgot_password';
+  onShowStatus?: (type: ModalType) => void;
+}
+
+export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
+  const [, setToken] = useQueryState('token');
   const [email, setEmail] = useQueryState('email');
   const [seconds, setSeconds] = useState(60);
   const [canResend, setCanResend] = useState(false);
@@ -38,7 +46,6 @@ export const VerifyCode: FC = () => {
     setCanResend(false);
   });
   const verifyMutation = useVerify(setError);
-  // const [otp, setOtp] = useState('');
   const kodValue = watch('kod');
   const isOtpComplete = kodValue.length === 4;
 
@@ -73,9 +80,26 @@ export const VerifyCode: FC = () => {
         kod: data.kod,
       },
       {
-        onSuccess: () => {
+        onSuccess: async (response) => {
+          const { access_token, refresh_token, user_id } = response.data;
           toast.success('Код підтверджено!');
-          setModal(LOGIN_FORM_MODAL_KEY);
+
+          if (action !== 'forgot_password') {
+            const result = await signIn('credentials', {
+              accessToken: access_token,
+              refreshToken: refresh_token,
+              userId: user_id,
+              redirect: false,
+            });
+            if (result?.ok) {
+              toast.success('Авторизовано успішно!');
+              setModal(null);
+              onShowStatus?.('welcome');
+            }
+          } else {
+            setToken(access_token);
+            setModal(RESET_PASSWORD_MODAL_KEY);
+          }
           reset();
         },
       },
