@@ -15,7 +15,7 @@ import './styles/ForgotPasswordForm.scss';
 
 import {
   MODAL_QUERY_STATE,
-  VERIFY_ACTION_KEY,
+  // VERIFY_ACTION_KEY,
 } from '../../constants/modal-constants';
 import { useForgotPassword } from '../../hooks/useForgotPassword';
 

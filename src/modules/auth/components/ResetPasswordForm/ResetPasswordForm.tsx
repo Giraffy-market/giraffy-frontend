@@ -16,7 +16,7 @@ import './styles/ResetPasswordForm.scss';
 import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
-  VERIFY_ACTION_KEY,
+  // VERIFY_ACTION_KEY,
   // VerifyAction,
 } from '../../constants/modal-constants';
 import { useResetPassword } from '../../hooks/useResetPassword';
