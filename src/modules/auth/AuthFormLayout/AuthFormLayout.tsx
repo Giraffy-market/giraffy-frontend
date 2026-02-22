@@ -69,7 +69,7 @@ export const AuthFormLayout = () => {
       case REGISTER_FORM_MODAL_KEY:
         return <RegisterForm />;
       case FORGOT_PASSWORD_MODAL_KEY:
-        return <ForgotPasswordForm />;
+        return <ForgotPasswordForm onShowStatus={openModal} />;
       case RESET_PASSWORD_MODAL_KEY:
         return <ResetPasswordForm />;
       case VERIFY_FORM_MODAL_KEY:

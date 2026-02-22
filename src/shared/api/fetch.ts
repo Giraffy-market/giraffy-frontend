@@ -2,17 +2,17 @@ import { API } from '@/shared/api/constants/endpoints';
 import { HttpError, type HttpErrorType } from '@/shared/api/errors/http-error';
 import type { HttpStatuses } from '@/shared/api/errors/types';
 
-const MOCK_DATA: Record<string, unknown> = {
-  '/categories': [
-    { category_id: 1, name: 'Краса та догляд', image_url: null },
-    { category_id: 2, name: 'Електроніка', image_url: null },
-    { category_id: 3, name: 'Дім та сад', image_url: null },
-  ],
-  '/products': [
-    { id: 1, name: 'Крем для обличчя', price: 450, category_id: 1 },
-    { id: 2, name: 'Смартфон', price: 12000, category_id: 2 },
-  ],
-};
+// const MOCK_DATA: Record<string, unknown> = {
+//   '/categories': [
+//     { category_id: 1, name: 'Краса та догляд', image_url: null },
+//     { category_id: 2, name: 'Електроніка', image_url: null },
+//     { category_id: 3, name: 'Дім та сад', image_url: null },
+//   ],
+//   '/products': [
+//     { id: 1, name: 'Крем для обличчя', price: 450, category_id: 1 },
+//     { id: 2, name: 'Смартфон', price: 12000, category_id: 2 },
+//   ],
+// };
 
 export const customFetch = async <Tresp>(
   endpoint: string,

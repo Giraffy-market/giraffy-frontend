@@ -45,7 +45,10 @@ export const useResetPassword = (
                 .join('\n')
             : displayMessage;
 
-          setError('password', { type: 'server', message: passwordSpecific });
+          setError('new_password', {
+            type: 'server',
+            message: passwordSpecific,
+          });
           isHandled = true;
         }
       }

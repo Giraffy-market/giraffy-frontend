@@ -2,6 +2,7 @@
 
 import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { useQueryState } from 'nuqs';
 
@@ -16,7 +17,7 @@ import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
   VERIFY_ACTION_KEY,
-  VerifyAction,
+  // VerifyAction,
 } from '../../constants/modal-constants';
 import { useResetPassword } from '../../hooks/useResetPassword';
 
@@ -25,7 +26,7 @@ export const ResetPasswordForm: FC = () => {
     useForm<ResetPasswordFormValues>({
       defaultValues: {
         token: '',
-        password: '',
+        new_password: '',
         passwordConfirm: '',
       },
     });
@@ -33,10 +34,10 @@ export const ResetPasswordForm: FC = () => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   // const [, setEmail] = useQueryState('email');
   const [token, setToken] = useQueryState('token');
-  const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
+  // const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
-    if (data.password !== data.passwordConfirm) {
+    if (data.new_password !== data.passwordConfirm) {
       setError('passwordConfirm', { message: 'Паролі не співпадають' });
       return;
     }
@@ -51,12 +52,13 @@ export const ResetPasswordForm: FC = () => {
     mutate(
       {
         token: activeToken,
-        password: data.password,
+        new_password: data.new_password,
       },
       {
         onSuccess: async () => {
+          toast.success('Пароль успішно змінено');
           await setToken(null);
-          await setVerifyAction(VerifyAction.FORGOT_PASSWORD);
+          // await setVerifyAction(VerifyAction.FORGOT_PASSWORD);
           setModal(LOGIN_FORM_MODAL_KEY);
           reset();
         },
@@ -72,7 +74,7 @@ export const ResetPasswordForm: FC = () => {
       <div className="register-inputs--wrapper">
         <div className="register-input--wrapper">
           <Controller
-            name="password"
+            name="new_password"
             control={control}
             // prettier-ignore
             rules={{ required: 'Поле обов\'язкове для заповнення' }}

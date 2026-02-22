@@ -18,6 +18,7 @@ import './styles/VerifyCode.scss';
 import { MODAL_QUERY_STATE } from '../../constants/modal-constants';
 import { useResendCode } from '../../hooks/useResendCode';
 import { useVerify } from '../../hooks/useVerify';
+import { useAuthTempStore } from '../../store/useAuthTempStore';
 
 interface VerifyCodeProps {
   action?: 'register' | 'forgot_password';
@@ -25,17 +26,18 @@ interface VerifyCodeProps {
 }
 
 export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
+  const password = useAuthTempStore((state) => state.password);
+  const setPassword = useAuthTempStore((state) => state.setPassword);
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const [email, setEmail] = useQueryState('email');
   const [, setVerifyAction] = useQueryState('verifyAction');
   const [seconds, setSeconds] = useState(60);
   const [canResend, setCanResend] = useState(false);
-  const { control, handleSubmit, reset, watch, setError } =
-    useForm<VerifyFormValues>({
-      defaultValues: {
-        kod: '',
-      },
-    });
+  const { control, handleSubmit, reset, setError } = useForm<VerifyFormValues>({
+    defaultValues: {
+      kod: '',
+    },
+  });
 
   const resendMutation = useResendCode(() => {
     setSeconds(60);
@@ -74,21 +76,22 @@ export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
         kod: data.kod,
       },
       {
-        onSuccess: async (response) => {
-          const { access_token, refresh_token, user_id } = response.data;
+        onSuccess: async () => {
           toast.success('Код підтверджено!');
 
           if (action !== 'forgot_password') {
             const result = await signIn('credentials', {
-              accessToken: access_token,
-              refreshToken: refresh_token,
-              userId: user_id,
+              email: email,
+              password: password,
               redirect: false,
             });
             if (result?.ok) {
               toast.success('Авторизовано успішно!');
               setModal(null);
               onShowStatus?.('welcome');
+              setPassword(null);
+            } else {
+              toast.error('Помилка при автоматичному вході');
             }
           } else {
             setModal(null);

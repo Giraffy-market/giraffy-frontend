@@ -1,5 +1,5 @@
 export type ResetPasswordFormValues = {
   token: string;
-  password: string;
+  new_password: string;
   passwordConfirm: string;
 };

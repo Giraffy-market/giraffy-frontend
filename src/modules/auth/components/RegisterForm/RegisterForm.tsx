@@ -24,8 +24,10 @@ import {
   VerifyAction,
 } from '../../constants/modal-constants';
 import { useRegister } from '../../hooks/useRegister';
+import { useAuthTempStore } from '../../store/useAuthTempStore';
 
 export const RegisterForm: FC = () => {
+  const setPassword = useAuthTempStore((state) => state.setPassword);
   const { control, handleSubmit, reset, setError } =
     useForm<RegisterFormValues>({
       defaultValues: {
@@ -62,6 +64,7 @@ export const RegisterForm: FC = () => {
       },
       {
         onSuccess: async () => {
+          setPassword(data.password);
           await setEmail(data.email);
           await setVerifyAction(VerifyAction.REGISTER);
           setModal(VERIFY_FORM_MODAL_KEY);

@@ -7,7 +7,7 @@ import type { ResetPasswordResponse } from '../type/types';
 
 type HandleResetPasswordProps = {
   token: string;
-  password: string;
+  new_password: string;
 };
 
 export const handleResetPassword = async (data: HandleResetPasswordProps) => {

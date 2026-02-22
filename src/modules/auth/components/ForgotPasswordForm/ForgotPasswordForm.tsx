@@ -5,6 +5,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import { useQueryState } from 'nuqs';
 
+import { type ModalType } from '@/components/common/UseModalManager/hooks/useModalManager';
 import { Button } from '@/components/ui/button/Button';
 import { BaseInput } from '@/components/ui/inputs';
 
@@ -15,11 +16,16 @@ import './styles/ForgotPasswordForm.scss';
 import {
   MODAL_QUERY_STATE,
   VERIFY_ACTION_KEY,
-  VERIFY_FORM_MODAL_KEY,
 } from '../../constants/modal-constants';
 import { useForgotPassword } from '../../hooks/useForgotPassword';
 
-export const ForgotPasswordForm: FC = () => {
+interface ForgotPasswordFormProps {
+  onShowStatus?: (type: ModalType) => void;
+}
+
+export const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({
+  onShowStatus,
+}) => {
   const { control, handleSubmit, setError } = useForm<ForgotPasswordFormValues>(
     {
       defaultValues: {
@@ -29,17 +35,19 @@ export const ForgotPasswordForm: FC = () => {
   );
 
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
-  const [, setEmail] = useQueryState('email');
-  const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
+  // const [, setEmail] = useQueryState('email');
+  // const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
 
   const { mutate, isPending } = useForgotPassword(setError);
 
   const onSubmit: SubmitHandler<ForgotPasswordFormValues> = async (data) => {
     mutate(data, {
       onSuccess: async () => {
-        await setEmail(data.email);
-        await setVerifyAction('forgot_password');
-        await setModal(VERIFY_FORM_MODAL_KEY);
+        // await setEmail(data.email);
+        // await setVerifyAction('forgot_password');
+        // await setModal(VERIFY_FORM_MODAL_KEY);
+        await setModal(null);
+        onShowStatus?.('sendmessage');
       },
     });
   };
