@@ -8,13 +8,12 @@ import { useQueryState } from 'nuqs';
 import { Button } from '@/components/ui/button/Button';
 import { BaseInput } from '@/components/ui/inputs';
 
-import { ForgotPasswordFormValues } from './types/types';
+import { type ForgotPasswordFormValues } from './types/types';
 
 import './styles/ForgotPasswordForm.scss';
 
 import {
   MODAL_QUERY_STATE,
-  REGISTER_FORM_MODAL_KEY,
   VERIFY_ACTION_KEY,
   VERIFY_FORM_MODAL_KEY,
 } from '../../constants/modal-constants';
@@ -58,7 +57,8 @@ export const ForgotPasswordForm: FC = () => {
             name="email"
             control={control}
             rules={{
-              required: "Поле обов'язкове для заповнення",
+              // prettier-ignore
+              required: 'Поле обов\'язкове для заповнення',
               pattern: {
                 value: /\S+@\S+\.\S+/,
                 message: 'Невірний формат пошти',

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
 
-import { ModalType } from '@/components/common/UseModalManager/hooks/useModalManager';
+import { type ModalType } from '@/components/common/UseModalManager/hooks/useModalManager';
 import { Button } from '@/components/ui/button/Button';
 import { OtpInput } from '@/components/ui/inputs';
 
@@ -15,11 +15,7 @@ import type { VerifyFormValues } from './types/types';
 
 import './styles/VerifyCode.scss';
 
-import {
-  LOGIN_FORM_MODAL_KEY,
-  MODAL_QUERY_STATE,
-  RESET_PASSWORD_MODAL_KEY,
-} from '../../constants/modal-constants';
+import { MODAL_QUERY_STATE } from '../../constants/modal-constants';
 import { useResendCode } from '../../hooks/useResendCode';
 import { useVerify } from '../../hooks/useVerify';
 
@@ -30,8 +26,8 @@ interface VerifyCodeProps {
 
 export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
-  const [, setToken] = useQueryState('token');
   const [email, setEmail] = useQueryState('email');
+  const [, setVerifyAction] = useQueryState('verifyAction');
   const [seconds, setSeconds] = useState(60);
   const [canResend, setCanResend] = useState(false);
   const { control, handleSubmit, reset, watch, setError } =
@@ -46,8 +42,6 @@ export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
     setCanResend(false);
   });
   const verifyMutation = useVerify(setError);
-  const kodValue = watch('kod');
-  const isOtpComplete = kodValue.length === 4;
 
   useEffect(() => {
     if (seconds <= 0) {
@@ -97,9 +91,11 @@ export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
               onShowStatus?.('welcome');
             }
           } else {
-            setToken(access_token);
-            setModal(RESET_PASSWORD_MODAL_KEY);
+            setModal(null);
+            onShowStatus?.('sendmessage');
           }
+
+          await Promise.all([setEmail(null), setVerifyAction(null)]);
           reset();
         },
       },

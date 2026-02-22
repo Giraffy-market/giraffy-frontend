@@ -6,10 +6,9 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { useQueryState } from 'nuqs';
 
 import { Button } from '@/components/ui/button/Button';
-import { CheckBox } from '@/components/ui/checkbox/CheckBox';
-import { BaseInput, PasswordInput, PhoneInput } from '@/components/ui/inputs';
+import { PasswordInput } from '@/components/ui/inputs';
 
-import { ResetPasswordFormValues } from './types/types';
+import { type ResetPasswordFormValues } from './types/types';
 
 import './styles/ResetPasswordForm.scss';
 
@@ -32,7 +31,7 @@ export const ResetPasswordForm: FC = () => {
     });
   const { mutate, isPending } = useResetPassword(setError);
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
-  const [, setEmail] = useQueryState('email');
+  // const [, setEmail] = useQueryState('email');
   const [token, setToken] = useQueryState('token');
   const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
 
@@ -42,9 +41,16 @@ export const ResetPasswordForm: FC = () => {
       return;
     }
 
+    const activeToken = token || data.token;
+
+    if (!activeToken) {
+      console.error('Токен відсутній у URL');
+      return;
+    }
+
     mutate(
       {
-        token: data.token || token || '',
+        token: activeToken,
         password: data.password,
       },
       {

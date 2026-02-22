@@ -2,6 +2,8 @@
 
 import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { FcGoogle } from 'react-icons/fc';
+import { toast } from 'react-toastify';
 
 import { useQueryState } from 'nuqs';
 
@@ -13,6 +15,7 @@ import type { RegisterFormValues } from './types/types';
 
 import './styles/RegisterForm.scss';
 
+import { handleGoogleLoginAction } from '../../api/handleGoogleLoginAction';
 import {
   LOGIN_FORM_MODAL_KEY,
   MODAL_QUERY_STATE,
@@ -36,6 +39,14 @@ export const RegisterForm: FC = () => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const [, setEmail] = useQueryState('email');
   const [, setVerifyAction] = useQueryState(VERIFY_ACTION_KEY);
+
+  const onGoogleClick = async () => {
+    try {
+      await handleGoogleLoginAction();
+    } catch (err) {
+      toast.error('Помилка авторизації');
+    }
+  };
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     if (data.password !== data.passwordConfirm) {
@@ -195,6 +206,34 @@ export const RegisterForm: FC = () => {
         disabled={isPending}
       />
 
+      <p
+        className="register-login"
+        style={{
+          margin: '16px auto 8px',
+        }}
+      >
+        Або
+      </p>
+
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isPending}
+        onClick={onGoogleClick}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            justifyContent: 'center',
+            height: '80px',
+          }}
+        >
+          <FcGoogle size={56} />
+          <span>Продовжити з Google</span>
+        </div>
+      </Button>
       <p className="register-login">
         Вже є аккаунт?&nbsp;
         <button

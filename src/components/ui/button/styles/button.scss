@@ -33,7 +33,7 @@ $disabled-gradient: linear-gradient(90deg, #ccc 0%, #797777 100%);
     }
   }
   &.outline {
-    height: 52px;
+    min-height: 52px;
   }
   &.smallest {
     height: 38px;

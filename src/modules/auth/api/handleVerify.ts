@@ -1,7 +1,8 @@
 import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
-import { mockRequest } from '@/shared/mock/mockRequest';
+
+// import { mockRequest } from '@/shared/mock/mockRequest';
 
 import type { VerifyResponse } from '../type/types';
 

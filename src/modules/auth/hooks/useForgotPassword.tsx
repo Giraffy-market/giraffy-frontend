@@ -1,9 +1,9 @@
-import { UseFormSetError } from 'react-hook-form';
+import { type UseFormSetError } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { ForgotPasswordFormValues } from '../components/ForgotPasswordForm/types/types';
+import { type ForgotPasswordFormValues } from '../components/ForgotPasswordForm/types/types';
 
 import { handleForgotPassword } from '../api/handleForgotPassword';
 
@@ -26,6 +26,20 @@ export const useForgotPassword = (
         ? rawMessages.join('\n')
         : rawMessages;
 
+      if (
+        displayMessage.includes('не знайдено') ||
+        displayMessage.includes('email')
+      ) {
+        setError(
+          'email',
+          {
+            type: 'manual',
+            message: displayMessage || 'Ця пошта не зареєстрована',
+          },
+          { shouldFocus: true },
+        );
+        return;
+      }
       const lowerMessage = errorString.toLowerCase();
 
       if (

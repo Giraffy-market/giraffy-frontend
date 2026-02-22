@@ -32,7 +32,7 @@ import {
   RESET_PASSWORD_MODAL_KEY,
   VERIFY_ACTION_KEY,
   VERIFY_FORM_MODAL_KEY,
-  VerifyAction,
+  type VerifyAction,
 } from '../constants/modal-constants';
 
 import './AuthFormLayout.scss';

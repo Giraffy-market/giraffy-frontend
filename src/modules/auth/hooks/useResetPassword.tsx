@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { ResetPasswordFormValues } from '../components/ResetPasswordForm/types/types';
+import { type ResetPasswordFormValues } from '../components/ResetPasswordForm/types/types';
 
 import { handleResetPassword } from '../api/handleResetPassword';
 

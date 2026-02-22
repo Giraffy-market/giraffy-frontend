@@ -1,6 +1,7 @@
 import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
-import { mockRequest } from '@/shared/mock/mockRequest';
+
+// import { mockRequest } from '@/shared/mock/mockRequest';
 
 import type { ResetPasswordResponse } from '../type/types';
 
