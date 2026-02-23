@@ -56,7 +56,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
 
         router.refresh();
         await setModal(null);
-        onShowStatus?.('welcome');
+        // onShowStatus?.('welcome');
       },
     });
   };
