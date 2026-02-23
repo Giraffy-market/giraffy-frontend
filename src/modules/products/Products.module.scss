@@ -1,0 +1,145 @@
+@use '@/shared/styles/utils/index' as *;
+
+.mainLayout {
+  display: flex;
+  gap: 38px;
+  margin-top: 20px;
+
+  aside {
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.dialog-close {
+  display: none;
+}
+
+.productsContent {
+  flex: 1;
+}
+
+.mobileFilterBtn {
+  display: none;
+
+  @media (max-width: 1024px) {
+    display: block;
+    margin: 0 auto 24px auto;
+    width: 100%;
+    max-width: 340px;
+    background: $orange;
+    color: $blue;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    @include button-2;
+
+    &:active {
+      transform: scale(0.98);
+      background: $orange-hover;
+    }
+  }
+}
+
+.innerBtnContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.svgSetting {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.mobileOverlay {
+  position: fixed;
+
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+}
+
+.mobileModal {
+  position: fixed;
+  top: 400;
+  right: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 100vh;
+  background: $white;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+
+  animation: 0.3s ease-out;
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+  }
+}
+
+.modalHeader {
+  padding: 16px 20px;
+  border-bottom: 1px solid $gray;
+
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    @include h3;
+    color: $blue;
+    margin: 0;
+  }
+}
+
+.modalBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+
+  aside {
+    display: block !important;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+.closeBtn {
+  background: $gray;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: $blue;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $light-gray;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

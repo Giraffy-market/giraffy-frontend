@@ -1,0 +1,176 @@
+@use '@/shared/styles/utils/index' as *;
+
+.filterSidebar {
+  width: 100%;
+  max-width: 300px;
+  background: $white;
+  border-radius: 12px;
+  padding: 20px;
+  padding-bottom: 46px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  align-self: flex-start;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.searchWrapper {
+  margin-bottom: 20px;
+
+  .searchInput {
+    @include small-body;
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid $light-gray;
+    border-radius: 10px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236d6b6b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E")
+      no-repeat 14px center;
+
+    &:focus {
+      border-color: $orange;
+    }
+  }
+}
+
+.section {
+  padding: 16px 0;
+  border-bottom: 1px solid $gray;
+
+  h3 {
+    @include h3;
+    color: $blue;
+    margin: 0;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  .arrow {
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid $blue;
+    border-bottom: 2px solid $blue;
+    transform: rotate(45deg);
+    transition: 0.3s;
+    margin-bottom: 5px;
+
+    &.up {
+      transform: rotate(-135deg);
+      margin-bottom: -5px;
+    }
+  }
+}
+
+.priceInputs {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.inputStepper {
+  position: relative;
+  flex: 1;
+
+  input {
+    @include small-body;
+    width: 100%;
+    padding: 10px 25px 10px 10px;
+    border: 1px solid $light-gray;
+    border-radius: 8px;
+    appearance: textfield; // Прибираємо стандартні стрілочки
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+    }
+  }
+
+  .stepperControls {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    button {
+      background: none;
+      border: none;
+      color: $orange;
+      font-size: 12px;
+      cursor: pointer;
+      line-height: 1;
+      &:hover {
+        color: $orange-hover;
+      }
+    }
+  }
+}
+
+.checkboxList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+
+    span {
+      @include base-body;
+      color: $blue;
+    }
+
+    input[type='checkbox'] {
+      width: 20px;
+      height: 20px;
+      accent-color: $orange;
+      cursor: pointer;
+    }
+  }
+
+  .showMore {
+    @include button-2;
+    font-size: 12px;
+    color: $dark-gray;
+    text-transform: uppercase;
+    cursor: pointer;
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+
+  .applyBtn {
+    @include button;
+    background-color: $orange !important;
+    border: none !important;
+    padding: 16px !important;
+    &:hover {
+      background-color: $orange-hover !important;
+    }
+  }
+
+  .resetBtn {
+    @include button;
+    background-color: $gray !important;
+    color: $blue !important;
+    border: 1px solid $blue !important;
+    padding: 16px !important;
+  }
+}
