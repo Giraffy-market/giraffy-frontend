@@ -166,7 +166,7 @@ export const RegisterForm: FC = () => {
               field: { value, onChange, ...field },
               fieldState: { error },
             }) => (
-              <div>
+              <div className="register-checkbox-content">
                 <CheckBox
                   {...field}
                   checked={value}
