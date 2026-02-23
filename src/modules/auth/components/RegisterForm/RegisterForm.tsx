@@ -35,6 +35,8 @@ export const RegisterForm: FC = () => {
         phone_number: '',
         password: '',
         passwordConfirm: '',
+        dataUseAgreement: false,
+        newsSubscription: false,
       },
     });
   const { mutate, isPending } = useRegister(setError);
@@ -159,31 +161,51 @@ export const RegisterForm: FC = () => {
           <Controller
             name="dataUseAgreement"
             control={control}
-            render={({ field }) => (
-              <CheckBox
-                {...field}
-                labelText={
-                  <span>
-                    Я даю згоду на обробку персональних данних та приймаю{' '}
-                    <a href="/privacy" target="_blank">
-                      Політику конфіденційності
-                    </a>{' '}
-                    і{' '}
-                    <a href="/legal-terms" target="_blank">
-                      Умови надання послуг
-                    </a>
+            rules={{ required: 'Це поле є обов’язковим для продовження' }}
+            render={({
+              field: { value, onChange, ...field },
+              fieldState: { error },
+            }) => (
+              <div>
+                <CheckBox
+                  {...field}
+                  checked={value}
+                  onChange={(e) => onChange(e.target.checked)}
+                  labelText={
+                    <span>
+                      Я даю згоду на обробку персональних даних та приймаю{' '}
+                      <a href="/privacy" target="_blank">
+                        Політику конфіденційності
+                      </a>{' '}
+                      і{' '}
+                      <a href="/legal-terms" target="_blank">
+                        Умови надання послуг
+                      </a>
+                    </span>
+                  }
+                  labelProps={{
+                    className: 'register-checkbox--item',
+                  }}
+                />
+                {error && (
+                  <span
+                    style={{
+                      color: 'var(--error-color, red)',
+                      fontSize: '12px',
+                      marginTop: '4px',
+                      display: 'block',
+                    }}
+                  >
+                    {error.message}
                   </span>
-                }
-                labelProps={{
-                  className: 'register-checkbox--item',
-                }}
-              />
+                )}
+              </div>
             )}
           />
         </div>
         <div className="register-checkbox--wrapper">
           <Controller
-            name="dataUseAgreement"
+            name="newsSubscription"
             control={control}
             render={({ field }) => (
               <CheckBox
