@@ -18,7 +18,10 @@
       }
     }
   }
-
+  &-checkbox-content {
+    display: flex;
+    flex-direction: column;
+  }
   &-checkboxes {
     &--wrapper {
       display: flex;

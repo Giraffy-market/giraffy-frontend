@@ -4,9 +4,10 @@ import { type FC, useEffect, useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
 
-// import { useModalManager } from '@/components/common/UseModalManager';
+import { type ModalType } from '@/components/common/UseModalManager/hooks/useModalManager';
 import { Button } from '@/components/ui/button/Button';
 import { OtpInput } from '@/components/ui/inputs';
 
@@ -14,33 +15,35 @@ import type { VerifyFormValues } from './types/types';
 
 import './styles/VerifyCode.scss';
 
-import {
-  LOGIN_FORM_MODAL_KEY,
-  MODAL_QUERY_STATE,
-} from '../../constants/modal-constants';
+import { MODAL_QUERY_STATE } from '../../constants/modal-constants';
 import { useResendCode } from '../../hooks/useResendCode';
 import { useVerify } from '../../hooks/useVerify';
+import { useAuthTempStore } from '../../store/useAuthTempStore';
 
-export const VerifyCode: FC = () => {
+interface VerifyCodeProps {
+  action?: 'register' | 'forgot_password';
+  onShowStatus?: (type: ModalType) => void;
+}
+
+export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
+  const password = useAuthTempStore((state) => state.password);
+  const setPassword = useAuthTempStore((state) => state.setPassword);
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const [email, setEmail] = useQueryState('email');
+  const [, setVerifyAction] = useQueryState('verifyAction');
   const [seconds, setSeconds] = useState(60);
   const [canResend, setCanResend] = useState(false);
-  const { control, handleSubmit, reset, watch, setError } =
-    useForm<VerifyFormValues>({
-      defaultValues: {
-        kod: '',
-      },
-    });
+  const { control, handleSubmit, reset, setError } = useForm<VerifyFormValues>({
+    defaultValues: {
+      kod: '',
+    },
+  });
 
   const resendMutation = useResendCode(() => {
     setSeconds(60);
     setCanResend(false);
   });
   const verifyMutation = useVerify(setError);
-  // const [otp, setOtp] = useState('');
-  const kodValue = watch('kod');
-  const isOtpComplete = kodValue.length === 4;
 
   useEffect(() => {
     if (seconds <= 0) {
@@ -73,9 +76,29 @@ export const VerifyCode: FC = () => {
         kod: data.kod,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           toast.success('Код підтверджено!');
-          setModal(LOGIN_FORM_MODAL_KEY);
+
+          if (action !== 'forgot_password') {
+            const result = await signIn('credentials', {
+              email: email,
+              password: password,
+              redirect: false,
+            });
+            if (result?.ok) {
+              toast.success('Авторизовано успішно!');
+              setModal(null);
+              onShowStatus?.('welcome');
+              setPassword(null);
+            } else {
+              toast.error('Помилка при автоматичному вході');
+            }
+          } else {
+            setModal(null);
+            onShowStatus?.('sendmessage');
+          }
+
+          await Promise.all([setEmail(null), setVerifyAction(null)]);
           reset();
         },
       },

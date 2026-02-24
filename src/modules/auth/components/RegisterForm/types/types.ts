@@ -4,4 +4,5 @@ export type RegisterFormValues = {
   password: string;
   passwordConfirm: string;
   dataUseAgreement: boolean;
+  newsSubscription: boolean;
 };
