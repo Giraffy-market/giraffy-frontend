@@ -2,6 +2,8 @@
 
 import { type FC } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
+import { FcGoogle } from 'react-icons/fc';
+import { toast } from 'react-toastify';
 
 import { useRouter } from 'next/navigation';
 import { useQueryState } from 'nuqs';
@@ -15,7 +17,9 @@ import type { LoginFormValues } from './types/types';
 
 import './styles/LoginForm.scss';
 
+import { handleGoogleLoginAction } from '../../api/handleGoogleLoginAction';
 import {
+  FORGOT_PASSWORD_MODAL_KEY,
   MODAL_QUERY_STATE,
   REGISTER_FORM_MODAL_KEY,
 } from '../../constants/modal-constants';
@@ -37,6 +41,14 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const { mutate, isPending } = useLogin(setError);
 
+  const onGoogleClick = async () => {
+    try {
+      await handleGoogleLoginAction();
+    } catch (err) {
+      toast.error('Помилка авторизації');
+    }
+  };
+
   const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
     mutate(data, {
       onSuccess: async () => {
@@ -44,7 +56,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
 
         router.refresh();
         await setModal(null);
-        onShowStatus?.('welcome');
+        // onShowStatus?.('welcome');
       },
     });
   };
@@ -106,7 +118,12 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
           )}
         />
 
-        <span className="login-actions--forget">Забули пароль?</span>
+        <button
+          className="login-actions--forget"
+          onClick={() => setModal(FORGOT_PASSWORD_MODAL_KEY)}
+        >
+          Забули пароль?
+        </button>
       </div>
 
       <Button
@@ -115,6 +132,34 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
         type="submit"
         disabled={isPending}
       />
+      <p
+        className="register-login"
+        style={{
+          margin: '16px auto 8px',
+        }}
+      >
+        Або
+      </p>
+
+      <Button
+        variant="outline"
+        type="button"
+        disabled={isPending}
+        onClick={onGoogleClick}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            justifyContent: 'center',
+            height: '80px',
+          }}
+        >
+          <FcGoogle size={56} />
+          <span>Продовжити з Google</span>
+        </div>
+      </Button>
 
       <p className="login-register">
         Вперше тут?&nbsp;

@@ -31,6 +31,11 @@ export type RegisterResponse = {
   oauth_accounts: OauthAccount[];
 };
 
-export type VerifyResponse = {
+export interface VerifyResponse {
+  status: string;
+  message: string;
+}
+
+export type ResetPasswordResponse = {
   message: string;
 };
