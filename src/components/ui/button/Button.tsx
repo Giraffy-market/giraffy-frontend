@@ -8,7 +8,12 @@ import type { BaseButtonProps } from './types/baseButtonProps';
 
 import './styles/button.scss';
 
-export const Button: FC<BaseButtonProps> = ({ text, variant, ...props }) => {
+export const Button: FC<BaseButtonProps> = ({
+  text,
+  variant,
+  children,
+  ...props
+}) => {
   return (
     <button
       className={cn('button', {
@@ -20,7 +25,7 @@ export const Button: FC<BaseButtonProps> = ({ text, variant, ...props }) => {
       })}
       {...props}
     >
-      {text}
+      {children ? children : text}
     </button>
   );
 };

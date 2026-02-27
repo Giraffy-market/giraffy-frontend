@@ -1,12 +1,10 @@
-'use client';
-
-import { type FC } from 'react';
-
 import SupportPage from '@/views/support/SupportPage';
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
 
-const Page: FC = () => {
-  const session = useSession();
+import { authOptions } from '@/modules/auth';
+
+export default async function Page() {
+  const session = await getServerSession(authOptions);
   console.log(session);
 
   return (
@@ -14,6 +12,4 @@ const Page: FC = () => {
       <SupportPage />
     </>
   );
-};
-
-export default Page;
+}

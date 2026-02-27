@@ -14,6 +14,10 @@ export const endpoints = {
     request: '/auth/request',
     confirm: '/auth/confirm',
   },
+  auth_google: {
+    authorize: '/auth/google/authorize',
+    callback: '/auth/google/callback',
+  },
   users: {
     me: '/users/me',
     ...makeEndpoints('/users'),

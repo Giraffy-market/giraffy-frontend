@@ -33,9 +33,20 @@ export const authOptions: AuthOptions = {
           placeholder: 'Введіть пароль',
           required: true,
         },
+        accessToken: { label: 'Access Token', type: 'text' },
+        refreshToken: { label: 'Refresh Token', type: 'text' },
+        userId: { label: 'User ID', type: 'text' },
       },
       // @ts-expect-error next-auth err
       authorize: async (credentials) => {
+        if (credentials?.accessToken) {
+          return {
+            access_token: credentials.accessToken,
+            refresh_token: credentials.refreshToken || '',
+            user_id: credentials.userId || '',
+            expired_in: 3600,
+          };
+        }
         try {
           const data = await customFetch<LoginResponse>(
             endpoints.auth.login,
