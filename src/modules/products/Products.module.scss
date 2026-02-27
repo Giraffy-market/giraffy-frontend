@@ -12,10 +12,6 @@
   }
 }
 
-.dialog-close {
-  display: none;
-}
-
 .productsContent {
   flex: 1;
 }
@@ -59,7 +55,6 @@
 
 .mobileOverlay {
   position: fixed;
-
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
@@ -67,9 +62,6 @@
 }
 
 .mobileModal {
-  position: fixed;
-  top: 400;
-  right: 0;
   width: 100%;
   max-width: 320px;
   height: 100vh;

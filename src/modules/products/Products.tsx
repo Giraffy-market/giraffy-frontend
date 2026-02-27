@@ -2,7 +2,6 @@
 
 import { type FC, useMemo, useState } from 'react';
 
-import { symlink } from 'fs';
 import { useSearchParams } from 'next/navigation';
 
 import { NAVCATEGORIES } from '@/modules/categories/constants/constants';
@@ -34,45 +33,47 @@ export const Products: FC<ProductsProps> = ({ categoryId }) => {
   const searchParams = useSearchParams();
 
   const displayTitle = useMemo(() => {
-    if (!categoryId) return 'Усі товари';
-    const currentCategory = NAVCATEGORIES.find((cat) => cat.id === categoryId);
-    return currentCategory
-      ? currentCategory.label_ua || currentCategory.label
-      : 'Товари';
+    if (categoryId) {
+      const currentCategory = NAVCATEGORIES.find(
+        (cat) => cat.id === categoryId,
+      );
+      return currentCategory
+        ? currentCategory.label_ua || currentCategory.label
+        : 'Товари';
+    }
+    return 'Усі товари';
   }, [categoryId]);
 
   const filters = useMemo(() => {
-    const minPrice = searchParams.get('minPrice');
-    const maxPrice = searchParams.get('maxPrice');
-    const city = searchParams.get('city');
-    const category = categoryId || searchParams.get('category');
+    const search = searchParams.get('search') || undefined;
+    const minPrice = searchParams.get('minPrice') || undefined;
+    const maxPrice = searchParams.get('maxPrice') || undefined;
+    const city = searchParams.getAll('city');
+    const status = searchParams.getAll('status');
+    const category = categoryId
+      ? [categoryId]
+      : searchParams.getAll('category');
 
     return {
-      ...(minPrice ? { minPrice: Number(minPrice) } : {}),
-      ...(maxPrice ? { maxPrice: Number(maxPrice) } : {}),
-      ...(city ? { city } : {}),
-      ...(category ? { category } : {}),
+      search,
+      minPrice,
+      maxPrice,
+      city: city.length > 0 ? city : undefined,
+      status: status.length > 0 ? status : undefined,
+      category: category.length > 0 ? category : undefined,
     };
   }, [searchParams, categoryId]);
 
   const { data, isLoading, error } = useFetchProducts(filters);
 
   if (isLoading) return <Loader />;
-
-  if (error) {
-    const errorMessage = handleApiError(error);
-    return <ToastMessage message={errorMessage} type="error" />;
-  }
-
-  if (!data || !data.items || data.items.length === 0) {
-    return <ToastMessage message="Товари не знайдено" type="info" />;
-  }
+  if (error)
+    return <ToastMessage message={handleApiError(error)} type="error" />;
 
   return (
     <div className="container">
       <div className={styles.mainLayout}>
         <ProductFilters />
-
         <main className={styles.productsContent}>
           <button
             className={styles.mobileFilterBtn}
@@ -83,14 +84,18 @@ export const Products: FC<ProductsProps> = ({ categoryId }) => {
               <span>Фільтри</span>
             </div>
           </button>
-
           <SectionTitle title={displayTitle} />
-          <ProductsList products={data.items} />
+          {data && data.items && data.items.length > 0 ? (
+            <ProductsList products={data.items} />
+          ) : (
+            <div className={styles.noResults}>
+              <ToastMessage message="Товари не знайдено" type="info" />
+            </div>
+          )}
         </main>
-
         <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
           <DialogOverlay className={styles.mobileOverlay} />
-          <DialogContent className={styles.mobileModal}>
+          <DialogContent className={styles.mobileModal} showCloseButton={false}>
             <DialogHeader className={styles.modalHeader}>
               <DialogTitle className={styles.modalTitle}>Фільтри</DialogTitle>
               <button
@@ -100,7 +105,6 @@ export const Products: FC<ProductsProps> = ({ categoryId }) => {
                 ✕
               </button>
             </DialogHeader>
-
             <div className={styles.modalBody}>
               <ProductFilters />
             </div>

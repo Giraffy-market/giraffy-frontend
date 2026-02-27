@@ -1,11 +1,17 @@
+import { Suspense } from 'react';
+
 import { Products } from '@/modules/products/Products';
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export default function CategoryPage({ params }: PageProps) {
-  console.log('CategoryPage params:', params);
+export default async function CategoryPage({ params }: PageProps) {
+  const resolvedParams = await params;
 
-  return <Products key={params.id} categoryId={params.id} />;
+  return (
+    <Suspense key={resolvedParams.id} fallback={<div>Завантаження...</div>}>
+      <Products categoryId={resolvedParams.id} />
+    </Suspense>
+  );
 }

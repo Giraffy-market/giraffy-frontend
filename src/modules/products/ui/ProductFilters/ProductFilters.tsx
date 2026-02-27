@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -20,14 +21,14 @@ const CITIES = [
 const OTHER_CITIES = ['Вінниця', 'Полтава', 'Чернігів', 'Житомир'];
 
 const CATEGORIES = [
-  { id: 'house', label: 'Для дому' },
+  { id: 'house-care', label: 'Для дому' },
   { id: 'kitchen', label: 'Кухня' },
   { id: 'pets', label: 'Тварини' },
-  { id: 'kids', label: 'Дитячі товари' },
+  { id: 'kids-products', label: 'Дитячі товари' },
   { id: 'hobbies', label: 'Хобі та розваги' },
   { id: 'electronics', label: 'Електроніка' },
   { id: 'clothes', label: 'Одяг та взуття' },
-  { id: 'beauty', label: 'Краса та догляд' },
+  { id: 'beauty-care', label: 'Краса та догляд' },
   { id: 'transport', label: 'Транспорт' },
 ];
 
@@ -35,6 +36,8 @@ export const ProductFilters = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const [formKey, setFormKey] = useState(0);
+  const [search, setSearch] = useState(searchParams.get('search') || '');
   const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
 
@@ -48,6 +51,7 @@ export const ProductFilters = () => {
   const [showAllCities, setShowAllCities] = useState(false);
 
   useEffect(() => {
+    setSearch(searchParams.get('search') || '');
     setMinPrice(searchParams.get('minPrice') || '');
     setMaxPrice(searchParams.get('maxPrice') || '');
   }, [searchParams]);
@@ -74,32 +78,34 @@ export const ProductFilters = () => {
   };
 
   const handleApply = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log('Кнопка натиснута, форма відправляється!');
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
     const selectedCities = formData.getAll('city');
-    const selectedCategories = formData.getAll('category');
-
-    params.delete('city');
     selectedCities.forEach((c) => params.append('city', c as string));
 
-    params.delete('category');
+    const selectedCategories = formData.getAll('category');
     selectedCategories.forEach((cat) =>
       params.append('category', cat as string),
     );
 
+    const selectedStatuses = formData.getAll('status');
+    selectedStatuses.forEach((s) => params.append('status', s as string));
+
+    if (search.trim()) params.set('search', search.trim());
     if (minPrice) params.set('minPrice', minPrice);
-    else params.delete('minPrice');
     if (maxPrice) params.set('maxPrice', maxPrice);
-    else params.delete('maxPrice');
 
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
   const handleReset = () => {
+    setSearch('');
     setMinPrice('');
     setMaxPrice('');
+    setFormKey((prev) => prev + 1);
     router.push(window.location.pathname);
   };
 
@@ -107,15 +113,18 @@ export const ProductFilters = () => {
 
   return (
     <aside className={styles.filterSidebar}>
-      <div className={styles.searchWrapper}>
-        <input
-          type="text"
-          placeholder="Пошук..."
-          className={styles.searchInput}
-        />
-      </div>
+      <form key={formKey} onSubmit={handleApply}>
+        <div className={styles.searchWrapper}>
+          <input
+            type="text"
+            name="search"
+            placeholder="Пошук..."
+            className={styles.searchInput}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
 
-      <form onSubmit={handleApply}>
         <div className={styles.section}>
           <div
             className={styles.sectionHeader}
@@ -140,13 +149,13 @@ export const ProductFilters = () => {
                     type="button"
                     onClick={() => handleStepPrice('minPrice', 'up')}
                   >
-                    ▲
+                    <TiArrowSortedUp />
                   </button>
                   <button
                     type="button"
                     onClick={() => handleStepPrice('minPrice', 'down')}
                   >
-                    ▼
+                    <TiArrowSortedDown />
                   </button>
                 </div>
               </div>
@@ -162,13 +171,13 @@ export const ProductFilters = () => {
                     type="button"
                     onClick={() => handleStepPrice('maxPrice', 'up')}
                   >
-                    ▲
+                    <TiArrowSortedUp />
                   </button>
                   <button
                     type="button"
                     onClick={() => handleStepPrice('maxPrice', 'down')}
                   >
-                    ▼
+                    <TiArrowSortedDown />
                   </button>
                 </div>
               </div>
@@ -222,11 +231,23 @@ export const ProductFilters = () => {
           {openSections.status && (
             <div className={styles.checkboxList}>
               <label className={styles.checkboxLabel}>
-                <input type="checkbox" name="status" value="new" />
+                <input
+                  type="checkbox"
+                  name="status"
+                  value="new"
+                  defaultChecked={searchParams.getAll('status').includes('new')}
+                />
                 <span>Нове</span>
               </label>
               <label className={styles.checkboxLabel}>
-                <input type="checkbox" name="status" value="used" />
+                <input
+                  type="checkbox"
+                  name="status"
+                  value="used"
+                  defaultChecked={searchParams
+                    .getAll('status')
+                    .includes('used')}
+                />
                 <span>Вживане</span>
               </label>
             </div>
@@ -247,7 +268,14 @@ export const ProductFilters = () => {
             <div className={styles.checkboxList}>
               {CATEGORIES.map((cat) => (
                 <label key={cat.id} className={styles.checkboxLabel}>
-                  <input type="checkbox" name="category" value={cat.id} />
+                  <input
+                    type="checkbox"
+                    name="category"
+                    value={cat.id}
+                    defaultChecked={searchParams
+                      .getAll('category')
+                      .includes(cat.id)}
+                  />
                   <span>{cat.label}</span>
                 </label>
               ))}
@@ -267,6 +295,7 @@ export const ProductFilters = () => {
             onClick={handleReset}
             variant="outline"
             className={styles.resetBtn}
+            type="button"
           />
         </div>
       </form>

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { components } from '@/shared/api/schema';
 
 export type Product = components['schemas']['ProductRead'];
