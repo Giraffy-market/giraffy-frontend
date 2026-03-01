@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import { useQueryState } from 'nuqs';
 
@@ -39,7 +40,34 @@ import './AuthFormLayout.scss';
 
 export const AuthFormLayout = () => {
   const [modal, setModal] = useQueryState(MODAL_QUERY_STATE);
+  const [error, setError] = useQueryState('error');
   const { activeModal, closeModal, openModal } = useModalManager();
+
+  useEffect(() => {
+    if (error) {
+      // Словник для перекладу технічних кодів
+      const errorMessages: Record<string, string> = {
+        BACKEND_AUTH_FAILED:
+          'Не вдалося авторизуватися через Google. Спробуйте ще раз пізніше.',
+        BACKEND_NOT_RESPONDING:
+          'Сервер тимчасово недоступний. Будь ласка, зачекайте.',
+        OAuthCallback: 'Сталася помилка при отриманні даних від Google.',
+      };
+
+      const message =
+        errorMessages[error] || `Помилка: ${decodeURIComponent(error)}`;
+
+      toast.error(message, { toastId: 'auth-error' });
+
+      // Відкриваємо модалку, якщо вона раптом закрита
+      if (modal !== LOGIN_FORM_MODAL_KEY) {
+        setModal(LOGIN_FORM_MODAL_KEY);
+      }
+
+      // Очищаємо URL через затримку
+      setTimeout(() => setError(null), 500);
+    }
+  }, [error, modal, setModal, setError]);
 
   useEffect(() => {
     if (modal && modal in MODAL_CONTENTS) {

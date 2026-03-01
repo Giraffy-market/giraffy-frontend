@@ -17,6 +17,13 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+        },
+      },
     }),
     CredentialsProvider({
       name: 'Credentials',
@@ -86,7 +93,6 @@ export const authOptions: AuthOptions = {
           access_token: user.access_token,
           refresh_token: user.refresh_token,
           user_id: user.user_id,
-          expired_in: user.expired_in,
           expiresAt: Math.floor(Date.now() / 1000) + user.expired_in,
         };
       }
@@ -101,7 +107,6 @@ export const authOptions: AuthOptions = {
         return refreshedToken;
       } catch (error) {
         console.error('Refresh error', error);
-
         return { ...token, error: 'RefreshAccessTokenError' };
       }
     },
@@ -116,9 +121,10 @@ export const authOptions: AuthOptions = {
     },
   },
 
-  // pages: {
-  //   signIn: 'modal-login',
-  // },
+  pages: {
+    signIn: '/',
+    error: '/auth/error',
+  },
 };
 
 export const getServerAuthSession = (): Promise<Session | null> =>
