@@ -1,18 +1,12 @@
 @use '@/shared/styles/utils/index' as *;
 
 .title {
-  display: none;
-
-  @include h3;
-  text-align: start;
+  @include h2;
+  text-align: center;
   color: $blue;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 
   @include onDesktop {
-    margin-bottom: 16px;
-  }
-
-  @media (max-width: 1024px) {
-    display: block;
+    margin-bottom: 32px;
   }
 }

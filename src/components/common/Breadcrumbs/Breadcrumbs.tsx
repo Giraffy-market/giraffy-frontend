@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { NAVCATEGORIES } from '@/modules/categories/constants/constants';
-
 import Arrow from '@/components/common/Slider/assets/arrow.svg';
 
 import { getDictionaryKey } from './constants/breadcrumbsData';
@@ -18,19 +16,12 @@ export const Breadcrumbs = () => {
 
   if (pathname === routing.home.base) return null;
 
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname.split('/').filter(Boolean).slice(0, -1);
 
-  const paths = segments
-    .filter((seg) => seg !== 'category')
-    .map((seg) => {
-      const category = NAVCATEGORIES.find((c) => c.id === seg);
-      return {
-        name: category
-          ? category.label_ua || category.label
-          : getDictionaryKey(seg),
-        href: '/' + segments.slice(0, segments.indexOf(seg) + 1).join('/'),
-      };
-    });
+  const paths = segments.map((seg, i) => ({
+    name: getDictionaryKey(seg),
+    href: '/' + segments.slice(0, i + 1).join('/'),
+  }));
 
   return (
     <nav className={styles.breadcrumbs}>

@@ -49,7 +49,6 @@ export const categoryIcons = [
 export type NavItem = {
   id: string;
   label: string;
-  label_ua?: string;
   href: string;
   Icon: React.ElementType;
 };
@@ -110,65 +109,56 @@ export const NAVMOBILE: NavItem[] = [
 export const NAVCATEGORIES: NavItem[] = [
   {
     id: 'kids-products',
-    label: 'Kids Products',
-    label_ua: 'Дитячі продукти',
-    href: '/category/kids-products',
+    label: 'Дитячі продукти',
+    href: '/kids-products',
     Icon: KidsIcon,
   },
   {
     id: 'clothes',
-    label: 'Clothes & Shoes',
-    label_ua: 'Одяг і взуття',
-    href: '/category/clothes',
+    label: 'Одяг і взуття',
+    href: '/clothes',
     Icon: ClothesIcon,
   },
   {
     id: 'house-care',
-    label: 'House Care',
-    label_ua: 'Для дому',
-    href: '/category/house-care',
+    label: 'Для дому',
+    href: '/house-care',
     Icon: HouseCareIcon,
   },
   {
     id: 'kitchen',
-    label: 'Kitchen',
-    label_ua: 'Кухня',
-    href: '/category/kitchen',
+    label: 'Кухня',
+    href: '/kitchen',
     Icon: KitchenIcon,
   },
   {
     id: 'hobbies',
-    label: 'Hobbies & Entertainment',
-    label_ua: 'Хобі та розваги',
-    href: '/category/hobbies',
+    label: 'Хобі та розваги',
+    href: '/hobbies',
     Icon: HobbiesIcon,
   },
   {
     id: 'electronics',
-    label: 'Electronics',
-    label_ua: 'Електроніка',
-    href: '/category/electronics',
+    label: 'Електроніка',
+    href: '/electronics',
     Icon: ElectronicsIcon,
   },
   {
     id: 'beauty-care',
-    label: 'Beauty & Care',
-    label_ua: 'Краса та догляд',
-    href: '/category/beauty-care',
+    label: 'Краса та догляд',
+    href: '/beauty-care',
     Icon: BeautyCareIcon,
   },
   {
     id: 'pets',
-    label: 'Pets',
-    label_ua: 'Тварини',
-    href: '/category/pets',
+    label: 'Тварини',
+    href: '/pets',
     Icon: PetsIcon,
   },
   {
     id: 'transport',
-    label: 'Transport',
-    label_ua: 'Транспорт',
-    href: '/category/transport',
+    label: 'Транспорт',
+    href: '/transport',
     Icon: TransportIcon,
   },
 ];
