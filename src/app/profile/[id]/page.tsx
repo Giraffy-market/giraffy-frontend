@@ -1,9 +1,11 @@
 import Profile from '@/views/profile/profile';
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export default function UserProfileIdPage({ params }: Props) {
-  return <Profile params={params} />;
+export default async function UserProfileIdPage({ params }: Props) {
+  const resolvedParams = await params;
+
+  return <Profile params={resolvedParams} />;
 }

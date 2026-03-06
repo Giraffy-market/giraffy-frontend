@@ -9,10 +9,8 @@ import type {
 
 import styles from './CheckBox.module.scss';
 
-interface CheckBoxProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  'value'
-> {
+interface CheckBoxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
   labelText: ReactNode;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   value?: boolean;

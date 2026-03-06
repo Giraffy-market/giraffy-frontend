@@ -1,10 +1,12 @@
+'use client';
+
 import { type FC } from 'react';
 
 import Link from 'next/link';
 
 import type { CategoryItem } from '../types/CategoryItem';
 
-import { categoryIcons } from '../constants/constants';
+import { NAVCATEGORIES, categoryIcons } from '../constants/constants';
 
 export type Props = {
   data: CategoryItem;
@@ -14,11 +16,16 @@ export type Props = {
 const CategoriesItem: FC<Props> = ({ data, index }) => {
   const Icon = categoryIcons[index];
 
+  const categoryConfig = NAVCATEGORIES[index];
+  const href = categoryConfig
+    ? categoryConfig.href
+    : `/category/${data.category_id}`;
+
   return (
     <li className="categories-item">
-      <Link className="categories-item-link" href="/">
+      <Link className="categories-item-link" href={href}>
         <div className="categories-item-image-wrapper">
-          <Icon role="img" aria-label={data.name} />
+          {Icon ? <Icon role="img" aria-label={data.name} /> : null}
         </div>
         <h3 className="categories-item-subtitle">{data.name}</h3>
       </Link>

@@ -3,10 +3,12 @@
 .products-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 24px;
   gap: 12px;
 
   @include onTablet {
     grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 24px;
     gap: 24px;
   }
 }

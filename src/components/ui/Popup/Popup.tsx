@@ -9,7 +9,12 @@ import CloseIcon from './assets/closeIcon.svg';
 
 import './styles/Popup.scss';
 
-export const Popup: FC<PopupProps> = ({ isOpen, onClose, children }) => {
+export const Popup: FC<PopupProps> = ({
+  isOpen,
+  onClose,
+  children,
+  showCloseButton = true,
+}) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -21,9 +26,6 @@ export const Popup: FC<PopupProps> = ({ isOpen, onClose, children }) => {
   }, [isOpen]);
 
   const handleBackdrop = (e: React.MouseEvent<HTMLDialogElement>): void => {
-    // const dialog = dialogRef.current;
-    // if (dialog && e.target === dialog) onClose();
-
     const rect = e.currentTarget.getBoundingClientRect();
     if (
       e.clientX < rect.left ||
@@ -47,18 +49,20 @@ export const Popup: FC<PopupProps> = ({ isOpen, onClose, children }) => {
         onClose={onClose}
         onClick={handleBackdrop}
       >
-        <button
-          className="dialog__closeButton"
-          onClick={onClose}
-          aria-label="Close"
-          type="button"
-        >
-          <CloseIcon
-            className="dialog__closeIcon"
-            role="img"
-            aria-label="Close icon"
-          />
-        </button>
+        {showCloseButton && (
+          <button
+            className="dialog__closeButton"
+            onClick={onClose}
+            aria-label="Close"
+            type="button"
+          >
+            <CloseIcon
+              className="dialog__closeIcon"
+              role="img"
+              aria-label="Close icon"
+            />
+          </button>
+        )}
 
         {children}
       </dialog>
