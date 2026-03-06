@@ -10,7 +10,7 @@
     "format": "prettier --check \"src/**/*.{ts,tsx,scss,json,md}\"",
     "format:fix": "prettier --write \"src/**/*.{ts,tsx,scss,json,md}\"",
     "prepare": "husky",
-    "api:gen": "npx openapi-typescript https://giraffy-marketplace-api.koyeb.app/openapi.json -o ./src/shared/api/schema.ts --root-types"
+    "api:gen": "npx openapi-typescript https://api-giraffy.gosyav.com/openapi.json -o ./src/shared/api/schema.ts --root-types"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

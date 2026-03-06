@@ -4,5 +4,4 @@ export type PopupProps = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
-  showCloseButton?: boolean;
 };
