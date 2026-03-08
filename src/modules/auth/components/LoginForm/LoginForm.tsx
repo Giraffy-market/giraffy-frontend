@@ -5,6 +5,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useQueryState } from 'nuqs';
 
@@ -43,7 +44,8 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
 
   const onGoogleClick = async () => {
     try {
-      await handleGoogleLoginAction();
+      // await handleGoogleLoginAction();
+      await signIn('google', { callbackUrl: '/' });
     } catch (err) {
       toast.error('Помилка авторизації');
     }
