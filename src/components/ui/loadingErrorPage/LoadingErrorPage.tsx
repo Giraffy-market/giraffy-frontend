@@ -3,7 +3,7 @@
 import { type FC } from 'react';
 
 import cn from 'classnames';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import type { ErrorProps } from './shared/types/LoadingErrorPageProps';
 
@@ -19,6 +19,7 @@ const Error: FC<ErrorProps> = ({
   onRetry,
   showUpdateButton = true,
 }) => {
+  const router = useRouter();
   const titleLines = Array.isArray(title) ? title : [title];
 
   return (
@@ -73,9 +74,13 @@ const Error: FC<ErrorProps> = ({
                   onClick={() => void onRetry()}
                 />
               )}
-              <Link className="error-link" href="/">
-                Повернутися на головну
-              </Link>
+
+              <Button
+                type="button"
+                text="Повернутися на головну"
+                variant={onRetry ? 'outline' : 'primary'}
+                onClick={() => router.push('/')}
+              />
             </div>
           </div>
         </div>

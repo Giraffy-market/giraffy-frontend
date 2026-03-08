@@ -18,7 +18,7 @@ export const LoadingError: FC<LoadingErrorProps> = ({
 
   return (
     <div className={cn(className, styles.wrapper)}>
-      <p>{message}</p>
+      <p> MESSAGE {message}</p>
     </div>
   );
 };

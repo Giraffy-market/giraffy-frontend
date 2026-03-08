@@ -14,7 +14,9 @@ import styles from './styles/Breadcrumbs.module.scss';
 export const Breadcrumbs = () => {
   const pathname = usePathname();
 
-  if (pathname === routing.home.base) return null;
+  const isExcludedPage = pathname === routing.home.base;
+
+  if (isExcludedPage) return null;
 
   const segments = pathname.split('/').filter(Boolean).slice(0, -1);
 

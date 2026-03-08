@@ -1,4 +1,11 @@
-import { type AuthOptions, type Session, getServerSession } from 'next-auth';
+import {
+  type Account,
+  type AuthOptions,
+  type Session,
+  type User,
+  getServerSession,
+} from 'next-auth';
+import type { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -10,6 +17,19 @@ import { endpoints } from '@/shared/api/constants/endpoints';
 import { handleApiError } from '@/shared/api/helpers/handleApiError';
 
 import { customFetch } from '../../../shared/api/fetch';
+
+interface BackendAccount extends Account {
+  backend_access_token?: string;
+  backend_user_id?: string;
+}
+
+interface CustomUser {
+  id: string;
+  access_token: string;
+  refresh_token: string;
+  user_id: string;
+  expired_in: number;
+}
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -86,7 +106,58 @@ export const authOptions: AuthOptions = {
   ],
 
   callbacks: {
-    jwt: async ({ user, token }) => {
+    async signIn({ account }) {
+      if (account?.provider === 'google') {
+        try {
+          const tokenToVerify = account.id_token;
+
+          if (!tokenToVerify) {
+            console.error('NextAuth не отримав id_token від Google');
+            return false;
+          }
+
+          const data = await customFetch<LoginResponse>(
+            endpoints.auth_google.callback,
+            tokenToVerify,
+            { method: 'GET' },
+          );
+
+          if (data?.access_token) {
+            (account as BackendAccount).backend_access_token =
+              data.access_token;
+            (account as BackendAccount).backend_user_id = data.user_id;
+            return true;
+          }
+
+          console.error('Бекенд не повернув access_token');
+          return false;
+        } catch (error) {
+          console.error('Помилка в signIn через customFetch:', error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({
+      token,
+      user,
+      account,
+    }: {
+      token: JWT;
+      user?: User;
+      account?: Account | null;
+    }) {
+      if (
+        account?.provider === 'google' &&
+        (account as BackendAccount).backend_access_token
+      ) {
+        return {
+          ...token,
+          access_token: (account as BackendAccount).backend_access_token,
+          user_id: user?.id ?? token.sub,
+          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+        };
+      }
       if (user) {
         return {
           ...token,
@@ -97,7 +168,7 @@ export const authOptions: AuthOptions = {
         };
       }
 
-      if (Math.floor(Date.now() / 1000) < token.expiresAt) {
+      if (Math.floor(Date.now() / 1000) < (token.expiresAt ?? 0)) {
         return token;
       }
 
@@ -114,7 +185,7 @@ export const authOptions: AuthOptions = {
     session: async ({ session, token }) => {
       session.access_token = token.access_token;
       session.refresh_token = token.refresh_token;
-      session.user.id = token.user_id;
+      session.user.id = token.user_id ?? session.user.id ?? '';
       session.error = token.error;
 
       return session;

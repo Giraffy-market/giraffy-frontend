@@ -12,6 +12,7 @@ declare module 'next-auth' {
   }
 
   interface User {
+    id: string;
     access_token: string;
     refresh_token: string;
     user_id: string;
@@ -21,10 +22,10 @@ declare module 'next-auth' {
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    access_token: string;
-    refresh_token: string;
-    user_id: string;
-    expiresAt: number;
+    access_token?: string;
+    refresh_token?: string;
+    user_id?: string;
+    expiresAt?: number;
     error?: string;
   }
 }
