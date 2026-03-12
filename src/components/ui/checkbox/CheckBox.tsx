@@ -25,7 +25,7 @@ export const CheckBox: FC<CheckBoxProps> = ({
 }) => {
   return (
     <label
-      className={`${styles.check} ${value ? styles.check_error : ''}`}
+      className={`${styles.check} ${value ? styles.check_error : ''} ${className || ''}`}
       {...labelProps}
     >
       {labelText}
