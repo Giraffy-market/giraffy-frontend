@@ -1,6 +1,7 @@
 'use client';
 
 import { Categories } from '@/modules/categories';
+import { Products } from '@/modules/products';
 
 import { Slider } from '@/components/common/Slider';
 
@@ -13,6 +14,10 @@ const HomePage = () => (
 
       <section>
         <Categories />
+      </section>
+
+      <section>
+        <Products />
       </section>
     </div>
   </div>

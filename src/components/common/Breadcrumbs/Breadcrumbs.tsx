@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { NAVCATEGORIES } from '@/modules/categories/constants/constants';
-
 import Arrow from '@/components/common/Slider/assets/arrow.svg';
 
 import { getDictionaryKey } from './constants/breadcrumbsData';
@@ -16,25 +14,29 @@ import styles from './styles/Breadcrumbs.module.scss';
 export const Breadcrumbs = () => {
   const pathname = usePathname();
 
-  if (pathname === routing.home.base) return null;
+  const isExcludedPage = pathname === routing.home.base;
 
-  const segments = pathname.split('/').filter(Boolean);
+  if (isExcludedPage) return null;
 
-  const paths = segments
-    .filter((seg) => seg !== 'category')
-    .map((seg) => {
-      const category = NAVCATEGORIES.find((c) => c.id === seg);
-      return {
-        name: category
-          ? category.label_ua || category.label
-          : getDictionaryKey(seg),
-        href: '/' + segments.slice(0, segments.indexOf(seg) + 1).join('/'),
-      };
-    });
+  const allSegments = pathname.split('/').filter(Boolean);
+  const breadcrumbSegments = allSegments.filter((seg) => seg !== 'category');
+
+  const paths = breadcrumbSegments.map((seg, i) => {
+    const decodedName = decodeURIComponent(seg);
+
+    const originalIndex = allSegments.indexOf(seg);
+    const fullHref = '/' + allSegments.slice(0, originalIndex + 1).join('/');
+
+    return {
+      name: getDictionaryKey(decodedName),
+      href: fullHref,
+    };
+  });
 
   return (
     <nav className={styles.breadcrumbs}>
       <Arrow className={styles.startArrow} />
+
       <span className={styles.linkWithSeparator}>
         <Link href={routing.home.base} className={styles.link}>
           Головна сторінка
@@ -51,6 +53,7 @@ export const Breadcrumbs = () => {
               {item.name}
             </Link>
           )}
+
           {index !== paths.length - 1 && (
             <span className={styles.separator}>/</span>
           )}

@@ -98,24 +98,4 @@
       margin: 0 58px;
     }
   }
-
-  &-link {
-    cursor: pointer;
-    @include button-2;
-    border-radius: 10px;
-    width: 100%;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid $blue;
-    text-decoration: none;
-    color: $blue;
-    background-color: $gray;
-    transition: background-color 250ms linear;
-
-    &:hover {
-      background-color: $white;
-    }
-  }
 }
