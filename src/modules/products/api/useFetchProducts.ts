@@ -27,7 +27,7 @@ export const useFetchProducts = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const categorySlug = pathname.startsWith('/category/')
+  const categorySlug = pathname?.startsWith('/category/')
     ? decodeURIComponent(pathname.split('/').pop() || '')
     : null;
 
