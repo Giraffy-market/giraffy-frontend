@@ -35,11 +35,13 @@ export const customFetch = async <Tresp>(
   //   return data as unknown as Tresp;
   // }
 
-  const url = new URL(
-    `${API}${endpoint}${searchParams ? `?${searchParams}` : ''}`,
-  );
+  // const url = new URL(
+  //   `${API}${endpoint}${searchParams ? `?${searchParams}` : ''}`,
+  // );
 
-  const resp = await fetch(url, {
+  const fullUrl = `${API}${endpoint}${searchParams ? `?${searchParams}` : ''}`;
+
+  const resp = await fetch(fullUrl, {
     ...init,
     headers: {
       'Content-Type': 'application/json',

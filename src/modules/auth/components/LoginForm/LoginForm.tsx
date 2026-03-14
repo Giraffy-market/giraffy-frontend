@@ -5,6 +5,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useQueryState } from 'nuqs';
@@ -31,6 +32,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { control, handleSubmit, reset, setError } = useForm<LoginFormValues>({
     defaultValues: {
@@ -54,6 +56,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
   const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
     mutate(data, {
       onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey: ['user'] });
         reset();
 
         router.refresh();

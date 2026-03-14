@@ -76,7 +76,7 @@ export const authOptions: AuthOptions = {
         }
         try {
           const data = await customFetch<LoginResponse>(
-            endpoints.auth.login,
+            '/auth/user_login',
             '',
             {
               method: 'POST',

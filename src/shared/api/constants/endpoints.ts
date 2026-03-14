@@ -1,14 +1,21 @@
 import { makeEndpoints } from './root';
 
-export const API = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
+// export const API = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
+
+const isServer = typeof window === 'undefined';
+
+export const API = isServer
+  ? `${process.env.NEXT_PUBLIC_API_BASE_URL}`
+  : '/api';
+
 export const STALE_TIME = 300_000;
 
 export const endpoints = {
   auth: {
-    register: '/auth/register',
+    register: '/server/auth/register',
     verify_code: '/auth/verify_code',
     resend_verification_code: '/auth/resend-verification-code',
-    login: '/auth/user_login',
+    login: '/server/auth/user_login',
     logout: '/auth/user_logout',
     refresh: '/auth/refresh',
     request: '/auth/request',
