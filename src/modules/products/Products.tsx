@@ -58,9 +58,11 @@ export const Products: FC<ProductsProps> = ({ categoryId }) => {
 
   return (
     <div className={`container ${styles.productsWrapper}`}>
-      <div className={styles.desktopFilters}>
-        <ProductFilters />
-      </div>
+      {categoryId && (
+        <aside className={styles.desktopFilters}>
+          <ProductFilters />
+        </aside>
+      )}
 
       <div className={styles.content}>
         {categoryId && (
