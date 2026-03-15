@@ -16,7 +16,7 @@ const CategoriesItem: FC<Props> = ({ data, index }) => {
 
   return (
     <li className="categories-item">
-      <Link className="categories-item-link" href="/">
+      <Link className="categories-item-link" href={`/category/${data.name}`}>
         <div className="categories-item-image-wrapper">
           <Icon role="img" aria-label={data.name} />
         </div>
