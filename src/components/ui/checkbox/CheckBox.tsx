@@ -8,7 +8,7 @@ import type {
 } from 'react';
 
 import styles from './CheckBox.module.scss';
-
+// prettier-ignore
 interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
   labelText: ReactNode;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
