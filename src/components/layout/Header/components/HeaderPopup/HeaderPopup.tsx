@@ -17,12 +17,12 @@ import {
 import {
   ADD,
   LOGOUT,
-  NAV,
   SUPPORT,
   TRIGGER,
-  USER,
 } from '@/modules/categories/constants/constants';
 import { useFetchUser } from '@/modules/user/api/useFetchUser';
+import { Nav } from '@/modules/user/components';
+import { HeaderUserMenu } from '@/modules/user/components/HeaderUserMenu/HeaderUserMenu';
 
 import { Button } from '@/components/ui/button/Button';
 import { Loader } from '@/components/ui/loader/Loader';
@@ -108,36 +108,14 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
           >
             {isLoggedIn && data ? (
               <>
-                <div className={styles.userRow}>
-                  <div className={styles.userIcon}>
-                    {data.avatar_url || <USER.Icon />}
-                  </div>
-
-                  <div className={styles.userInfo}>
-                    <h1 className={styles.userName}>
-                      {data.username || USER.name}
-                    </h1>
-                    <p className={styles.userEmail}>
-                      {data.email || USER.email}
-                    </p>
-                  </div>
-                </div>
+                <HeaderUserMenu data={data} />
 
                 <Link href={ADD.href} className={styles.addButton}>
                   {ADD.label}
                 </Link>
 
                 <nav className={styles.nav}>
-                  {NAV.map((item) => (
-                    <Link
-                      key={item.id}
-                      href={item.href}
-                      className={styles.navItem}
-                    >
-                      <item.Icon />
-                      <span>{item.label}</span>
-                    </Link>
-                  ))}
+                  <Nav />
                 </nav>
 
                 <Link

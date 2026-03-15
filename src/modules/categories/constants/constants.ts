@@ -1,7 +1,9 @@
 // import BasketIcon from '../assets/assets/basket.svg';
+import type { NavItem } from '@/shared/types';
+
 import BeautyCareIcon from '../assets/beauty-care-mobile.svg';
 import BeautyCare from '../assets/beauty-care.svg';
-import BasketIcon from '../assets/bonuses.svg';
+// import BasketIcon from '../assets/bonuses.svg';
 import BonusesIcon from '../assets/bonuses.svg';
 // import UserProfileIcon from '../assets/profile-skeleton.svg';
 import UserProfileIcon from '../assets/bonuses.svg';
@@ -46,13 +48,6 @@ export const categoryIcons = [
   CarsCare,
 ];
 
-export type NavItem = {
-  id: string;
-  label: string;
-  href: string;
-  Icon: React.ElementType;
-};
-
 export const TRIGGER = {
   Icon: ProfileIcon,
 };
@@ -68,23 +63,6 @@ export const ADD = {
   label: 'Додати оголошення',
   href: '/ads/new',
 };
-
-export const NAV: NavItem[] = [
-  {
-    id: 'profile',
-    label: 'Профіль користувача',
-    href: '/profile',
-    Icon: UserProfileIcon,
-  },
-  { id: 'chats', label: 'Чати', href: '/chats', Icon: ChatsIcon },
-  { id: 'my-ads', label: 'Мої оголошення', href: '/my-ads', Icon: OrdersIcon },
-  {
-    id: 'purchases',
-    label: 'Мої покупки',
-    href: '/purchases',
-    Icon: BasketIcon,
-  },
-];
 
 export const NAVMOBILE: NavItem[] = [
   {

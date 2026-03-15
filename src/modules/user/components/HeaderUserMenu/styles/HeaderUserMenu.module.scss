@@ -1,0 +1,24 @@
+@use '@/shared/styles/utils/index' as *;
+
+.userRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 150%;
+}
+
+.userEmail {
+  font-weight: 400;
+  font-size: 16px;
+}
