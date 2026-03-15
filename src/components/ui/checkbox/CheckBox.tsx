@@ -9,11 +9,7 @@ import type {
 
 import styles from './CheckBox.module.scss';
 
-interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
-  labelText: ReactNode;
-  labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
-  value?: boolean;
-}
+interface CheckBoxProps extends Omit<InputHTMLAttributes<HTMLInputElement>,'value'> {labelText: ReactNode; labelProps?: LabelHTMLAttributes<HTMLLabelElement>;value?: boolean;}
 
 export const CheckBox: FC<CheckBoxProps> = ({
   labelText,
