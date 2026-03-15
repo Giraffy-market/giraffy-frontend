@@ -4,6 +4,7 @@ import { type FC, useEffect, useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 import { useQueryState } from 'nuqs';
 
@@ -26,6 +27,7 @@ interface VerifyCodeProps {
 }
 
 export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
+  const queryClient = useQueryClient();
   const password = useAuthTempStore((state) => state.password);
   const setPassword = useAuthTempStore((state) => state.setPassword);
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
@@ -86,6 +88,7 @@ export const VerifyCode: FC<VerifyCodeProps> = ({ action, onShowStatus }) => {
               redirect: false,
             });
             if (result?.ok) {
+              await queryClient.invalidateQueries({ queryKey: ['user'] });
               toast.success('Авторизовано успішно!');
               setModal(null);
               onShowStatus?.('welcome');
