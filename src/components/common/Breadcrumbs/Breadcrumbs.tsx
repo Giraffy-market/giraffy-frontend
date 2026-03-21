@@ -18,16 +18,25 @@ export const Breadcrumbs = () => {
 
   if (isExcludedPage) return null;
 
-  const segments = pathname.split('/').filter(Boolean).slice(0, -1);
+  const allSegments = pathname.split('/').filter(Boolean);
+  const breadcrumbSegments = allSegments.filter((seg) => seg !== 'category');
 
-  const paths = segments.map((seg, i) => ({
-    name: getDictionaryKey(seg),
-    href: '/' + segments.slice(0, i + 1).join('/'),
-  }));
+  const paths = breadcrumbSegments.map((seg, i) => {
+    const decodedName = decodeURIComponent(seg);
+
+    const originalIndex = allSegments.indexOf(seg);
+    const fullHref = '/' + allSegments.slice(0, originalIndex + 1).join('/');
+
+    return {
+      name: getDictionaryKey(decodedName),
+      href: fullHref,
+    };
+  });
 
   return (
     <nav className={styles.breadcrumbs}>
       <Arrow className={styles.startArrow} />
+
       <span className={styles.linkWithSeparator}>
         <Link href={routing.home.base} className={styles.link}>
           Головна сторінка
@@ -44,6 +53,7 @@ export const Breadcrumbs = () => {
               {item.name}
             </Link>
           )}
+
           {index !== paths.length - 1 && (
             <span className={styles.separator}>/</span>
           )}

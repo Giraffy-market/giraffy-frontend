@@ -9,15 +9,11 @@ import type {
 
 import styles from './CheckBox.module.scss';
 
-interface CheckBoxProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  'value'
-> {
+type CheckBoxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> & {
   labelText: ReactNode;
   labelProps?: LabelHTMLAttributes<HTMLLabelElement>;
   value?: boolean;
-}
-
+};
 export const CheckBox: FC<CheckBoxProps> = ({
   labelText,
   labelProps,
@@ -27,7 +23,7 @@ export const CheckBox: FC<CheckBoxProps> = ({
 }) => {
   return (
     <label
-      className={`${styles.check} ${value ? styles.check_error : ''}`}
+      className={`${styles.check} ${value ? styles.check_error : ''} ${className || ''}`}
       {...labelProps}
     >
       {labelText}
