@@ -1,0 +1,11 @@
+@use '@/shared/styles/utils/index' as *;
+
+.editWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 16px;
+
+  margin: 60px auto 80px;
+}

@@ -27,6 +27,7 @@
 
       .username {
         display: flex;
+        flex-wrap: wrap;
         gap: 4px;
       }
 
@@ -87,4 +88,9 @@
       }
     }
   }
+}
+
+.placeholder {
+  color: #a0a0a0;
+  font-style: italic;
 }

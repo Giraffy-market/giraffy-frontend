@@ -2,13 +2,13 @@ import Image from 'next/image';
 
 import type { ReviewsListProps } from '@/shared/types';
 
-import Add from '../assets/add.svg';
-import DefaultAvatar from '../assets/defaultAvatar.png';
-import StarEmpty from '../assets/star-empty.svg';
-import StarFilled from '../assets/star-filled.svg';
+import styles from './styles/ReviewsList.module.scss';
 
-import { reviewsData } from '../reviewsData';
-import styles from './ReviewsList.module.scss';
+import Add from '../../assets/add.svg';
+import DefaultAvatar from '../../assets/defaultAvatar.png';
+import StarEmpty from '../../assets/star-empty.svg';
+import StarFilled from '../../assets/star-filled.svg';
+import { reviewsData } from '../../constants/reviewsData';
 
 export default function ReviewsList({
   // userId,

@@ -1,6 +1,6 @@
 import type { Review } from '@/shared/types';
 
-import defaultAvatar from './assets/defaultAvatar.png';
+import defaultAvatar from '../assets/defaultAvatar.png';
 
 export const reviewsData: Review[] = [
   {

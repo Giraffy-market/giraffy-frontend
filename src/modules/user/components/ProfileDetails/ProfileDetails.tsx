@@ -1,19 +1,22 @@
 import cn from 'classnames';
 import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
+
+import ReviewsList from '@/modules/reviews/components/ReviewsList/ReviewsList';
 
 import { routing } from '@/shared/routing';
 import type { User } from '@/shared/types';
 
-import ComplaintIcon from '../assets/complaint.svg';
-import LogoutIcon from '../assets/logout.svg';
-import PencilIcon from '../assets/pencil.svg';
+// import ReviewsList from '../ReviewsList/ReviewsList';
+import styles from './styles/ProfileDetails.module.scss';
 
-import ReviewsList from '../ReviewsList/ReviewsList';
-import styles from './ProfileDetails.module.scss';
+import ComplaintIcon from '../../assets/complaint.svg';
+import LogoutIcon from '../../assets/logout.svg';
+import PencilIcon from '../../assets/pencil.svg';
 
-export default function ProfileDetails({ user }: { user: User }) {
+export function ProfileDetails({ user }: { user: User }) {
   const { data: session } = useSession();
-  const isOwnProfile = session?.user?.id === user.id;
+  const isOwnProfile = session?.user.id === user.id;
   const handleLogout = () => {
     signOut({ callbackUrl: routing.home.base });
   };
@@ -24,13 +27,13 @@ export default function ProfileDetails({ user }: { user: User }) {
         <div className={styles.titleWrapper}>
           <h3 className={styles.title}>Дані профілю</h3>
           {isOwnProfile ? (
-            <button
+            <Link
+              href="/profile/me/edit"
               className={cn(styles.detailActionBtn, styles.editButton)}
-              disabled
             >
               Редагувати
               <PencilIcon />
-            </button>
+            </Link>
           ) : (
             <button className={cn(styles.detailActionBtn, styles.reportButton)}>
               Поскаржитися

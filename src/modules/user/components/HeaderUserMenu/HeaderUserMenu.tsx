@@ -5,17 +5,18 @@ import styles from './styles/HeaderUserMenu.module.scss';
 import { USER } from '../../constants/constants';
 
 interface HeaderUserMenuProps {
-  data: User;
+  data?: User;
 }
 
 export const HeaderUserMenu = ({ data }: HeaderUserMenuProps) => {
+  if (!data) return null;
   return (
     <div className={styles.userRow}>
-      <div className={styles.userIcon}>{data.avatar_url || <USER.Icon />}</div>
+      <div className={styles.userIcon}>{data?.avatar_url || <USER.Icon />}</div>
 
       <div className={styles.userInfo}>
-        <h1 className={styles.userName}>{data.username || USER.name}</h1>
-        <p className={styles.userEmail}>{data.email || USER.email}</p>
+        <h1 className={styles.userName}>{data?.username || USER.name}</h1>
+        <p className={styles.userEmail}>{data?.email || USER.email}</p>
       </div>
     </div>
   );

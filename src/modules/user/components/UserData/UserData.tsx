@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
@@ -5,16 +6,16 @@ import { Button } from '@/components/ui/button/Button';
 
 import type { User } from '@/shared/types';
 
-import defaultAvatar from '../assets/defaultAvatar.png';
+import styles from './styles/UserData.module.scss';
 
-import { formatDateToUk } from '../formatDateToUk';
-import styles from './UserData.module.scss';
+import defaultAvatar from '../../assets/defaultAvatar.png';
+import { formatDateToUk } from '../../constants/formatDateToUk';
 
 interface UserDataProps {
   user: User;
 }
 
-export default function UserData({ user }: UserDataProps) {
+export function UserData({ user }: UserDataProps) {
   const { data: session } = useSession();
   const isOwnProfile = session?.user?.id === user.id;
 
@@ -33,10 +34,28 @@ export default function UserData({ user }: UserDataProps) {
 
         <div className={styles.bio}>
           <div className={styles.username}>
-            <p>{user.first_name ?? 'Іван'}</p>
-            <p>{user.last_name ?? 'Коваленко'}</p>
+            <p
+              className={cn({
+                [styles['placeholder'] as string]: !user.first_name,
+              })}
+            >
+              {user.first_name ?? 'Ваше Імʼя'}
+            </p>
+            <p
+              className={cn({
+                [styles['placeholder'] as string]: !user.last_name,
+              })}
+            >
+              {user.last_name ?? 'Ваше Прізвище'}
+            </p>
           </div>
-          <p>{user.location ?? 'Львів, Україна'}</p>
+          <p
+            className={cn({
+              [styles['placeholder'] as string]: !user.location,
+            })}
+          >
+            {user.location ?? 'Ваша Адреса'}
+          </p>
           <p>
             На Giraffy з{' '}
             {user.datetime_create ? formatDateToUk(user.datetime_create) : '--'}

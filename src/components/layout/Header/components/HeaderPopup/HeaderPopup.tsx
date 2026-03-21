@@ -20,9 +20,9 @@ import {
   SUPPORT,
   TRIGGER,
 } from '@/modules/categories/constants/constants';
-import { useFetchUser } from '@/modules/user/api/useFetchUser';
 import { Nav } from '@/modules/user/components';
-import { HeaderUserMenu } from '@/modules/user/components/HeaderUserMenu/HeaderUserMenu';
+import { HeaderUserMenu } from '@/modules/user/components/';
+import { useCurrentUser } from '@/modules/user/hooks/useCurrentUser';
 
 import { Button } from '@/components/ui/button/Button';
 import { Loader } from '@/components/ui/loader/Loader';
@@ -44,7 +44,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
-  const { data, isLoading, error } = useFetchUser();
+  const { user, isLoading, error } = useCurrentUser();
 
   const { status } = useSession();
   const isLoggedIn = status === 'authenticated';
@@ -76,7 +76,7 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
 
   if (isLoading) return <Loader />;
 
-  if (error && !data) {
+  if (error && !user) {
     const errorMessage = handleApiError(error);
 
     <ToastMessage type="error" message={errorMessage} />;
@@ -106,16 +106,16 @@ export const HeaderPopup: FC<Props> = ({ popupClassName }) => {
             exit="exit"
             variants={panelVariants}
           >
-            {isLoggedIn && data ? (
+            {isLoggedIn && user ? (
               <>
-                <HeaderUserMenu data={data} />
+                <HeaderUserMenu data={user} />
 
                 <Link href={ADD.href} className={styles.addButton}>
                   {ADD.label}
                 </Link>
 
                 <nav className={styles.nav}>
-                  <Nav />
+                  <Nav onLinkClick={handleClose} />
                 </nav>
 
                 <Link

@@ -27,6 +27,7 @@ export const endpoints = {
   },
   users: {
     me: '/users/me',
+    byId: '/users/{id}',
     ...makeEndpoints('/users'),
   },
   categories: {

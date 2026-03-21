@@ -168,7 +168,7 @@ export const authOptions: AuthOptions = {
         };
       }
 
-      if (Math.floor(Date.now() / 1000) < (token.expiresAt ?? 0)) {
+      if (Math.floor(Date.now() / 1000) < (token.expiresAt as number) - 60) {
         return token;
       }
 

@@ -17,6 +17,8 @@ import { BaseInput, PasswordInput } from '@/components/ui/inputs';
 
 import type { LoginFormValues } from './types/types';
 
+import type { HttpError } from '@/shared/api/errors/http-error';
+
 import './styles/LoginForm.scss';
 
 import { handleGoogleLoginAction } from '../../api/handleGoogleLoginAction';
@@ -24,14 +26,20 @@ import {
   FORGOT_PASSWORD_MODAL_KEY,
   MODAL_QUERY_STATE,
   REGISTER_FORM_MODAL_KEY,
+  VERIFY_FORM_MODAL_KEY,
+  VerifyAction,
 } from '../../constants/modal-constants';
 import { useLogin } from '../../hooks/useLogin';
+import { useAuthTempStore } from '../../store/useAuthTempStore';
 
 interface LoginFormProps {
   onShowStatus?: (type: ModalType) => void;
 }
 
 export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
+  const setPassword = useAuthTempStore((state) => state.setPassword);
+  const [, setEmailQuery] = useQueryState('email');
+  const [, setVerifyAction] = useQueryState('verifyAction');
   const queryClient = useQueryClient();
   const router = useRouter();
   const { control, handleSubmit, reset, setError } = useForm<LoginFormValues>({
@@ -46,7 +54,6 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
 
   const onGoogleClick = async () => {
     try {
-      // await handleGoogleLoginAction();
       await signIn('google', { callbackUrl: '/' });
     } catch (err) {
       toast.error('Помилка авторизації');
@@ -61,7 +68,27 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
 
         router.refresh();
         await setModal(null);
-        // onShowStatus?.('welcome');
+      },
+      onError: (error) => {
+        const httpError = error as HttpError;
+        console.log('Full error message:', httpError.message);
+
+        const errorMessage = httpError.message || '';
+        const lowerMessage = errorMessage.toLowerCase();
+
+        if (lowerMessage.includes('не підтверджено')) {
+          setPassword(data.password);
+
+          const proceedToVerify = async () => {
+            await setEmailQuery(data.email);
+            await setVerifyAction(VerifyAction.REGISTER);
+
+            setModal(VERIFY_FORM_MODAL_KEY);
+          };
+
+          proceedToVerify();
+          toast.info('Будь ласка, підтвердіть вашу пошту');
+        }
       },
     });
   };
