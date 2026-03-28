@@ -4,11 +4,20 @@ import styles from './styles/Nav.module.scss';
 
 import { NAV } from '../../constants/constants';
 
-export const Nav = () => {
+interface NavProps {
+  onLinkClick?: () => void;
+}
+
+export const Nav = ({ onLinkClick }: NavProps) => {
   return (
     <div>
       {NAV.map((item) => (
-        <Link key={item.id} href={item.href} className={styles.navItem}>
+        <Link
+          key={item.id}
+          href={item.href}
+          className={styles.navItem}
+          onClick={onLinkClick}
+        >
           <item.Icon />
           <span>{item.label}</span>
         </Link>

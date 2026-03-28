@@ -28,3 +28,13 @@ export type User = {
   location: string | null;
   rating: number | null;
 };
+
+export type UpdateUserRequest = {
+  first_name?: string;
+  last_name?: string;
+  username?: string;
+  phone_number?: string;
+  location?: string | null;
+  description?: string;
+  password?: string;
+};

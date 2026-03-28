@@ -16,10 +16,9 @@ export type PasswordInputProps = Omit<BaseInputProps, 'type'> & {
   isInvalid?: boolean;
 };
 
-export type PhoneInputProps = IMaskMixinProps<HTMLInputElement> & {
-  className?: string;
-  labelText?: string;
-  id?: string;
-  error?: string;
-  isInvalid?: boolean;
-};
+export type PhoneInputProps = InputHTMLAttributes<HTMLInputElement> &
+  IMaskMixinProps<HTMLInputElement> & {
+    labelText?: string;
+    error?: string;
+    isInvalid?: boolean;
+  };

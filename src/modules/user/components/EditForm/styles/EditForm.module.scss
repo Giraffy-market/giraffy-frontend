@@ -1,0 +1,73 @@
+@use '@/shared/styles/utils/index' as *;
+
+.editFormWrapper {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+
+  gap: 24px;
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+  }
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  .avatarImage {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  width: 100%;
+}
+
+.form {
+  width: 100%;
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .buttonsWrapper {
+    margin: 48px 0;
+    display: flex;
+    gap: 35px;
+  }
+}
+
+.passwordSection {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.confirmPasswordButton {
+  max-width: 500px;
+  margin: 0 0 0 auto;
+}
