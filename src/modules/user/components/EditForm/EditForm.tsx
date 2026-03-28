@@ -1,39 +1,190 @@
+import { useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
+import cn from 'classnames';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button/Button';
-import { BaseInput } from '@/components/ui/inputs';
+import { BaseInput, PhoneInput } from '@/components/ui/inputs';
 import { TextInput } from '@/components/ui/inputs/TextInput/TextInput';
 
-import type { User } from '@/shared/types';
+import { PasswordFields } from './ui/PasswordField';
+
+import { endpoints } from '@/shared/api/constants/endpoints';
+import type { UpdateUserRequest, User } from '@/shared/types';
 
 import styles from './styles/EditForm.module.scss';
 
 import defaultAvatar from '../../assets/defaultAvatar.png';
 import ImageIcon from '../../assets/img.svg';
 import TrashIcon from '../../assets/trash.svg';
+import { useUpdateUser } from '../../hooks/useUpdateUser';
+import { useVerifyPassword } from '../../hooks/useVerifyPassword';
+
+interface FormInput {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  location: string;
+  description: string;
+  current_password?: string;
+  new_password?: string;
+  confirm_password?: string;
+}
+
+const MAIN_FIELDS = [
+  // prettier-ignore
+  { name: 'first_name', label: 'Ім\'я', placeholder: 'Введіть ім\'я' },
+  { name: 'last_name', label: 'Прізвище', placeholder: 'Введіть прізвище' },
+  {
+    name: 'email',
+    label: 'Електронна пошта',
+    placeholder: 'example@mail.com',
+    disabled: true,
+  },
+  { name: 'phone_number', label: 'Номер телефону', disabled: true },
+];
 
 interface UserDataProps {
   user: User;
 }
 
 export const EditForm = ({ user }: UserDataProps) => {
-  const { control, handleSubmit } = useForm({
+  const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [currentAvatar, setCurrentAvatar] = useState(
+    user.avatar_url || defaultAvatar,
+  );
+  const [isAvatarLoading, setIsAvatarLoading] = useState(false);
+  const { mutate: update, isPending } = useUpdateUser();
+  const {
+    control,
+    watch,
+    handleSubmit,
+    trigger,
+    formState: { errors },
+  } = useForm<FormInput>({
     defaultValues: {
-      user_name: user.first_name || '',
-      user_email: user.email || '',
-      title: '',
+      first_name: user.first_name || '',
+      last_name: user.last_name || '',
+      email: user.email || '',
+      phone_number: user.phone_number || '',
+      location: '',
       description: '',
+      current_password: '',
+      new_password: '',
+      confirm_password: '',
     },
   });
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const { data: session } = useSession();
+
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Файл занадто великий (макс. 5мб)');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    setIsAvatarLoading(true);
+
+    try {
+      const token = (session as { access_token?: string } | null)?.access_token;
+
+      if (!token) {
+        toast.error('Увійдіть в акаунт, щоб змінити фото');
+        setIsAvatarLoading(false);
+        return;
+      }
+
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL ||
+        'https://giraffy-marketplace-api.koyeb.app';
+      const url = `${baseUrl}${endpoints.users.avatar}`;
+
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage =
+          errorData.detail?.[0]?.msg || `Помилка ${response.status}`;
+        toast.error(errorMessage);
+        return;
+      }
+
+      const data = await response.json();
+
+      setCurrentAvatar(data.avatar_url);
+      toast.success('Фото оновлено!');
+    } catch (error: unknown) {
+      console.error('Upload error details:', error);
+      toast.error('Сталася помилка при завантаженні');
+    } finally {
+      setIsAvatarLoading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const { isPasswordValidated, isVerifying, handleVerifyPassword } =
+    useVerifyPassword({
+      watch,
+      trigger,
+      email: user.email,
+    });
+
+  const onSubmit = (formData: FormInput) => {
+    const payload: UpdateUserRequest = {
+      first_name: formData.first_name,
+      last_name: formData.last_name,
+      username: formData.first_name,
+    };
+
+    if (isPasswordValidated && formData.new_password) {
+      payload.password = formData.new_password;
+    }
+    update(payload, {
+      onSuccess: () => {
+        toast.success('Зміни збережено');
+
+        router.push('/profile/me');
+      },
+    });
+  };
   return (
     <div className={styles.editFormWrapper}>
       <h3 className={styles.title}>Особиста інформація</h3>
       <div className={styles.top}>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept="image/jpeg,image/png,image/webp"
+          style={{ display: 'none' }}
+        />
         <div className={styles.avatar}>
           <Image
-            src={user.avatar_url || defaultAvatar}
+            src={currentAvatar || defaultAvatar}
             alt="Аватар користувача"
             width={100}
             height={100}
@@ -41,86 +192,62 @@ export const EditForm = ({ user }: UserDataProps) => {
           />
         </div>
         <div className={styles.buttons}>
-          <div className={styles.item}>
+          <div
+            className={cn(styles.item, isAvatarLoading && styles.disabled)}
+            onClick={handleUploadClick}
+          >
             <ImageIcon />
-            <p>Завантажити</p>
+            <p>{isAvatarLoading ? 'Завантаження...' : 'Завантажити'}</p>
           </div>
-          <div className={styles.item}>
+          <div
+            className={styles.item}
+            onClick={() => setCurrentAvatar(defaultAvatar)}
+          >
             <TrashIcon />
-            <p>Видалили</p>
+            <p>Видалити</p>
           </div>
         </div>
       </div>
-      <form className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputWrapper}>
-          <div className="ticket-input--wrapper-base">
-            <Controller
-              name="user_name"
-              control={control}
-              defaultValue=""
-              // prettier-ignore
-              rules={{ required: 'Поле обов\'язкове для заповнення' }}
-              render={({ field, fieldState: { error } }) => (
-                <BaseInput
-                  {...field}
-                  type="name"
-                  placeholder="Введіть ім’я"
-                  labelText="Ім'я"
-                  id="user_name"
-                  error={error?.message}
-                  isInvalid={!!error}
-                />
-              )}
-            />
-          </div>
-          <div className="ticket-input--wrapper-base">
-            <Controller
-              name="user_email"
-              control={control}
-              defaultValue=""
-              // prettier-ignore
-              rules={{ required: 'Поле обов\'язкове для заповнення' }}
-              render={({ field, fieldState: { error } }) => (
-                <BaseInput
-                  {...field}
-                  type="email"
-                  placeholder="example@mail.com"
-                  labelText="Електронна пошта"
-                  id="user_email"
-                  error={error?.message}
-                  isInvalid={!!error}
-                />
-              )}
-            />
-          </div>
-          <div className="ticket-input--wrapper-base">
-            <Controller
-              name="title"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <BaseInput
-                  {...field}
-                  type="text"
-                  placeholder="Вкажіть тему звернення"
-                  labelText="Тема"
-                  id="title"
-                />
-              )}
-            />
-          </div>
+          {MAIN_FIELDS.map((field) => (
+            <div
+              key={field.name as keyof FormInput}
+              className="ticket-input--wrapper-base"
+            >
+              <Controller
+                name={field.name as keyof FormInput}
+                control={control}
+                render={({ field: f, fieldState: { error } }) => {
+                  const InputComponent =
+                    field.name === 'phone_number' ? PhoneInput : BaseInput;
+                  return (
+                    <InputComponent
+                      {...f}
+                      disabled={field.disabled}
+                      placeholder={field.placeholder}
+                      labelText={field.label}
+                      error={error?.message}
+                      isInvalid={!!error}
+                    />
+                  );
+                }}
+              />
+            </div>
+          ))}
+
           <div className="ticket-input--wrapper">
             <Controller
               name="description"
               control={control}
               defaultValue=""
               // prettier-ignore
-              rules={{ required: 'Поле обов\'язкове для заповнення' }}
+
               render={({ field, fieldState: { error } }) => (
                 <TextInput
                   {...field}
-                  placeholder="Опишить ваше питання або проблему..."
-                  labelText="Опис"
+                  placeholder="Напишіть інформацію про себе..."
+                  labelText="Про себе"
                   id="description"
                   style={{ minHeight: '108px' }}
                   error={error?.message}
@@ -129,14 +256,48 @@ export const EditForm = ({ user }: UserDataProps) => {
               )}
             />
           </div>
+          <div className="ticket-input--wrapper-base">
+            <Controller
+              name="location"
+              control={control}
+              defaultValue=""
+              // prettier-ignore
+
+              render={({ field, fieldState: { error } }) => (
+                <BaseInput
+                  {...field}
+                  type="name"
+                  placeholder="Вкажіть ваше місце знаходження"
+                  labelText="Локація"
+                  id="location"
+                  error={error?.message}
+                  isInvalid={!!error}
+                />
+              )}
+            />
+          </div>
+          <PasswordFields
+            control={control}
+            watch={watch}
+            isPasswordValidated={isPasswordValidated}
+            isVerifying={isVerifying}
+            onVerify={handleVerifyPassword}
+          />
         </div>
-        <Button
-          // text={isPending ? 'Відправка...' : 'Відправити'}
-          variant="gradient"
-          type="submit"
-          // disabled={isPending}
-          style={{ marginTop: '40px' }}
-        />
+        <div className={styles.buttonsWrapper}>
+          <Button
+            type="button"
+            text="Скасувати"
+            variant="outline"
+            onClick={() => router.push('/profile/me')}
+          />
+          <Button
+            type="submit"
+            text={isPending ? 'Збереження...' : 'Зберегти'}
+            variant="primary"
+            disabled={isPending}
+          />
+        </div>
       </form>
     </div>
   );

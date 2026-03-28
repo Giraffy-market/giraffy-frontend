@@ -18,6 +18,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
       iconPosition = 'left',
       error,
       isInvalid,
+      disabled,
       ...props
     },
     ref: ForwardedRef<HTMLInputElement>,
@@ -40,6 +41,7 @@ export const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
               ['base-input__field--invalid']: isInvalid,
             })}
             id={id}
+            disabled={disabled}
             onChange={onChange}
             {...props}
           />

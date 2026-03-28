@@ -28,6 +28,7 @@ export const endpoints = {
   users: {
     me: '/users/me',
     byId: '/users/{id}',
+    avatar: '/users/user/avatar',
     ...makeEndpoints('/users'),
   },
   categories: {
