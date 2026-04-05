@@ -47,8 +47,7 @@ export const RegisterForm: FC = () => {
 
   const onGoogleClick = async () => {
     try {
-      // await handleGoogleLoginAction();
-      await signIn('google', { callbackUrl: '/' });
+      await signIn('google', { callbackUrl: window.location.origin });
     } catch (err) {
       toast.error('Помилка авторизації');
     }
@@ -233,7 +232,7 @@ export const RegisterForm: FC = () => {
         disabled={isPending}
       />
 
-      <p
+      {/* <p
         className="register-login"
         style={{
           margin: '16px auto 8px',
@@ -260,7 +259,7 @@ export const RegisterForm: FC = () => {
           <FcGoogle size={56} />
           <span>Продовжити з Google</span>
         </div>
-      </Button>
+      </Button> */}
       <p className="register-login">
         Вже є аккаунт?&nbsp;
         <button

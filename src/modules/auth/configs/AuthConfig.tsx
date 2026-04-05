@@ -64,14 +64,16 @@ export const authOptions: AuthOptions = {
         refreshToken: { label: 'Refresh Token', type: 'text' },
         userId: { label: 'User ID', type: 'text' },
       },
+
       // @ts-expect-error next-auth err
       authorize: async (credentials) => {
         if (credentials?.accessToken) {
+          const expirationTimestamp = Math.floor(Date.now() / 1000) + 1800;
           return {
             access_token: credentials.accessToken,
             refresh_token: credentials.refreshToken || '',
             user_id: credentials.userId || '',
-            expired_in: 3600,
+            expired_in: expirationTimestamp,
           };
         }
         try {
@@ -106,33 +108,47 @@ export const authOptions: AuthOptions = {
   ],
 
   callbacks: {
-    async signIn({ account }) {
+    async signIn({ account, user }) {
       if (account?.provider === 'google') {
         try {
           const tokenToVerify = account.id_token;
 
           if (!tokenToVerify) {
-            console.error('NextAuth не отримав id_token від Google');
+            console.error('NextAuth: id_token is missing');
             return false;
           }
 
-          const data = await customFetch<LoginResponse>(
-            endpoints.auth_google.callback,
-            tokenToVerify,
-            { method: 'GET' },
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google/verify`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                id_token: tokenToVerify,
+              }),
+            },
           );
+
+          if (!response.ok) {
+            console.error('Backend Google Verify failed');
+            return false;
+          }
+
+          const data = await response.json();
 
           if (data?.access_token) {
             (account as BackendAccount).backend_access_token =
               data.access_token;
             (account as BackendAccount).backend_user_id = data.user_id;
+
             return true;
           }
 
-          console.error('Бекенд не повернув access_token');
           return false;
         } catch (error) {
-          console.error('Помилка в signIn через customFetch:', error);
+          console.error('Error during Google verification:', error);
           return false;
         }
       }
@@ -154,8 +170,8 @@ export const authOptions: AuthOptions = {
         return {
           ...token,
           access_token: (account as BackendAccount).backend_access_token,
-          user_id: user?.id ?? token.sub,
-          expiresAt: Math.floor(Date.now() / 1000) + 3600,
+          user_id: (account as BackendAccount).backend_user_id,
+          expiresAt: Math.floor(Date.now() / 1000) + 1800,
         };
       }
       if (user) {
@@ -164,7 +180,7 @@ export const authOptions: AuthOptions = {
           access_token: user.access_token,
           refresh_token: user.refresh_token,
           user_id: user.user_id,
-          expiresAt: Math.floor(Date.now() / 1000) + user.expired_in,
+          expiresAt: user.expired_in,
         };
       }
 
