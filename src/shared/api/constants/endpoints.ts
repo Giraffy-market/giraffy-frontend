@@ -13,13 +13,13 @@ export const STALE_TIME = 300_000;
 export const endpoints = {
   auth: {
     register: '/server/auth/register',
-    verify_code: '/auth/verify_code',
-    resend_verification_code: '/auth/resend-verification-code',
+    verify_code: '/server/auth/verify_code',
+    resend_verification_code: '/server/auth/resend-verification-code',
     login: '/server/auth/user_login',
-    logout: '/auth/user_logout',
-    refresh: '/auth/refresh',
-    request: '/auth/request',
-    confirm: '/auth/confirm',
+    logout: '/server/auth/user_logout',
+    refresh: '/server/auth/refresh',
+    request: '/server/auth/request',
+    confirm: '/server/auth/confirm',
   },
   auth_google: {
     authorize: '/auth/google/authorize',
