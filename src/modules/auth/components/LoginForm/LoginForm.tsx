@@ -164,7 +164,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
         type="submit"
         disabled={isPending}
       />
-      <p
+      {/* <p
         className="register-login"
         style={{
           margin: '16px auto 8px',
@@ -191,7 +191,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onShowStatus }) => {
           <FcGoogle size={56} />
           <span>Продовжити з Google</span>
         </div>
-      </Button>
+      </Button> */}
 
       <p className="login-register">
         Вперше тут?&nbsp;
