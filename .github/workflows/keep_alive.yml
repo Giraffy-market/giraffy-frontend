@@ -1,0 +1,13 @@
+name: Keep Alive Render
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake up server
+        run: curl -s https://giraffy-frontend.onrender.com/ > /dev/null
