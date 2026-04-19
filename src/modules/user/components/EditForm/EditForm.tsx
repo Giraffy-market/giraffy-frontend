@@ -18,9 +18,11 @@ import type { UpdateUserRequest, User } from '@/shared/types';
 
 import styles from './styles/EditForm.module.scss';
 
+import { handleUpdateAvatar } from '../../api/handleUpdateAvatar';
 import defaultAvatar from '../../assets/defaultAvatar.png';
 import ImageIcon from '../../assets/img.svg';
 import TrashIcon from '../../assets/trash.svg';
+import { useUpdateAvatar } from '../../hooks/useUpdateAvatar';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useVerifyPassword } from '../../hooks/useVerifyPassword';
 
@@ -59,7 +61,6 @@ export const EditForm = ({ user }: UserDataProps) => {
   const [currentAvatar, setCurrentAvatar] = useState(
     user.avatar_url || defaultAvatar,
   );
-  const [isAvatarLoading, setIsAvatarLoading] = useState(false);
   const { mutate: update, isPending } = useUpdateUser();
   const {
     control,
@@ -80,6 +81,8 @@ export const EditForm = ({ user }: UserDataProps) => {
       confirm_password: '',
     },
   });
+  const { mutate: updateAvatar, isPending: isAvatarLoading } =
+    useUpdateAvatar();
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
@@ -87,9 +90,7 @@ export const EditForm = ({ user }: UserDataProps) => {
 
   const { data: session } = useSession();
 
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -98,52 +99,14 @@ export const EditForm = ({ user }: UserDataProps) => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('file', file);
+    updateAvatar(file, {
+      onSuccess: (data) => {
+        const newUrl = data.avatar_url || data.url;
+        if (newUrl) setCurrentAvatar(newUrl);
 
-    setIsAvatarLoading(true);
-
-    try {
-      const token = (session as { access_token?: string } | null)?.access_token;
-
-      if (!token) {
-        toast.error('Увійдіть в акаунт, щоб змінити фото');
-        setIsAvatarLoading(false);
-        return;
-      }
-
-      const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL ||
-        'https://giraffy-marketplace-api.koyeb.app';
-      const url = `${baseUrl}${endpoints.users.avatar}`;
-
-      const response = await fetch(url, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const errorMessage =
-          errorData.detail?.[0]?.msg || `Помилка ${response.status}`;
-        toast.error(errorMessage);
-        return;
-      }
-
-      const data = await response.json();
-
-      setCurrentAvatar(data.avatar_url);
-      toast.success('Фото оновлено!');
-    } catch (error: unknown) {
-      console.error('Upload error details:', error);
-      toast.error('Сталася помилка при завантаженні');
-    } finally {
-      setIsAvatarLoading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
-    }
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      },
+    });
   };
 
   const { isPasswordValidated, isVerifying, handleVerifyPassword } =

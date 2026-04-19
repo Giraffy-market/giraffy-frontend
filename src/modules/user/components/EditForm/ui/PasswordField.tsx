@@ -27,6 +27,14 @@ export const PasswordFields = <T extends FieldValues>({
   onVerify,
 }: PasswordFieldsProps<T>) => {
   const newPassword = watch('new_password' as Path<T>);
+  const currentPassword = watch('current_password' as Path<T>);
+  const confirmPassword = watch('confirm_password' as Path<T>);
+
+  const isChangingPassword = !!(
+    currentPassword ||
+    newPassword ||
+    confirmPassword
+  );
 
   return (
     <div className={styles.passwordSection}>
@@ -36,7 +44,9 @@ export const PasswordFields = <T extends FieldValues>({
         <Controller
           name={'current_password' as Path<T>}
           control={control}
-          rules={{ required: 'Введіть старий пароль' }}
+          rules={{
+            required: isChangingPassword ? 'Введіть старий пароль' : false,
+          }}
           render={({ field, fieldState: { error } }) => (
             <PasswordInput
               {...field}
@@ -54,11 +64,17 @@ export const PasswordFields = <T extends FieldValues>({
           name={'new_password' as Path<T>}
           control={control}
           rules={{
-            required: 'Введіть новий пароль',
-            minLength: { value: 6, message: 'Мінімум 6 символів' },
-            validate: (value) =>
-              value !== watch('current_password' as Path<T>) ||
-              'Новий пароль не може збігатися зі старим',
+            required: isChangingPassword ? 'Введіть новий пароль' : false,
+            minLength: isChangingPassword
+              ? { value: 6, message: 'Мінімум 6 символів' }
+              : undefined,
+            validate: (value) => {
+              if (!isChangingPassword) return true;
+              return (
+                value !== currentPassword ||
+                'Новий пароль не може збігатися зі старим'
+              );
+            },
           }}
           render={({ field, fieldState: { error } }) => (
             <PasswordInput
@@ -77,9 +93,11 @@ export const PasswordFields = <T extends FieldValues>({
           name={'confirm_password' as Path<T>}
           control={control}
           rules={{
-            required: 'Підтвердіть пароль',
-            validate: (value) =>
-              value === newPassword || 'Паролі не збігаються',
+            required: isChangingPassword ? 'Підтвердіть пароль' : false,
+            validate: (value) => {
+              if (!isChangingPassword) return true;
+              return value === newPassword || 'Паролі не збігаються';
+            },
           }}
           render={({ field, fieldState: { error } }) => (
             <PasswordInput
@@ -93,21 +111,23 @@ export const PasswordFields = <T extends FieldValues>({
         />
       </div>
 
-      <div className={styles.confirmPasswordButton}>
-        <Button
-          type="button"
-          text={
-            isVerifying
-              ? 'Зачекайте...'
-              : isPasswordValidated
-                ? 'Пароль підтверджено ✓'
-                : 'Підтвердити зміну пароля'
-          }
-          variant="outline"
-          onClick={onVerify}
-          disabled={isPasswordValidated || isVerifying}
-        />
-      </div>
+      {isChangingPassword && (
+        <div className={styles.confirmPasswordButton}>
+          <Button
+            type="button"
+            text={
+              isVerifying
+                ? 'Зачекайте...'
+                : isPasswordValidated
+                  ? 'Пароль підтверджено ✓'
+                  : 'Підтвердити зміну пароля'
+            }
+            variant="outline"
+            onClick={onVerify}
+            disabled={isPasswordValidated || isVerifying}
+          />
+        </div>
+      )}
     </div>
   );
 };

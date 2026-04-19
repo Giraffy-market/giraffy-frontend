@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 
@@ -11,6 +12,9 @@ import {
   NOTIFICATIONS,
   USER,
 } from '@/modules/categories/constants/constants';
+import { useCurrentUser } from '@/modules/user/hooks/useCurrentUser';
+
+import { routing } from '@/shared/routing';
 
 import styles from './styles/MobileMenu.module.scss';
 
@@ -18,15 +22,26 @@ import DropdownCategoriesIcon from '../../assets/Expand_right_light.svg';
 import CategoriesLogo from '../../assets/categories.svg';
 import { MobileCategories } from './MobileCategories';
 
-export const MobileMenu = () => {
+type Props = {
+  onClose?: () => void;
+};
+
+export const MobileMenu = ({ onClose }: Props) => {
   const [, setModal] = useQueryState(MODAL_QUERY_STATE);
-  const [user, setUser] = useState(false);
+  const { status } = useSession();
+  const { user, isLoading } = useCurrentUser();
+  const isLoggedIn = status === 'authenticated';
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
   const [isUserListOpen, setIsUserListOpen] = useState(false);
 
   const [isLangOpen, setIsLangOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsUserListOpen(false);
+    if (onClose) onClose();
+  };
 
   // useEffect(() => {
   //   if (isOpen) {
@@ -42,23 +57,21 @@ export const MobileMenu = () => {
   // }, [isOpen]);
   return (
     <div className={styles.overlay}>
-      {user ? (
+      {isLoggedIn && user ? (
         <div className={styles.userRow}>
           <div className={styles.userIcon}>
             <USER.Icon />
           </div>
 
           <div className={styles.userInfo}>
-            <h1 className={styles.userName}>{USER.name}</h1>
+            <h1 className={styles.userName}>{user.username || 'Користувач'}</h1>
             <div className={styles.userDropdownSection}>
               <div className={styles.leftGroup}>
-                <p className={styles.userEmail}>{USER.email}</p>
+                <p className={styles.userEmail}>{user.email}</p>
               </div>
               <button
                 className={styles.rightGroup}
-                onClick={() => {
-                  setIsUserListOpen((prev) => !prev);
-                }}
+                onClick={() => setIsUserListOpen((prev) => !prev)}
                 role="button"
               >
                 <span className={styles.dropdownWrapper}>
@@ -73,7 +86,6 @@ export const MobileMenu = () => {
           </div>
           {isUserListOpen && (
             <div className={styles.userDropdownContent}>
-              {/* whatever you want to show below */}
               <button className={styles.actionButton}>Додати оголошення</button>
               <nav className={styles.nav}>
                 {NAVMOBILE.map((item) => {
@@ -112,12 +124,27 @@ export const MobileMenu = () => {
                       </div>
                     );
                   }
+                  if (item.id === 'logout') {
+                    return (
+                      <button
+                        key={item.id}
+                        className={styles.navItem}
+                        onClick={() =>
+                          signOut({ callbackUrl: routing.home.base })
+                        }
+                      >
+                        <item.Icon />
+                        <span>{item.label}</span>
+                      </button>
+                    );
+                  }
 
                   return (
                     <Link
                       key={item.id}
                       href={item.href}
                       className={styles.navItem}
+                      onClick={handleLinkClick}
                     >
                       <item.Icon />
                       <span>{item.label}</span>
