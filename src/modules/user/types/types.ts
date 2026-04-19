@@ -5,3 +5,8 @@ export interface UpdateUserPayload {
   phone_number?: string;
   avatar_url?: string;
 }
+
+export interface AvatarUploadResponse {
+  avatar_url?: string;
+  url?: string;
+}

@@ -68,7 +68,7 @@ export const NAVMOBILE: NavItem[] = [
   {
     id: 'profile',
     label: 'Профіль користувача',
-    href: '/profile',
+    href: '/profile/me',
     Icon: UserProfileIcon,
   },
   { id: 'chats', label: 'Чати', href: '/chats', Icon: ChatsIcon },
