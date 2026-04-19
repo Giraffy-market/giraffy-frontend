@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 import Link from 'next/link';
+import { useQueryState } from 'nuqs';
 
+import { LOGIN_FORM_MODAL_KEY, MODAL_QUERY_STATE } from '@/modules/auth';
 import {
   FAVOURITES,
   LANGUAGES,
@@ -17,6 +19,7 @@ import CategoriesLogo from '../../assets/categories.svg';
 import { MobileCategories } from './MobileCategories';
 
 export const MobileMenu = () => {
+  const [, setModal] = useQueryState(MODAL_QUERY_STATE);
   const [user, setUser] = useState(false);
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -134,9 +137,7 @@ export const MobileMenu = () => {
             <button
               className={styles.actionButton}
               type="button"
-              onClick={() => {
-                setUser(true);
-              }}
+              onClick={() => setModal(LOGIN_FORM_MODAL_KEY)}
             >
               Увійти
             </button>
