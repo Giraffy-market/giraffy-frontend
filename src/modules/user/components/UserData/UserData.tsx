@@ -19,12 +19,16 @@ export function UserData({ user }: UserDataProps) {
   const { data: session } = useSession();
   const isOwnProfile = session?.user?.id === user.id;
 
+  const avatarSrc =
+    typeof user.avatar_url === 'string' && user.avatar_url.startsWith('http')
+      ? user.avatar_url
+      : defaultAvatar;
   return (
     <div className={styles.userData}>
       <div className={styles.userDataWrapper}>
         <div className={styles.avatar}>
           <Image
-            src={user.avatar_url || defaultAvatar}
+            src={avatarSrc}
             alt="Аватар користувача"
             width={100}
             height={100}

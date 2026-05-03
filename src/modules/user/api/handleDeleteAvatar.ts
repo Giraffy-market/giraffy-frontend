@@ -1,21 +1,16 @@
-import type { AvatarUploadResponse } from '../types/types';
+import { type AvatarUploadResponse } from '../types/types';
 
 import { endpoints } from '@/shared/api/constants/endpoints';
 import { customFetch } from '@/shared/api/fetch';
 
-export const handleUpdateAvatar = async (
-  file: File,
+export const handleDeleteAvatar = async (
   token: string,
 ): Promise<AvatarUploadResponse> => {
-  const formData = new FormData();
-  formData.append('file', file);
-
   return await customFetch<AvatarUploadResponse>(
     endpoints.users.avatar,
     token,
     {
-      method: 'POST',
-      body: formData,
+      method: 'DELETE',
     },
   );
 };
