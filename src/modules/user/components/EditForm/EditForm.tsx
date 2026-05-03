@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import cn from 'classnames';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button/Button';
@@ -58,8 +58,10 @@ interface UserDataProps {
 export const EditForm = ({ user }: UserDataProps) => {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [currentAvatar, setCurrentAvatar] = useState(
-    user.avatar_url || defaultAvatar,
+  const [currentAvatar, setCurrentAvatar] = useState<string | StaticImageData>(
+    user.avatar_url && user.avatar_url.startsWith('http')
+      ? user.avatar_url
+      : defaultAvatar,
   );
   const { mutate: update, isPending } = useUpdateUser();
   const {
@@ -109,6 +111,20 @@ export const EditForm = ({ user }: UserDataProps) => {
     });
   };
 
+  const handleDeleteAvatar = () => {
+    setCurrentAvatar(defaultAvatar);
+
+    updateAvatar(null, {
+      onSuccess: () => {
+        toast.success('Аватар видалено');
+      },
+      onError: () => {
+        setCurrentAvatar(user.avatar_url || defaultAvatar);
+        toast.error('не вдалося видалити аватар');
+      },
+    });
+  };
+
   const { isPasswordValidated, isVerifying, handleVerifyPassword } =
     useVerifyPassword({
       watch,
@@ -134,6 +150,11 @@ export const EditForm = ({ user }: UserDataProps) => {
       },
     });
   };
+
+  const avatarSrc =
+    typeof user.avatar_url === 'string' && user.avatar_url.startsWith('http')
+      ? user.avatar_url
+      : defaultAvatar;
   return (
     <div className={styles.editFormWrapper}>
       <h3 className={styles.title}>Особиста інформація</h3>
@@ -147,7 +168,8 @@ export const EditForm = ({ user }: UserDataProps) => {
         />
         <div className={styles.avatar}>
           <Image
-            src={currentAvatar || defaultAvatar}
+            key={typeof currentAvatar === 'string' ? currentAvatar : 'default'}
+            src={currentAvatar}
             alt="Аватар користувача"
             width={100}
             height={100}
@@ -162,10 +184,7 @@ export const EditForm = ({ user }: UserDataProps) => {
             <ImageIcon />
             <p>{isAvatarLoading ? 'Завантаження...' : 'Завантажити'}</p>
           </div>
-          <div
-            className={styles.item}
-            onClick={() => setCurrentAvatar(defaultAvatar)}
-          >
+          <div className={styles.item} onClick={handleDeleteAvatar}>
             <TrashIcon />
             <p>Видалити</p>
           </div>
